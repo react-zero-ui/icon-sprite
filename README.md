@@ -79,7 +79,7 @@ Drop SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />` with the 
 > ```
 > ```tsx
 >import { CustomIcon } from "@react-zero-ui/icon-sprite";
->//❗The name MUST match the name of the  file name (no .svg extension).
+>//❗The name MUST matcb the file name (no .svg extension).
 ><CustomIcon name="dog" size={24} />
 >```
 
