@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "build": "rm -rf dist && node scripts/gen-wrappers.js && tsc && node scripts/gen-dist.js",
-    "test": "node tests/test-mapping.test.js",
+    "test": "node tests/run-all-tests.js",
     "prepare": "npm run build && npm run test",
     "type-check": "tsc --noEmit | tee type-errors.log"
   },
