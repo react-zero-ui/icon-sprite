@@ -5,6 +5,7 @@
 <div align="center">
   
 <h1>React Zero Icon Sprite</h1>
+<h2>The most performant way to do icons in React</h2>
 
 <legend><b>Use over 1,600</b> Lucide <code>&lt;Icon /&gt;</code> in development. </br> Ship <b>one SVG sprite</b> in production - only the icons you used.</legend>
 <small>Average 300% Decrease in HTML Size. <a  target="_blank" href="https://zero-ui.dev/icon-sprite">See the Demo ↗︎</a></small>
@@ -12,7 +13,7 @@
 <p/>
   <p/>
 <p>
-  🔹 No React at runtime 🔹 Tree-shaken & deduped 🔹 Lucide + your custom SVGs 🔹 Long-cacheable sprite 🔹 SSR-safe
+  🔹 Zero runtime 🔹 Tree-shaken & deduped 🔹 Lucide + your custom SVGs 🔹 Long-cacheable sprite 🔹 SSR-safe
 </p>
 </div>
 
