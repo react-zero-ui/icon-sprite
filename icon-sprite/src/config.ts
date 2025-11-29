@@ -1,37 +1,29 @@
 // src/config.ts
-import fs from "fs";
-import path from "path";
-import { pathToFileURL } from "url";
+// Client-safe config - NO fs, NO Node.js modules
+// These are the default values. User overrides are applied at build time via CLI.
 
-const DEFAULT_CONFIG = {
-	IMPORT_NAME: "@react-zero-ui/icon-sprite",
-	SPRITE_PATH: "/icons.svg",
-	ROOT_DIR: "src",
-	CUSTOM_SVG_DIR: "zero-ui-icons",
-	OUTPUT_DIR: "public",
-	IGNORE_ICONS: ["CustomIcon"],
-	EXCLUDE_DIRS: ["node_modules", ".git", "dist", "build", ".next", "out"],
-};
-
-let userConfig = {};
-const configFile = path.resolve(process.cwd(), "zero-ui.config.js");
-
-if (fs.existsSync(configFile)) {
-	try {
-		const mod = await import(pathToFileURL(configFile).href);
-		userConfig = mod.default ?? mod;
-	} catch (e) {
-		// @ts-expect-error
-		console.warn("⚠️ Failed to load zero-ui.config.js:", e.message);
-	}
+/** Configuration options for zero-ui.config.js or zero-ui.config.ts */
+export interface ZeroUIConfig {
+	/** Package import name (default: "@react-zero-ui/icon-sprite") */
+	IMPORT_NAME?: string;
+	/** Path to the sprite file relative to public dir (default: "/icons.svg") */
+	SPRITE_PATH?: string;
+	/** Root directory to scan for icon imports (default: auto-detected from "src", "app", or "pages") */
+	ROOT_DIR?: string;
+	/** Directory for custom SVG icons inside OUTPUT_DIR (default: "zero-ui-icons") */
+	CUSTOM_SVG_DIR?: string;
+	/** Output directory for built assets (default: "public") */
+	OUTPUT_DIR?: string;
+	/** Icon names to ignore during scanning (default: ["CustomIcon"]) */
+	IGNORE_ICONS?: string[];
+	/** Directories to exclude from scanning (default: ["node_modules", ".git", "dist", "build", ".next", "out"]) */
+	EXCLUDE_DIRS?: string[];
 }
 
-const merged = { ...DEFAULT_CONFIG, ...userConfig };
-
-export const IMPORT_NAME = merged.IMPORT_NAME;
-export const SPRITE_PATH = merged.SPRITE_PATH;
-export const ROOT_DIR = merged.ROOT_DIR;
-export const CUSTOM_SVG_DIR = merged.CUSTOM_SVG_DIR;
-export const OUTPUT_DIR = merged.OUTPUT_DIR;
-export const IGNORE_ICONS = merged.IGNORE_ICONS;
-export const EXCLUDE_DIRS = merged.EXCLUDE_DIRS;
+export const IMPORT_NAME = "@react-zero-ui/icon-sprite";
+export const SPRITE_PATH = "/icons.svg";
+export const ROOT_DIR = "src";
+export const CUSTOM_SVG_DIR = "zero-ui-icons";
+export const OUTPUT_DIR = "public";
+export const IGNORE_ICONS = ["CustomIcon"];
+export const EXCLUDE_DIRS = ["node_modules", ".git", "dist", "build", ".next", "out"];

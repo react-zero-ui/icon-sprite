@@ -1,6 +1,6 @@
 {
   "name": "@react-zero-ui/icon-sprite",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Generate a single SVG sprite containing only the icons you used (Lucide + custom). Lucid to SVG sprite solution for React.",
   "keywords": [
     "react",
@@ -38,6 +38,7 @@
   "scripts": {
     "build": "rm -rf dist && node scripts/gen-wrappers.js && tsc && node scripts/gen-dist.js",
     "test": "node tests/run-all-tests.js",
+    "test:integration": "node tests/integration-test.js",
     "prepare": "npm run build && npm run test",
     "type-check": "tsc --noEmit | tee type-errors.log"
   },
@@ -48,18 +49,18 @@
     "react": ">=17"
   },
   "dependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
-    "@babel/traverse": "^7.28.0",
-    "lucide-react": "^0.525.0",
-    "lucide-static": "^0.525.0",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
+    "lucide-react": "^0.555.0",
+    "lucide-static": "^0.555.0",
     "svgstore": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "^24.2.0",
+    "@types/node": "^24.10.1",
     "@types/parse5": "^6.0.3",
-    "@types/react": "^19.1.9",
-    "typescript": "^5.0.0"
+    "@types/react": "^19.2.7",
+    "typescript": "^5.9.3"
   }
 }

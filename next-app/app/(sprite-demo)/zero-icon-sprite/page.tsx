@@ -106,7 +106,7 @@ import {
   AudioWaveform,
   Award,
   Axe,
-  Axis3d,
+  Axis3D,
   Baby,
   Backpack,
   Badge,
@@ -248,7 +248,7 @@ const page = () => {
         <AudioWaveform size={24} />
         <Award size={24} />
         <Axe size={24} />
-        <Axis3d size={24} />
+        <Axis3D size={24} />
         <Baby size={24} />
         <Backpack size={24} />
         <Badge size={24} />

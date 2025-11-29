@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -27,25 +23,11 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*",
-        "./scripts/*"
-      ],
-      "@zero-ui/attributes": [
-        "./.zero-ui/attributes.js"
-      ],
+      "@/*": ["./*", "./scripts/*"],
+      "@zero-ui/attributes": ["./.zero-ui/attributes.js"]
     },
     "baseUrl": "."
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/**/*.d.ts",
-    ".next/types/**/*.ts",
-    ".zero-ui/**/*.d.ts",
-    "next-env.d.ts",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".next/**/*.d.ts", ".next/types/**/*.ts", ".zero-ui/**/*.d.ts", "next-env.d.ts"],
+  "exclude": ["node_modules"]
 }

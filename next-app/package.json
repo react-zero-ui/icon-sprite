@@ -11,12 +11,12 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "clean": "rm -rf .next node_modules package-lock.json",
+    "clean": "rm -rf .next node_modules/@react-zero-ui/icon-sprite package-lock.json",
     "reset": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm install"
   },
   "dependencies": {
     "@react-zero-ui/core": "^0.2.4",
-    "@react-zero-ui/icon-sprite": "file:../icon-sprite/react-zero-ui-icon-sprite-0.1.6.tgz",
+    "@react-zero-ui/icon-sprite": "file:../icon-sprite/react-zero-ui-icon-sprite-0.2.0.tgz",
     "lucide-react": "^0.473.0",
     "next": "^15.3.1",
     "react": "^19.1.0",

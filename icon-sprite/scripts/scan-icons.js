@@ -5,11 +5,14 @@ import { fileURLToPath } from "url";
 import * as babel from "@babel/core";
 import traverseImport from "@babel/traverse";
 import * as t from "@babel/types";
-import { IMPORT_NAME, ROOT_DIR, IGNORE_ICONS, EXCLUDE_DIRS } from "../dist/config.js";
+import { loadConfig } from "../dist/loadConfig.js";
 
 // ESM __dirname shim
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ICONS = new Set();
+
+// Load user config (merged with defaults)
+const { IMPORT_NAME, ROOT_DIR, IGNORE_ICONS, EXCLUDE_DIRS } = await loadConfig();
 
 // 1️⃣ Find the consuming app's root
 function findProjectRoot(dir = process.cwd()) {

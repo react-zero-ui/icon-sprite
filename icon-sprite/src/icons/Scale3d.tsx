@@ -1,12 +1,12 @@
 import { SPRITE_PATH } from "../config.js";
 import { warnMissingIconSize } from "../utils.js";
-import { Scale3d as DevIcon } from "lucide-react"
+import { Scale3D as DevIcon } from "lucide-react"
 import { renderUse,type IconProps,} from "../_shared.js";
 
 
 
-export function Scale3d({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Scale3d", size, width, height);
+export function Scale3D({ size, width, height, ...props }: IconProps) {
+  warnMissingIconSize("Scale3D", size, width, height);
   if (process.env.NODE_ENV !== "production" && DevIcon) {
     return (
       <DevIcon
@@ -17,5 +17,5 @@ export function Scale3d({ size, width, height, ...props }: IconProps) {
       />
     );
   }
-  return  renderUse("scale-3d", width, height, size, SPRITE_PATH, props)
+  return  renderUse("scale-3-d", width, height, size, SPRITE_PATH, props)
 }

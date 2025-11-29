@@ -4,10 +4,13 @@ import path from "path";
 import { createRequire } from "module";
 import svgstore from "svgstore";
 import { ICONS } from "./used-icons.js";
-import { SPRITE_PATH, CUSTOM_SVG_DIR } from "../dist/config.js";
+import { loadConfig } from "../dist/loadConfig.js";
 import { componentNameToStaticId } from "../dist/utils.js";
 
 const require = createRequire(import.meta.url);
+
+// Load user config (merged with defaults)
+const { SPRITE_PATH, CUSTOM_SVG_DIR, OUTPUT_DIR } = await loadConfig();
 
 // 1️⃣ Resolve lucide-static icons
 const sample = require.resolve("../../../lucide-static/icons/mail.svg");
@@ -35,7 +38,7 @@ for (const file of fs.readdirSync(iconsDir)) {
 }
 
 // 4️⃣ Optionally include *all* SVGs from your custom folder
-const customDir = path.resolve(process.cwd(), "public", CUSTOM_SVG_DIR);
+const customDir = path.resolve(process.cwd(), OUTPUT_DIR, CUSTOM_SVG_DIR);
 if (fs.existsSync(customDir)) {
 	for (const file of fs.readdirSync(customDir)) {
 		if (!file.endsWith(".svg")) continue;
@@ -56,7 +59,7 @@ if (missing.length) {
 
 // 6️⃣ Write a fresh sprite (inline: true drops xml/doctype)
 const sprite = store.toString({ inline: true });
-const outDir = path.join(process.cwd(), "public");
+const outDir = path.join(process.cwd(), OUTPUT_DIR);
 const outFile = path.join(outDir, SPRITE_PATH);
 
 fs.mkdirSync(outDir, { recursive: true });

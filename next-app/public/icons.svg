@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs/><symbol id="a-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M3.5 13h6"/>
-  <path d="m2 16 4.5-9 4.5 9"/>
-  <path d="M18 7v9"/>
   <path d="m14 12 4 4 4-4"/>
-</symbol><symbol id="a-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M3.5 13h6"/>
-  <path d="m2 16 4.5-9 4.5 9"/>
   <path d="M18 16V7"/>
+  <path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16"/>
+  <path d="M3.304 13h6.392"/>
+</symbol><symbol id="a-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="m14 11 4-4 4 4"/>
+  <path d="M18 16V7"/>
+  <path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16"/>
+  <path d="M3.304 13h6.392"/>
 </symbol><symbol id="a-large-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M21 14h-5"/>
-  <path d="M16 16v-3.5a2.5 2.5 0 0 1 5 0V16"/>
-  <path d="M4.5 13h6"/>
-  <path d="m3 16 4.5-9 4.5 9"/>
+  <path d="m15 16 2.536-7.328a1.02 1.02 1 0 1 1.928 0L22 16"/>
+  <path d="M15.697 14h5.606"/>
+  <path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16"/>
+  <path d="M3.304 13h6.392"/>
 </symbol><symbol id="accessibility" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="16" cy="4" r="1"/>
   <path d="m18 19 1-7-6 1"/>
@@ -87,9 +87,9 @@
   <path d="M8 20H7a2 2 0 0 1-2-2v-2c0-1.1.9-2 2-2h1"/>
   <path d="M16 14h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1"/>
 </symbol><symbol id="align-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 5H3"/>
   <path d="M17 12H7"/>
-  <path d="M19 18H5"/>
-  <path d="M21 6H3"/>
+  <path d="M19 19H5"/>
 </symbol><symbol id="align-end-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <rect width="6" height="16" x="4" y="2" rx="2"/>
   <rect width="6" height="9" x="14" y="9" rx="2"/>
@@ -137,17 +137,17 @@
   <path d="M3 2v20"/>
   <path d="M21 2v20"/>
 </symbol><symbol id="align-justify" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 5h18"/>
   <path d="M3 12h18"/>
-  <path d="M3 18h18"/>
-  <path d="M3 6h18"/>
+  <path d="M3 19h18"/>
 </symbol><symbol id="align-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 5H3"/>
   <path d="M15 12H3"/>
-  <path d="M17 18H3"/>
-  <path d="M21 6H3"/>
+  <path d="M17 19H3"/>
 </symbol><symbol id="align-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 5H3"/>
   <path d="M21 12H9"/>
-  <path d="M21 18H7"/>
-  <path d="M21 6H3"/>
+  <path d="M21 19H7"/>
 </symbol><symbol id="align-start-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <rect width="6" height="16" x="4" y="6" rx="2"/>
   <rect width="6" height="9" x="14" y="6" rx="2"/>
@@ -203,8 +203,8 @@
   <circle cx="17" cy="18" r="2"/>
   <circle cx="7" cy="18" r="2"/>
 </symbol><symbol id="ampersand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M17.5 12c0 4.4-3.6 8-8 8A4.5 4.5 0 0 1 5 15.5c0-6 8-4 8-8.5a3 3 0 1 0-6 0c0 3 2.5 8.5 12 13"/>
   <path d="M16 12h3"/>
+  <path d="M17.5 12a8 8 0 0 1-8 8A4.5 4.5 0 0 1 5 15.5c0-6 8-4 8-8.5a3 3 0 1 0-6 0c0 3 2.5 8.5 12 13"/>
 </symbol><symbol id="ampersands" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M10 17c-5-3-7-7-7-9a2 2 0 0 1 4 0c0 2.5-5 2.5-5 6 0 1.7 1.3 3 3 3 2.8 0 5-2.2 5-5"/>
   <path d="M22 17c-5-3-7-7-7-9a2 2 0 0 1 4 0c0 2.5-5 2.5-5 6 0 1.7 1.3 3 3 3 2.8 0 5-2.2 5-5"/>
@@ -216,9 +216,10 @@
   <path d="M18 22H6"/>
   <path d="M9 2h6"/>
 </symbol><symbol id="anchor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 22V8"/>
-  <path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
-  <circle cx="12" cy="5" r="3"/>
+  <path d="M12 6v16"/>
+  <path d="m19 13 2-1a9 9 0 0 1-18 0l2 1"/>
+  <path d="M9 11h6"/>
+  <circle cx="12" cy="4" r="2"/>
 </symbol><symbol id="angry" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="12" cy="12" r="10"/>
   <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
@@ -263,8 +264,8 @@
   <path d="M2 8h20"/>
   <path d="M6 4v4"/>
 </symbol><symbol id="apple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/>
-  <path d="M10 2c1 .5 2 2 2 5"/>
+  <path d="M12 6.528V3a1 1 0 0 1 1-1h0"/>
+  <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"/>
 </symbol><symbol id="archive-restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <rect width="20" height="5" x="2" y="3" rx="1"/>
   <path d="M4 8v11a2 2 0 0 0 2 2h2"/>
@@ -286,25 +287,25 @@
   <path d="M5 18v2"/>
   <path d="M19 18v2"/>
 </symbol><symbol id="arrow-big-down-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M15 5H9"/>
-  <path d="M15 9v3h4l-7 7-7-7h4V9z"/>
+  <path d="M15 11a1 1 0 0 0 1 1h2.939a1 1 0 0 1 .75 1.811l-6.835 6.836a1.207 1.207 0 0 1-1.707 0L4.31 13.81a1 1 0 0 1 .75-1.811H8a1 1 0 0 0 1-1V9a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1z"/>
+  <path d="M9 4h6"/>
 </symbol><symbol id="arrow-big-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M15 6v6h4l-7 7-7-7h4V6h6z"/>
+  <path d="M15 11a1 1 0 0 0 1 1h2.939a1 1 0 0 1 .75 1.811l-6.835 6.836a1.207 1.207 0 0 1-1.707 0L4.31 13.81a1 1 0 0 1 .75-1.811H8a1 1 0 0 0 1-1V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1z"/>
 </symbol><symbol id="arrow-big-left-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M19 15V9"/>
-  <path d="M15 15h-3v4l-7-7 7-7v4h3v6z"/>
+  <path d="M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h2a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/>
+  <path d="M20 9v6"/>
 </symbol><symbol id="arrow-big-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M18 15h-6v4l-7-7 7-7v4h6v6z"/>
+  <path d="M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/>
 </symbol><symbol id="arrow-big-right-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M5 9v6"/>
-  <path d="M9 9h3V5l7 7-7 7v-4H9V9z"/>
+  <path d="M11 9a1 1 0 0 0 1-1V5.061a1 1 0 0 1 1.811-.75l6.836 6.836a1.207 1.207 0 0 1 0 1.707l-6.836 6.835a1 1 0 0 1-1.811-.75V16a1 1 0 0 0-1-1H9a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"/>
+  <path d="M4 9v6"/>
 </symbol><symbol id="arrow-big-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M6 9h6V5l7 7-7 7v-4H6V9z"/>
+  <path d="M11 9a1 1 0 0 0 1-1V5.061a1 1 0 0 1 1.811-.75l6.836 6.836a1.207 1.207 0 0 1 0 1.707l-6.836 6.835a1 1 0 0 1-1.811-.75V16a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"/>
 </symbol><symbol id="arrow-big-up-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M9 19h6"/>
-  <path d="M9 15v-3H5l7-7 7 7h-4v3H9z"/>
+  <path d="M9 13a1 1 0 0 0-1-1H5.061a1 1 0 0 1-.75-1.811l6.836-6.835a1.207 1.207 0 0 1 1.707 0l6.835 6.835a1 1 0 0 1-.75 1.811H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/>
+  <path d="M9 20h6"/>
 </symbol><symbol id="arrow-big-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M9 18v-6H5l7-7 7 7h-4v6H9z"/>
+  <path d="M9 13a1 1 0 0 0-1-1H5.061a1 1 0 0 1-.75-1.811l6.836-6.835a1.207 1.207 0 0 1 1.707 0l6.835 6.835a1 1 0 0 1-.75 1.811H16a1 1 0 0 0-1 1v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z"/>
 </symbol><symbol id="arrow-down-0-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="m3 16 4 4 4-4"/>
   <path d="M7 20V4"/>
@@ -493,7 +494,7 @@
 </symbol><symbol id="axe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="m14 12-8.381 8.38a1 1 0 0 1-3.001-3L11 9"/>
   <path d="M15 15.5a.5.5 0 0 0 .5.5A6.5 6.5 0 0 0 22 9.5a.5.5 0 0 0-.5-.5h-1.672a2 2 0 0 1-1.414-.586l-5.062-5.062a1.205 1.205 0 0 0-1.704 0L9.352 5.648a1.205 1.205 0 0 0 0 1.704l5.062 5.062A2 2 0 0 1 15 13.828z"/>
-</symbol><symbol id="axis-3d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+</symbol><symbol id="axis-3-d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M13.5 10.5 15 9"/>
   <path d="M4 4v15a1 1 0 0 0 1 1h15"/>
   <path d="M4.293 19.707 6 18"/>
@@ -582,8 +583,8 @@
   <circle cx="18" cy="20" r="2"/>
   <circle cx="9" cy="20" r="2"/>
 </symbol><symbol id="ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.929 4.929 19.07 19.071"/>
   <circle cx="12" cy="12" r="10"/>
-  <path d="m4.9 4.9 14.2 14.2"/>
 </symbol><symbol id="banana" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M4 13c3.5-2 8-2 10 2a5.5 5.5 0 0 1 8 5"/>
   <path d="M5.15 17.89c5.52-1.52 8.65-6.89 7-12C11.55 4 11.5 2 13 2c3.22 0 5 5.5 5 8 0 6.5-4.2 12-10.49 12C5.11 22 2 22 2 20c0-1.5 1.14-1.55 3.15-2.11Z"/>

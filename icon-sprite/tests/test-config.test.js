@@ -32,8 +32,8 @@ function cleanup() {
 	}
 }
 
-// Helper to run a test script in a child process
-function runConfigTest() {
+// Helper to run a test script in a child process - tests static config defaults
+function runStaticConfigTest() {
 	const testScript = `
 import { IMPORT_NAME, ROOT_DIR, SPRITE_PATH, CUSTOM_SVG_DIR, OUTPUT_DIR, IGNORE_ICONS, EXCLUDE_DIRS } from "../dist/config.js";
 console.log(JSON.stringify({
@@ -58,13 +58,32 @@ console.log(JSON.stringify({
 	return JSON.parse(result.trim());
 }
 
+// Helper to run a test script that uses loadConfig() - tests user config merging
+function runLoadConfigTest() {
+	const testScript = `
+import { loadConfig } from "../dist/loadConfig.js";
+const config = await loadConfig();
+console.log(JSON.stringify(config));
+`;
+
+	const testScriptPath = path.join(TEST_PROJECT_ROOT, "test-runner.js");
+	fs.writeFileSync(testScriptPath, testScript, "utf8");
+
+	const result = execSync(`node "${testScriptPath}"`, {
+		cwd: TEST_PROJECT_ROOT,
+		encoding: "utf8",
+	});
+
+	return JSON.parse(result.trim());
+}
+
 // Test 1: Default config values (no config file)
 async function testDefaultConfig() {
 	console.log("\n🧪 Test 1: Default config values (no config file)");
 	setupTestProject();
 
 	try {
-		const config = runConfigTest();
+		const config = runStaticConfigTest();
 
 		const assertions = [
 			{ name: "IMPORT_NAME", expected: "@react-zero-ui/icon-sprite", actual: config.IMPORT_NAME },
@@ -95,9 +114,9 @@ async function testDefaultConfig() {
 	}
 }
 
-// Test 2: Custom config loading
+// Test 2: Custom config loading via loadConfig()
 async function testCustomConfig() {
-	console.log("\n🧪 Test 2: Custom config loading from zero-ui.config.js");
+	console.log("\n🧪 Test 2: Custom config loading from zero-ui.config.js (via loadConfig)");
 	setupTestProject();
 
 	try {
@@ -113,7 +132,7 @@ async function testCustomConfig() {
 };`;
 		fs.writeFileSync(CONFIG_FILE, customConfig, "utf8");
 
-		const config = runConfigTest();
+		const config = runLoadConfigTest();
 
 		const assertions = [
 			{ name: "IMPORT_NAME", expected: "@my-custom/icons", actual: config.IMPORT_NAME },
@@ -144,9 +163,9 @@ async function testCustomConfig() {
 	}
 }
 
-// Test 3: Partial config override (merging with defaults)
+// Test 3: Partial config override (merging with defaults) via loadConfig()
 async function testPartialConfig() {
-	console.log("\n🧪 Test 3: Partial config override (merging with defaults)");
+	console.log("\n🧪 Test 3: Partial config override (merging with defaults via loadConfig)");
 	setupTestProject();
 
 	try {
@@ -157,7 +176,7 @@ async function testPartialConfig() {
 };`;
 		fs.writeFileSync(CONFIG_FILE, partialConfig, "utf8");
 
-		const config = runConfigTest();
+		const config = runLoadConfigTest();
 
 		const assertions = [
 			{ name: "IMPORT_NAME (default)", expected: "@react-zero-ui/icon-sprite", actual: config.IMPORT_NAME },
@@ -185,9 +204,9 @@ async function testPartialConfig() {
 	}
 }
 
-// Test 4: Config file with syntax error (should warn and use defaults)
+// Test 4: Config file with syntax error (should warn and use defaults via loadConfig)
 async function testInvalidConfig() {
-	console.log("\n🧪 Test 4: Invalid config file (should warn and use defaults)");
+	console.log("\n🧪 Test 4: Invalid config file (should warn and use defaults via loadConfig)");
 	setupTestProject();
 
 	try {
@@ -198,8 +217,9 @@ async function testInvalidConfig() {
 		fs.writeFileSync(CONFIG_FILE, invalidConfig, "utf8");
 
 		const testScript = `
-import { ROOT_DIR, EXCLUDE_DIRS } from "../dist/config.js";
-console.log(JSON.stringify({ ROOT_DIR, EXCLUDE_DIRS }));
+import { loadConfig } from "../dist/loadConfig.js";
+const config = await loadConfig();
+console.log(JSON.stringify({ ROOT_DIR: config.ROOT_DIR, EXCLUDE_DIRS: config.EXCLUDE_DIRS }));
 `;
 
 		const testScriptPath = path.join(TEST_PROJECT_ROOT, "test-runner.js");
