@@ -14,6 +14,11 @@ const testSuites = [
 		description: "Verify all React icon components map to lucide-static SVGs",
 	},
 	{
+		name: "Lucide-React Compatibility",
+		file: "test-lucide-compat.test.js",
+		description: "Verify drop-in replacement for lucide-react (same export names)",
+	},
+	{
 		name: "Config Loading Tests",
 		file: "test-config.test.js",
 		description: "Verify config loading and merging with defaults",

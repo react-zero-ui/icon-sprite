@@ -1,12 +1,12 @@
 import { SPRITE_PATH } from "../config.js";
 import { warnMissingIconSize } from "../utils.js";
-import { Axis3D as DevIcon } from "lucide-react"
+import { Axis3d as DevIcon } from "lucide-react"
 import { renderUse,type IconProps,} from "../_shared.js";
 
 
 
-export function Axis3D({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Axis3D", size, width, height);
+export function Axis3d({ size, width, height, ...props }: IconProps) {
+  warnMissingIconSize("Axis3d", size, width, height);
   if (process.env.NODE_ENV !== "production" && DevIcon) {
     return (
       <DevIcon

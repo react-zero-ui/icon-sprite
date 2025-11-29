@@ -1,12 +1,12 @@
 import { SPRITE_PATH } from "../config.js";
 import { warnMissingIconSize } from "../utils.js";
-import { Grid2X2Plus as DevIcon } from "lucide-react"
+import { Grid2x2Plus as DevIcon } from "lucide-react"
 import { renderUse,type IconProps,} from "../_shared.js";
 
 
 
-export function Grid2X2Plus({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Grid2X2Plus", size, width, height);
+export function Grid2x2Plus({ size, width, height, ...props }: IconProps) {
+  warnMissingIconSize("Grid2x2Plus", size, width, height);
   if (process.env.NODE_ENV !== "production" && DevIcon) {
     return (
       <DevIcon

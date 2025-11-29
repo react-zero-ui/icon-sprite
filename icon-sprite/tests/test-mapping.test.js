@@ -64,5 +64,4 @@ if (missing.length) {
 	console.error(`❌ Mapping failures (${missing.length}):\n  ${sample}\n` + `Search path: ${STATIC_DIR}\n` + `Wrappers dir: ${SRC_ICONS_DIR}`);
 	process.exit(1);
 }
-
 console.log(`✅ ${reactNames.length} components map to existing lucide-static SVGs.`);
