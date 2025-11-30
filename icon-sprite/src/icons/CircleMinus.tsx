@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { CircleMinus as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { CircleMinus as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function CircleMinus({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("CircleMinus", size, width, height);
+export function CircleMinus(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("circle-minus", width, height, size, SPRITE_PATH, props)
+  return renderUse("circle-minus", SPRITE_PATH, props);
 }

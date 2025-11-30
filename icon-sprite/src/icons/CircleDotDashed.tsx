@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { CircleDotDashed as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { CircleDotDashed as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function CircleDotDashed({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("CircleDotDashed", size, width, height);
+export function CircleDotDashed(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("circle-dot-dashed", width, height, size, SPRITE_PATH, props)
+  return renderUse("circle-dot-dashed", SPRITE_PATH, props);
 }

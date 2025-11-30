@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { UserRound as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { UserRound as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function UserRound({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("UserRound", size, width, height);
+export function UserRound(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("user-round", width, height, size, SPRITE_PATH, props)
+  return renderUse("user-round", SPRITE_PATH, props);
 }

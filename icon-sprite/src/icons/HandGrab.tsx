@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { HandGrab as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { HandGrab as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function HandGrab({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("HandGrab", size, width, height);
+export function HandGrab(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("hand-grab", width, height, size, SPRITE_PATH, props)
+  return renderUse("hand-grab", SPRITE_PATH, props);
 }

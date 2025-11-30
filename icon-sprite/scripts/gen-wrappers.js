@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 /**
- * Generate icon wrapper components.
+ * Generate icon wrapper components for multiple icon packs.
+ * 
+ * Supported packs:
+ * - Lucide (lucide-react / lucide-static)
+ * - Tabler (@tabler/icons-react / @tabler/icons)
  * 
  * Strategy:
- * 1. Get all SVGs from lucide-static
- * 2. Get export names from lucide-react
- * 3. For icons in lucide-react: use their exact name (for drop-in compatibility)
- * 4. For icons only in lucide-static: derive name from filename
- * 
- * This ensures:
- * - All lucide-react imports work as drop-in replacement
- * - Extra icons from lucide-static are also available
- * - Future icon packs can be added
+ * 1. For each pack, get SVGs and React export names
+ * 2. Use React library's exact names (for drop-in compatibility)
+ * 3. Prefix SVG IDs in sprite to avoid conflicts (e.g., "tabler-arrow-up")
  */
 import fs from "fs";
 import path from "path";
@@ -40,7 +38,6 @@ if (fs.existsSync(OUT_DIR)) {
 // Helper functions
 // ============================================================================
 
-// Convert kebab-case to PascalCase
 function kebabToPascal(str) {
 	return str
 		.split("-")
@@ -48,7 +45,6 @@ function kebabToPascal(str) {
 		.join("");
 }
 
-// Convert PascalCase to kebab-case
 function pascalToKebab(str) {
 	return str
 		.replace(/([a-z])([A-Z])/g, "$1-$2")
@@ -59,110 +55,183 @@ function pascalToKebab(str) {
 }
 
 // ============================================================================
-// Get data from lucide packages
+// LUCIDE ICONS
 // ============================================================================
 
-// Get all SVG IDs from lucide-static
-function getStaticSvgIds() {
+function getLucideStaticSvgIds() {
 	const svgDir = path.resolve(__dirname, "node_modules/lucide-static/icons");
+	if (!fs.existsSync(svgDir)) return new Set();
 	const files = fs.readdirSync(svgDir).filter((f) => f.endsWith(".svg"));
 	return new Set(files.map((f) => f.replace(".svg", "")));
 }
 
-// Get export names from lucide-react (for compatibility mapping)
 function getLucideReactExports() {
 	const lucideDts = path.resolve(__dirname, "node_modules/lucide-react/dist/lucide-react.d.ts");
-	if (!fs.existsSync(lucideDts)) {
-		console.warn("⚠️ lucide-react types not found. Using derived names only.");
-		return new Map();
-	}
+	if (!fs.existsSync(lucideDts)) return new Map();
 	const content = fs.readFileSync(lucideDts, "utf8");
 	
-	const exports = new Map(); // kebab-ish key -> exact export name
-	
+	const exports = new Map();
 	const matches = content.matchAll(/declare const (\w+): react\.ForwardRefExoticComponent/g);
 	for (const match of matches) {
 		const name = match[1];
 		if (!name.startsWith("Lucide") && !name.endsWith("Icon")) {
-			// Create a normalized key for matching
 			const key = pascalToKebab(name).replace(/-/g, "");
 			exports.set(key, name);
 		}
 	}
-	
 	return exports;
 }
 
-// Find lucide-react's name for an SVG ID, or derive one
-function getComponentName(svgId, lucideReactExports) {
-	// Normalize the SVG ID for lookup
+function getLucideComponentName(svgId, reactExports) {
 	const normalizedKey = svgId.replace(/-/g, "");
-	
-	// Check if lucide-react has this icon
-	if (lucideReactExports.has(normalizedKey)) {
-		return lucideReactExports.get(normalizedKey);
+	if (reactExports.has(normalizedKey)) {
+		return reactExports.get(normalizedKey);
 	}
-	
-	// Derive name from SVG filename
 	return kebabToPascal(svgId);
+}
+
+// ============================================================================
+// TABLER ICONS
+// ============================================================================
+
+function getTablerStaticSvgIds() {
+	// Use outline style by default (like Lucide)
+	const svgDir = path.resolve(__dirname, "node_modules/@tabler/icons/icons/outline");
+	if (!fs.existsSync(svgDir)) return new Set();
+	const files = fs.readdirSync(svgDir).filter((f) => f.endsWith(".svg"));
+	return new Set(files.map((f) => f.replace(".svg", "")));
+}
+
+function getTablerReactExports() {
+	const tablerDts = path.resolve(__dirname, "node_modules/@tabler/icons-react/dist/tabler-icons-react.d.ts");
+	if (!fs.existsSync(tablerDts)) return new Map();
+	const content = fs.readFileSync(tablerDts, "utf8");
+	
+	const exports = new Map();
+	// Match: declare const IconName: react.ForwardRefExoticComponent
+	const matches = content.matchAll(/declare const (Icon\w+): react\.ForwardRefExoticComponent/g);
+	for (const match of matches) {
+		const name = match[1]; // e.g., "IconAccessPoint"
+		// Create key from name without "Icon" prefix
+		const withoutPrefix = name.replace(/^Icon/, "");
+		const key = pascalToKebab(withoutPrefix).replace(/-/g, "");
+		exports.set(key, name);
+	}
+	return exports;
+}
+
+function getTablerComponentName(svgId, reactExports) {
+	const normalizedKey = svgId.replace(/-/g, "");
+	if (reactExports.has(normalizedKey)) {
+		return reactExports.get(normalizedKey);
+	}
+	// Derive with Icon prefix
+	return "Icon" + kebabToPascal(svgId);
 }
 
 // ============================================================================
 // Generate wrappers
 // ============================================================================
 
-const staticSvgIds = getStaticSvgIds();
+// Track generated names for case collision detection
+const generatedNames = new Map();
+
+let totalGenerated = 0;
+let totalSkipped = 0;
+
+// Mapping of component name → sprite info (for build-sprite.js to use)
+const componentToSprite = new Map();
+
+// --- LUCIDE ---
+const lucideSvgIds = getLucideStaticSvgIds();
 const lucideReactExports = getLucideReactExports();
+let lucideCount = 0;
 
-// Track generated names for case collision detection (macOS is case-insensitive)
-const generatedNames = new Map(); // lowercase -> { name, svgId }
-
-let generatedCount = 0;
-let skippedCollisions = 0;
-
-for (const svgId of staticSvgIds) {
-	const componentName = getComponentName(svgId, lucideReactExports);
+for (const svgId of lucideSvgIds) {
+	const componentName = getLucideComponentName(svgId, lucideReactExports);
 	const lowerName = componentName.toLowerCase();
 	
-	// Skip case collisions on case-insensitive filesystems
 	if (generatedNames.has(lowerName)) {
-		skippedCollisions++;
+		totalSkipped++;
 		continue;
 	}
+	generatedNames.set(lowerName, { name: componentName, pack: "lucide" });
 	
-	generatedNames.set(lowerName, { name: componentName, svgId });
+	// Lucide SVG IDs don't need prefix (they're the "default")
+	const spriteId = svgId;
+	
+	// Store mapping for build-sprite.js
+	componentToSprite.set(componentName, { pack: "lucide", spriteId, svgFile: `${svgId}.svg` });
 	
 	const wrapperTsx = `\
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { ${componentName} as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { ${componentName} as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function ${componentName}({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("${componentName}", size, width, height);
+export function ${componentName}(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("${svgId}", width, height, size, SPRITE_PATH, props)
+  return renderUse("${spriteId}", SPRITE_PATH, props);
 }
 `;
 
 	fs.writeFileSync(path.join(OUT_DIR, `${componentName}.tsx`), wrapperTsx);
-	generatedCount++;
+	lucideCount++;
+	totalGenerated++;
 }
 
-console.log(`✅ Generated ${generatedCount} icon wrappers in ${OUT_DIR}`);
-if (skippedCollisions > 0) {
-	console.log(`   (skipped ${skippedCollisions} case-collision aliases)`);
+// --- TABLER ---
+const tablerSvgIds = getTablerStaticSvgIds();
+const tablerReactExports = getTablerReactExports();
+let tablerCount = 0;
+
+for (const svgId of tablerSvgIds) {
+	const componentName = getTablerComponentName(svgId, tablerReactExports);
+	const lowerName = componentName.toLowerCase();
+	
+	if (generatedNames.has(lowerName)) {
+		totalSkipped++;
+		continue;
+	}
+	generatedNames.set(lowerName, { name: componentName, pack: "tabler" });
+	
+	// Prefix Tabler SVG IDs to avoid conflicts in sprite
+	const spriteId = `tabler-${svgId}`;
+	
+	// Store mapping for build-sprite.js
+	componentToSprite.set(componentName, { pack: "tabler", spriteId, svgFile: `${svgId}.svg` });
+	
+	const wrapperTsx = `\
+import { SPRITE_PATH } from "../config.js";
+import { ${componentName} as DevIcon } from "@tabler/icons-react";
+import { renderUse, type IconProps } from "../_shared.js";
+
+export function ${componentName}(props: IconProps) {
+  if (process.env.NODE_ENV !== "production" && DevIcon) {
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
+  }
+  return renderUse("${spriteId}", SPRITE_PATH, props);
 }
-console.log(`   lucide-react compatible: ${lucideReactExports.size} icons`);
-console.log(`   Extra from lucide-static: ${generatedCount - lucideReactExports.size} icons`);
+`;
+
+	fs.writeFileSync(path.join(OUT_DIR, `${componentName}.tsx`), wrapperTsx);
+	tablerCount++;
+	totalGenerated++;
+}
+
+// --- Write component-to-sprite mapping ---
+const mappingFile = path.join(__dirname, "scripts", "component-sprite-map.json");
+const mappingObj = Object.fromEntries(componentToSprite);
+fs.writeFileSync(mappingFile, JSON.stringify(mappingObj, null, 2), "utf8");
+
+// --- Summary ---
+console.log(`✅ Generated ${totalGenerated} icon wrappers in ${OUT_DIR}`);
+console.log(`   📦 Lucide: ${lucideCount} icons (${lucideReactExports.size} react-compatible)`);
+console.log(`   📦 Tabler: ${tablerCount} icons (${tablerReactExports.size} react-compatible)`);
+console.log(`   📁 Wrote mapping to ${mappingFile}`);
+if (totalSkipped > 0) {
+	console.log(`   ⚠️  Skipped ${totalSkipped} case-collision aliases`);
+}

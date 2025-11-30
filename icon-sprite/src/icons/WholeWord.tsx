@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { WholeWord as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { WholeWord as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function WholeWord({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("WholeWord", size, width, height);
+export function WholeWord(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("whole-word", width, height, size, SPRITE_PATH, props)
+  return renderUse("whole-word", SPRITE_PATH, props);
 }

@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { SquaresExclude as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { SquaresExclude as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function SquaresExclude({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("SquaresExclude", size, width, height);
+export function SquaresExclude(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("squares-exclude", width, height, size, SPRITE_PATH, props)
+  return renderUse("squares-exclude", SPRITE_PATH, props);
 }

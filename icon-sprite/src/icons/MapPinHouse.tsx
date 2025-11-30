@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { MapPinHouse as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { MapPinHouse as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function MapPinHouse({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("MapPinHouse", size, width, height);
+export function MapPinHouse(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("map-pin-house", width, height, size, SPRITE_PATH, props)
+  return renderUse("map-pin-house", SPRITE_PATH, props);
 }

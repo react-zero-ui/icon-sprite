@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { AppWindowMac as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { AppWindowMac as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function AppWindowMac({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("AppWindowMac", size, width, height);
+export function AppWindowMac(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("app-window-mac", width, height, size, SPRITE_PATH, props)
+  return renderUse("app-window-mac", SPRITE_PATH, props);
 }

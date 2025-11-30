@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { Info as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { Info as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function Info({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Info", size, width, height);
+export function Info(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("info", width, height, size, SPRITE_PATH, props)
+  return renderUse("info", SPRITE_PATH, props);
 }

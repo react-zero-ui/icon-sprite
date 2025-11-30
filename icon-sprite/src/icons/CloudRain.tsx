@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { CloudRain as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { CloudRain as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function CloudRain({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("CloudRain", size, width, height);
+export function CloudRain(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("cloud-rain", width, height, size, SPRITE_PATH, props)
+  return renderUse("cloud-rain", SPRITE_PATH, props);
 }

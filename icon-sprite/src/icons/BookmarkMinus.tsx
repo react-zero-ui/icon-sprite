@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { BookmarkMinus as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { BookmarkMinus as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function BookmarkMinus({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("BookmarkMinus", size, width, height);
+export function BookmarkMinus(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("bookmark-minus", width, height, size, SPRITE_PATH, props)
+  return renderUse("bookmark-minus", SPRITE_PATH, props);
 }

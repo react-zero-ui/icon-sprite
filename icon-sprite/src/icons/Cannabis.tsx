@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { Cannabis as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { Cannabis as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function Cannabis({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Cannabis", size, width, height);
+export function Cannabis(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("cannabis", width, height, size, SPRITE_PATH, props)
+  return renderUse("cannabis", SPRITE_PATH, props);
 }

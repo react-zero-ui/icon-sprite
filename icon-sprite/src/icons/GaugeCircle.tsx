@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { GaugeCircle as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { GaugeCircle as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function GaugeCircle({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("GaugeCircle", size, width, height);
+export function GaugeCircle(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("gauge-circle", width, height, size, SPRITE_PATH, props)
+  return renderUse("gauge-circle", SPRITE_PATH, props);
 }

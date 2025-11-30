@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { MouseOff as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { MouseOff as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function MouseOff({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("MouseOff", size, width, height);
+export function MouseOff(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("mouse-off", width, height, size, SPRITE_PATH, props)
+  return renderUse("mouse-off", SPRITE_PATH, props);
 }

@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { FileBraces as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { FileBraces as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function FileBraces({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("FileBraces", size, width, height);
+export function FileBraces(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("file-braces", width, height, size, SPRITE_PATH, props)
+  return renderUse("file-braces", SPRITE_PATH, props);
 }

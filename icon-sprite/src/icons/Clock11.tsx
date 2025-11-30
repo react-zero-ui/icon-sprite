@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { Clock11 as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { Clock11 as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function Clock11({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Clock11", size, width, height);
+export function Clock11(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("clock-11", width, height, size, SPRITE_PATH, props)
+  return renderUse("clock-11", SPRITE_PATH, props);
 }

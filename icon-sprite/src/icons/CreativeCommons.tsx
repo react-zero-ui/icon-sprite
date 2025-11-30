@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { CreativeCommons as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { CreativeCommons as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function CreativeCommons({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("CreativeCommons", size, width, height);
+export function CreativeCommons(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("creative-commons", width, height, size, SPRITE_PATH, props)
+  return renderUse("creative-commons", SPRITE_PATH, props);
 }

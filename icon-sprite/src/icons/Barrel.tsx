@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { Barrel as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { Barrel as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function Barrel({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("Barrel", size, width, height);
+export function Barrel(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("barrel", width, height, size, SPRITE_PATH, props)
+  return renderUse("barrel", SPRITE_PATH, props);
 }

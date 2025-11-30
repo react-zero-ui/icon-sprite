@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { ListFilterPlus as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { ListFilterPlus as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function ListFilterPlus({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("ListFilterPlus", size, width, height);
+export function ListFilterPlus(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("list-filter-plus", width, height, size, SPRITE_PATH, props)
+  return renderUse("list-filter-plus", SPRITE_PATH, props);
 }

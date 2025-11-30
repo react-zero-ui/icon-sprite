@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { TabletSmartphone as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { TabletSmartphone as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function TabletSmartphone({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("TabletSmartphone", size, width, height);
+export function TabletSmartphone(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("tablet-smartphone", width, height, size, SPRITE_PATH, props)
+  return renderUse("tablet-smartphone", SPRITE_PATH, props);
 }

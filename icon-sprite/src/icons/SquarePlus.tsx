@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { SquarePlus as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { SquarePlus as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function SquarePlus({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("SquarePlus", size, width, height);
+export function SquarePlus(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("square-plus", width, height, size, SPRITE_PATH, props)
+  return renderUse("square-plus", SPRITE_PATH, props);
 }

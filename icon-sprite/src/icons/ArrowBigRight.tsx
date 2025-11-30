@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { ArrowBigRight as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { ArrowBigRight as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function ArrowBigRight({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("ArrowBigRight", size, width, height);
+export function ArrowBigRight(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("arrow-big-right", width, height, size, SPRITE_PATH, props)
+  return renderUse("arrow-big-right", SPRITE_PATH, props);
 }

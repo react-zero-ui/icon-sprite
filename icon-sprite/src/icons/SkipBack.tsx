@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { SkipBack as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { SkipBack as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function SkipBack({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("SkipBack", size, width, height);
+export function SkipBack(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("skip-back", width, height, size, SPRITE_PATH, props)
+  return renderUse("skip-back", SPRITE_PATH, props);
 }

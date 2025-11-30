@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { BanknoteX as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { BanknoteX as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function BanknoteX({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("BanknoteX", size, width, height);
+export function BanknoteX(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("banknote-x", width, height, size, SPRITE_PATH, props)
+  return renderUse("banknote-x", SPRITE_PATH, props);
 }

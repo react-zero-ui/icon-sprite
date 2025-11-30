@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { BookImage as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { BookImage as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function BookImage({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("BookImage", size, width, height);
+export function BookImage(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("book-image", width, height, size, SPRITE_PATH, props)
+  return renderUse("book-image", SPRITE_PATH, props);
 }

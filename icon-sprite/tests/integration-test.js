@@ -53,7 +53,7 @@ async function waitForServer(url, timeout = 30000) {
 	
 	while (Date.now() - start < timeout) {
 		try {
-			const res = await fetch(url);
+			 await fetch(url);
 			return true;
 		} catch {
 			// Server not ready yet

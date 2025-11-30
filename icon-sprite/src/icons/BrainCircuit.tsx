@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { BrainCircuit as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { BrainCircuit as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function BrainCircuit({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("BrainCircuit", size, width, height);
+export function BrainCircuit(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("brain-circuit", width, height, size, SPRITE_PATH, props)
+  return renderUse("brain-circuit", SPRITE_PATH, props);
 }

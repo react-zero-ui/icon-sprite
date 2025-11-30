@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { SquaresUnite as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { SquaresUnite as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function SquaresUnite({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("SquaresUnite", size, width, height);
+export function SquaresUnite(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("squares-unite", width, height, size, SPRITE_PATH, props)
+  return renderUse("squares-unite", SPRITE_PATH, props);
 }

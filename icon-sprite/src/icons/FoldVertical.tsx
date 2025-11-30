@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { FoldVertical as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { FoldVertical as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function FoldVertical({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("FoldVertical", size, width, height);
+export function FoldVertical(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("fold-vertical", width, height, size, SPRITE_PATH, props)
+  return renderUse("fold-vertical", SPRITE_PATH, props);
 }

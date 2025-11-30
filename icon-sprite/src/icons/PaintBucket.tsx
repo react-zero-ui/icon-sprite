@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { PaintBucket as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { PaintBucket as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function PaintBucket({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("PaintBucket", size, width, height);
+export function PaintBucket(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("paint-bucket", width, height, size, SPRITE_PATH, props)
+  return renderUse("paint-bucket", SPRITE_PATH, props);
 }

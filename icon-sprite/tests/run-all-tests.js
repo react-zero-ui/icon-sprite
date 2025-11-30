@@ -19,6 +19,11 @@ const testSuites = [
 		description: "Verify drop-in replacement for lucide-react (same export names)",
 	},
 	{
+		name: "Sprite ID Match Tests",
+		file: "test-sprite-id-match.test.js",
+		description: "Verify sprite IDs in wrappers match build-sprite mapping",
+	},
+	{
 		name: "Config Loading Tests",
 		file: "test-config.test.js",
 		description: "Verify config loading and merging with defaults",

@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { TextSearch as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { TextSearch as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function TextSearch({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("TextSearch", size, width, height);
+export function TextSearch(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("text-search", width, height, size, SPRITE_PATH, props)
+  return renderUse("text-search", SPRITE_PATH, props);
 }

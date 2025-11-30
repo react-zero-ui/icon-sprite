@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { GalleryThumbnails as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { GalleryThumbnails as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function GalleryThumbnails({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("GalleryThumbnails", size, width, height);
+export function GalleryThumbnails(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("gallery-thumbnails", width, height, size, SPRITE_PATH, props)
+  return renderUse("gallery-thumbnails", SPRITE_PATH, props);
 }

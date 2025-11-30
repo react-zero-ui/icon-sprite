@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { SquareArrowDown as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { SquareArrowDown as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function SquareArrowDown({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("SquareArrowDown", size, width, height);
+export function SquareArrowDown(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("square-arrow-down", width, height, size, SPRITE_PATH, props)
+  return renderUse("square-arrow-down", SPRITE_PATH, props);
 }

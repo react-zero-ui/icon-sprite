@@ -53,6 +53,8 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@babel/traverse": "^7.28.5",
+    "@tabler/icons": "^3.35.0",
+    "@tabler/icons-react": "^3.35.0",
     "lucide-react": "^0.555.0",
     "lucide-static": "^0.555.0",
     "svgstore": "^3.0.1"

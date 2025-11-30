@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { PiSquare as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { PiSquare as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function PiSquare({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("PiSquare", size, width, height);
+export function PiSquare(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("pi-square", width, height, size, SPRITE_PATH, props)
+  return renderUse("pi-square", SPRITE_PATH, props);
 }

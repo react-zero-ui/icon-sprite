@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { UserRoundCog as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { UserRoundCog as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function UserRoundCog({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("UserRoundCog", size, width, height);
+export function UserRoundCog(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("user-round-cog", width, height, size, SPRITE_PATH, props)
+  return renderUse("user-round-cog", SPRITE_PATH, props);
 }

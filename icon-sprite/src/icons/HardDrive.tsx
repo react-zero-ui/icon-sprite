@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { HardDrive as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { HardDrive as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function HardDrive({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("HardDrive", size, width, height);
+export function HardDrive(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("hard-drive", width, height, size, SPRITE_PATH, props)
+  return renderUse("hard-drive", SPRITE_PATH, props);
 }

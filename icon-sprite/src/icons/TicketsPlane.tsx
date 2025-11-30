@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { TicketsPlane as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { TicketsPlane as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function TicketsPlane({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("TicketsPlane", size, width, height);
+export function TicketsPlane(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("tickets-plane", width, height, size, SPRITE_PATH, props)
+  return renderUse("tickets-plane", SPRITE_PATH, props);
 }

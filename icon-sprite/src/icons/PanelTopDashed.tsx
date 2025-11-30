@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { PanelTopDashed as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { PanelTopDashed as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function PanelTopDashed({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("PanelTopDashed", size, width, height);
+export function PanelTopDashed(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("panel-top-dashed", width, height, size, SPRITE_PATH, props)
+  return renderUse("panel-top-dashed", SPRITE_PATH, props);
 }

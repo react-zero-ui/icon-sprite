@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { OctagonAlert as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { OctagonAlert as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function OctagonAlert({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("OctagonAlert", size, width, height);
+export function OctagonAlert(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("octagon-alert", width, height, size, SPRITE_PATH, props)
+  return renderUse("octagon-alert", SPRITE_PATH, props);
 }

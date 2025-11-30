@@ -1,21 +1,11 @@
 import { SPRITE_PATH } from "../config.js";
-import { warnMissingIconSize } from "../utils.js";
-import { UnlockKeyhole as DevIcon } from "lucide-react"
-import { renderUse,type IconProps,} from "../_shared.js";
+import { UnlockKeyhole as DevIcon } from "lucide-react";
+import { renderUse, type IconProps } from "../_shared.js";
 
-
-
-export function UnlockKeyhole({ size, width, height, ...props }: IconProps) {
-  warnMissingIconSize("UnlockKeyhole", size, width, height);
+export function UnlockKeyhole(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
-    return (
-      <DevIcon
-        {...(props as any)}
-        {...(size != null ? { size } : {})}
-        {...(width != null ? { width } : {})}
-        {...(height != null ? { height } : {})}
-      />
-    );
+    const { size, width, height, ...rest } = props;
+    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
   }
-  return  renderUse("unlock-keyhole", width, height, size, SPRITE_PATH, props)
+  return renderUse("unlock-keyhole", SPRITE_PATH, props);
 }
