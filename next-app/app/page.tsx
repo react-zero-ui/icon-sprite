@@ -43,13 +43,13 @@ const Home: React.FC = () => {
 
       {/* Tabler icons */}
       <div className="grid grid-cols-10 gap-1 **:rounded-lg **:bg-blue-500  ">
-        <IconAccessible className="h-20 w-20" strokeWidth={1}/>
+        <IconAccessible className="h-20 w-20" fill="red" strokeWidth={1}/>
         <IconZzz className="h-20 w-20" strokeWidth={3}/>
         <IconBellZ className="h-20 w-20" />
         {/* <IconAccessible className="h-20 w-20" /> */}
         <IconAccessibleOff className="h-20 w-20" />
         <IconBellBolt className="h-20 w-20" />
-        <IconBell className="h-20 w-20" />
+        <IconBell className="h-20 w-20" fill="red" />
         <IconBrandGoogle className="h-20 w-20" />
         <IconBrandGolang className="h-20 w-20" />
         <IconGoGame className="h-20 w-20" />
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
           <CustomIcon name="ai" size={80} className="h-20 w-20 fill-red-500!" />
           <CustomIcon name="react-svgrepo-com" size={80} className="h-20 w-20 fill-red-500!" />
         </div>
-        <AlarmClockCheck size={80} strokeWidth={3} />
+        <AlarmClockCheck size={80} color="#000" strokeWidth={3} />
         <AlarmClockMinus size={80} className="h-20 w-20 fill-red-500" />
         <ArrowDownAZ className="h-20 w-20 text-red-500" />
         <AlarmClockOff className="h-20 w-20" />

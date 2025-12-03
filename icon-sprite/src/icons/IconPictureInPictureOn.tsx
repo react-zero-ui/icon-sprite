@@ -5,7 +5,14 @@ import { renderUse, type IconProps } from "../_shared.js";
 export function IconPictureInPictureOn(props: IconProps) {
   if (process.env.NODE_ENV !== "production" && DevIcon) {
     const { size, width, height, ...rest } = props;
-    return <DevIcon {...(rest as any)} size={size ?? 24} width={width} height={height} />;
+    return (
+      <DevIcon
+        {...(rest as any)}
+        size={size ?? 24}
+        {...(width != null ? { width } : {})}
+        {...(height != null ? { height } : {})}
+      />
+    );
   }
   return renderUse("tabler-picture-in-picture-on", SPRITE_PATH, props);
 }

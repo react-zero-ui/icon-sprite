@@ -11,6 +11,22 @@ import { loadConfig } from "../dist/loadConfig.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ICONS = new Set();
 
+// Props that may behave differently in prod (sprite mode) vs dev
+const RISKY_PROPS = new Set([
+	// Color props - should use className="text-*" instead
+	"stroke", "fill", "color",
+	// Stroke presentation attributes - don't cascade into <use> shadow DOM
+	"strokeLinecap", "strokeLinejoin", "strokeDasharray", 
+	"strokeDashoffset", "strokeMiterlimit", "strokeOpacity",
+	// Fill presentation attributes
+	"fillOpacity", "fillRule",
+	// Other presentation attributes
+	"opacity", "transform", "vectorEffect",
+]);
+
+// Track warnings: { file, line, icon, prop }
+const riskyPropWarnings = [];
+
 // Load user config (merged with defaults)
 const { IMPORT_NAME, ROOT_DIR, IGNORE_ICONS, EXCLUDE_DIRS } = await loadConfig();
 
@@ -53,49 +69,69 @@ function collect(dir) {
 		});
 		if (!ast) continue;
 
-		// Track local "Icon" aliases in this file
+		// Track local icon names imported from our library
 		const iconLocalNames = new Set();
+		const iconImports = new Map(); // local name -> imported name
 
 		traverseImport.default(ast, {
-			ImportDeclaration(path) {
-				if (path.node.source.value !== IMPORT_NAME) return;
-				for (const spec of path.node.specifiers) {
+			ImportDeclaration(nodePath) {
+				if (nodePath.node.source.value !== IMPORT_NAME) return;
+				for (const spec of nodePath.node.specifiers) {
 					if (t.isImportSpecifier(spec)) {
 						const imported = spec.imported.name;
 						const local = spec.local.name;
 						if (imported === "Icon") {
-							// generic Component: track for JSX
 							iconLocalNames.add(local);
-							// ignore CustomIcon imports
 						} else if (!IGNORE_ICONS.includes(imported)) {
-							// named icon import
 							ICONS.add(imported);
+							iconLocalNames.add(local);
+							iconImports.set(local, imported);
 						}
 					}
 				}
 			},
-			JSXElement(path) {
-				const opening = path.get("openingElement");
+			JSXElement(nodePath) {
+				const opening = nodePath.get("openingElement");
 				const nameNode = opening.get("name");
 				if (!nameNode.isJSXIdentifier()) return;
 				const tag = nameNode.node.name;
+				
+				// Check if this is one of our icon components
 				if (!iconLocalNames.has(tag)) return;
-				// found <Icon ...>
+				
+				const iconName = iconImports.get(tag) || tag;
+				const line = nodePath.node.loc?.start?.line || "?";
+				
+				// Check for risky props
 				for (const attrPath of opening.get("attributes")) {
 					if (!attrPath.isJSXAttribute()) continue;
-					const attrName = attrPath.get("name");
-					if (!attrName.isJSXIdentifier({ name: "name" })) continue;
-					const valuePath = attrPath.get("value");
-					if (valuePath.isStringLiteral()) {
-						ICONS.add(valuePath.node.value);
-					} else if (valuePath.isJSXExpressionContainer()) {
-						const exprPath = valuePath.get("expression");
-						if (exprPath.evaluate) {
-							const res = exprPath.evaluate();
-							if (res.confident && typeof res.value === "string") {
-								ICONS.add(res.value);
-							} else {
-								throw path.buildCodeFrameError(`Unable to statically evaluate <Icon name={...}> at ${full}`);
+					const attrNameNode = attrPath.get("name");
+					if (!attrNameNode.isJSXIdentifier()) continue;
+					const propName = attrNameNode.node.name;
+					
+					if (RISKY_PROPS.has(propName)) {
+						riskyPropWarnings.push({
+							file: path.relative(projectRoot, full),
+							line,
+							icon: iconName,
+							prop: propName,
+						});
+					}
+					
+					// Handle <Icon name="..."> for generic Icon component
+					if (propName === "name") {
+						const valuePath = attrPath.get("value");
+						if (valuePath.isStringLiteral()) {
+							ICONS.add(valuePath.node.value);
+						} else if (valuePath.isJSXExpressionContainer()) {
+							const exprPath = valuePath.get("expression");
+							if (exprPath.evaluate) {
+								const res = exprPath.evaluate();
+								if (res.confident && typeof res.value === "string") {
+									ICONS.add(res.value);
+								} else {
+									throw nodePath.buildCodeFrameError(`Unable to statically evaluate <Icon name={...}> at ${full}`);
+								}
 							}
 						}
 					}
@@ -111,3 +147,31 @@ collect(scanRoot);
 const outFile = path.join(__dirname, "used-icons.js");
 fs.writeFileSync(outFile, `export const ICONS = ${JSON.stringify([...ICONS].sort(), null, 2)};\n`, "utf8");
 console.log(`✅ Found ${ICONS.size} icons; wrote to ${outFile}`);
+
+// 4️⃣ Warn about risky props
+if (riskyPropWarnings.length > 0) {
+	console.log("");
+	console.warn(`⚠️  Found ${riskyPropWarnings.length} icon(s) with props that may differ in prod:`);
+	
+	// Group by file for cleaner output
+	const byFile = new Map();
+	for (const w of riskyPropWarnings) {
+		if (!byFile.has(w.file)) byFile.set(w.file, []);
+		byFile.get(w.file).push(w);
+	}
+	
+	for (const [file, warnings] of byFile) {
+		console.warn(`   ${file}:`);
+		for (const w of warnings.slice(0, 5)) {
+			console.warn(`     Line ${w.line}: <${w.icon} ${w.prop}="..." /> - "${w.prop}" may not work in prod`);
+		}
+		if (warnings.length > 5) {
+			console.warn(`     ... and ${warnings.length - 5} more`);
+		}
+	}
+	
+	console.warn("");
+	console.warn(`   💡 Tip: Use className="text-red-500" for colors (works via currentColor)`);
+	console.warn(`   💡 Props like strokeLinecap, fill, stroke don't cascade into <use> shadow DOM`);
+	console.warn("");
+}

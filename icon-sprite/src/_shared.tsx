@@ -1,18 +1,22 @@
 export type Dim = number | string | undefined;
 
-// Props that reliably work with SVG sprites
-export type IconProps = {
-	className?: string;
-	style?: React.CSSProperties;
+/**
+ * Icon props - extends all SVG props for maximum compatibility.
+ * 
+ * ✅ RELIABLE (work same in dev & prod):
+ *   - className, style, size, width, height
+ *   - strokeWidth (via CSS variable)
+ *   - id, role, aria-*, data-*
+ * 
+ * ⚠️ COLOR (use className instead):
+ *   - stroke, fill, color → Use className="text-red-500" (works via currentColor)
+ * 
+ * ❌ MAY DIFFER in prod (don't cascade into <use> shadow DOM):
+ *   - strokeLinecap, strokeLinejoin, strokeDasharray, etc.
+ *   - These work in dev but may not apply in prod sprite mode
+ */
+export type IconProps = React.SVGProps<SVGSVGElement> & {
 	size?: Dim;
-	width?: Dim;
-	height?: Dim;
-	strokeWidth?: number | string;
-	id?: string;
-	role?: string;
-	"aria-label"?: string;
-	"aria-hidden"?: boolean | "true" | "false";
-	"data-testid"?: string;
 };
 
 // Ultra-minimal renderUse - all logic in one place
