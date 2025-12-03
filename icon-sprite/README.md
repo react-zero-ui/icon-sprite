@@ -1,77 +1,67 @@
-<div align="center">
-  
 # @react-zero-ui/icon-sprite
 
 [![MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/react-zero-ui/icon-sprite/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/@react-zero-ui/icon-sprite.svg)](https://www.npmjs.com/package/@react-zero-ui/icon-sprite)
 
-</div>
+**The most performant way to use icons in React.**
 
-> ![Note](https://img.shields.io/badge/Note-blue) > **Generates one SVG sprite containing only the icons you used** - Lucide + custom SVGs.
-> DX with real `<Icon/>` in dev ➡️ zero-runtime `<use/>` in prod.
+Use **6,800+ Lucide & Tabler icons** in development with full React DX. Ship a **single optimized SVG sprite** in production — only the icons you actually used.
 
-> Part of the [React Zero-UI](https://github.com/react-zero-ui) ecosystem.
-
----
-
-**📊 Live Demo — ~270% Smaller HTML**
-**See the difference:** [View Demo](https://zero-ui.dev/icon-sprite)
+🚀 Zero Runtime • 📦 ~300% Smaller HTML • 🎨 6,800+ Icons • 🛠️ DX First • ⚡ Any Framework
 
 ---
 
-## 🧠 What This Library Does
+## Why This Library?
 
-1. **Full Lucide-React DX in development**
-   Import from `@react-zero-ui/icon-sprite` instead of `lucide-react`. Hot reload, JSX props, no caching headaches.
+SVG sprites are still the most performant way to deliver flat icons on the web. They are significantly smaller than React components and can be cached aggressively by the browser.
 
-2. **Zero-runtime in production**  
-   Every icon becomes `<use href="/icons.svg#id" />` at build time.
+**However, using sprites in development is a pain.**
+Browsers cache sprites so aggressively that you often have to close the tab and reopen it just to see a new icon, even with cache disabled in DevTools.
 
-3. **Smallest possible sprite**  
-   Only icons actually used in your app are included.
+**This library solves that problem:**
+1. **In Development:** It uses standard React components. No caching issues, instant HMR, and full prop support.
+2. **In Production:** It compiles everything into a single, highly optimized SVG sprite that is loaded once and cached forever.
 
-## 🙏 Custom Icon Support
+You get the **Developer Experience** of a component library with the **Performance** of a handwritten sprite.
 
-Drop SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />` with the filename (no `.svg`).
-
-> ![Tip](https://img.shields.io/badge/Tip-green)
->
-> ```txt
-> 📁/public
->   └──📁/zero-ui-icons/
->       └──dog.svg
-> ```
->
-> ```tsx
-> import { CustomIcon } from '@react-zero-ui/icon-sprite';
-> //❗The name MUST match the name of the  file name (no .svg extension).
-> <CustomIcon name='dog' size={24} />;
-> ```
-
-> ![Info](https://img.shields.io/badge/Info-blue)
-> In dev you may see a brief FOUC using custom icons; this is removed in production.
+> ![Demo](https://img.shields.io/badge/Live_Demo-4b00b8) **See the difference:** [View Demo ↗](https://zero-ui.dev/icon-sprite)
 
 ---
 
-## 📦 Installation
+## Benchmarks (150 Icons)
+
+| Library | HTML Size |
+|---------|-----------|
+| **Lucide React** | 19.5kb |
+| **@react-zero-ui** | **7.5kb** |
+
+---
+
+## Quick Start
+
+### 1. Install
 
 ```bash
 npm install @react-zero-ui/icon-sprite
 ```
 
----
+### 2. Use Icons
 
-## ❗ Build Command
+```tsx
+import { ArrowRight, Mail } from "@react-zero-ui/icon-sprite";
 
-> ![Caution](https://img.shields.io/badge/Caution-red)
-> Run this before your app build so the sprite exists.
->
-> ```bash
-> npx zero-icons
-> ```
+<ArrowRight size={24} className="text-gray-600" />
+<Mail width={24} height={24} />
+```
 
-This command builds the icons sprite for production.
+### 3. Build for Production
 
-Or add this to your `package.json` scripts:
+> ![Caution](https://img.shields.io/badge/Caution-red) Run this **before** your app build so the sprite exists.
+
+```bash
+npx zero-icons
+```
+
+Or add it to your `package.json`:
 
 ```json
 {
@@ -82,16 +72,15 @@ Or add this to your `package.json` scripts:
 }
 ```
 
-That's it!
+That's it! Your icons are now optimized for production.
 
 ---
 
-## 🔨 Usage
+## Usage
 
-> ![Warning](https://img.shields.io/badge/Warning-orange) > **Pass `size`, or both `width` and `height`, to ensure identical dev/prod rendering.**  
-> Dev defaults (Lucide 24×24) differ from sprite viewBoxes in production. Missing these props will **very likely** change the visual size in prod.
+> ![Warning](https://img.shields.io/badge/Warning-orange) **Pass `size`, or both `width` and `height`, to ensure identical dev/prod rendering.** Dev defaults (Lucide 24×24) differ from sprite viewBoxes in production.
 
-### For Lucide Icons:
+### Lucide Icons
 
 ```tsx
 import { ArrowRight, Mail } from "@react-zero-ui/icon-sprite";
@@ -100,29 +89,82 @@ import { ArrowRight, Mail } from "@react-zero-ui/icon-sprite";
 <Mail width={24} height={24} />
 ```
 
-### Custom Icons:
-
-Drop SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />` with the filename (no `.svg`).
+### Tabler Icons
 
 ```tsx
-import { CustomIcon } from '@react-zero-ui/icon-sprite';
-//❗The name MUST match the name of the file name (without .svg).
-<CustomIcon name='dog' size={32} />;
+import { IconBrandGithub, IconHeart } from "@react-zero-ui/icon-sprite";
+
+<IconBrandGithub size={24} className="text-gray-600" />
+<IconHeart width={24} height={24} />
 ```
+
+### Custom Icons
+
+Drop your own SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />`:
+
+```txt
+📁/public
+   └──📁/zero-ui-icons/
+       └──dog.svg
+```
+
+```tsx
+import { CustomIcon } from "@react-zero-ui/icon-sprite";
+
+<CustomIcon name="dog" size={24} />
+```
+
+> ![Tip](https://img.shields.io/badge/Tip-green) The `name` prop **must match** the file name (without `.svg`).
+
+> ![Note](https://img.shields.io/badge/Note-blue) In dev you may see a brief FOUC using custom icons; this is removed in production.
 
 ---
 
-## 🧪 How It Works (Under the Hood)
+## Configuration
 
-### ✅ Development Mode: DX First
+Customize the scanner behavior by creating a `zero-ui.config.js` file in your project root:
 
-In dev, each icon wrapper looks like this:
+```js
+// zero-ui.config.js
+export default {
+  // Package name to scan for (default: "@react-zero-ui/icon-sprite")
+  IMPORT_NAME: "@react-zero-ui/icon-sprite",
+
+  // Path where the sprite will be served (default: "/icons.svg")
+  SPRITE_PATH: "/icons.svg",
+
+  // Directory to scan for icon usage (default: "src")
+  ROOT_DIR: "src",
+
+  // Directory containing custom SVG files (default: "zero-ui-icons")
+  CUSTOM_SVG_DIR: "zero-ui-icons",
+
+  // Output directory for the sprite (default: "public")
+  OUTPUT_DIR: "public",
+
+  // Icon names to ignore during scanning (default: ["CustomIcon"])
+  IGNORE_ICONS: ["CustomIcon"],
+
+  // Directories to exclude from scanning
+  EXCLUDE_DIRS: ["node_modules", ".git", "dist", "build", ".next", "out"],
+};
+```
+
+> ![Note](https://img.shields.io/badge/Note-blue) The scanner defaults to scanning only the `src` directory and automatically excludes `node_modules` and other common build directories.
+
+---
+
+## How It Works
+
+### Development: DX First
+
+In dev, each icon wrapper renders the real React component:
 
 ```tsx
-import { ArrowRight as DevIcon } from 'lucide-react';
+import { ArrowRight as DevIcon } from "lucide-react";
 
-export const ArrowRight = props =>
-  process.env.NODE_ENV === 'development' ? (
+export const ArrowRight = (props) =>
+  process.env.NODE_ENV === "development" ? (
     <DevIcon {...props} />
   ) : (
     <svg {...props}>
@@ -132,80 +174,27 @@ export const ArrowRight = props =>
 ```
 
 This ensures:
-
-- Dev uses Lucide's real React components (`lucide-react`)
+- Dev uses real React components (`lucide-react` or `@tabler/icons-react`)
 - Full props support (e.g. `strokeWidth`, `className`)
 - No caching issues from SVG sprites
 - No FOUC (Flash of Unstyled Content)
 
-### ⚙️ Production Mode: Minimal Runtime, Maximum Speed
+### Production: Maximum Performance
 
-At build time:
+At build time (`npx zero-icons`):
 
-1. We scan your codebase for all icons statically using Babel + AST traversal
+1. We scan your codebase for all icons using Babel + AST traversal
 2. We generate a single SVG sprite sheet (`public/icons.svg`)
 3. The wrapper components switch to `<use href="/icons.svg#icon-id" />`
 
----
-
-## ⚙️ Configuration
-
-You can customize the scanner behavior by creating a `zero-ui.config.js` file in your project root:
-
-```js
-// zero-ui.config.js
-export default {
-  // Package name to scan for (default: "@react-zero-ui/icon-sprite")
-  IMPORT_NAME: '@react-zero-ui/icon-sprite',
-
-  // Path where the sprite will be served (default: "/icons.svg")
-  SPRITE_PATH: '/icons.svg',
-
-  // Directory to scan for icon usage (default: "src")
-  ROOT_DIR: 'src',
-
-  // Directory containing custom SVG files (default: "zero-ui-icons")
-  CUSTOM_SVG_DIR: 'zero-ui-icons',
-
-  // Output directory for the sprite (default: "public")
-  OUTPUT_DIR: 'public',
-
-  // Icon names to ignore during scanning (default: ["CustomIcon"])
-  IGNORE_ICONS: ['CustomIcon'],
-
-  // Directories to exclude from scanning (default: ["node_modules", ".git", "dist", "build", ".next", "out"])
-  EXCLUDE_DIRS: ['node_modules', '.git', 'dist', 'build', '.next', 'out'],
-};
-```
-
-> ![Note](https://img.shields.io/badge/Note-blue)
-> The scanner now defaults to scanning only the `src` directory and automatically excludes `node_modules` and other common build directories. This prevents build failures from dependencies with unsupported syntax (e.g., TypeScript decorators).
+| Script | Purpose |
+| --- | --- |
+| `scan-icons.js` | Parse your codebase for used icons |
+| `used-icons.js` | Collects a list of unique icon names |
+| `build-sprite.js` | Generates `icons.svg` from used Lucide + Tabler + custom SVGs |
 
 ---
 
-## ⚡️ Tooling
+Part of the [React Zero-UI](https://github.com/react-zero-ui) ecosystem.
 
-To generate everything:
-
-```bash
-npx zero-icons
-```
-
-This runs the full pipeline:
-
-| Script            | Purpose                                                                                                      |
-| ----------------- | ------------------------------------------------------------------------------------------------------------ |
-| `scan-icons.js`   | Parse your codebase for used icons (`Icon` usage or named imports)                                           |
-| `used-icons.js`   | Collects a list of unique icon names                                                                         |
-| `build-sprite.js` | Uses [`svgstore`](https://github.com/DIYgod/svgstore) to generate `icons.svg` from used Lucide + custom SVGs |
-
----
-
-## ✨ Why This Beats Icon Libraries Everywhere
-
-- **DX-first in dev**: No flicker. No sprite caching. Live updates.
-- **Zero-runtime in production**: Sprites are native, fast, lightweight & highly Cached.
-- **Only ships the icons you actually use** - smallest possible sprite.
-- **Custom icon support**: Drop SVGs into `/public/zero-ui-icons/` and use `<CustomIcon />`
-
-Made with ❤️ for the React community by [@austin1serb](https://github.com/austin1serb)
+Made with ❤️ by [@austinserb](https://www.austinserb.com/)
