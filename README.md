@@ -202,7 +202,7 @@ At build time:
 | --- | --- |
 | `scan-icons.js`   | Parse your codebase for used icons (`Icon` usage or named imports) |
 | `used-icons.js`   | Collects a list of unique icon names |
-| `build-sprite.js` | Uses [`svgstore`](https://github.com/DIYgod/svgstore) to generate `icons.svg` from used Lucide + Tabler + custom SVGs |
+| `build-sprite.js` | Uses [`svgstore`](https://github.com/svgstore/svgstore) to generate `icons.svg` from used Lucide + Tabler + custom SVGs |
 
 </details>
 
