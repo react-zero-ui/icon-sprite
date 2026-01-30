@@ -17,7 +17,7 @@
       🚀 <b>Zero Runtime</b><br/>Compiles to native <code>&lt;use&gt;</code> tags
     </td>
     <td align="center" width="33%">
-      📦 <b>~300% Smaller</b><br/>No HTML bloat or JS overhead
+      📦 <b>~70% Smaller</b><br/>No HTML bloat or JS overhead
     </td>
     <td align="center" width="33%">
       🎨 <b>6,800+ Icons</b><br/>Full Lucide & Tabler support
