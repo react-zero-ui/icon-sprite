@@ -1,0 +1,182 @@
+[
+  {
+    "pack": "lucide",
+    "svgId": "arrow-down-01",
+    "componentName": "ArrowDown01",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowDown01",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-down-10",
+    "componentName": "ArrowDown10",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowDown10",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-down-az",
+    "componentName": "ArrowDownAZ",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowDownAZ",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-down-za",
+    "componentName": "ArrowDownZA",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowDownZA",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-up-01",
+    "componentName": "ArrowUp01",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowUp01",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-up-10",
+    "componentName": "ArrowUp10",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowUp10",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-up-az",
+    "componentName": "ArrowUpAZ",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowUpAZ",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "arrow-up-za",
+    "componentName": "ArrowUpZA",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "ArrowUpZA",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "axis-3d",
+    "componentName": "Axis3d",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Axis3d",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "file-axis-3d",
+    "componentName": "FileAxis3d",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "FileAxis3d",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "grid-2x2-check",
+    "componentName": "Grid2x2Check",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Grid2x2Check",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "grid-2x2-plus",
+    "componentName": "Grid2x2Plus",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Grid2x2Plus",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "grid-2x2-x",
+    "componentName": "Grid2x2X",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Grid2x2X",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "grid-2x2",
+    "componentName": "Grid2x2",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Grid2x2",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "grid-3x3",
+    "componentName": "Grid3x3",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Grid3x3",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "move-3d",
+    "componentName": "Move3d",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Move3d",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "rotate-3d",
+    "componentName": "Rotate3d",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Rotate3d",
+      "pack": "lucide"
+    }
+  },
+  {
+    "pack": "lucide",
+    "svgId": "scale-3d",
+    "componentName": "Scale3d",
+    "reason": "case-collision",
+    "collidesWith": {
+      "name": "Scale3d",
+      "pack": "lucide"
+    }
+  }
+]

@@ -57,7 +57,11 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
 				setPayload(p);
 			})
 			.catch((err) => {
-				if (err.name !== "AbortError") console.warn(`[CustomIcon] failed to load ${url}:`, err);
+				if (err.name !== "AbortError") {
+					console.warn(
+						`[CustomIcon] "${name}" not found. Add ${name}.svg to /public/${CUSTOM_SVG_DIR}/\n` + `Then run: npx zero-icons\n` + `Docs: https://github.com/react-zero-ui/icon-sprite#custom-icons`
+					);
+				}
 				if (!ctrl.signal.aborted) setPayload(null);
 			});
 		return () => ctrl.abort();
@@ -68,6 +72,7 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
 		const h = height ?? size ?? 24;
 		return (
 			<svg
+				aria-hidden="true"
 				ref={svgRef}
 				width={w}
 				height={h}

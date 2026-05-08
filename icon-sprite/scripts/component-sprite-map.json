@@ -649,6 +649,11 @@
     "spriteId": "asterisk",
     "svgFile": "asterisk.svg"
   },
+  "Astroid": {
+    "pack": "lucide",
+    "spriteId": "astroid",
+    "svgFile": "astroid.svg"
+  },
   "AtSign": {
     "pack": "lucide",
     "spriteId": "at-sign",
@@ -793,6 +798,11 @@
     "pack": "lucide",
     "spriteId": "baggage-claim",
     "svgFile": "baggage-claim.svg"
+  },
+  "Balloon": {
+    "pack": "lucide",
+    "spriteId": "balloon",
+    "svgFile": "balloon.svg"
   },
   "Ban": {
     "pack": "lucide",
@@ -949,6 +959,11 @@
     "spriteId": "bed",
     "svgFile": "bed.svg"
   },
+  "BeefOff": {
+    "pack": "lucide",
+    "spriteId": "beef-off",
+    "svgFile": "beef-off.svg"
+  },
   "Beef": {
     "pack": "lucide",
     "spriteId": "beef",
@@ -963,6 +978,11 @@
     "pack": "lucide",
     "spriteId": "beer",
     "svgFile": "beer.svg"
+  },
+  "BellCheck": {
+    "pack": "lucide",
+    "spriteId": "bell-check",
+    "svgFile": "bell-check.svg"
   },
   "BellDot": {
     "pack": "lucide",
@@ -1214,6 +1234,11 @@
     "spriteId": "book-plus",
     "svgFile": "book-plus.svg"
   },
+  "BookSearch": {
+    "pack": "lucide",
+    "spriteId": "book-search",
+    "svgFile": "book-search.svg"
+  },
   "BookTemplate": {
     "pack": "lucide",
     "spriteId": "book-template",
@@ -1263,6 +1288,11 @@
     "pack": "lucide",
     "spriteId": "bookmark-minus",
     "svgFile": "bookmark-minus.svg"
+  },
+  "BookmarkOff": {
+    "pack": "lucide",
+    "spriteId": "bookmark-off",
+    "svgFile": "bookmark-off.svg"
   },
   "BookmarkPlus": {
     "pack": "lucide",
@@ -1604,6 +1634,11 @@
     "spriteId": "candy",
     "svgFile": "candy.svg"
   },
+  "CannabisOff": {
+    "pack": "lucide",
+    "spriteId": "cannabis-off",
+    "svgFile": "cannabis-off.svg"
+  },
   "Cannabis": {
     "pack": "lucide",
     "spriteId": "cannabis",
@@ -1683,6 +1718,11 @@
     "pack": "lucide",
     "spriteId": "cat",
     "svgFile": "cat.svg"
+  },
+  "CctvOff": {
+    "pack": "lucide",
+    "spriteId": "cctv-off",
+    "svgFile": "cctv-off.svg"
   },
   "Cctv": {
     "pack": "lucide",
@@ -1994,16 +2034,6 @@
     "spriteId": "chevrons-up",
     "svgFile": "chevrons-up.svg"
   },
-  "Chrome": {
-    "pack": "lucide",
-    "spriteId": "chrome",
-    "svgFile": "chrome.svg"
-  },
-  "Chromium": {
-    "pack": "lucide",
-    "spriteId": "chromium",
-    "svgFile": "chromium.svg"
-  },
   "Church": {
     "pack": "lucide",
     "spriteId": "church",
@@ -2178,6 +2208,11 @@
     "pack": "lucide",
     "spriteId": "circle-percent",
     "svgFile": "circle-percent.svg"
+  },
+  "CirclePile": {
+    "pack": "lucide",
+    "spriteId": "circle-pile",
+    "svgFile": "circle-pile.svg"
   },
   "CirclePlay": {
     "pack": "lucide",
@@ -2444,6 +2479,11 @@
     "spriteId": "cloud-alert",
     "svgFile": "cloud-alert.svg"
   },
+  "CloudBackup": {
+    "pack": "lucide",
+    "spriteId": "cloud-backup",
+    "svgFile": "cloud-backup.svg"
+  },
   "CloudCheck": {
     "pack": "lucide",
     "spriteId": "cloud-check",
@@ -2519,6 +2559,11 @@
     "spriteId": "cloud-sun",
     "svgFile": "cloud-sun.svg"
   },
+  "CloudSync": {
+    "pack": "lucide",
+    "spriteId": "cloud-sync",
+    "svgFile": "cloud-sync.svg"
+  },
   "CloudUpload": {
     "pack": "lucide",
     "spriteId": "cloud-upload",
@@ -2563,16 +2608,6 @@
     "pack": "lucide",
     "spriteId": "code",
     "svgFile": "code.svg"
-  },
-  "Codepen": {
-    "pack": "lucide",
-    "spriteId": "codepen",
-    "svgFile": "codepen.svg"
-  },
-  "Codesandbox": {
-    "pack": "lucide",
-    "spriteId": "codesandbox",
-    "svgFile": "codesandbox.svg"
   },
   "Coffee": {
     "pack": "lucide",
@@ -2849,6 +2884,11 @@
     "spriteId": "database-backup",
     "svgFile": "database-backup.svg"
   },
+  "DatabaseSearch": {
+    "pack": "lucide",
+    "spriteId": "database-search",
+    "svgFile": "database-search.svg"
+  },
   "DatabaseZap": {
     "pack": "lucide",
     "spriteId": "database-zap",
@@ -3054,11 +3094,6 @@
     "spriteId": "drama",
     "svgFile": "drama.svg"
   },
-  "Dribbble": {
-    "pack": "lucide",
-    "spriteId": "dribbble",
-    "svgFile": "dribbble.svg"
-  },
   "Drill": {
     "pack": "lucide",
     "spriteId": "drill",
@@ -3154,6 +3189,11 @@
     "spriteId": "egg",
     "svgFile": "egg.svg"
   },
+  "Ellipse": {
+    "pack": "lucide",
+    "spriteId": "ellipse",
+    "svgFile": "ellipse.svg"
+  },
   "EllipsisVertical": {
     "pack": "lucide",
     "spriteId": "ellipsis-vertical",
@@ -3229,11 +3269,6 @@
     "spriteId": "eye",
     "svgFile": "eye.svg"
   },
-  "Facebook": {
-    "pack": "lucide",
-    "spriteId": "facebook",
-    "svgFile": "facebook.svg"
-  },
   "Factory": {
     "pack": "lucide",
     "spriteId": "factory",
@@ -3263,11 +3298,6 @@
     "pack": "lucide",
     "spriteId": "ferris-wheel",
     "svgFile": "ferris-wheel.svg"
-  },
-  "Figma": {
-    "pack": "lucide",
-    "spriteId": "figma",
-    "svgFile": "figma.svg"
   },
   "FileArchive": {
     "pack": "lucide",
@@ -3724,6 +3754,16 @@
     "spriteId": "fish",
     "svgFile": "fish.svg"
   },
+  "FishingHook": {
+    "pack": "lucide",
+    "spriteId": "fishing-hook",
+    "svgFile": "fishing-hook.svg"
+  },
+  "FishingRod": {
+    "pack": "lucide",
+    "spriteId": "fishing-rod",
+    "svgFile": "fishing-rod.svg"
+  },
   "FlagOff": {
     "pack": "lucide",
     "spriteId": "flag-off",
@@ -3828,6 +3868,11 @@
     "pack": "lucide",
     "spriteId": "folder-archive",
     "svgFile": "folder-archive.svg"
+  },
+  "FolderBookmark": {
+    "pack": "lucide",
+    "spriteId": "folder-bookmark",
+    "svgFile": "folder-bookmark.svg"
   },
   "FolderCheck": {
     "pack": "lucide",
@@ -4029,11 +4074,6 @@
     "spriteId": "frame",
     "svgFile": "frame.svg"
   },
-  "Framer": {
-    "pack": "lucide",
-    "spriteId": "framer",
-    "svgFile": "framer.svg"
-  },
   "Frown": {
     "pack": "lucide",
     "spriteId": "frown",
@@ -4204,6 +4244,11 @@
     "spriteId": "git-graph",
     "svgFile": "git-graph.svg"
   },
+  "GitMergeConflict": {
+    "pack": "lucide",
+    "spriteId": "git-merge-conflict",
+    "svgFile": "git-merge-conflict.svg"
+  },
   "GitMerge": {
     "pack": "lucide",
     "spriteId": "git-merge",
@@ -4239,16 +4284,6 @@
     "spriteId": "git-pull-request",
     "svgFile": "git-pull-request.svg"
   },
-  "Github": {
-    "pack": "lucide",
-    "spriteId": "github",
-    "svgFile": "github.svg"
-  },
-  "Gitlab": {
-    "pack": "lucide",
-    "spriteId": "gitlab",
-    "svgFile": "gitlab.svg"
-  },
   "GlassWater": {
     "pack": "lucide",
     "spriteId": "glass-water",
@@ -4268,6 +4303,16 @@
     "pack": "lucide",
     "spriteId": "globe-lock",
     "svgFile": "globe-lock.svg"
+  },
+  "GlobeOff": {
+    "pack": "lucide",
+    "spriteId": "globe-off",
+    "svgFile": "globe-off.svg"
+  },
+  "GlobeX": {
+    "pack": "lucide",
+    "spriteId": "globe-x",
+    "svgFile": "globe-x.svg"
   },
   "Globe": {
     "pack": "lucide",
@@ -4459,6 +4504,11 @@
     "spriteId": "haze",
     "svgFile": "haze.svg"
   },
+  "Hd": {
+    "pack": "lucide",
+    "spriteId": "hd",
+    "svgFile": "hd.svg"
+  },
   "HdmiPort": {
     "pack": "lucide",
     "spriteId": "hdmi-port",
@@ -4543,6 +4593,11 @@
     "pack": "lucide",
     "spriteId": "heart-pulse",
     "svgFile": "heart-pulse.svg"
+  },
+  "HeartX": {
+    "pack": "lucide",
+    "spriteId": "heart-x",
+    "svgFile": "heart-x.svg"
   },
   "Heart": {
     "pack": "lucide",
@@ -4764,11 +4819,6 @@
     "spriteId": "inspection-panel",
     "svgFile": "inspection-panel.svg"
   },
-  "Instagram": {
-    "pack": "lucide",
-    "spriteId": "instagram",
-    "svgFile": "instagram.svg"
-  },
   "Italic": {
     "pack": "lucide",
     "spriteId": "italic",
@@ -4934,6 +4984,16 @@
     "spriteId": "layers-3",
     "svgFile": "layers-3.svg"
   },
+  "LayersMinus": {
+    "pack": "lucide",
+    "spriteId": "layers-minus",
+    "svgFile": "layers-minus.svg"
+  },
+  "LayersPlus": {
+    "pack": "lucide",
+    "spriteId": "layers-plus",
+    "svgFile": "layers-plus.svg"
+  },
   "Layers": {
     "pack": "lucide",
     "spriteId": "layers",
@@ -4989,6 +5049,16 @@
     "spriteId": "lectern",
     "svgFile": "lectern.svg"
   },
+  "LensConcave": {
+    "pack": "lucide",
+    "spriteId": "lens-concave",
+    "svgFile": "lens-concave.svg"
+  },
+  "LensConvex": {
+    "pack": "lucide",
+    "spriteId": "lens-convex",
+    "svgFile": "lens-convex.svg"
+  },
   "LetterText": {
     "pack": "lucide",
     "spriteId": "letter-text",
@@ -5034,10 +5104,20 @@
     "spriteId": "line-chart",
     "svgFile": "line-chart.svg"
   },
+  "LineDotRightHorizontal": {
+    "pack": "lucide",
+    "spriteId": "line-dot-right-horizontal",
+    "svgFile": "line-dot-right-horizontal.svg"
+  },
   "LineSquiggle": {
     "pack": "lucide",
     "spriteId": "line-squiggle",
     "svgFile": "line-squiggle.svg"
+  },
+  "LineStyle": {
+    "pack": "lucide",
+    "spriteId": "line-style",
+    "svgFile": "line-style.svg"
   },
   "Link2Off": {
     "pack": "lucide",
@@ -5053,11 +5133,6 @@
     "pack": "lucide",
     "spriteId": "link",
     "svgFile": "link.svg"
-  },
-  "Linkedin": {
-    "pack": "lucide",
-    "spriteId": "linkedin",
-    "svgFile": "linkedin.svg"
   },
   "ListCheck": {
     "pack": "lucide",
@@ -5369,6 +5444,11 @@
     "spriteId": "map-pin-plus",
     "svgFile": "map-pin-plus.svg"
   },
+  "MapPinSearch": {
+    "pack": "lucide",
+    "spriteId": "map-pin-search",
+    "svgFile": "map-pin-search.svg"
+  },
   "MapPinXInside": {
     "pack": "lucide",
     "spriteId": "map-pin-x-inside",
@@ -5464,6 +5544,11 @@
     "spriteId": "merge",
     "svgFile": "merge.svg"
   },
+  "MessageCircleCheck": {
+    "pack": "lucide",
+    "spriteId": "message-circle-check",
+    "svgFile": "message-circle-check.svg"
+  },
   "MessageCircleCode": {
     "pack": "lucide",
     "spriteId": "message-circle-code",
@@ -5523,6 +5608,11 @@
     "pack": "lucide",
     "spriteId": "message-circle",
     "svgFile": "message-circle.svg"
+  },
+  "MessageSquareCheck": {
+    "pack": "lucide",
+    "spriteId": "message-square-check",
+    "svgFile": "message-square-check.svg"
   },
   "MessageSquareCode": {
     "pack": "lucide",
@@ -5609,6 +5699,11 @@
     "spriteId": "messages-square",
     "svgFile": "messages-square.svg"
   },
+  "Metronome": {
+    "pack": "lucide",
+    "spriteId": "metronome",
+    "svgFile": "metronome.svg"
+  },
   "Mic2": {
     "pack": "lucide",
     "spriteId": "mic-2",
@@ -5683,6 +5778,16 @@
     "pack": "lucide",
     "spriteId": "minus",
     "svgFile": "minus.svg"
+  },
+  "MirrorRectangular": {
+    "pack": "lucide",
+    "spriteId": "mirror-rectangular",
+    "svgFile": "mirror-rectangular.svg"
+  },
+  "MirrorRound": {
+    "pack": "lucide",
+    "spriteId": "mirror-round",
+    "svgFile": "mirror-round.svg"
   },
   "MonitorCheck": {
     "pack": "lucide",
@@ -5789,6 +5894,11 @@
     "spriteId": "mountain",
     "svgFile": "mountain.svg"
   },
+  "MouseLeft": {
+    "pack": "lucide",
+    "spriteId": "mouse-left",
+    "svgFile": "mouse-left.svg"
+  },
   "MouseOff": {
     "pack": "lucide",
     "spriteId": "mouse-off",
@@ -5823,6 +5933,11 @@
     "pack": "lucide",
     "spriteId": "mouse-pointer",
     "svgFile": "mouse-pointer.svg"
+  },
+  "MouseRight": {
+    "pack": "lucide",
+    "spriteId": "mouse-right",
+    "svgFile": "mouse-right.svg"
   },
   "Mouse": {
     "pack": "lucide",
@@ -6609,11 +6724,6 @@
     "spriteId": "pocket-knife",
     "svgFile": "pocket-knife.svg"
   },
-  "Pocket": {
-    "pack": "lucide",
-    "spriteId": "pocket",
-    "svgFile": "pocket.svg"
-  },
   "Podcast": {
     "pack": "lucide",
     "spriteId": "podcast",
@@ -6674,6 +6784,11 @@
     "spriteId": "printer-check",
     "svgFile": "printer-check.svg"
   },
+  "PrinterX": {
+    "pack": "lucide",
+    "spriteId": "printer-x",
+    "svgFile": "printer-x.svg"
+  },
   "Printer": {
     "pack": "lucide",
     "spriteId": "printer",
@@ -6729,6 +6844,11 @@
     "spriteId": "radical",
     "svgFile": "radical.svg"
   },
+  "RadioOff": {
+    "pack": "lucide",
+    "spriteId": "radio-off",
+    "svgFile": "radio-off.svg"
+  },
   "RadioReceiver": {
     "pack": "lucide",
     "spriteId": "radio-receiver",
@@ -6748,11 +6868,6 @@
     "pack": "lucide",
     "spriteId": "radius",
     "svgFile": "radius.svg"
-  },
-  "RailSymbol": {
-    "pack": "lucide",
-    "spriteId": "rail-symbol",
-    "svgFile": "rail-symbol.svg"
   },
   "Rainbow": {
     "pack": "lucide",
@@ -6909,6 +7024,11 @@
     "spriteId": "repeat-2",
     "svgFile": "repeat-2.svg"
   },
+  "RepeatOff": {
+    "pack": "lucide",
+    "spriteId": "repeat-off",
+    "svgFile": "repeat-off.svg"
+  },
   "Repeat": {
     "pack": "lucide",
     "spriteId": "repeat",
@@ -6943,6 +7063,11 @@
     "pack": "lucide",
     "spriteId": "ribbon",
     "svgFile": "ribbon.svg"
+  },
+  "Road": {
+    "pack": "lucide",
+    "spriteId": "road",
+    "svgFile": "road.svg"
   },
   "Rocket": {
     "pack": "lucide",
@@ -7189,6 +7314,11 @@
     "spriteId": "scissors",
     "svgFile": "scissors.svg"
   },
+  "Scooter": {
+    "pack": "lucide",
+    "spriteId": "scooter",
+    "svgFile": "scooter.svg"
+  },
   "ScreenShareOff": {
     "pack": "lucide",
     "spriteId": "screen-share-off",
@@ -7208,6 +7338,11 @@
     "pack": "lucide",
     "spriteId": "scroll",
     "svgFile": "scroll.svg"
+  },
+  "SearchAlert": {
+    "pack": "lucide",
+    "spriteId": "search-alert",
+    "svgFile": "search-alert.svg"
   },
   "SearchCheck": {
     "pack": "lucide",
@@ -7324,6 +7459,11 @@
     "spriteId": "shell",
     "svgFile": "shell.svg"
   },
+  "ShelvingUnit": {
+    "pack": "lucide",
+    "spriteId": "shelving-unit",
+    "svgFile": "shelving-unit.svg"
+  },
   "ShieldAlert": {
     "pack": "lucide",
     "spriteId": "shield-alert",
@@ -7343,6 +7483,16 @@
     "pack": "lucide",
     "spriteId": "shield-close",
     "svgFile": "shield-close.svg"
+  },
+  "ShieldCogCorner": {
+    "pack": "lucide",
+    "spriteId": "shield-cog-corner",
+    "svgFile": "shield-cog-corner.svg"
+  },
+  "ShieldCog": {
+    "pack": "lucide",
+    "spriteId": "shield-cog",
+    "svgFile": "shield-cog.svg"
   },
   "ShieldEllipsis": {
     "pack": "lucide",
@@ -7544,11 +7694,6 @@
     "spriteId": "skull",
     "svgFile": "skull.svg"
   },
-  "Slack": {
-    "pack": "lucide",
-    "spriteId": "slack",
-    "svgFile": "slack.svg"
-  },
   "SlashSquare": {
     "pack": "lucide",
     "spriteId": "slash-square",
@@ -7714,6 +7859,11 @@
     "spriteId": "spool",
     "svgFile": "spool.svg"
   },
+  "SportShoe": {
+    "pack": "lucide",
+    "spriteId": "sport-shoe",
+    "svgFile": "sport-shoe.svg"
+  },
   "Spotlight": {
     "pack": "lucide",
     "spriteId": "spotlight",
@@ -7774,6 +7924,16 @@
     "spriteId": "square-arrow-out-up-right",
     "svgFile": "square-arrow-out-up-right.svg"
   },
+  "SquareArrowRightEnter": {
+    "pack": "lucide",
+    "spriteId": "square-arrow-right-enter",
+    "svgFile": "square-arrow-right-enter.svg"
+  },
+  "SquareArrowRightExit": {
+    "pack": "lucide",
+    "spriteId": "square-arrow-right-exit",
+    "svgFile": "square-arrow-right-exit.svg"
+  },
   "SquareArrowRight": {
     "pack": "lucide",
     "spriteId": "square-arrow-right",
@@ -7803,6 +7963,16 @@
     "pack": "lucide",
     "spriteId": "square-bottom-dashed-scissors",
     "svgFile": "square-bottom-dashed-scissors.svg"
+  },
+  "SquareCenterlineDashedHorizontal": {
+    "pack": "lucide",
+    "spriteId": "square-centerline-dashed-horizontal",
+    "svgFile": "square-centerline-dashed-horizontal.svg"
+  },
+  "SquareCenterlineDashedVertical": {
+    "pack": "lucide",
+    "spriteId": "square-centerline-dashed-vertical",
+    "svgFile": "square-centerline-dashed-vertical.svg"
   },
   "SquareChartGantt": {
     "pack": "lucide",
@@ -7863,6 +8033,11 @@
     "pack": "lucide",
     "spriteId": "square-dashed-mouse-pointer",
     "svgFile": "square-dashed-mouse-pointer.svg"
+  },
+  "SquareDashedText": {
+    "pack": "lucide",
+    "spriteId": "square-dashed-text",
+    "svgFile": "square-dashed-text.svg"
   },
   "SquareDashedTopSolid": {
     "pack": "lucide",
@@ -8143,6 +8318,11 @@
     "pack": "lucide",
     "spriteId": "sticky-note",
     "svgFile": "sticky-note.svg"
+  },
+  "Stone": {
+    "pack": "lucide",
+    "spriteId": "stone",
+    "svgFile": "stone.svg"
   },
   "StopCircle": {
     "pack": "lucide",
@@ -8539,6 +8719,11 @@
     "spriteId": "tickets",
     "svgFile": "tickets.svg"
   },
+  "Timeline": {
+    "pack": "lucide",
+    "spriteId": "timeline",
+    "svgFile": "timeline.svg"
+  },
   "TimerOff": {
     "pack": "lucide",
     "spriteId": "timer-off",
@@ -8574,6 +8759,11 @@
     "spriteId": "tool-case",
     "svgFile": "tool-case.svg"
   },
+  "Toolbox": {
+    "pack": "lucide",
+    "spriteId": "toolbox",
+    "svgFile": "toolbox.svg"
+  },
   "Tornado": {
     "pack": "lucide",
     "spriteId": "tornado",
@@ -8593,6 +8783,11 @@
     "pack": "lucide",
     "spriteId": "touchpad",
     "svgFile": "touchpad.svg"
+  },
+  "TowelRack": {
+    "pack": "lucide",
+    "spriteId": "towel-rack",
+    "svgFile": "towel-rack.svg"
   },
   "TowerControl": {
     "pack": "lucide",
@@ -8673,11 +8868,6 @@
     "pack": "lucide",
     "spriteId": "trees",
     "svgFile": "trees.svg"
-  },
-  "Trello": {
-    "pack": "lucide",
-    "spriteId": "trello",
-    "svgFile": "trello.svg"
   },
   "TrendingDown": {
     "pack": "lucide",
@@ -8763,16 +8953,6 @@
     "pack": "lucide",
     "spriteId": "tv",
     "svgFile": "tv.svg"
-  },
-  "Twitch": {
-    "pack": "lucide",
-    "spriteId": "twitch",
-    "svgFile": "twitch.svg"
-  },
-  "Twitter": {
-    "pack": "lucide",
-    "spriteId": "twitter",
-    "svgFile": "twitter.svg"
   },
   "TypeOutline": {
     "pack": "lucide",
@@ -8909,6 +9089,11 @@
     "spriteId": "user-cog",
     "svgFile": "user-cog.svg"
   },
+  "UserKey": {
+    "pack": "lucide",
+    "spriteId": "user-key",
+    "svgFile": "user-key.svg"
+  },
   "UserLock": {
     "pack": "lucide",
     "spriteId": "user-lock",
@@ -8948,6 +9133,11 @@
     "pack": "lucide",
     "spriteId": "user-round-cog",
     "svgFile": "user-round-cog.svg"
+  },
+  "UserRoundKey": {
+    "pack": "lucide",
+    "spriteId": "user-round-key",
+    "svgFile": "user-round-key.svg"
   },
   "UserRoundMinus": {
     "pack": "lucide",
@@ -9043,6 +9233,11 @@
     "pack": "lucide",
     "spriteId": "utility-pole",
     "svgFile": "utility-pole.svg"
+  },
+  "Van": {
+    "pack": "lucide",
+    "spriteId": "van",
+    "svgFile": "van.svg"
   },
   "Variable": {
     "pack": "lucide",
@@ -9219,10 +9414,20 @@
     "spriteId": "waves-arrow-up",
     "svgFile": "waves-arrow-up.svg"
   },
+  "WavesHorizontal": {
+    "pack": "lucide",
+    "spriteId": "waves-horizontal",
+    "svgFile": "waves-horizontal.svg"
+  },
   "WavesLadder": {
     "pack": "lucide",
     "spriteId": "waves-ladder",
     "svgFile": "waves-ladder.svg"
+  },
+  "WavesVertical": {
+    "pack": "lucide",
+    "spriteId": "waves-vertical",
+    "svgFile": "waves-vertical.svg"
   },
   "Waves": {
     "pack": "lucide",
@@ -9248,6 +9453,11 @@
     "pack": "lucide",
     "spriteId": "webhook",
     "svgFile": "webhook.svg"
+  },
+  "WeightTilde": {
+    "pack": "lucide",
+    "spriteId": "weight-tilde",
+    "svgFile": "weight-tilde.svg"
   },
   "Weight": {
     "pack": "lucide",
@@ -9354,6 +9564,11 @@
     "spriteId": "x-circle",
     "svgFile": "x-circle.svg"
   },
+  "XLineTop": {
+    "pack": "lucide",
+    "spriteId": "x-line-top",
+    "svgFile": "x-line-top.svg"
+  },
   "XOctagon": {
     "pack": "lucide",
     "spriteId": "x-octagon",
@@ -9369,11 +9584,6 @@
     "spriteId": "x",
     "svgFile": "x.svg"
   },
-  "Youtube": {
-    "pack": "lucide",
-    "spriteId": "youtube",
-    "svgFile": "youtube.svg"
-  },
   "ZapOff": {
     "pack": "lucide",
     "spriteId": "zap-off",
@@ -9383,6 +9593,71 @@
     "pack": "lucide",
     "spriteId": "zap",
     "svgFile": "zap.svg"
+  },
+  "ZodiacAquarius": {
+    "pack": "lucide",
+    "spriteId": "zodiac-aquarius",
+    "svgFile": "zodiac-aquarius.svg"
+  },
+  "ZodiacAries": {
+    "pack": "lucide",
+    "spriteId": "zodiac-aries",
+    "svgFile": "zodiac-aries.svg"
+  },
+  "ZodiacCancer": {
+    "pack": "lucide",
+    "spriteId": "zodiac-cancer",
+    "svgFile": "zodiac-cancer.svg"
+  },
+  "ZodiacCapricorn": {
+    "pack": "lucide",
+    "spriteId": "zodiac-capricorn",
+    "svgFile": "zodiac-capricorn.svg"
+  },
+  "ZodiacGemini": {
+    "pack": "lucide",
+    "spriteId": "zodiac-gemini",
+    "svgFile": "zodiac-gemini.svg"
+  },
+  "ZodiacLeo": {
+    "pack": "lucide",
+    "spriteId": "zodiac-leo",
+    "svgFile": "zodiac-leo.svg"
+  },
+  "ZodiacLibra": {
+    "pack": "lucide",
+    "spriteId": "zodiac-libra",
+    "svgFile": "zodiac-libra.svg"
+  },
+  "ZodiacOphiuchus": {
+    "pack": "lucide",
+    "spriteId": "zodiac-ophiuchus",
+    "svgFile": "zodiac-ophiuchus.svg"
+  },
+  "ZodiacPisces": {
+    "pack": "lucide",
+    "spriteId": "zodiac-pisces",
+    "svgFile": "zodiac-pisces.svg"
+  },
+  "ZodiacSagittarius": {
+    "pack": "lucide",
+    "spriteId": "zodiac-sagittarius",
+    "svgFile": "zodiac-sagittarius.svg"
+  },
+  "ZodiacScorpio": {
+    "pack": "lucide",
+    "spriteId": "zodiac-scorpio",
+    "svgFile": "zodiac-scorpio.svg"
+  },
+  "ZodiacTaurus": {
+    "pack": "lucide",
+    "spriteId": "zodiac-taurus",
+    "svgFile": "zodiac-taurus.svg"
+  },
+  "ZodiacVirgo": {
+    "pack": "lucide",
+    "spriteId": "zodiac-virgo",
+    "svgFile": "zodiac-virgo.svg"
   },
   "ZoomIn": {
     "pack": "lucide",
@@ -9443,6 +9718,16 @@
     "pack": "tabler",
     "spriteId": "tabler-accessible",
     "svgFile": "accessible.svg"
+  },
+  "IconAcorn": {
+    "pack": "tabler",
+    "spriteId": "tabler-acorn",
+    "svgFile": "acorn.svg"
+  },
+  "IconAcrobatic": {
+    "pack": "tabler",
+    "spriteId": "tabler-acrobatic",
+    "svgFile": "acrobatic.svg"
   },
   "IconActivityHeartbeat": {
     "pack": "tabler",
@@ -9618,6 +9903,21 @@
     "pack": "tabler",
     "spriteId": "tabler-affiliate",
     "svgFile": "affiliate.svg"
+  },
+  "IconAiAgent": {
+    "pack": "tabler",
+    "spriteId": "tabler-ai-agent",
+    "svgFile": "ai-agent.svg"
+  },
+  "IconAiAgents": {
+    "pack": "tabler",
+    "spriteId": "tabler-ai-agents",
+    "svgFile": "ai-agents.svg"
+  },
+  "IconAiGateway": {
+    "pack": "tabler",
+    "spriteId": "tabler-ai-gateway",
+    "svgFile": "ai-gateway.svg"
   },
   "IconAi": {
     "pack": "tabler",
@@ -9914,6 +10214,16 @@
     "spriteId": "tabler-alphabet-latin",
     "svgFile": "alphabet-latin.svg"
   },
+  "IconAlphabetPolish": {
+    "pack": "tabler",
+    "spriteId": "tabler-alphabet-polish",
+    "svgFile": "alphabet-polish.svg"
+  },
+  "IconAlphabetRunes": {
+    "pack": "tabler",
+    "spriteId": "tabler-alphabet-runes",
+    "svgFile": "alphabet-runes.svg"
+  },
   "IconAlphabetThai": {
     "pack": "tabler",
     "spriteId": "tabler-alphabet-thai",
@@ -10023,6 +10333,11 @@
     "pack": "tabler",
     "spriteId": "tabler-api-app",
     "svgFile": "api-app.svg"
+  },
+  "IconApiBook": {
+    "pack": "tabler",
+    "spriteId": "tabler-api-book",
+    "svgFile": "api-book.svg"
   },
   "IconApiOff": {
     "pack": "tabler",
@@ -11374,6 +11689,11 @@
     "spriteId": "tabler-ban",
     "svgFile": "ban.svg"
   },
+  "IconBanana": {
+    "pack": "tabler",
+    "spriteId": "tabler-banana",
+    "svgFile": "banana.svg"
+  },
   "IconBandageOff": {
     "pack": "tabler",
     "spriteId": "tabler-bandage-off",
@@ -11929,6 +12249,11 @@
     "spriteId": "tabler-blender",
     "svgFile": "blender.svg"
   },
+  "IconBlind": {
+    "pack": "tabler",
+    "spriteId": "tabler-blind",
+    "svgFile": "blind.svg"
+  },
   "IconBlob": {
     "pack": "tabler",
     "spriteId": "tabler-blob",
@@ -12229,6 +12554,11 @@
     "spriteId": "tabler-border-vertical",
     "svgFile": "border-vertical.svg"
   },
+  "IconBotId": {
+    "pack": "tabler",
+    "spriteId": "tabler-bot-id",
+    "svgFile": "bot-id.svg"
+  },
   "IconBottleOff": {
     "pack": "tabler",
     "spriteId": "tabler-bottle-off",
@@ -12494,10 +12824,10 @@
     "spriteId": "tabler-brand-adobe-photoshop",
     "svgFile": "brand-adobe-photoshop.svg"
   },
-  "IconBrandAdobePremier": {
+  "IconBrandAdobePremiere": {
     "pack": "tabler",
-    "spriteId": "tabler-brand-adobe-premier",
-    "svgFile": "brand-adobe-premier.svg"
+    "spriteId": "tabler-brand-adobe-premiere",
+    "svgFile": "brand-adobe-premiere.svg"
   },
   "IconBrandAdobeXd": {
     "pack": "tabler",
@@ -12628,6 +12958,11 @@
     "pack": "tabler",
     "spriteId": "tabler-brand-astro",
     "svgFile": "brand-astro.svg"
+  },
+  "IconBrandAudible": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-audible",
+    "svgFile": "brand-audible.svg"
   },
   "IconBrandAuth0": {
     "pack": "tabler",
@@ -13279,6 +13614,11 @@
     "spriteId": "tabler-brand-inertia",
     "svgFile": "brand-inertia.svg"
   },
+  "IconBrandInfakt": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-infakt",
+    "svgFile": "brand-infakt.svg"
+  },
   "IconBrandInstagram": {
     "pack": "tabler",
     "spriteId": "tabler-brand-instagram",
@@ -13298,6 +13638,11 @@
     "pack": "tabler",
     "spriteId": "tabler-brand-javascript",
     "svgFile": "brand-javascript.svg"
+  },
+  "IconBrandJira": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-jira",
+    "svgFile": "brand-jira.svg"
   },
   "IconBrandJuejin": {
     "pack": "tabler",
@@ -13859,6 +14204,11 @@
     "spriteId": "tabler-brand-steam",
     "svgFile": "brand-steam.svg"
   },
+  "IconBrandStellar": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-stellar",
+    "svgFile": "brand-stellar.svg"
+  },
   "IconBrandStocktwits": {
     "pack": "tabler",
     "spriteId": "tabler-brand-stocktwits",
@@ -13938,6 +14288,11 @@
     "pack": "tabler",
     "spriteId": "tabler-brand-tabler",
     "svgFile": "brand-tabler.svg"
+  },
+  "IconBrandTabnine": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-tabnine",
+    "svgFile": "brand-tabnine.svg"
   },
   "IconBrandTailwind": {
     "pack": "tabler",
@@ -14088,6 +14443,11 @@
     "pack": "tabler",
     "spriteId": "tabler-brand-valorant",
     "svgFile": "brand-valorant.svg"
+  },
+  "IconBrandVechain": {
+    "pack": "tabler",
+    "spriteId": "tabler-brand-vechain",
+    "svgFile": "brand-vechain.svg"
   },
   "IconBrandVercel": {
     "pack": "tabler",
@@ -14558,6 +14918,11 @@
     "pack": "tabler",
     "spriteId": "tabler-building-cottage",
     "svgFile": "building-cottage.svg"
+  },
+  "IconBuildingEiffelTower": {
+    "pack": "tabler",
+    "spriteId": "tabler-building-eiffel-tower",
+    "svgFile": "building-eiffel-tower.svg"
   },
   "IconBuildingEstate": {
     "pack": "tabler",
@@ -15049,6 +15414,11 @@
     "spriteId": "tabler-campfire",
     "svgFile": "campfire.svg"
   },
+  "IconCanary": {
+    "pack": "tabler",
+    "spriteId": "tabler-canary",
+    "svgFile": "canary.svg"
+  },
   "IconCancel": {
     "pack": "tabler",
     "spriteId": "tabler-cancel",
@@ -15129,6 +15499,11 @@
     "spriteId": "tabler-car-crash",
     "svgFile": "car-crash.svg"
   },
+  "IconCarDoor": {
+    "pack": "tabler",
+    "spriteId": "tabler-car-door",
+    "svgFile": "car-door.svg"
+  },
   "IconCarFan1": {
     "pack": "tabler",
     "spriteId": "tabler-car-fan-1",
@@ -15159,10 +15534,25 @@
     "spriteId": "tabler-car-garage",
     "svgFile": "car-garage.svg"
   },
+  "IconCarLifter": {
+    "pack": "tabler",
+    "spriteId": "tabler-car-lifter",
+    "svgFile": "car-lifter.svg"
+  },
+  "IconCarOffRoad": {
+    "pack": "tabler",
+    "spriteId": "tabler-car-off-road",
+    "svgFile": "car-off-road.svg"
+  },
   "IconCarOff": {
     "pack": "tabler",
     "spriteId": "tabler-car-off",
     "svgFile": "car-off.svg"
+  },
+  "IconCarSuspension": {
+    "pack": "tabler",
+    "spriteId": "tabler-car-suspension",
+    "svgFile": "car-suspension.svg"
   },
   "IconCarSuv": {
     "pack": "tabler",
@@ -15844,6 +16234,11 @@
     "spriteId": "tabler-chisel",
     "svgFile": "chisel.svg"
   },
+  "IconChocolate": {
+    "pack": "tabler",
+    "spriteId": "tabler-chocolate",
+    "svgFile": "chocolate.svg"
+  },
   "IconChristmasBall": {
     "pack": "tabler",
     "spriteId": "tabler-christmas-ball",
@@ -15898,6 +16293,11 @@
     "pack": "tabler",
     "spriteId": "tabler-circle-arrow-up",
     "svgFile": "circle-arrow-up.svg"
+  },
+  "IconCircleAsterisk": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-asterisk",
+    "svgFile": "circle-asterisk.svg"
   },
   "IconCircleCaretDown": {
     "pack": "tabler",
@@ -16529,6 +16929,26 @@
     "spriteId": "tabler-circle-off",
     "svgFile": "circle-off.svg"
   },
+  "IconCircleOpenArrowDown": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-open-arrow-down",
+    "svgFile": "circle-open-arrow-down.svg"
+  },
+  "IconCircleOpenArrowLeft": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-open-arrow-left",
+    "svgFile": "circle-open-arrow-left.svg"
+  },
+  "IconCircleOpenArrowRight": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-open-arrow-right",
+    "svgFile": "circle-open-arrow-right.svg"
+  },
+  "IconCircleOpenArrowUp": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-open-arrow-up",
+    "svgFile": "circle-open-arrow-up.svg"
+  },
   "IconCirclePercentage": {
     "pack": "tabler",
     "spriteId": "tabler-circle-percentage",
@@ -16538,6 +16958,11 @@
     "pack": "tabler",
     "spriteId": "tabler-circle-plus-2",
     "svgFile": "circle-plus-2.svg"
+  },
+  "IconCirclePlusMinus": {
+    "pack": "tabler",
+    "spriteId": "tabler-circle-plus-minus",
+    "svgFile": "circle-plus-minus.svg"
   },
   "IconCirclePlus": {
     "pack": "tabler",
@@ -16688,6 +17113,16 @@
     "pack": "tabler",
     "spriteId": "tabler-clear-formatting",
     "svgFile": "clear-formatting.svg"
+  },
+  "IconClefStaff": {
+    "pack": "tabler",
+    "spriteId": "tabler-clef-staff",
+    "svgFile": "clef-staff.svg"
+  },
+  "IconClef": {
+    "pack": "tabler",
+    "spriteId": "tabler-clef",
+    "svgFile": "clef.svg"
   },
   "IconClick": {
     "pack": "tabler",
@@ -17219,6 +17654,11 @@
     "spriteId": "tabler-code",
     "svgFile": "code.svg"
   },
+  "IconCodeblock": {
+    "pack": "tabler",
+    "spriteId": "tabler-codeblock",
+    "svgFile": "codeblock.svg"
+  },
   "IconCoffeeOff": {
     "pack": "tabler",
     "spriteId": "tabler-coffee-off",
@@ -17428,6 +17868,11 @@
     "pack": "tabler",
     "spriteId": "tabler-congruent-to",
     "svgFile": "congruent-to.svg"
+  },
+  "IconConnection": {
+    "pack": "tabler",
+    "spriteId": "tabler-connection",
+    "svgFile": "connection.svg"
   },
   "IconContainerOff": {
     "pack": "tabler",
@@ -17674,6 +18119,11 @@
     "spriteId": "tabler-creative-commons",
     "svgFile": "creative-commons.svg"
   },
+  "IconCreditCardHand": {
+    "pack": "tabler",
+    "spriteId": "tabler-credit-card-hand",
+    "svgFile": "credit-card-hand.svg"
+  },
   "IconCreditCardOff": {
     "pack": "tabler",
     "spriteId": "tabler-credit-card-off",
@@ -17693,6 +18143,11 @@
     "pack": "tabler",
     "spriteId": "tabler-credit-card",
     "svgFile": "credit-card.svg"
+  },
+  "IconCredits": {
+    "pack": "tabler",
+    "spriteId": "tabler-credits",
+    "svgFile": "credits.svg"
   },
   "IconCricket": {
     "pack": "tabler",
@@ -17974,6 +18429,11 @@
     "spriteId": "tabler-currency-hryvnia",
     "svgFile": "currency-hryvnia.svg"
   },
+  "IconCurrencyHusd": {
+    "pack": "tabler",
+    "spriteId": "tabler-currency-husd",
+    "svgFile": "currency-husd.svg"
+  },
   "IconCurrencyIranianRial": {
     "pack": "tabler",
     "spriteId": "tabler-currency-iranian-rial",
@@ -18139,6 +18599,11 @@
     "spriteId": "tabler-currency-tenge",
     "svgFile": "currency-tenge.svg"
   },
+  "IconCurrencyTether": {
+    "pack": "tabler",
+    "spriteId": "tabler-currency-tether",
+    "svgFile": "currency-tether.svg"
+  },
   "IconCurrencyTugrik": {
     "pack": "tabler",
     "spriteId": "tabler-currency-tugrik",
@@ -18168,6 +18633,11 @@
     "pack": "tabler",
     "spriteId": "tabler-currency-yuan",
     "svgFile": "currency-yuan.svg"
+  },
+  "IconCurrencyZcash": {
+    "pack": "tabler",
+    "spriteId": "tabler-currency-zcash",
+    "svgFile": "currency-zcash.svg"
   },
   "IconCurrencyZloty": {
     "pack": "tabler",
@@ -18314,6 +18784,11 @@
     "spriteId": "tabler-database",
     "svgFile": "database.svg"
   },
+  "IconDeaf": {
+    "pack": "tabler",
+    "spriteId": "tabler-deaf",
+    "svgFile": "deaf.svg"
+  },
   "IconDecimal": {
     "pack": "tabler",
     "spriteId": "tabler-decimal",
@@ -18364,6 +18839,16 @@
     "spriteId": "tabler-details",
     "svgFile": "details.svg"
   },
+  "IconDevice3dCamera": {
+    "pack": "tabler",
+    "spriteId": "tabler-device-3d-camera",
+    "svgFile": "device-3d-camera.svg"
+  },
+  "IconDevice3dLens": {
+    "pack": "tabler",
+    "spriteId": "tabler-device-3d-lens",
+    "svgFile": "device-3d-lens.svg"
+  },
   "IconDeviceAirpodsCase": {
     "pack": "tabler",
     "spriteId": "tabler-device-airpods-case",
@@ -18403,6 +18888,11 @@
     "pack": "tabler",
     "spriteId": "tabler-device-cctv",
     "svgFile": "device-cctv.svg"
+  },
+  "IconDeviceComputerCamera2": {
+    "pack": "tabler",
+    "spriteId": "tabler-device-computer-camera-2",
+    "svgFile": "device-computer-camera-2.svg"
   },
   "IconDeviceComputerCameraOff": {
     "pack": "tabler",
@@ -19024,6 +19514,11 @@
     "spriteId": "tabler-device-remote",
     "svgFile": "device-remote.svg"
   },
+  "IconDeviceScreen": {
+    "pack": "tabler",
+    "spriteId": "tabler-device-screen",
+    "svgFile": "device-screen.svg"
+  },
   "IconDeviceSdCard": {
     "pack": "tabler",
     "spriteId": "tabler-device-sd-card",
@@ -19634,6 +20129,11 @@
     "spriteId": "tabler-door-exit",
     "svgFile": "door-exit.svg"
   },
+  "IconDoorHanger": {
+    "pack": "tabler",
+    "spriteId": "tabler-door-hanger",
+    "svgFile": "door-hanger.svg"
+  },
   "IconDoorOff": {
     "pack": "tabler",
     "spriteId": "tabler-door-off",
@@ -19829,6 +20329,11 @@
     "spriteId": "tabler-dual-screen",
     "svgFile": "dual-screen.svg"
   },
+  "IconDumbbell": {
+    "pack": "tabler",
+    "spriteId": "tabler-dumbbell",
+    "svgFile": "dumbbell.svg"
+  },
   "IconDumpling": {
     "pack": "tabler",
     "spriteId": "tabler-dumpling",
@@ -19853,6 +20358,11 @@
     "pack": "tabler",
     "spriteId": "tabler-ear",
     "svgFile": "ear.svg"
+  },
+  "IconEarphoneBluetooth": {
+    "pack": "tabler",
+    "spriteId": "tabler-earphone-bluetooth",
+    "svgFile": "earphone-bluetooth.svg"
   },
   "IconEaseInControlPoint": {
     "pack": "tabler",
@@ -20043,6 +20553,11 @@
     "pack": "tabler",
     "spriteId": "tabler-exclamation-mark",
     "svgFile": "exclamation-mark.svg"
+  },
+  "IconExerciseBall": {
+    "pack": "tabler",
+    "spriteId": "tabler-exercise-ball",
+    "svgFile": "exercise-ball.svg"
   },
   "IconExplicitOff": {
     "pack": "tabler",
@@ -21069,6 +21584,16 @@
     "spriteId": "tabler-firetruck",
     "svgFile": "firetruck.svg"
   },
+  "IconFirewallCheck": {
+    "pack": "tabler",
+    "spriteId": "tabler-firewall-check",
+    "svgFile": "firewall-check.svg"
+  },
+  "IconFirewallFlame": {
+    "pack": "tabler",
+    "spriteId": "tabler-firewall-flame",
+    "svgFile": "firewall-flame.svg"
+  },
   "IconFirstAidKitOff": {
     "pack": "tabler",
     "spriteId": "tabler-first-aid-kit-off",
@@ -21313,6 +21838,11 @@
     "pack": "tabler",
     "spriteId": "tabler-float-right",
     "svgFile": "float-right.svg"
+  },
+  "IconFlood": {
+    "pack": "tabler",
+    "spriteId": "tabler-flood",
+    "svgFile": "flood.svg"
   },
   "IconFlowerOff": {
     "pack": "tabler",
@@ -21894,6 +22424,11 @@
     "spriteId": "tabler-grain",
     "svgFile": "grain.svg"
   },
+  "IconGrape": {
+    "pack": "tabler",
+    "spriteId": "tabler-grape",
+    "svgFile": "grape.svg"
+  },
   "IconGraphOff": {
     "pack": "tabler",
     "spriteId": "tabler-graph-off",
@@ -22018,6 +22553,11 @@
     "pack": "tabler",
     "spriteId": "tabler-h-6",
     "svgFile": "h-6.svg"
+  },
+  "IconHammerDrill": {
+    "pack": "tabler",
+    "spriteId": "tabler-hammer-drill",
+    "svgFile": "hammer-drill.svg"
   },
   "IconHammerOff": {
     "pack": "tabler",
@@ -22419,6 +22959,11 @@
     "spriteId": "tabler-hexagon-3d",
     "svgFile": "hexagon-3d.svg"
   },
+  "IconHexagonAsterisk": {
+    "pack": "tabler",
+    "spriteId": "tabler-hexagon-asterisk",
+    "svgFile": "hexagon-asterisk.svg"
+  },
   "IconHexagonLetterA": {
     "pack": "tabler",
     "spriteId": "tabler-hexagon-letter-a",
@@ -22794,6 +23339,11 @@
     "spriteId": "tabler-home-link",
     "svgFile": "home-link.svg"
   },
+  "IconHomeLock": {
+    "pack": "tabler",
+    "spriteId": "tabler-home-lock",
+    "svgFile": "home-lock.svg"
+  },
   "IconHomeMinus": {
     "pack": "tabler",
     "spriteId": "tabler-home-minus",
@@ -23044,6 +23594,11 @@
     "spriteId": "tabler-http-trace",
     "svgFile": "http-trace.svg"
   },
+  "IconHulaHoop": {
+    "pack": "tabler",
+    "spriteId": "tabler-hula-hoop",
+    "svgFile": "hula-hoop.svg"
+  },
   "IconIceCream2": {
     "pack": "tabler",
     "spriteId": "tabler-ice-cream-2",
@@ -23063,6 +23618,11 @@
     "pack": "tabler",
     "spriteId": "tabler-ice-skating",
     "svgFile": "ice-skating.svg"
+  },
+  "IconIceberg": {
+    "pack": "tabler",
+    "spriteId": "tabler-iceberg",
+    "svgFile": "iceberg.svg"
   },
   "IconIconsOff": {
     "pack": "tabler",
@@ -23104,6 +23664,11 @@
     "spriteId": "tabler-ikosaedr",
     "svgFile": "ikosaedr.svg"
   },
+  "IconImageGeneration": {
+    "pack": "tabler",
+    "spriteId": "tabler-image-generation",
+    "svgFile": "image-generation.svg"
+  },
   "IconImageInPicture": {
     "pack": "tabler",
     "spriteId": "tabler-image-in-picture",
@@ -23128,6 +23693,11 @@
     "pack": "tabler",
     "spriteId": "tabler-indent-increase",
     "svgFile": "indent-increase.svg"
+  },
+  "IconInfinity2": {
+    "pack": "tabler",
+    "spriteId": "tabler-infinity-2",
+    "svgFile": "infinity-2.svg"
   },
   "IconInfinityOff": {
     "pack": "tabler",
@@ -23308,6 +23878,11 @@
     "pack": "tabler",
     "spriteId": "tabler-jetpack",
     "svgFile": "jetpack.svg"
+  },
+  "IconJetski": {
+    "pack": "tabler",
+    "spriteId": "tabler-jetski",
+    "svgFile": "jetski.svg"
   },
   "IconJewishStar": {
     "pack": "tabler",
@@ -23528,6 +24103,11 @@
     "pack": "tabler",
     "spriteId": "tabler-laurel-wreath",
     "svgFile": "laurel-wreath.svg"
+  },
+  "IconLawnMower": {
+    "pack": "tabler",
+    "spriteId": "tabler-lawn-mower",
+    "svgFile": "lawn-mower.svg"
   },
   "IconLayersDifference": {
     "pack": "tabler",
@@ -23773,6 +24353,11 @@
     "pack": "tabler",
     "spriteId": "tabler-leaf-2",
     "svgFile": "leaf-2.svg"
+  },
+  "IconLeafMaple": {
+    "pack": "tabler",
+    "spriteId": "tabler-leaf-maple",
+    "svgFile": "leaf-maple.svg"
   },
   "IconLeafOff": {
     "pack": "tabler",
@@ -24243,6 +24828,11 @@
     "pack": "tabler",
     "spriteId": "tabler-loader-3",
     "svgFile": "loader-3.svg"
+  },
+  "IconLoader4": {
+    "pack": "tabler",
+    "spriteId": "tabler-loader-4",
+    "svgFile": "loader-4.svg"
   },
   "IconLoaderQuarter": {
     "pack": "tabler",
@@ -24854,6 +25444,11 @@
     "spriteId": "tabler-map-heart",
     "svgFile": "map-heart.svg"
   },
+  "IconMapLock": {
+    "pack": "tabler",
+    "spriteId": "tabler-map-lock",
+    "svgFile": "map-lock.svg"
+  },
   "IconMapMinus": {
     "pack": "tabler",
     "spriteId": "tabler-map-minus",
@@ -25013,6 +25608,11 @@
     "pack": "tabler",
     "spriteId": "tabler-map-share",
     "svgFile": "map-share.svg"
+  },
+  "IconMapShield": {
+    "pack": "tabler",
+    "spriteId": "tabler-map-shield",
+    "svgFile": "map-shield.svg"
   },
   "IconMapSouth": {
     "pack": "tabler",
@@ -25393,6 +25993,11 @@
     "pack": "tabler",
     "spriteId": "tabler-menu",
     "svgFile": "menu.svg"
+  },
+  "IconMesh": {
+    "pack": "tabler",
+    "spriteId": "tabler-mesh",
+    "svgFile": "mesh.svg"
   },
   "IconMessage2Bolt": {
     "pack": "tabler",
@@ -25804,6 +26409,11 @@
     "spriteId": "tabler-mickey",
     "svgFile": "mickey.svg"
   },
+  "IconMicrofrontends": {
+    "pack": "tabler",
+    "spriteId": "tabler-microfrontends",
+    "svgFile": "microfrontends.svg"
+  },
   "IconMicrophone2Off": {
     "pack": "tabler",
     "spriteId": "tabler-microphone-2-off",
@@ -25843,6 +26453,11 @@
     "pack": "tabler",
     "spriteId": "tabler-microwave",
     "svgFile": "microwave.svg"
+  },
+  "IconMiddleware": {
+    "pack": "tabler",
+    "spriteId": "tabler-middleware",
+    "svgFile": "middleware.svg"
   },
   "IconMilitaryAward": {
     "pack": "tabler",
@@ -26228,6 +26843,11 @@
     "pack": "tabler",
     "spriteId": "tabler-moped",
     "svgFile": "moped.svg"
+  },
+  "IconMosque": {
+    "pack": "tabler",
+    "spriteId": "tabler-mosque",
+    "svgFile": "mosque.svg"
   },
   "IconMotorbike": {
     "pack": "tabler",
@@ -26623,6 +27243,11 @@
     "pack": "tabler",
     "spriteId": "tabler-north-star",
     "svgFile": "north-star.svg"
+  },
+  "IconNotdef": {
+    "pack": "tabler",
+    "spriteId": "tabler-notdef",
+    "svgFile": "notdef.svg"
   },
   "IconNoteOff": {
     "pack": "tabler",
@@ -27309,6 +27934,11 @@
     "spriteId": "tabler-old",
     "svgFile": "old.svg"
   },
+  "IconOlympicTorch": {
+    "pack": "tabler",
+    "spriteId": "tabler-olympic-torch",
+    "svgFile": "olympic-torch.svg"
+  },
   "IconOlympicsOff": {
     "pack": "tabler",
     "spriteId": "tabler-olympics-off",
@@ -27328,6 +27958,11 @@
     "pack": "tabler",
     "spriteId": "tabler-omega",
     "svgFile": "omega.svg"
+  },
+  "IconOption": {
+    "pack": "tabler",
+    "spriteId": "tabler-option",
+    "svgFile": "option.svg"
   },
   "IconOutbound": {
     "pack": "tabler",
@@ -27468,6 +28103,11 @@
     "pack": "tabler",
     "spriteId": "tabler-parking-circle",
     "svgFile": "parking-circle.svg"
+  },
+  "IconParkingMeter": {
+    "pack": "tabler",
+    "spriteId": "tabler-parking-meter",
+    "svgFile": "parking-meter.svg"
   },
   "IconParkingOff": {
     "pack": "tabler",
@@ -27633,6 +28273,11 @@
     "pack": "tabler",
     "spriteId": "tabler-pencil",
     "svgFile": "pencil.svg"
+  },
+  "IconPendulum": {
+    "pack": "tabler",
+    "spriteId": "tabler-pendulum",
+    "svgFile": "pendulum.svg"
   },
   "IconPennant2": {
     "pack": "tabler",
@@ -28169,6 +28814,11 @@
     "spriteId": "tabler-pill",
     "svgFile": "pill.svg"
   },
+  "IconPillow": {
+    "pack": "tabler",
+    "spriteId": "tabler-pillow",
+    "svgFile": "pillow.svg"
+  },
   "IconPills": {
     "pack": "tabler",
     "spriteId": "tabler-pills",
@@ -28203,6 +28853,11 @@
     "pack": "tabler",
     "spriteId": "tabler-pinned",
     "svgFile": "pinned.svg"
+  },
+  "IconPipeline": {
+    "pack": "tabler",
+    "spriteId": "tabler-pipeline",
+    "svgFile": "pipeline.svg"
   },
   "IconPizzaOff": {
     "pack": "tabler",
@@ -28493,6 +29148,11 @@
     "pack": "tabler",
     "spriteId": "tabler-plug",
     "svgFile": "plug.svg"
+  },
+  "IconPlunger": {
+    "pack": "tabler",
+    "spriteId": "tabler-plunger",
+    "svgFile": "plunger.svg"
   },
   "IconPlusEqual": {
     "pack": "tabler",
@@ -28864,10 +29524,25 @@
     "spriteId": "tabler-question-mark",
     "svgFile": "question-mark.svg"
   },
+  "IconQueuePopIn": {
+    "pack": "tabler",
+    "spriteId": "tabler-queue-pop-in",
+    "svgFile": "queue-pop-in.svg"
+  },
+  "IconQueuePopOut": {
+    "pack": "tabler",
+    "spriteId": "tabler-queue-pop-out",
+    "svgFile": "queue-pop-out.svg"
+  },
   "IconQuoteOff": {
     "pack": "tabler",
     "spriteId": "tabler-quote-off",
     "svgFile": "quote-off.svg"
+  },
+  "IconQuoteOpen": {
+    "pack": "tabler",
+    "spriteId": "tabler-quote-open",
+    "svgFile": "quote-open.svg"
   },
   "IconQuote": {
     "pack": "tabler",
@@ -29324,10 +29999,20 @@
     "spriteId": "tabler-rings",
     "svgFile": "rings.svg"
   },
+  "IconRippleDown": {
+    "pack": "tabler",
+    "spriteId": "tabler-ripple-down",
+    "svgFile": "ripple-down.svg"
+  },
   "IconRippleOff": {
     "pack": "tabler",
     "spriteId": "tabler-ripple-off",
     "svgFile": "ripple-off.svg"
+  },
+  "IconRippleUp": {
+    "pack": "tabler",
+    "spriteId": "tabler-ripple-up",
+    "svgFile": "ripple-up.svg"
   },
   "IconRipple": {
     "pack": "tabler",
@@ -29388,6 +30073,11 @@
     "pack": "tabler",
     "spriteId": "tabler-rollercoaster",
     "svgFile": "rollercoaster.svg"
+  },
+  "IconRosetteAsterisk": {
+    "pack": "tabler",
+    "spriteId": "tabler-rosette-asterisk",
+    "svgFile": "rosette-asterisk.svg"
   },
   "IconRosetteDiscountCheckOff": {
     "pack": "tabler",
@@ -29594,6 +30284,11 @@
     "spriteId": "tabler-rubber-stamp",
     "svgFile": "rubber-stamp.svg"
   },
+  "IconRugby": {
+    "pack": "tabler",
+    "spriteId": "tabler-rugby",
+    "svgFile": "rugby.svg"
+  },
   "IconRuler2Off": {
     "pack": "tabler",
     "spriteId": "tabler-ruler-2-off",
@@ -29729,10 +30424,25 @@
     "spriteId": "tabler-scan-eye",
     "svgFile": "scan-eye.svg"
   },
+  "IconScanLetterA": {
+    "pack": "tabler",
+    "spriteId": "tabler-scan-letter-a",
+    "svgFile": "scan-letter-a.svg"
+  },
+  "IconScanLetterT": {
+    "pack": "tabler",
+    "spriteId": "tabler-scan-letter-t",
+    "svgFile": "scan-letter-t.svg"
+  },
   "IconScanPosition": {
     "pack": "tabler",
     "spriteId": "tabler-scan-position",
     "svgFile": "scan-position.svg"
+  },
+  "IconScanTraces": {
+    "pack": "tabler",
+    "spriteId": "tabler-scan-traces",
+    "svgFile": "scan-traces.svg"
   },
   "IconScan": {
     "pack": "tabler",
@@ -29889,6 +30599,11 @@
     "spriteId": "tabler-seedling",
     "svgFile": "seedling.svg"
   },
+  "IconSegway": {
+    "pack": "tabler",
+    "spriteId": "tabler-segway",
+    "svgFile": "segway.svg"
+  },
   "IconSelectAll": {
     "pack": "tabler",
     "spriteId": "tabler-select-all",
@@ -29969,6 +30684,11 @@
     "spriteId": "tabler-server",
     "svgFile": "server.svg"
   },
+  "IconServerless": {
+    "pack": "tabler",
+    "spriteId": "tabler-serverless",
+    "svgFile": "serverless.svg"
+  },
   "IconServicemark": {
     "pack": "tabler",
     "spriteId": "tabler-servicemark",
@@ -29978,6 +30698,11 @@
     "pack": "tabler",
     "spriteId": "tabler-settings-2",
     "svgFile": "settings-2.svg"
+  },
+  "IconSettingsAi": {
+    "pack": "tabler",
+    "spriteId": "tabler-settings-ai",
+    "svgFile": "settings-ai.svg"
   },
   "IconSettingsAutomation": {
     "pack": "tabler",
@@ -30849,6 +31574,11 @@
     "spriteId": "tabler-spade",
     "svgFile": "spade.svg"
   },
+  "IconSparkles2": {
+    "pack": "tabler",
+    "spriteId": "tabler-sparkles-2",
+    "svgFile": "sparkles-2.svg"
+  },
   "IconSparkles": {
     "pack": "tabler",
     "spriteId": "tabler-sparkles",
@@ -31199,6 +31929,11 @@
     "spriteId": "tabler-square-letter-z",
     "svgFile": "square-letter-z.svg"
   },
+  "IconSquareMinus2": {
+    "pack": "tabler",
+    "spriteId": "tabler-square-minus-2",
+    "svgFile": "square-minus-2.svg"
+  },
   "IconSquareMinus": {
     "pack": "tabler",
     "spriteId": "tabler-square-minus",
@@ -31283,6 +32018,11 @@
     "pack": "tabler",
     "spriteId": "tabler-square-root",
     "svgFile": "square-root.svg"
+  },
+  "IconSquareRotatedAsterisk": {
+    "pack": "tabler",
+    "spriteId": "tabler-square-rotated-asterisk",
+    "svgFile": "square-rotated-asterisk.svg"
   },
   "IconSquareRotatedForbid2": {
     "pack": "tabler",
@@ -31794,6 +32534,21 @@
     "spriteId": "tabler-strikethrough",
     "svgFile": "strikethrough.svg"
   },
+  "IconStrokeCurved": {
+    "pack": "tabler",
+    "spriteId": "tabler-stroke-curved",
+    "svgFile": "stroke-curved.svg"
+  },
+  "IconStrokeDynamic": {
+    "pack": "tabler",
+    "spriteId": "tabler-stroke-dynamic",
+    "svgFile": "stroke-dynamic.svg"
+  },
+  "IconStrokeStraight": {
+    "pack": "tabler",
+    "spriteId": "tabler-stroke-straight",
+    "svgFile": "stroke-straight.svg"
+  },
   "IconSubmarine": {
     "pack": "tabler",
     "spriteId": "tabler-submarine",
@@ -31808,6 +32563,26 @@
     "pack": "tabler",
     "spriteId": "tabler-subtask",
     "svgFile": "subtask.svg"
+  },
+  "IconSubtitlesAi": {
+    "pack": "tabler",
+    "spriteId": "tabler-subtitles-ai",
+    "svgFile": "subtitles-ai.svg"
+  },
+  "IconSubtitlesEdit": {
+    "pack": "tabler",
+    "spriteId": "tabler-subtitles-edit",
+    "svgFile": "subtitles-edit.svg"
+  },
+  "IconSubtitlesOff": {
+    "pack": "tabler",
+    "spriteId": "tabler-subtitles-off",
+    "svgFile": "subtitles-off.svg"
+  },
+  "IconSubtitles": {
+    "pack": "tabler",
+    "spriteId": "tabler-subtitles",
+    "svgFile": "subtitles.svg"
   },
   "IconSumOff": {
     "pack": "tabler",
@@ -32069,6 +32844,11 @@
     "spriteId": "tabler-tags",
     "svgFile": "tags.svg"
   },
+  "IconTaiwanDollar": {
+    "pack": "tabler",
+    "spriteId": "tabler-taiwan-dollar",
+    "svgFile": "taiwan-dollar.svg"
+  },
   "IconTallymark1": {
     "pack": "tabler",
     "spriteId": "tabler-tallymark-1",
@@ -32098,6 +32878,11 @@
     "pack": "tabler",
     "spriteId": "tabler-tank",
     "svgFile": "tank.svg"
+  },
+  "IconTarget2": {
+    "pack": "tabler",
+    "spriteId": "tabler-target-2",
+    "svgFile": "target-2.svg"
   },
   "IconTargetArrow": {
     "pack": "tabler",
@@ -32859,6 +33644,11 @@
     "spriteId": "tabler-trending-up-3",
     "svgFile": "trending-up-3.svg"
   },
+  "IconTrendingUpDown": {
+    "pack": "tabler",
+    "spriteId": "tabler-trending-up-down",
+    "svgFile": "trending-up-down.svg"
+  },
   "IconTrendingUp": {
     "pack": "tabler",
     "spriteId": "tabler-trending-up",
@@ -33034,6 +33824,11 @@
     "spriteId": "tabler-underline",
     "svgFile": "underline.svg"
   },
+  "IconUnicycle": {
+    "pack": "tabler",
+    "spriteId": "tabler-unicycle",
+    "svgFile": "unicycle.svg"
+  },
   "IconUniverse": {
     "pack": "tabler",
     "spriteId": "tabler-universe",
@@ -33123,6 +33918,11 @@
     "pack": "tabler",
     "spriteId": "tabler-user-hexagon",
     "svgFile": "user-hexagon.svg"
+  },
+  "IconUserKey": {
+    "pack": "tabler",
+    "spriteId": "tabler-user-key",
+    "svgFile": "user-key.svg"
   },
   "IconUserMinus": {
     "pack": "tabler",
@@ -33424,6 +34224,11 @@
     "spriteId": "tabler-vinyl",
     "svgFile": "vinyl.svg"
   },
+  "IconVip2": {
+    "pack": "tabler",
+    "spriteId": "tabler-vip-2",
+    "svgFile": "vip-2.svg"
+  },
   "IconVipOff": {
     "pack": "tabler",
     "spriteId": "tabler-vip-off",
@@ -33473,6 +34278,11 @@
     "pack": "tabler",
     "spriteId": "tabler-volume-3",
     "svgFile": "volume-3.svg"
+  },
+  "IconVolume4": {
+    "pack": "tabler",
+    "spriteId": "tabler-volume-4",
+    "svgFile": "volume-4.svg"
   },
   "IconVolumeOff": {
     "pack": "tabler",
@@ -33754,6 +34564,11 @@
     "spriteId": "tabler-whirl",
     "svgFile": "whirl.svg"
   },
+  "IconWhisk": {
+    "pack": "tabler",
+    "spriteId": "tabler-whisk",
+    "svgFile": "whisk.svg"
+  },
   "IconWifi0": {
     "pack": "tabler",
     "spriteId": "tabler-wifi-0",
@@ -33909,6 +34724,11 @@
     "spriteId": "tabler-world-longitude",
     "svgFile": "world-longitude.svg"
   },
+  "IconWorldMap": {
+    "pack": "tabler",
+    "spriteId": "tabler-world-map",
+    "svgFile": "world-map.svg"
+  },
   "IconWorldMinus": {
     "pack": "tabler",
     "spriteId": "tabler-world-minus",
@@ -34004,6 +34824,11 @@
     "spriteId": "tabler-writing",
     "svgFile": "writing.svg"
   },
+  "IconXMark": {
+    "pack": "tabler",
+    "spriteId": "tabler-x-mark",
+    "svgFile": "x-mark.svg"
+  },
   "IconXPowerY": {
     "pack": "tabler",
     "spriteId": "tabler-x-power-y",
@@ -34063,6 +34888,11 @@
     "pack": "tabler",
     "spriteId": "tabler-zeppelin",
     "svgFile": "zeppelin.svg"
+  },
+  "IconZeroConfig": {
+    "pack": "tabler",
+    "spriteId": "tabler-zero-config",
+    "svgFile": "zero-config.svg"
   },
   "IconZip": {
     "pack": "tabler",

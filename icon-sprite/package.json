@@ -1,6 +1,6 @@
 {
   "name": "@react-zero-ui/icon-sprite",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generate a single SVG sprite containing only the icons you used (Lucide + Tabler + custom). Lucid to SVG sprite solution for React.",
   "keywords": [
     "react",
@@ -50,20 +50,20 @@
     "react": ">=17"
   },
   "dependencies": {
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
-    "@babel/traverse": "^7.28.5",
-    "@tabler/icons": "^3.35.0",
-    "@tabler/icons-react": "^3.35.0",
-    "lucide-react": "^0.555.0",
-    "lucide-static": "^0.555.0",
+    "@babel/traverse": "^7.29.0",
+    "@tabler/icons": "^3.43.0",
+    "@tabler/icons-react": "^3.43.0",
+    "lucide-react": "^1.14.0",
+    "lucide-static": "^1.14.0",
     "svgstore": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@types/parse5": "^6.0.3",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.14",
     "typescript": "^5.9.3"
   }
 }
