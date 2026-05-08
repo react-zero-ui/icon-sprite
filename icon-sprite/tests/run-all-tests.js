@@ -19,6 +19,11 @@ const testSuites = [
 		description: "Verify drop-in replacement for lucide-react (same export names)",
 	},
 	{
+		name: "Accessibility Defaults",
+		file: "test-accessibility-defaults.test.js",
+		description: "Verify icons are aria-hidden by default and user overrides win",
+	},
+	{
 		name: "Sprite ID Match Tests",
 		file: "test-sprite-id-match.test.js",
 		description: "Verify sprite IDs in wrappers match build-sprite mapping",

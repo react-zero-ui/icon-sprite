@@ -20,10 +20,10 @@ export type IconProps = React.SVGProps<SVGSVGElement> & {
 };
 
 // Ultra-minimal renderUse - all logic in one place
-export function renderUse(id: string, path: string, { size, width, height, style, strokeWidth, ...rest }: IconProps) {
-	return (
+export function renderUse(id: string, path: string, { size, width, height, style, strokeWidth, "aria-hidden": ariaHidden, ...rest }: IconProps) {	return (
 		<svg
 			{...rest}
+      aria-hidden={ariaHidden === undefined ? true : ariaHidden}
 			width={width ?? size ?? 24}
 			height={height ?? size ?? 24}
 			style={strokeWidth != null ? ({ "--icon-stroke-width": strokeWidth, ...style } as React.CSSProperties) : style}
