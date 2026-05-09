@@ -24,6 +24,11 @@ const testSuites = [
 		description: "Verify sprite IDs in wrappers match build-sprite mapping",
 	},
 	{
+		name: "Accessibility Props Tests",
+		file: "test-accessibility-props.test.js",
+		description: "Verify default aria-hidden behavior and consumer overrides",
+	},
+	{
 		name: "Config Loading Tests",
 		file: "test-config.test.js",
 		description: "Verify config loading and merging with defaults",
