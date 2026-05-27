@@ -23,6 +23,7 @@ export type IconProps = React.SVGProps<SVGSVGElement> & {
 export function renderUse(id: string, path: string, { size, width, height, style, strokeWidth, ...rest }: IconProps) {
 	return (
 		<svg
+			aria-hidden="true"
 			{...rest}
 			width={width ?? size ?? 24}
 			height={height ?? size ?? 24}
