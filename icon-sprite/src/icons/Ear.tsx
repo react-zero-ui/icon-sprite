@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ear as DevIcon } from "lucide-react";
+import { Ear as DevIcon } from "../lucide-archive/Ear.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ear(props: IconProps) {

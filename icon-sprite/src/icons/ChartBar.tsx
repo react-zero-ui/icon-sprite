@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartBar as DevIcon } from "lucide-react";
+import { ChartBar as DevIcon } from "../lucide-archive/ChartBar.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartBar(props: IconProps) {

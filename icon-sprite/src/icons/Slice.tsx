@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Slice as DevIcon } from "lucide-react";
+import { Slice as DevIcon } from "../lucide-archive/Slice.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Slice(props: IconProps) {

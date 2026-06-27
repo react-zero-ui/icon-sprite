@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SkipBack as DevIcon } from "lucide-react";
+import { SkipBack as DevIcon } from "../lucide-archive/SkipBack.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SkipBack(props: IconProps) {

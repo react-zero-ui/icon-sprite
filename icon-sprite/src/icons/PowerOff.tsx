@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PowerOff as DevIcon } from "lucide-react";
+import { PowerOff as DevIcon } from "../lucide-archive/PowerOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PowerOff(props: IconProps) {

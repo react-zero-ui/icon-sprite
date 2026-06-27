@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderClosed as DevIcon } from "lucide-react";
+import { FolderClosed as DevIcon } from "../lucide-archive/FolderClosed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderClosed(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BanknoteArrowDown as DevIcon } from "lucide-react";
+import { BanknoteArrowDown as DevIcon } from "../lucide-archive/BanknoteArrowDown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BanknoteArrowDown(props: IconProps) {

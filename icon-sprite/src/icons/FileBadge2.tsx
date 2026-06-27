@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileBadge as DevIcon } from "lucide-react";
+import { FileBadge2 as DevIcon } from "../lucide-archive/FileBadge2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileBadge2(props: IconProps) {

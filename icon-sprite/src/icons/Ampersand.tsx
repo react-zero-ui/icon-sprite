@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ampersand as DevIcon } from "lucide-react";
+import { Ampersand as DevIcon } from "../lucide-archive/Ampersand.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ampersand(props: IconProps) {

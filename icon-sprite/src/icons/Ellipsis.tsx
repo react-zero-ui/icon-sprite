@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ellipsis as DevIcon } from "lucide-react";
+import { Ellipsis as DevIcon } from "../lucide-archive/Ellipsis.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ellipsis(props: IconProps) {

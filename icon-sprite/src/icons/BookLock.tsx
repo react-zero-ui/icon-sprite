@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookLock as DevIcon } from "lucide-react";
+import { BookLock as DevIcon } from "../lucide-archive/BookLock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookLock(props: IconProps) {

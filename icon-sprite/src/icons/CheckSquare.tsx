@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareCheckBig as DevIcon } from "lucide-react";
+import { CheckSquare as DevIcon } from "../lucide-archive/CheckSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CheckSquare(props: IconProps) {

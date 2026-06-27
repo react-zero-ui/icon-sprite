@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldAlert as DevIcon } from "lucide-react";
+import { ShieldAlert as DevIcon } from "../lucide-archive/ShieldAlert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldAlert(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VenusAndMars as DevIcon } from "lucide-react";
+import { VenusAndMars as DevIcon } from "../lucide-archive/VenusAndMars.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VenusAndMars(props: IconProps) {

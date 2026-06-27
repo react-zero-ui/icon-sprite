@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RemoveFormatting as DevIcon } from "lucide-react";
+import { RemoveFormatting as DevIcon } from "../lucide-archive/RemoveFormatting.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RemoveFormatting(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CreativeCommons as DevIcon } from "lucide-react";
+import { CreativeCommons as DevIcon } from "../lucide-archive/CreativeCommons.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CreativeCommons(props: IconProps) {

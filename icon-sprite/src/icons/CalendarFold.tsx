@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CalendarFold as DevIcon } from "lucide-react";
+import { CalendarFold as DevIcon } from "../lucide-archive/CalendarFold.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CalendarFold(props: IconProps) {

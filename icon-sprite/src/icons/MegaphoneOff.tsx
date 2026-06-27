@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MegaphoneOff as DevIcon } from "lucide-react";
+import { MegaphoneOff as DevIcon } from "../lucide-archive/MegaphoneOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MegaphoneOff(props: IconProps) {

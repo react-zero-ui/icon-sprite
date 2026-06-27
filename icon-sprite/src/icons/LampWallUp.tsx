@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LampWallUp as DevIcon } from "lucide-react";
+import { LampWallUp as DevIcon } from "../lucide-archive/LampWallUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LampWallUp(props: IconProps) {

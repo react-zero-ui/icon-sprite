@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rows3 as DevIcon } from "lucide-react";
+import { PanelsTopBottom as DevIcon } from "../lucide-archive/PanelsTopBottom.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelsTopBottom(props: IconProps) {

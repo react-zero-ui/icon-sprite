@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareDashedText as DevIcon } from "lucide-react";
+import { TextSelect as DevIcon } from "../lucide-archive/TextSelect.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TextSelect(props: IconProps) {

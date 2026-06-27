@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { NotebookText as DevIcon } from "lucide-react";
+import { NotebookText as DevIcon } from "../lucide-archive/NotebookText.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function NotebookText(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rainbow as DevIcon } from "lucide-react";
+import { Rainbow as DevIcon } from "../lucide-archive/Rainbow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rainbow(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HeartHandshake as DevIcon } from "lucide-react";
+import { HeartHandshake as DevIcon } from "../lucide-archive/HeartHandshake.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HeartHandshake(props: IconProps) {

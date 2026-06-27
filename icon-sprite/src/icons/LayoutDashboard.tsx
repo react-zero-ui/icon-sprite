@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LayoutDashboard as DevIcon } from "lucide-react";
+import { LayoutDashboard as DevIcon } from "../lucide-archive/LayoutDashboard.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LayoutDashboard(props: IconProps) {

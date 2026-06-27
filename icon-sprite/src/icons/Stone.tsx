@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Stone as DevIcon } from "lucide-react";
+import { Stone as DevIcon } from "../lucide-archive/Stone.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Stone(props: IconProps) {

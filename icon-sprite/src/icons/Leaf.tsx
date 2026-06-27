@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Leaf as DevIcon } from "lucide-react";
+import { Leaf as DevIcon } from "../lucide-archive/Leaf.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Leaf(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Redo as DevIcon } from "lucide-react";
+import { Redo as DevIcon } from "../lucide-archive/Redo.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Redo(props: IconProps) {

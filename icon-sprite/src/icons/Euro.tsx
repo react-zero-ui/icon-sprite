@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Euro as DevIcon } from "lucide-react";
+import { Euro as DevIcon } from "../lucide-archive/Euro.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Euro(props: IconProps) {

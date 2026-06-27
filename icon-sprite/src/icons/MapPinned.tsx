@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MapPinned as DevIcon } from "lucide-react";
+import { MapPinned as DevIcon } from "../lucide-archive/MapPinned.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MapPinned(props: IconProps) {

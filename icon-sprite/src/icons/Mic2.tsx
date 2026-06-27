@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MicVocal as DevIcon } from "lucide-react";
+import { Mic2 as DevIcon } from "../lucide-archive/Mic2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Mic2(props: IconProps) {

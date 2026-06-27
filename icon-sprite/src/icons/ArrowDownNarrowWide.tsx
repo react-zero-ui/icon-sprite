@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowDownNarrowWide as DevIcon } from "lucide-react";
+import { ArrowDownNarrowWide as DevIcon } from "../lucide-archive/ArrowDownNarrowWide.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowDownNarrowWide(props: IconProps) {

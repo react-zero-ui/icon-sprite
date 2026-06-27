@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelLeftRightDashed as DevIcon } from "lucide-react";
+import { PanelLeftRightDashed as DevIcon } from "../lucide-archive/PanelLeftRightDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelLeftRightDashed(props: IconProps) {

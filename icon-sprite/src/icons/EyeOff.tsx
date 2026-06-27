@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EyeOff as DevIcon } from "lucide-react";
+import { EyeOff as DevIcon } from "../lucide-archive/EyeOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EyeOff(props: IconProps) {

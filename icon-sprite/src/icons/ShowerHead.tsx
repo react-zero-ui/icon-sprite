@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShowerHead as DevIcon } from "lucide-react";
+import { ShowerHead as DevIcon } from "../lucide-archive/ShowerHead.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShowerHead(props: IconProps) {

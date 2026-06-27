@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Forward as DevIcon } from "lucide-react";
+import { Forward as DevIcon } from "../lucide-archive/Forward.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Forward(props: IconProps) {

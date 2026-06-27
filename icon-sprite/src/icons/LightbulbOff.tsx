@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LightbulbOff as DevIcon } from "lucide-react";
+import { LightbulbOff as DevIcon } from "../lucide-archive/LightbulbOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LightbulbOff(props: IconProps) {

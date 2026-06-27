@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Baby as DevIcon } from "lucide-react";
+import { Baby as DevIcon } from "../lucide-archive/Baby.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Baby(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WheatOff as DevIcon } from "lucide-react";
+import { WheatOff as DevIcon } from "../lucide-archive/WheatOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WheatOff(props: IconProps) {

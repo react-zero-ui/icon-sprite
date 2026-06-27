@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LaptopMinimal as DevIcon } from "lucide-react";
+import { LaptopMinimal as DevIcon } from "../lucide-archive/LaptopMinimal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LaptopMinimal(props: IconProps) {

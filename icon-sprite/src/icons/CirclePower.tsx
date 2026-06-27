@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CirclePower as DevIcon } from "lucide-react";
+import { CirclePower as DevIcon } from "../lucide-archive/CirclePower.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CirclePower(props: IconProps) {

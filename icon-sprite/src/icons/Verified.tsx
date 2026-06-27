@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeCheck as DevIcon } from "lucide-react";
+import { Verified as DevIcon } from "../lucide-archive/Verified.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Verified(props: IconProps) {

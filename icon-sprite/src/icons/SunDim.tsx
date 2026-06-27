@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SunDim as DevIcon } from "lucide-react";
+import { SunDim as DevIcon } from "../lucide-archive/SunDim.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SunDim(props: IconProps) {

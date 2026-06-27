@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldCheck as DevIcon } from "lucide-react";
+import { ShieldCheck as DevIcon } from "../lucide-archive/ShieldCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldCheck(props: IconProps) {

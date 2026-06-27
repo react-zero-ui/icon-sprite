@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FoldVertical as DevIcon } from "lucide-react";
+import { FoldVertical as DevIcon } from "../lucide-archive/FoldVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FoldVertical(props: IconProps) {

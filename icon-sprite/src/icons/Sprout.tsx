@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sprout as DevIcon } from "lucide-react";
+import { Sprout as DevIcon } from "../lucide-archive/Sprout.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sprout(props: IconProps) {

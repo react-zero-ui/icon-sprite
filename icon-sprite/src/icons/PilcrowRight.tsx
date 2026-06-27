@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PilcrowRight as DevIcon } from "lucide-react";
+import { PilcrowRight as DevIcon } from "../lucide-archive/PilcrowRight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PilcrowRight(props: IconProps) {

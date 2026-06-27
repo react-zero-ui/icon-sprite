@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RectangleGoggles as DevIcon } from "lucide-react";
+import { RectangleGoggles as DevIcon } from "../lucide-archive/RectangleGoggles.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RectangleGoggles(props: IconProps) {

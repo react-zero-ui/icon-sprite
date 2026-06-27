@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudFog as DevIcon } from "lucide-react";
+import { CloudFog as DevIcon } from "../lucide-archive/CloudFog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudFog(props: IconProps) {

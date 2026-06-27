@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GalleryVerticalEnd as DevIcon } from "lucide-react";
+import { GalleryVerticalEnd as DevIcon } from "../lucide-archive/GalleryVerticalEnd.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GalleryVerticalEnd(props: IconProps) {

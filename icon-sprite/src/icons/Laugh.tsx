@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Laugh as DevIcon } from "lucide-react";
+import { Laugh as DevIcon } from "../lucide-archive/Laugh.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Laugh(props: IconProps) {

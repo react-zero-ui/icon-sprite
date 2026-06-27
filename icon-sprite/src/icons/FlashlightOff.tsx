@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FlashlightOff as DevIcon } from "lucide-react";
+import { FlashlightOff as DevIcon } from "../lucide-archive/FlashlightOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FlashlightOff(props: IconProps) {

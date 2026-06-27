@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bubbles as DevIcon } from "lucide-react";
+import { Bubbles as DevIcon } from "../lucide-archive/Bubbles.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bubbles(props: IconProps) {

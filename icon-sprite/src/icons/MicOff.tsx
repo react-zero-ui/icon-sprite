@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MicOff as DevIcon } from "lucide-react";
+import { MicOff as DevIcon } from "../lucide-archive/MicOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MicOff(props: IconProps) {

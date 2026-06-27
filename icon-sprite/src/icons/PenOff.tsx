@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PenOff as DevIcon } from "lucide-react";
+import { PenOff as DevIcon } from "../lucide-archive/PenOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PenOff(props: IconProps) {

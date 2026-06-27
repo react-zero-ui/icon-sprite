@@ -3,7 +3,7 @@ import { type IconProps } from "../_shared.js";
 export function Grid2x2({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-grid-2x2"
+      className="lucide lucide-grid-2-x-2"
   xmlns="http://www.w3.org/2000/svg"
  
  

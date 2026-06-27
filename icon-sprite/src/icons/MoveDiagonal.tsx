@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MoveDiagonal as DevIcon } from "lucide-react";
+import { MoveDiagonal as DevIcon } from "../lucide-archive/MoveDiagonal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MoveDiagonal(props: IconProps) {

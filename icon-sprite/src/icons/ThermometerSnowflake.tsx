@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ThermometerSnowflake as DevIcon } from "lucide-react";
+import { ThermometerSnowflake as DevIcon } from "../lucide-archive/ThermometerSnowflake.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ThermometerSnowflake(props: IconProps) {

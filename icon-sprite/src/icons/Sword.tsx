@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sword as DevIcon } from "lucide-react";
+import { Sword as DevIcon } from "../lucide-archive/Sword.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sword(props: IconProps) {

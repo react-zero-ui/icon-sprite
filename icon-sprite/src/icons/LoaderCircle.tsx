@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LoaderCircle as DevIcon } from "lucide-react";
+import { LoaderCircle as DevIcon } from "../lucide-archive/LoaderCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LoaderCircle(props: IconProps) {

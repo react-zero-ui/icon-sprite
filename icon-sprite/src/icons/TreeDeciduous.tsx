@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TreeDeciduous as DevIcon } from "lucide-react";
+import { TreeDeciduous as DevIcon } from "../lucide-archive/TreeDeciduous.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TreeDeciduous(props: IconProps) {

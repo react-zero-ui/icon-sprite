@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BetweenVerticalEnd as DevIcon } from "lucide-react";
+import { BetweenVerticalEnd as DevIcon } from "../lucide-archive/BetweenVerticalEnd.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BetweenVerticalEnd(props: IconProps) {

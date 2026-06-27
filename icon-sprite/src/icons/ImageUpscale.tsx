@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ImageUpscale as DevIcon } from "lucide-react";
+import { ImageUpscale as DevIcon } from "../lucide-archive/ImageUpscale.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ImageUpscale(props: IconProps) {

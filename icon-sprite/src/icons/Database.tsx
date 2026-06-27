@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Database as DevIcon } from "lucide-react";
+import { Database as DevIcon } from "../lucide-archive/Database.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Database(props: IconProps) {

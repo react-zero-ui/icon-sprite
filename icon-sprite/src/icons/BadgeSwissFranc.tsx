@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeSwissFranc as DevIcon } from "lucide-react";
+import { BadgeSwissFranc as DevIcon } from "../lucide-archive/BadgeSwissFranc.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgeSwissFranc(props: IconProps) {

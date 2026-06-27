@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RectangleVertical as DevIcon } from "lucide-react";
+import { RectangleVertical as DevIcon } from "../lucide-archive/RectangleVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RectangleVertical(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HandMetal as DevIcon } from "lucide-react";
+import { HandMetal as DevIcon } from "../lucide-archive/HandMetal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HandMetal(props: IconProps) {

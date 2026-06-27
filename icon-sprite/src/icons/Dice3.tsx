@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dice3 as DevIcon } from "lucide-react";
+import { Dice3 as DevIcon } from "../lucide-archive/Dice3.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dice3(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GamepadDirectional as DevIcon } from "lucide-react";
+import { GamepadDirectional as DevIcon } from "../lucide-archive/GamepadDirectional.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GamepadDirectional(props: IconProps) {

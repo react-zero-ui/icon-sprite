@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Carrot as DevIcon } from "lucide-react";
+import { Carrot as DevIcon } from "../lucide-archive/Carrot.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Carrot(props: IconProps) {

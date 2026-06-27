@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cloudy as DevIcon } from "lucide-react";
+import { Cloudy as DevIcon } from "../lucide-archive/Cloudy.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cloudy(props: IconProps) {

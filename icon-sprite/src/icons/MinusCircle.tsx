@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleMinus as DevIcon } from "lucide-react";
+import { MinusCircle as DevIcon } from "../lucide-archive/MinusCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MinusCircle(props: IconProps) {

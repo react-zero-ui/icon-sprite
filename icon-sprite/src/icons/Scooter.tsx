@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Scooter as DevIcon } from "lucide-react";
+import { Scooter as DevIcon } from "../lucide-archive/Scooter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Scooter(props: IconProps) {

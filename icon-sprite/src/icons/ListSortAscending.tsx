@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListSortAscending as DevIcon } from "lucide-react";
+import { ListSortAscending as DevIcon } from "../lucide-archive/ListSortAscending.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ListSortAscending(props: IconProps) {

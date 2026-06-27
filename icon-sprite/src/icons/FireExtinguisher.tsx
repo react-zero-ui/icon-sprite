@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FireExtinguisher as DevIcon } from "lucide-react";
+import { FireExtinguisher as DevIcon } from "../lucide-archive/FireExtinguisher.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FireExtinguisher(props: IconProps) {

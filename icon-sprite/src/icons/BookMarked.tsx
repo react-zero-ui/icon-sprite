@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookMarked as DevIcon } from "lucide-react";
+import { BookMarked as DevIcon } from "../lucide-archive/BookMarked.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookMarked(props: IconProps) {

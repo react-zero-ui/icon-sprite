@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListCheck as DevIcon } from "lucide-react";
+import { ListCheck as DevIcon } from "../lucide-archive/ListCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ListCheck(props: IconProps) {

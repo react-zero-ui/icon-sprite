@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderSymlink as DevIcon } from "lucide-react";
+import { FolderSymlink as DevIcon } from "../lucide-archive/FolderSymlink.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderSymlink(props: IconProps) {

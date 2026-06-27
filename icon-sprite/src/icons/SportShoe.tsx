@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SportShoe as DevIcon } from "lucide-react";
+import { SportShoe as DevIcon } from "../lucide-archive/SportShoe.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SportShoe(props: IconProps) {

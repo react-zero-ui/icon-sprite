@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WifiSync as DevIcon } from "lucide-react";
+import { WifiSync as DevIcon } from "../lucide-archive/WifiSync.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WifiSync(props: IconProps) {

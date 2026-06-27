@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GalleryThumbnails as DevIcon } from "lucide-react";
+import { GalleryThumbnails as DevIcon } from "../lucide-archive/GalleryThumbnails.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GalleryThumbnails(props: IconProps) {

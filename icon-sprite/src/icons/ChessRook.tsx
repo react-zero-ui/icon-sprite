@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChessRook as DevIcon } from "lucide-react";
+import { ChessRook as DevIcon } from "../lucide-archive/ChessRook.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChessRook(props: IconProps) {

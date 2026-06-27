@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GlassWater as DevIcon } from "lucide-react";
+import { GlassWater as DevIcon } from "../lucide-archive/GlassWater.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GlassWater(props: IconProps) {

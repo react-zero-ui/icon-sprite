@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Road as DevIcon } from "lucide-react";
+import { Road as DevIcon } from "../lucide-archive/Road.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Road(props: IconProps) {

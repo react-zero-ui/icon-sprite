@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EvCharger as DevIcon } from "lucide-react";
+import { EvCharger as DevIcon } from "../lucide-archive/EvCharger.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EvCharger(props: IconProps) {

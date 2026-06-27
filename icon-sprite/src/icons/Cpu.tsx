@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cpu as DevIcon } from "lucide-react";
+import { Cpu as DevIcon } from "../lucide-archive/Cpu.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cpu(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DiamondPercent as DevIcon } from "lucide-react";
+import { PercentDiamond as DevIcon } from "../lucide-archive/PercentDiamond.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PercentDiamond(props: IconProps) {

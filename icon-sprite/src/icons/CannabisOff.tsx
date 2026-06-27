@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CannabisOff as DevIcon } from "lucide-react";
+import { CannabisOff as DevIcon } from "../lucide-archive/CannabisOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CannabisOff(props: IconProps) {

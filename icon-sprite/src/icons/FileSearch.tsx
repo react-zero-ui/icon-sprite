@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileSearch as DevIcon } from "lucide-react";
+import { FileSearch as DevIcon } from "../lucide-archive/FileSearch.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileSearch(props: IconProps) {

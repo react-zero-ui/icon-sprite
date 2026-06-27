@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SaudiRiyal as DevIcon } from "lucide-react";
+import { SaudiRiyal as DevIcon } from "../lucide-archive/SaudiRiyal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SaudiRiyal(props: IconProps) {

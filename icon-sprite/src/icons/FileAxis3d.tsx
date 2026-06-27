@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileAxis3d as DevIcon } from "lucide-react";
+import { FileAxis3d as DevIcon } from "../lucide-archive/FileAxis3d.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileAxis3d(props: IconProps) {

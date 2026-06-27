@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VideoOff as DevIcon } from "lucide-react";
+import { VideoOff as DevIcon } from "../lucide-archive/VideoOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VideoOff(props: IconProps) {

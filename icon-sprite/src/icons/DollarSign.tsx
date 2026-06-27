@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DollarSign as DevIcon } from "lucide-react";
+import { DollarSign as DevIcon } from "../lucide-archive/DollarSign.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DollarSign(props: IconProps) {

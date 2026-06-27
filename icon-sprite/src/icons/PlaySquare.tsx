@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquarePlay as DevIcon } from "lucide-react";
+import { PlaySquare as DevIcon } from "../lucide-archive/PlaySquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PlaySquare(props: IconProps) {

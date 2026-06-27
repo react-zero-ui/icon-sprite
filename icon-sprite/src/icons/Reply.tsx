@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Reply as DevIcon } from "lucide-react";
+import { Reply as DevIcon } from "../lucide-archive/Reply.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Reply(props: IconProps) {

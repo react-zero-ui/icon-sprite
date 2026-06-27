@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SwissFranc as DevIcon } from "lucide-react";
+import { SwissFranc as DevIcon } from "../lucide-archive/SwissFranc.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SwissFranc(props: IconProps) {

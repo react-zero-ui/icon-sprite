@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TableCellsMerge as DevIcon } from "lucide-react";
+import { TableCellsMerge as DevIcon } from "../lucide-archive/TableCellsMerge.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TableCellsMerge(props: IconProps) {

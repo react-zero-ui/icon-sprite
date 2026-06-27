@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileBraces as DevIcon } from "lucide-react";
+import { FileJson as DevIcon } from "../lucide-archive/FileJson.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileJson(props: IconProps) {

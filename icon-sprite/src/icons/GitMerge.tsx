@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitMerge as DevIcon } from "lucide-react";
+import { GitMerge as DevIcon } from "../lucide-archive/GitMerge.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitMerge(props: IconProps) {

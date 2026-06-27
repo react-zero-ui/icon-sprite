@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Type as DevIcon } from "lucide-react";
+import { Type as DevIcon } from "../lucide-archive/Type.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Type(props: IconProps) {

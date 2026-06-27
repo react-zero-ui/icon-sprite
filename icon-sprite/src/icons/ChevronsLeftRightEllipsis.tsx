@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChevronsLeftRightEllipsis as DevIcon } from "lucide-react";
+import { ChevronsLeftRightEllipsis as DevIcon } from "../lucide-archive/ChevronsLeftRightEllipsis.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChevronsLeftRightEllipsis(props: IconProps) {

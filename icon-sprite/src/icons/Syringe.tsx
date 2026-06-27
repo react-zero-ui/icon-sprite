@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Syringe as DevIcon } from "lucide-react";
+import { Syringe as DevIcon } from "../lucide-archive/Syringe.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Syringe(props: IconProps) {

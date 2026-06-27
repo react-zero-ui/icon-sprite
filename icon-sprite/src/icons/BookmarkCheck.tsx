@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookmarkCheck as DevIcon } from "lucide-react";
+import { BookmarkCheck as DevIcon } from "../lucide-archive/BookmarkCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookmarkCheck(props: IconProps) {

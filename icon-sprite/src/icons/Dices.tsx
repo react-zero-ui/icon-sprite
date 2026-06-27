@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dices as DevIcon } from "lucide-react";
+import { Dices as DevIcon } from "../lucide-archive/Dices.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dices(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FoldHorizontal as DevIcon } from "lucide-react";
+import { FoldHorizontal as DevIcon } from "../lucide-archive/FoldHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FoldHorizontal(props: IconProps) {

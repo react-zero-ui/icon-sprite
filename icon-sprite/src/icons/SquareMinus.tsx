@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareMinus as DevIcon } from "lucide-react";
+import { SquareMinus as DevIcon } from "../lucide-archive/SquareMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareMinus(props: IconProps) {

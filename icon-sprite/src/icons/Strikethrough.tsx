@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Strikethrough as DevIcon } from "lucide-react";
+import { Strikethrough as DevIcon } from "../lucide-archive/Strikethrough.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Strikethrough(props: IconProps) {

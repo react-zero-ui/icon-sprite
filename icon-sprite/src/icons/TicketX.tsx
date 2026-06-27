@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TicketX as DevIcon } from "lucide-react";
+import { TicketX as DevIcon } from "../lucide-archive/TicketX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TicketX(props: IconProps) {

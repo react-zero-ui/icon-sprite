@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CopyX as DevIcon } from "lucide-react";
+import { CopyX as DevIcon } from "../lucide-archive/CopyX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CopyX(props: IconProps) {

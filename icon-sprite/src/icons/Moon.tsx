@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Moon as DevIcon } from "lucide-react";
+import { Moon as DevIcon } from "../lucide-archive/Moon.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Moon(props: IconProps) {

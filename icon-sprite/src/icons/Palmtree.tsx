@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TreePalm as DevIcon } from "lucide-react";
+import { Palmtree as DevIcon } from "../lucide-archive/Palmtree.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Palmtree(props: IconProps) {

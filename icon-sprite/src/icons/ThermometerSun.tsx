@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ThermometerSun as DevIcon } from "lucide-react";
+import { ThermometerSun as DevIcon } from "../lucide-archive/ThermometerSun.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ThermometerSun(props: IconProps) {

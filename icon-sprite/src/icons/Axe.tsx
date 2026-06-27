@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Axe as DevIcon } from "lucide-react";
+import { Axe as DevIcon } from "../lucide-archive/Axe.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Axe(props: IconProps) {

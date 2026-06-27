@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Keyboard as DevIcon } from "lucide-react";
+import { Keyboard as DevIcon } from "../lucide-archive/Keyboard.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Keyboard(props: IconProps) {

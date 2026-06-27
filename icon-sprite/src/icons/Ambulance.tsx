@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ambulance as DevIcon } from "lucide-react";
+import { Ambulance as DevIcon } from "../lucide-archive/Ambulance.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ambulance(props: IconProps) {

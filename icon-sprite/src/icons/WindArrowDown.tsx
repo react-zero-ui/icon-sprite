@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WindArrowDown as DevIcon } from "lucide-react";
+import { WindArrowDown as DevIcon } from "../lucide-archive/WindArrowDown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WindArrowDown(props: IconProps) {

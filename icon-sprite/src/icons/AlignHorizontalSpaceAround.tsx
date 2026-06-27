@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignHorizontalSpaceAround as DevIcon } from "lucide-react";
+import { AlignHorizontalSpaceAround as DevIcon } from "../lucide-archive/AlignHorizontalSpaceAround.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignHorizontalSpaceAround(props: IconProps) {

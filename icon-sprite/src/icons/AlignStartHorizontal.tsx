@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignStartHorizontal as DevIcon } from "lucide-react";
+import { AlignStartHorizontal as DevIcon } from "../lucide-archive/AlignStartHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignStartHorizontal(props: IconProps) {

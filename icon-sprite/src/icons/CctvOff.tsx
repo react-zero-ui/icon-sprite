@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CctvOff as DevIcon } from "lucide-react";
+import { CctvOff as DevIcon } from "../lucide-archive/CctvOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CctvOff(props: IconProps) {

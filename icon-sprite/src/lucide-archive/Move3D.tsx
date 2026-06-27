@@ -3,7 +3,7 @@ import { type IconProps } from "../_shared.js";
 export function Move3d({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-move-3d"
+      className="lucide lucide-move-3-d"
   xmlns="http://www.w3.org/2000/svg"
  
  

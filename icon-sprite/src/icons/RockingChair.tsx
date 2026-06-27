@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RockingChair as DevIcon } from "lucide-react";
+import { RockingChair as DevIcon } from "../lucide-archive/RockingChair.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RockingChair(props: IconProps) {

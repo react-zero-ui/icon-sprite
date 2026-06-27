@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeInfo as DevIcon } from "lucide-react";
+import { BadgeInfo as DevIcon } from "../lucide-archive/BadgeInfo.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgeInfo(props: IconProps) {

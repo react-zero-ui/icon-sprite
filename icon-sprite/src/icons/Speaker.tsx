@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Speaker as DevIcon } from "lucide-react";
+import { Speaker as DevIcon } from "../lucide-archive/Speaker.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Speaker(props: IconProps) {

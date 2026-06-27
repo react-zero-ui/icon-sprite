@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CirclePoundSterling as DevIcon } from "lucide-react";
+import { CirclePoundSterling as DevIcon } from "../lucide-archive/CirclePoundSterling.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CirclePoundSterling(props: IconProps) {

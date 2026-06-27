@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Italic as DevIcon } from "lucide-react";
+import { Italic as DevIcon } from "../lucide-archive/Italic.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Italic(props: IconProps) {

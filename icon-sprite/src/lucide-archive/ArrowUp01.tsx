@@ -3,7 +3,7 @@ import { type IconProps } from "../_shared.js";
 export function ArrowUp01({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-arrow-up-01"
+      className="lucide lucide-arrow-up-0-1"
   xmlns="http://www.w3.org/2000/svg"
  
  

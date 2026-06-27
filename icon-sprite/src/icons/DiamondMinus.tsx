@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DiamondMinus as DevIcon } from "lucide-react";
+import { DiamondMinus as DevIcon } from "../lucide-archive/DiamondMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DiamondMinus(props: IconProps) {

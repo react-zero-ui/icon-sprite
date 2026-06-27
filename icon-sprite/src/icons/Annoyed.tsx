@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Annoyed as DevIcon } from "lucide-react";
+import { Annoyed as DevIcon } from "../lucide-archive/Annoyed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Annoyed(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FunnelPlus as DevIcon } from "lucide-react";
+import { FunnelPlus as DevIcon } from "../lucide-archive/FunnelPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FunnelPlus(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareDashed as DevIcon } from "lucide-react";
+import { BoxSelect as DevIcon } from "../lucide-archive/BoxSelect.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BoxSelect(props: IconProps) {

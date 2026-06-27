@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BoomBox as DevIcon } from "lucide-react";
+import { BoomBox as DevIcon } from "../lucide-archive/BoomBox.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BoomBox(props: IconProps) {

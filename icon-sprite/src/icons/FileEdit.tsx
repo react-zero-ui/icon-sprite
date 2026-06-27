@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FilePen as DevIcon } from "lucide-react";
+import { FileEdit as DevIcon } from "../lucide-archive/FileEdit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileEdit(props: IconProps) {

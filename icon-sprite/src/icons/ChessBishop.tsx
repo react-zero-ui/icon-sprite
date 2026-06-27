@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChessBishop as DevIcon } from "lucide-react";
+import { ChessBishop as DevIcon } from "../lucide-archive/ChessBishop.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChessBishop(props: IconProps) {

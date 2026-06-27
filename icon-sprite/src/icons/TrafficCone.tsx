@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TrafficCone as DevIcon } from "lucide-react";
+import { TrafficCone as DevIcon } from "../lucide-archive/TrafficCone.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TrafficCone(props: IconProps) {

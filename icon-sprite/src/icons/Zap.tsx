@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Zap as DevIcon } from "lucide-react";
+import { Zap as DevIcon } from "../lucide-archive/Zap.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Zap(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Theater as DevIcon } from "lucide-react";
+import { Theater as DevIcon } from "../lucide-archive/Theater.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Theater(props: IconProps) {

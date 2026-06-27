@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GeorgianLari as DevIcon } from "lucide-react";
+import { GeorgianLari as DevIcon } from "../lucide-archive/GeorgianLari.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GeorgianLari(props: IconProps) {

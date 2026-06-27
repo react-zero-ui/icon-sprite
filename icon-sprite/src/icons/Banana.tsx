@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Banana as DevIcon } from "lucide-react";
+import { Banana as DevIcon } from "../lucide-archive/Banana.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Banana(props: IconProps) {

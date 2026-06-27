@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FlameKindling as DevIcon } from "lucide-react";
+import { FlameKindling as DevIcon } from "../lucide-archive/FlameKindling.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FlameKindling(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SaveAll as DevIcon } from "lucide-react";
+import { SaveAll as DevIcon } from "../lucide-archive/SaveAll.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SaveAll(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartGantt as DevIcon } from "lucide-react";
+import { ChartGantt as DevIcon } from "../lucide-archive/ChartGantt.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartGantt(props: IconProps) {

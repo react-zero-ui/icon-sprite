@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Columns3Cog as DevIcon } from "lucide-react";
+import { Columns3Cog as DevIcon } from "../lucide-archive/Columns3Cog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Columns3Cog(props: IconProps) {

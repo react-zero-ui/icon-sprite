@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pi as DevIcon } from "lucide-react";
+import { Pi as DevIcon } from "../lucide-archive/Pi.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pi(props: IconProps) {

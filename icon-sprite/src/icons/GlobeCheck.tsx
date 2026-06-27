@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GlobeCheck as DevIcon } from "lucide-react";
+import { GlobeCheck as DevIcon } from "../lucide-archive/GlobeCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GlobeCheck(props: IconProps) {

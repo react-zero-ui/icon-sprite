@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Briefcase as DevIcon } from "lucide-react";
+import { Briefcase as DevIcon } from "../lucide-archive/Briefcase.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Briefcase(props: IconProps) {

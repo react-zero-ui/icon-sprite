@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitBranch as DevIcon } from "lucide-react";
+import { GitBranch as DevIcon } from "../lucide-archive/GitBranch.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitBranch(props: IconProps) {

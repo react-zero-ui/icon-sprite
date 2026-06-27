@@ -10,6 +10,7 @@ import path from "path";
 
 const sourceDir = path.resolve("node_modules/lucide-static/icons");
 const outDir = path.resolve("scripts/lucide-icons");
+const manifestFile = path.resolve("scripts/lucide-icons.json");
 const componentDir = path.resolve("src/lucide-archive");
 
 if (!fs.existsSync(sourceDir)) {
@@ -27,11 +28,47 @@ for (const file of fs.readdirSync(sourceDir)) {
 
 console.log(`✅ Copied ${copied} Lucide SVGs to ${outDir}`);
 
+const manifest = {};
+for (const file of fs.readdirSync(outDir).sort()) {
+	if (!file.endsWith(".svg")) continue;
+	manifest[file] = fs.readFileSync(path.join(outDir, file), "utf8");
+}
+fs.writeFileSync(manifestFile, JSON.stringify(manifest), "utf8");
+console.log(`✅ Wrote ${Object.keys(manifest).length} Lucide SVGs to ${manifestFile}`);
+
 function kebabToPascal(str) {
 	return str
 		.split("-")
 		.map((w) => w[0].toUpperCase() + w.slice(1))
 		.join("");
+}
+
+function pascalToKebab(str) {
+	return str
+		.replace(/([a-z])([A-Z])/g, "$1-$2")
+		.replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+		.replace(/([a-zA-Z])(\d)/g, "$1-$2")
+		.replace(/(\d)([a-zA-Z])/g, "$1-$2")
+		.toLowerCase();
+}
+
+function getLucideReactExports() {
+	const lucideDts = path.resolve("node_modules/lucide-react/dist/lucide-react.d.ts");
+	if (!fs.existsSync(lucideDts)) return new Map();
+
+	const content = fs.readFileSync(lucideDts, "utf8");
+	const exports = new Map();
+	const matches = content.matchAll(/declare const (\w+): react\.ForwardRefExoticComponent/g);
+
+	for (const match of matches) {
+		const name = match[1];
+		if (!name.startsWith("Lucide") && !name.endsWith("Icon")) {
+			const key = pascalToKebab(name).replace(/-/g, "");
+			exports.set(key, name);
+		}
+	}
+
+	return exports;
 }
 
 function toJsxAttrs(markup) {
@@ -59,8 +96,7 @@ function extractSvg(svg) {
 	};
 }
 
-function writeArchivedComponent(svgId, svg) {
-	const componentName = kebabToPascal(svgId);
+function writeArchivedComponent(componentName, svg) {
 	const { attrs, children } = extractSvg(svg);
 	const attrText = attrs
 		.replace(/\swidth="[^"]*"/, "")
@@ -84,6 +120,9 @@ export function ${componentName}({ size, width, height, ...rest }: IconProps) {
 `;
 }
 
+const lucideReactExports = getLucideReactExports();
+const generatedNames = new Set();
+
 fs.rmSync(componentDir, { recursive: true, force: true });
 fs.mkdirSync(componentDir, { recursive: true });
 
@@ -91,8 +130,14 @@ let generated = 0;
 for (const file of fs.readdirSync(outDir)) {
 	if (!file.endsWith(".svg")) continue;
 	const svgId = file.slice(0, -4);
+	const normalizedKey = svgId.replace(/-/g, "");
+	const componentName = lucideReactExports.get(normalizedKey) ?? kebabToPascal(svgId);
+	const lowerName = componentName.toLowerCase();
+	if (generatedNames.has(lowerName)) continue;
+	generatedNames.add(lowerName);
+
 	const svg = fs.readFileSync(path.join(outDir, file), "utf8");
-	fs.writeFileSync(path.join(componentDir, `${kebabToPascal(svgId)}.tsx`), writeArchivedComponent(svgId, svg), "utf8");
+	fs.writeFileSync(path.join(componentDir, `${componentName}.tsx`), writeArchivedComponent(componentName, svg), "utf8");
 	generated++;
 }
 

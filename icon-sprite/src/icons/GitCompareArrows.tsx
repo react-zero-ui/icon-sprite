@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitCompareArrows as DevIcon } from "lucide-react";
+import { GitCompareArrows as DevIcon } from "../lucide-archive/GitCompareArrows.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitCompareArrows(props: IconProps) {

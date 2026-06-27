@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitCompare as DevIcon } from "lucide-react";
+import { GitCompare as DevIcon } from "../lucide-archive/GitCompare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitCompare(props: IconProps) {

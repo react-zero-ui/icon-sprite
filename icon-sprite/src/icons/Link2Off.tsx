@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Link2Off as DevIcon } from "lucide-react";
+import { Link2Off as DevIcon } from "../lucide-archive/Link2Off.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Link2Off(props: IconProps) {

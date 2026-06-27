@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudOff as DevIcon } from "lucide-react";
+import { CloudOff as DevIcon } from "../lucide-archive/CloudOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudOff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowRightToLine as DevIcon } from "lucide-react";
+import { ArrowRightToLine as DevIcon } from "../lucide-archive/ArrowRightToLine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowRightToLine(props: IconProps) {

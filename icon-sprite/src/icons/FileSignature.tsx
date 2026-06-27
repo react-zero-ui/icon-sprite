@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FilePenLine as DevIcon } from "lucide-react";
+import { FileSignature as DevIcon } from "../lucide-archive/FileSignature.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileSignature(props: IconProps) {

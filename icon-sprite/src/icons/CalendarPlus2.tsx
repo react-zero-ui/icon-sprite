@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CalendarPlus2 as DevIcon } from "lucide-react";
+import { CalendarPlus2 as DevIcon } from "../lucide-archive/CalendarPlus2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CalendarPlus2(props: IconProps) {

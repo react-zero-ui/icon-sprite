@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartBarIncreasing as DevIcon } from "lucide-react";
+import { ChartBarIncreasing as DevIcon } from "../lucide-archive/ChartBarIncreasing.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartBarIncreasing(props: IconProps) {

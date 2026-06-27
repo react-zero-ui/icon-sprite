@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cat as DevIcon } from "lucide-react";
+import { Cat as DevIcon } from "../lucide-archive/Cat.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cat(props: IconProps) {

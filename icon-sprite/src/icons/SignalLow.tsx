@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SignalLow as DevIcon } from "lucide-react";
+import { SignalLow as DevIcon } from "../lucide-archive/SignalLow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SignalLow(props: IconProps) {

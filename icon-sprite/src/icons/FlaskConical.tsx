@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FlaskConical as DevIcon } from "lucide-react";
+import { FlaskConical as DevIcon } from "../lucide-archive/FlaskConical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FlaskConical(props: IconProps) {

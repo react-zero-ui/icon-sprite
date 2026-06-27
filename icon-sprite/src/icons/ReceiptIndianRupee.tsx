@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ReceiptIndianRupee as DevIcon } from "lucide-react";
+import { ReceiptIndianRupee as DevIcon } from "../lucide-archive/ReceiptIndianRupee.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ReceiptIndianRupee(props: IconProps) {

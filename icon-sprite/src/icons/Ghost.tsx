@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ghost as DevIcon } from "lucide-react";
+import { Ghost as DevIcon } from "../lucide-archive/Ghost.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ghost(props: IconProps) {

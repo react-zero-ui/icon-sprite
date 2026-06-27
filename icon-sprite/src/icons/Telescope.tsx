@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Telescope as DevIcon } from "lucide-react";
+import { Telescope as DevIcon } from "../lucide-archive/Telescope.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Telescope(props: IconProps) {

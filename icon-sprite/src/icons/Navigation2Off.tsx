@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Navigation2Off as DevIcon } from "lucide-react";
+import { Navigation2Off as DevIcon } from "../lucide-archive/Navigation2Off.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Navigation2Off(props: IconProps) {

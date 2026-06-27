@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SendToBack as DevIcon } from "lucide-react";
+import { SendToBack as DevIcon } from "../lucide-archive/SendToBack.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SendToBack(props: IconProps) {

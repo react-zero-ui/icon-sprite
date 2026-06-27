@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignCenterVertical as DevIcon } from "lucide-react";
+import { AlignCenterVertical as DevIcon } from "../lucide-archive/AlignCenterVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignCenterVertical(props: IconProps) {

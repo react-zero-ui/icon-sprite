@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bike as DevIcon } from "lucide-react";
+import { Bike as DevIcon } from "../lucide-archive/Bike.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bike(props: IconProps) {

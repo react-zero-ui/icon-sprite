@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PhoneMissed as DevIcon } from "lucide-react";
+import { PhoneMissed as DevIcon } from "../lucide-archive/PhoneMissed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PhoneMissed(props: IconProps) {

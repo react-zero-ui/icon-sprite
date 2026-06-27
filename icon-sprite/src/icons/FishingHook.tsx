@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FishingHook as DevIcon } from "lucide-react";
+import { FishingHook as DevIcon } from "../lucide-archive/FishingHook.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FishingHook(props: IconProps) {

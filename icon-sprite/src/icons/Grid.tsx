@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Grid3x3 as DevIcon } from "lucide-react";
+import { Grid as DevIcon } from "../lucide-archive/Grid.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Grid(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleEllipsis as DevIcon } from "lucide-react";
+import { CircleEllipsis as DevIcon } from "../lucide-archive/CircleEllipsis.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleEllipsis(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Beaker as DevIcon } from "lucide-react";
+import { Beaker as DevIcon } from "../lucide-archive/Beaker.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Beaker(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HeartCrack as DevIcon } from "lucide-react";
+import { HeartCrack as DevIcon } from "../lucide-archive/HeartCrack.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HeartCrack(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PaintBucket as DevIcon } from "lucide-react";
+import { PaintBucket as DevIcon } from "../lucide-archive/PaintBucket.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PaintBucket(props: IconProps) {

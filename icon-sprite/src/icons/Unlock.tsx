@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LockOpen as DevIcon } from "lucide-react";
+import { Unlock as DevIcon } from "../lucide-archive/Unlock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Unlock(props: IconProps) {

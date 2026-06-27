@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tally2 as DevIcon } from "lucide-react";
+import { Tally2 as DevIcon } from "../lucide-archive/Tally2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tally2(props: IconProps) {

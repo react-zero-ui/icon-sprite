@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LockKeyholeOpen as DevIcon } from "lucide-react";
+import { UnlockKeyhole as DevIcon } from "../lucide-archive/UnlockKeyhole.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UnlockKeyhole(props: IconProps) {

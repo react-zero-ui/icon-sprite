@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelLeftClose as DevIcon } from "lucide-react";
+import { SidebarClose as DevIcon } from "../lucide-archive/SidebarClose.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SidebarClose(props: IconProps) {

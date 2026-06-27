@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MoveVertical as DevIcon } from "lucide-react";
+import { MoveVertical as DevIcon } from "../lucide-archive/MoveVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MoveVertical(props: IconProps) {

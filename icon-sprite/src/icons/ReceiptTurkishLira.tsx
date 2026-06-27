@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ReceiptTurkishLira as DevIcon } from "lucide-react";
+import { ReceiptTurkishLira as DevIcon } from "../lucide-archive/ReceiptTurkishLira.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ReceiptTurkishLira(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZodiacPisces as DevIcon } from "lucide-react";
+import { ZodiacPisces as DevIcon } from "../lucide-archive/ZodiacPisces.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZodiacPisces(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Wheat as DevIcon } from "lucide-react";
+import { Wheat as DevIcon } from "../lucide-archive/Wheat.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Wheat(props: IconProps) {

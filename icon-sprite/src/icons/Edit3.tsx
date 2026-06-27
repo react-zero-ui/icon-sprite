@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PenLine as DevIcon } from "lucide-react";
+import { Edit3 as DevIcon } from "../lucide-archive/Edit3.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Edit3(props: IconProps) {

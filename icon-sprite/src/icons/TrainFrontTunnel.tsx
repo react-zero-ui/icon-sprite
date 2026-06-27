@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TrainFrontTunnel as DevIcon } from "lucide-react";
+import { TrainFrontTunnel as DevIcon } from "../lucide-archive/TrainFrontTunnel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TrainFrontTunnel(props: IconProps) {

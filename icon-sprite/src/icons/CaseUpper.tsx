@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CaseUpper as DevIcon } from "lucide-react";
+import { CaseUpper as DevIcon } from "../lucide-archive/CaseUpper.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CaseUpper(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Heading4 as DevIcon } from "lucide-react";
+import { Heading4 as DevIcon } from "../lucide-archive/Heading4.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Heading4(props: IconProps) {

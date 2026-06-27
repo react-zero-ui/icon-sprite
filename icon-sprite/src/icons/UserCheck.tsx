@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UserCheck as DevIcon } from "lucide-react";
+import { UserCheck as DevIcon } from "../lucide-archive/UserCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UserCheck(props: IconProps) {

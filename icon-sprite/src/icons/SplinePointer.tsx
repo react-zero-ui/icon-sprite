@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SplinePointer as DevIcon } from "lucide-react";
+import { SplinePointer as DevIcon } from "../lucide-archive/SplinePointer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SplinePointer(props: IconProps) {

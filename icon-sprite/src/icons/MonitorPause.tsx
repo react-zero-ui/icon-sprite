@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorPause as DevIcon } from "lucide-react";
+import { MonitorPause as DevIcon } from "../lucide-archive/MonitorPause.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorPause(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Diameter as DevIcon } from "lucide-react";
+import { Diameter as DevIcon } from "../lucide-archive/Diameter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Diameter(props: IconProps) {

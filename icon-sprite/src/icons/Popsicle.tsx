@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Popsicle as DevIcon } from "lucide-react";
+import { Popsicle as DevIcon } from "../lucide-archive/Popsicle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Popsicle(props: IconProps) {

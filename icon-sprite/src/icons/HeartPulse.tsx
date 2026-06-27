@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HeartPulse as DevIcon } from "lucide-react";
+import { HeartPulse as DevIcon } from "../lucide-archive/HeartPulse.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HeartPulse(props: IconProps) {

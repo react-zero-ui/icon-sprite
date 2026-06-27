@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Anvil as DevIcon } from "lucide-react";
+import { Anvil as DevIcon } from "../lucide-archive/Anvil.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Anvil(props: IconProps) {

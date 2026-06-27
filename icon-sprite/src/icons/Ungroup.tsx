@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ungroup as DevIcon } from "lucide-react";
+import { Ungroup as DevIcon } from "../lucide-archive/Ungroup.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ungroup(props: IconProps) {

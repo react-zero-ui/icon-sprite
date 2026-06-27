@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitPullRequestCreate as DevIcon } from "lucide-react";
+import { GitPullRequestCreate as DevIcon } from "../lucide-archive/GitPullRequestCreate.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitPullRequestCreate(props: IconProps) {

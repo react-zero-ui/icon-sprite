@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Guitar as DevIcon } from "lucide-react";
+import { Guitar as DevIcon } from "../lucide-archive/Guitar.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Guitar(props: IconProps) {

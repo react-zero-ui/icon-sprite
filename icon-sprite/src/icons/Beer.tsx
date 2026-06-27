@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Beer as DevIcon } from "lucide-react";
+import { Beer as DevIcon } from "../lucide-archive/Beer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Beer(props: IconProps) {

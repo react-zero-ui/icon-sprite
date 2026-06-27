@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tag as DevIcon } from "lucide-react";
+import { Tag as DevIcon } from "../lucide-archive/Tag.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tag(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BetweenHorizontalStart as DevIcon } from "lucide-react";
+import { BetweenHorizontalStart as DevIcon } from "../lucide-archive/BetweenHorizontalStart.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BetweenHorizontalStart(props: IconProps) {

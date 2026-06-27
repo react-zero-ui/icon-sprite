@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Binary as DevIcon } from "lucide-react";
+import { Binary as DevIcon } from "../lucide-archive/Binary.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Binary(props: IconProps) {

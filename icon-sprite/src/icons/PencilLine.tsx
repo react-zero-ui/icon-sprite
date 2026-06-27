@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PencilLine as DevIcon } from "lucide-react";
+import { PencilLine as DevIcon } from "../lucide-archive/PencilLine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PencilLine(props: IconProps) {

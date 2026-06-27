@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartColumnDecreasing as DevIcon } from "lucide-react";
+import { ChartColumnDecreasing as DevIcon } from "../lucide-archive/ChartColumnDecreasing.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartColumnDecreasing(props: IconProps) {

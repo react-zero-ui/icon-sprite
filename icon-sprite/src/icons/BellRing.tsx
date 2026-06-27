@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BellRing as DevIcon } from "lucide-react";
+import { BellRing as DevIcon } from "../lucide-archive/BellRing.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BellRing(props: IconProps) {

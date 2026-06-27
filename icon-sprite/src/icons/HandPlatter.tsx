@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HandPlatter as DevIcon } from "lucide-react";
+import { HandPlatter as DevIcon } from "../lucide-archive/HandPlatter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HandPlatter(props: IconProps) {

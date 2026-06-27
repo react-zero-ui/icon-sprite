@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Upload as DevIcon } from "lucide-react";
+import { Upload as DevIcon } from "../lucide-archive/Upload.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Upload(props: IconProps) {

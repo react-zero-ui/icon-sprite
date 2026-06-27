@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sparkle as DevIcon } from "lucide-react";
+import { Sparkle as DevIcon } from "../lucide-archive/Sparkle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sparkle(props: IconProps) {

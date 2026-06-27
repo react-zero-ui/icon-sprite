@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CalendarRange as DevIcon } from "lucide-react";
+import { CalendarRange as DevIcon } from "../lucide-archive/CalendarRange.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CalendarRange(props: IconProps) {

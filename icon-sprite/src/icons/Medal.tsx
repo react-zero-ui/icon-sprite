@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Medal as DevIcon } from "lucide-react";
+import { Medal as DevIcon } from "../lucide-archive/Medal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Medal(props: IconProps) {

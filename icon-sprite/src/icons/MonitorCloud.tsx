@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorCloud as DevIcon } from "lucide-react";
+import { MonitorCloud as DevIcon } from "../lucide-archive/MonitorCloud.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorCloud(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Router as DevIcon } from "lucide-react";
+import { Router as DevIcon } from "../lucide-archive/Router.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Router(props: IconProps) {

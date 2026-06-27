@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitFork as DevIcon } from "lucide-react";
+import { GitFork as DevIcon } from "../lucide-archive/GitFork.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitFork(props: IconProps) {

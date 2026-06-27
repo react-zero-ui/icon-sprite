@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Videotape as DevIcon } from "lucide-react";
+import { Videotape as DevIcon } from "../lucide-archive/Videotape.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Videotape(props: IconProps) {

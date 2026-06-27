@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Shell as DevIcon } from "lucide-react";
+import { Shell as DevIcon } from "../lucide-archive/Shell.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Shell(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileLock as DevIcon } from "lucide-react";
+import { FileLock as DevIcon } from "../lucide-archive/FileLock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileLock(props: IconProps) {

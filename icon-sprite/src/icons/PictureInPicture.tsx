@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PictureInPicture as DevIcon } from "lucide-react";
+import { PictureInPicture as DevIcon } from "../lucide-archive/PictureInPicture.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PictureInPicture(props: IconProps) {

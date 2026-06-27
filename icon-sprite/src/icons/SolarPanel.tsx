@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SolarPanel as DevIcon } from "lucide-react";
+import { SolarPanel as DevIcon } from "../lucide-archive/SolarPanel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SolarPanel(props: IconProps) {

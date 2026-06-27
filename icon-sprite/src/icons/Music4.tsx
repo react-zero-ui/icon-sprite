@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Music4 as DevIcon } from "lucide-react";
+import { Music4 as DevIcon } from "../lucide-archive/Music4.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Music4(props: IconProps) {

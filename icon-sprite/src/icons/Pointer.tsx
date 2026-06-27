@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pointer as DevIcon } from "lucide-react";
+import { Pointer as DevIcon } from "../lucide-archive/Pointer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pointer(props: IconProps) {

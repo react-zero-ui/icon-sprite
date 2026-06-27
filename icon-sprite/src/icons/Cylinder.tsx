@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cylinder as DevIcon } from "lucide-react";
+import { Cylinder as DevIcon } from "../lucide-archive/Cylinder.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cylinder(props: IconProps) {

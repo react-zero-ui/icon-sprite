@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HandCoins as DevIcon } from "lucide-react";
+import { HandCoins as DevIcon } from "../lucide-archive/HandCoins.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HandCoins(props: IconProps) {

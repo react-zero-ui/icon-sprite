@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BowArrow as DevIcon } from "lucide-react";
+import { BowArrow as DevIcon } from "../lucide-archive/BowArrow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BowArrow(props: IconProps) {

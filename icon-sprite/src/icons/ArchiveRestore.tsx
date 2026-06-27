@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArchiveRestore as DevIcon } from "lucide-react";
+import { ArchiveRestore as DevIcon } from "../lucide-archive/ArchiveRestore.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArchiveRestore(props: IconProps) {

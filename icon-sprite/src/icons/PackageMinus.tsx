@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PackageMinus as DevIcon } from "lucide-react";
+import { PackageMinus as DevIcon } from "../lucide-archive/PackageMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PackageMinus(props: IconProps) {

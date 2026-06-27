@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorPlay as DevIcon } from "lucide-react";
+import { MonitorPlay as DevIcon } from "../lucide-archive/MonitorPlay.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorPlay(props: IconProps) {

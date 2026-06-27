@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tent as DevIcon } from "lucide-react";
+import { Tent as DevIcon } from "../lucide-archive/Tent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tent(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ScanEye as DevIcon } from "lucide-react";
+import { ScanEye as DevIcon } from "../lucide-archive/ScanEye.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScanEye(props: IconProps) {

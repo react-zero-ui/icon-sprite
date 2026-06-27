@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PocketKnife as DevIcon } from "lucide-react";
+import { PocketKnife as DevIcon } from "../lucide-archive/PocketKnife.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PocketKnife(props: IconProps) {

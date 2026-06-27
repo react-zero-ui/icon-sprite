@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BrainCog as DevIcon } from "lucide-react";
+import { BrainCog as DevIcon } from "../lucide-archive/BrainCog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BrainCog(props: IconProps) {

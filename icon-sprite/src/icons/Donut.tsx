@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Donut as DevIcon } from "lucide-react";
+import { Donut as DevIcon } from "../lucide-archive/Donut.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Donut(props: IconProps) {

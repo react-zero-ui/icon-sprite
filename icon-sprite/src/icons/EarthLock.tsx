@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EarthLock as DevIcon } from "lucide-react";
+import { EarthLock as DevIcon } from "../lucide-archive/EarthLock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EarthLock(props: IconProps) {

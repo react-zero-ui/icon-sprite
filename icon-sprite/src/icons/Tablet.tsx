@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tablet as DevIcon } from "lucide-react";
+import { Tablet as DevIcon } from "../lucide-archive/Tablet.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tablet(props: IconProps) {

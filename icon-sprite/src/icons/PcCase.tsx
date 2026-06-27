@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PcCase as DevIcon } from "lucide-react";
+import { PcCase as DevIcon } from "../lucide-archive/PcCase.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PcCase(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LayoutGrid as DevIcon } from "lucide-react";
+import { LayoutGrid as DevIcon } from "../lucide-archive/LayoutGrid.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LayoutGrid(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Metronome as DevIcon } from "lucide-react";
+import { Metronome as DevIcon } from "../lucide-archive/Metronome.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Metronome(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileCheckCorner as DevIcon } from "lucide-react";
+import { FileCheck2 as DevIcon } from "../lucide-archive/FileCheck2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileCheck2(props: IconProps) {

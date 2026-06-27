@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TableOfContents as DevIcon } from "lucide-react";
+import { TableOfContents as DevIcon } from "../lucide-archive/TableOfContents.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TableOfContents(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ServerCrash as DevIcon } from "lucide-react";
+import { ServerCrash as DevIcon } from "../lucide-archive/ServerCrash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ServerCrash(props: IconProps) {

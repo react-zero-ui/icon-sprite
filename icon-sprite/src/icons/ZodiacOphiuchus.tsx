@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZodiacOphiuchus as DevIcon } from "lucide-react";
+import { ZodiacOphiuchus as DevIcon } from "../lucide-archive/ZodiacOphiuchus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZodiacOphiuchus(props: IconProps) {

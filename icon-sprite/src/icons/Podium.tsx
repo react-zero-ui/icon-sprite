@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Podium as DevIcon } from "lucide-react";
+import { Podium as DevIcon } from "../lucide-archive/Podium.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Podium(props: IconProps) {

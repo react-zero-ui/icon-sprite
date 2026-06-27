@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleStop as DevIcon } from "lucide-react";
+import { CircleStop as DevIcon } from "../lucide-archive/CircleStop.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleStop(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dna as DevIcon } from "lucide-react";
+import { Dna as DevIcon } from "../lucide-archive/Dna.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dna(props: IconProps) {

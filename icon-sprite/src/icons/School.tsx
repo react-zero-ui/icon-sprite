@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { School as DevIcon } from "lucide-react";
+import { School as DevIcon } from "../lucide-archive/School.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function School(props: IconProps) {

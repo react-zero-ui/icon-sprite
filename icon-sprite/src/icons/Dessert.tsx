@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dessert as DevIcon } from "lucide-react";
+import { Dessert as DevIcon } from "../lucide-archive/Dessert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dessert(props: IconProps) {

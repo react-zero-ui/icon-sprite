@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignVerticalJustifyStart as DevIcon } from "lucide-react";
+import { AlignVerticalJustifyStart as DevIcon } from "../lucide-archive/AlignVerticalJustifyStart.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignVerticalJustifyStart(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WholeWord as DevIcon } from "lucide-react";
+import { WholeWord as DevIcon } from "../lucide-archive/WholeWord.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WholeWord(props: IconProps) {

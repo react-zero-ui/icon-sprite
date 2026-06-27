@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorCog as DevIcon } from "lucide-react";
+import { MonitorCog as DevIcon } from "../lucide-archive/MonitorCog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorCog(props: IconProps) {

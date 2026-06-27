@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CheckCheck as DevIcon } from "lucide-react";
+import { CheckCheck as DevIcon } from "../lucide-archive/CheckCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CheckCheck(props: IconProps) {

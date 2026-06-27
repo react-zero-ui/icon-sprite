@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TicketSlash as DevIcon } from "lucide-react";
+import { TicketSlash as DevIcon } from "../lucide-archive/TicketSlash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TicketSlash(props: IconProps) {

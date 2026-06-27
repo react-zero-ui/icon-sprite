@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PlaneTakeoff as DevIcon } from "lucide-react";
+import { PlaneTakeoff as DevIcon } from "../lucide-archive/PlaneTakeoff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PlaneTakeoff(props: IconProps) {

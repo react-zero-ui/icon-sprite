@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChessKnight as DevIcon } from "lucide-react";
+import { ChessKnight as DevIcon } from "../lucide-archive/ChessKnight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChessKnight(props: IconProps) {

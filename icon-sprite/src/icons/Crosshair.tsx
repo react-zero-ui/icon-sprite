@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Crosshair as DevIcon } from "lucide-react";
+import { Crosshair as DevIcon } from "../lucide-archive/Crosshair.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Crosshair(props: IconProps) {

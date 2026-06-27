@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Recycle as DevIcon } from "lucide-react";
+import { Recycle as DevIcon } from "../lucide-archive/Recycle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Recycle(props: IconProps) {

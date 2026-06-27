@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EggOff as DevIcon } from "lucide-react";
+import { EggOff as DevIcon } from "../lucide-archive/EggOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EggOff(props: IconProps) {

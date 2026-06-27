@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ParkingMeter as DevIcon } from "lucide-react";
+import { ParkingMeter as DevIcon } from "../lucide-archive/ParkingMeter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ParkingMeter(props: IconProps) {

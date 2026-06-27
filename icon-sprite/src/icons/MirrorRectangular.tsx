@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MirrorRectangular as DevIcon } from "lucide-react";
+import { MirrorRectangular as DevIcon } from "../lucide-archive/MirrorRectangular.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MirrorRectangular(props: IconProps) {

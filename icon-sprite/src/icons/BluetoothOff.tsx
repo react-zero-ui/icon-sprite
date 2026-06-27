@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BluetoothOff as DevIcon } from "lucide-react";
+import { BluetoothOff as DevIcon } from "../lucide-archive/BluetoothOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BluetoothOff(props: IconProps) {

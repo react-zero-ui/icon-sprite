@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BicepsFlexed as DevIcon } from "lucide-react";
+import { BicepsFlexed as DevIcon } from "../lucide-archive/BicepsFlexed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BicepsFlexed(props: IconProps) {

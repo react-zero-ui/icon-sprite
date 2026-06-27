@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Truck as DevIcon } from "lucide-react";
+import { Truck as DevIcon } from "../lucide-archive/Truck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Truck(props: IconProps) {

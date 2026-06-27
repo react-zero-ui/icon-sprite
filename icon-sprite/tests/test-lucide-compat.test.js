@@ -90,6 +90,23 @@ function getLucideSpriteMapping() {
 	return bySvgFile;
 }
 
+function assertNoLucideRuntimeImports() {
+	const iconsDir = path.resolve(__dirname, "../dist/icons");
+	const offenders = [];
+
+	for (const file of fs.readdirSync(iconsDir)) {
+		if (!file.endsWith(".js")) continue;
+		const content = fs.readFileSync(path.join(iconsDir, file), "utf8");
+		if (content.includes("lucide-react")) {
+			offenders.push(file);
+		}
+	}
+
+	if (offenders.length > 0) {
+		throw new Error(`Lucide wrappers should use local archive components, but ${offenders.length} still import lucide-react: ${offenders.slice(0, 10).join(", ")}`);
+	}
+}
+
 // Run the test
 try {
 	const ourExports = getOurExports();
@@ -142,6 +159,8 @@ try {
 		console.error(`\n   Users importing these from older lucide-react versions won't find them in our library.`);
 		process.exit(1);
 	}
+
+	assertNoLucideRuntimeImports();
 	
 	if (extras.length > 0) {
 		console.log(`   Extra exports: ${extras.length} (CustomIcon, types, etc.)`);
@@ -151,6 +170,7 @@ try {
 	if (archivedLucideSvgFiles.size > 0) {
 		console.log(`   All ${archivedLucideSvgFiles.size - skippedLucideSvgFiles.size} archived Lucide SVGs are mapped to exports.`);
 	}
+	console.log(`   Lucide dev wrappers use local archive components.`);
 	console.log(`   Drop-in replacement supported! ✨`);
 	
 } catch (e) {

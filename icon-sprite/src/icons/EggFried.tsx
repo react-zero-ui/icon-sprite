@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EggFried as DevIcon } from "lucide-react";
+import { EggFried as DevIcon } from "../lucide-archive/EggFried.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EggFried(props: IconProps) {

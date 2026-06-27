@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChevronsRightLeft as DevIcon } from "lucide-react";
+import { ChevronsRightLeft as DevIcon } from "../lucide-archive/ChevronsRightLeft.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChevronsRightLeft(props: IconProps) {

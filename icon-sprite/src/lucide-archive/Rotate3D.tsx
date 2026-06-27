@@ -3,7 +3,7 @@ import { type IconProps } from "../_shared.js";
 export function Rotate3d({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-rotate-3d"
+      className="lucide lucide-rotate-3-d"
   xmlns="http://www.w3.org/2000/svg"
  
  

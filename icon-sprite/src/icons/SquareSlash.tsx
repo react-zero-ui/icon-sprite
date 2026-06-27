@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareSlash as DevIcon } from "lucide-react";
+import { SquareSlash as DevIcon } from "../lucide-archive/SquareSlash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareSlash(props: IconProps) {

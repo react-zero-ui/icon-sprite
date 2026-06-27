@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Undo as DevIcon } from "lucide-react";
+import { Undo as DevIcon } from "../lucide-archive/Undo.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Undo(props: IconProps) {

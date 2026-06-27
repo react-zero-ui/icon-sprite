@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TvMinimalPlay as DevIcon } from "lucide-react";
+import { TvMinimalPlay as DevIcon } from "../lucide-archive/TvMinimalPlay.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TvMinimalPlay(props: IconProps) {

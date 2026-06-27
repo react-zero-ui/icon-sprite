@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowBigRightDash as DevIcon } from "lucide-react";
+import { ArrowBigRightDash as DevIcon } from "../lucide-archive/ArrowBigRightDash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowBigRightDash(props: IconProps) {

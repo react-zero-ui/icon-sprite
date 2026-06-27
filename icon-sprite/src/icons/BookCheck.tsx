@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookCheck as DevIcon } from "lucide-react";
+import { BookCheck as DevIcon } from "../lucide-archive/BookCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookCheck(props: IconProps) {

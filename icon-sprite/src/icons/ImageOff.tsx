@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ImageOff as DevIcon } from "lucide-react";
+import { ImageOff as DevIcon } from "../lucide-archive/ImageOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ImageOff(props: IconProps) {

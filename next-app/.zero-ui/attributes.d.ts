@@ -1,4 +1,8 @@
 /* AUTO-GENERATED - DO NOT EDIT */
 export declare const bodyAttributes: {
-  [key: string]: string;
+
+};
+
+export declare const variantKeyMap: {
+  [key: string]: true | string[] | '*';
 };

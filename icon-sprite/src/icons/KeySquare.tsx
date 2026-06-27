@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { KeySquare as DevIcon } from "lucide-react";
+import { KeySquare as DevIcon } from "../lucide-archive/KeySquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function KeySquare(props: IconProps) {

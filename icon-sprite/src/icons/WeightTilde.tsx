@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WeightTilde as DevIcon } from "lucide-react";
+import { WeightTilde as DevIcon } from "../lucide-archive/WeightTilde.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WeightTilde(props: IconProps) {

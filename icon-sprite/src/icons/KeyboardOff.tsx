@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { KeyboardOff as DevIcon } from "lucide-react";
+import { KeyboardOff as DevIcon } from "../lucide-archive/KeyboardOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function KeyboardOff(props: IconProps) {

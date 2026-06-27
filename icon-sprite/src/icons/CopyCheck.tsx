@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CopyCheck as DevIcon } from "lucide-react";
+import { CopyCheck as DevIcon } from "../lucide-archive/CopyCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CopyCheck(props: IconProps) {

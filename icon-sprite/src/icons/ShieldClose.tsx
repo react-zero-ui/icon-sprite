@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldX as DevIcon } from "lucide-react";
+import { ShieldClose as DevIcon } from "../lucide-archive/ShieldClose.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldClose(props: IconProps) {

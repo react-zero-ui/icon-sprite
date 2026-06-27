@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ribbon as DevIcon } from "lucide-react";
+import { Ribbon as DevIcon } from "../lucide-archive/Ribbon.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ribbon(props: IconProps) {

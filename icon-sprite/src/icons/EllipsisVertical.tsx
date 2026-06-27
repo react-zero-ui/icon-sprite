@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EllipsisVertical as DevIcon } from "lucide-react";
+import { EllipsisVertical as DevIcon } from "../lucide-archive/EllipsisVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EllipsisVertical(props: IconProps) {

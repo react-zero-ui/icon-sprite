@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { QrCode as DevIcon } from "lucide-react";
+import { QrCode as DevIcon } from "../lucide-archive/QrCode.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function QrCode(props: IconProps) {

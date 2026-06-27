@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderKanban as DevIcon } from "lucide-react";
+import { FolderKanban as DevIcon } from "../lucide-archive/FolderKanban.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderKanban(props: IconProps) {

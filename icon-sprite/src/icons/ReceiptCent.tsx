@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ReceiptCent as DevIcon } from "lucide-react";
+import { ReceiptCent as DevIcon } from "../lucide-archive/ReceiptCent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ReceiptCent(props: IconProps) {

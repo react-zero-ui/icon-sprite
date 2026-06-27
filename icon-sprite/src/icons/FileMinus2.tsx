@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileMinusCorner as DevIcon } from "lucide-react";
+import { FileMinus2 as DevIcon } from "../lucide-archive/FileMinus2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileMinus2(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Motorbike as DevIcon } from "lucide-react";
+import { Motorbike as DevIcon } from "../lucide-archive/Motorbike.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Motorbike(props: IconProps) {

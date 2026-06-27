@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MessageSquareShare as DevIcon } from "lucide-react";
+import { MessageSquareShare as DevIcon } from "../lucide-archive/MessageSquareShare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MessageSquareShare(props: IconProps) {

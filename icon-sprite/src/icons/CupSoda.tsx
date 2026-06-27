@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CupSoda as DevIcon } from "lucide-react";
+import { CupSoda as DevIcon } from "../lucide-archive/CupSoda.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CupSoda(props: IconProps) {

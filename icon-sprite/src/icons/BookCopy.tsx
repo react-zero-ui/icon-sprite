@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookCopy as DevIcon } from "lucide-react";
+import { BookCopy as DevIcon } from "../lucide-archive/BookCopy.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookCopy(props: IconProps) {

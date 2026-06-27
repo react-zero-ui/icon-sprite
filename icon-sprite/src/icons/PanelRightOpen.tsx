@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelRightOpen as DevIcon } from "lucide-react";
+import { PanelRightOpen as DevIcon } from "../lucide-archive/PanelRightOpen.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelRightOpen(props: IconProps) {

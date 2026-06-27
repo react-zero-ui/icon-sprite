@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Feather as DevIcon } from "lucide-react";
+import { Feather as DevIcon } from "../lucide-archive/Feather.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Feather(props: IconProps) {

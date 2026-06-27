@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BaggageClaim as DevIcon } from "lucide-react";
+import { BaggageClaim as DevIcon } from "../lucide-archive/BaggageClaim.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BaggageClaim(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TowelRack as DevIcon } from "lucide-react";
+import { TowelRack as DevIcon } from "../lucide-archive/TowelRack.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TowelRack(props: IconProps) {

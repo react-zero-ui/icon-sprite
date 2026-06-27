@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BluetoothSearching as DevIcon } from "lucide-react";
+import { BluetoothSearching as DevIcon } from "../lucide-archive/BluetoothSearching.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BluetoothSearching(props: IconProps) {

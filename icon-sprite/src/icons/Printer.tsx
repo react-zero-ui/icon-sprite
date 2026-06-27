@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Printer as DevIcon } from "lucide-react";
+import { Printer as DevIcon } from "../lucide-archive/Printer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Printer(props: IconProps) {

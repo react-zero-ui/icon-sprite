@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Trees as DevIcon } from "lucide-react";
+import { Trees as DevIcon } from "../lucide-archive/Trees.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Trees(props: IconProps) {

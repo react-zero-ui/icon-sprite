@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Hand as DevIcon } from "lucide-react";
+import { Hand as DevIcon } from "../lucide-archive/Hand.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Hand(props: IconProps) {

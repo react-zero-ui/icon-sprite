@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClockArrowRight as DevIcon } from "lucide-react";
+import { ClockArrowRight as DevIcon } from "../lucide-archive/ClockArrowRight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClockArrowRight(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquarePercent as DevIcon } from "lucide-react";
+import { SquarePercent as DevIcon } from "../lucide-archive/SquarePercent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquarePercent(props: IconProps) {

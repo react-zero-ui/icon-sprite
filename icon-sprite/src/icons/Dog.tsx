@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dog as DevIcon } from "lucide-react";
+import { Dog as DevIcon } from "../lucide-archive/Dog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dog(props: IconProps) {

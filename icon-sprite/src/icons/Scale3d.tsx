@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Scale3d as DevIcon } from "lucide-react";
+import { Scale3d as DevIcon } from "../lucide-archive/Scale3d.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Scale3d(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TouchpadOff as DevIcon } from "lucide-react";
+import { TouchpadOff as DevIcon } from "../lucide-archive/TouchpadOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TouchpadOff(props: IconProps) {

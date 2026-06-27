@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudRain as DevIcon } from "lucide-react";
+import { CloudRain as DevIcon } from "../lucide-archive/CloudRain.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudRain(props: IconProps) {

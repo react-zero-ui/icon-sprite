@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LayoutList as DevIcon } from "lucide-react";
+import { LayoutList as DevIcon } from "../lucide-archive/LayoutList.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LayoutList(props: IconProps) {

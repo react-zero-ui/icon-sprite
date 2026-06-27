@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudAlert as DevIcon } from "lucide-react";
+import { CloudAlert as DevIcon } from "../lucide-archive/CloudAlert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudAlert(props: IconProps) {

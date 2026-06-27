@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Handbag as DevIcon } from "lucide-react";
+import { Handbag as DevIcon } from "../lucide-archive/Handbag.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Handbag(props: IconProps) {

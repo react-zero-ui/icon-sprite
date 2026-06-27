@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Nfc as DevIcon } from "lucide-react";
+import { Nfc as DevIcon } from "../lucide-archive/Nfc.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Nfc(props: IconProps) {

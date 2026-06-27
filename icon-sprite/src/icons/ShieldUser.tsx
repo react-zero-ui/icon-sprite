@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldUser as DevIcon } from "lucide-react";
+import { ShieldUser as DevIcon } from "../lucide-archive/ShieldUser.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldUser(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Grape as DevIcon } from "lucide-react";
+import { Grape as DevIcon } from "../lucide-archive/Grape.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Grape(props: IconProps) {

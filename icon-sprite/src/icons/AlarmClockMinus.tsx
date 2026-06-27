@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlarmClockMinus as DevIcon } from "lucide-react";
+import { AlarmClockMinus as DevIcon } from "../lucide-archive/AlarmClockMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlarmClockMinus(props: IconProps) {

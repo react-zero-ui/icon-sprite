@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bandage as DevIcon } from "lucide-react";
+import { Bandage as DevIcon } from "../lucide-archive/Bandage.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bandage(props: IconProps) {

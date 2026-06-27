@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MoveUpLeft as DevIcon } from "lucide-react";
+import { MoveUpLeft as DevIcon } from "../lucide-archive/MoveUpLeft.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MoveUpLeft(props: IconProps) {

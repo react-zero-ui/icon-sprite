@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListIndentIncrease as DevIcon } from "lucide-react";
+import { IndentIncrease as DevIcon } from "../lucide-archive/IndentIncrease.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IndentIncrease(props: IconProps) {

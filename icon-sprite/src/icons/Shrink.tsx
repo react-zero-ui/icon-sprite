@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Shrink as DevIcon } from "lucide-react";
+import { Shrink as DevIcon } from "../lucide-archive/Shrink.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Shrink(props: IconProps) {

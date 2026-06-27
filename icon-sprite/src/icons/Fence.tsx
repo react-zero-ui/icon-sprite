@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Fence as DevIcon } from "lucide-react";
+import { Fence as DevIcon } from "../lucide-archive/Fence.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Fence(props: IconProps) {

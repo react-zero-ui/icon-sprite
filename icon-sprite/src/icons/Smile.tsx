@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Smile as DevIcon } from "lucide-react";
+import { Smile as DevIcon } from "../lucide-archive/Smile.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Smile(props: IconProps) {

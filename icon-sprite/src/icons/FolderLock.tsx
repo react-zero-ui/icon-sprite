@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderLock as DevIcon } from "lucide-react";
+import { FolderLock as DevIcon } from "../lucide-archive/FolderLock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderLock(props: IconProps) {

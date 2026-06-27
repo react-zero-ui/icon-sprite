@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PackageX as DevIcon } from "lucide-react";
+import { PackageX as DevIcon } from "../lucide-archive/PackageX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PackageX(props: IconProps) {

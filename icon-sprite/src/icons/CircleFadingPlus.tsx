@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleFadingPlus as DevIcon } from "lucide-react";
+import { CircleFadingPlus as DevIcon } from "../lucide-archive/CircleFadingPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleFadingPlus(props: IconProps) {

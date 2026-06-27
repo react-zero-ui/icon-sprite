@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ellipsis as DevIcon } from "lucide-react";
+import { MoreHorizontal as DevIcon } from "../lucide-archive/MoreHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MoreHorizontal(props: IconProps) {

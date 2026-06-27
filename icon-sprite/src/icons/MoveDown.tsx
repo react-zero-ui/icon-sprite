@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MoveDown as DevIcon } from "lucide-react";
+import { MoveDown as DevIcon } from "../lucide-archive/MoveDown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MoveDown(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareTerminal as DevIcon } from "lucide-react";
+import { SquareTerminal as DevIcon } from "../lucide-archive/SquareTerminal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareTerminal(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Panda as DevIcon } from "lucide-react";
+import { Panda as DevIcon } from "../lucide-archive/Panda.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Panda(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CirclePercent as DevIcon } from "lucide-react";
+import { PercentCircle as DevIcon } from "../lucide-archive/PercentCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PercentCircle(props: IconProps) {

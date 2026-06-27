@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rabbit as DevIcon } from "lucide-react";
+import { Rabbit as DevIcon } from "../lucide-archive/Rabbit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rabbit(props: IconProps) {

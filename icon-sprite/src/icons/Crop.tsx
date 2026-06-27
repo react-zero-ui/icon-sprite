@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Crop as DevIcon } from "lucide-react";
+import { Crop as DevIcon } from "../lucide-archive/Crop.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Crop(props: IconProps) {

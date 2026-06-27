@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Orbit as DevIcon } from "lucide-react";
+import { Orbit as DevIcon } from "../lucide-archive/Orbit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Orbit(props: IconProps) {

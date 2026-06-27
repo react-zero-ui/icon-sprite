@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Turtle as DevIcon } from "lucide-react";
+import { Turtle as DevIcon } from "../lucide-archive/Turtle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Turtle(props: IconProps) {

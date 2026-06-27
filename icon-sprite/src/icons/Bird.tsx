@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bird as DevIcon } from "lucide-react";
+import { Bird as DevIcon } from "../lucide-archive/Bird.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bird(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WalletMinimal as DevIcon } from "lucide-react";
+import { WalletMinimal as DevIcon } from "../lucide-archive/WalletMinimal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WalletMinimal(props: IconProps) {

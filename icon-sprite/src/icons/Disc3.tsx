@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Disc3 as DevIcon } from "lucide-react";
+import { Disc3 as DevIcon } from "../lucide-archive/Disc3.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Disc3(props: IconProps) {

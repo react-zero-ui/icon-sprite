@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderCheck as DevIcon } from "lucide-react";
+import { FolderCheck as DevIcon } from "../lucide-archive/FolderCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderCheck(props: IconProps) {

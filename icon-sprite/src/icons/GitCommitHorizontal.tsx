@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GitCommitHorizontal as DevIcon } from "lucide-react";
+import { GitCommitHorizontal as DevIcon } from "../lucide-archive/GitCommitHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GitCommitHorizontal(props: IconProps) {

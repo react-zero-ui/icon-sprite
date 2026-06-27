@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Power as DevIcon } from "lucide-react";
+import { Power as DevIcon } from "../lucide-archive/Power.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Power(props: IconProps) {

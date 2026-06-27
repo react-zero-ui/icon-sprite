@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Stethoscope as DevIcon } from "lucide-react";
+import { Stethoscope as DevIcon } from "../lucide-archive/Stethoscope.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Stethoscope(props: IconProps) {

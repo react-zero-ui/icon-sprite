@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UserRoundCheck as DevIcon } from "lucide-react";
+import { UserRoundCheck as DevIcon } from "../lucide-archive/UserRoundCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UserRoundCheck(props: IconProps) {

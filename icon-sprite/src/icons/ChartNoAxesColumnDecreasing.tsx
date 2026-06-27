@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartNoAxesColumnDecreasing as DevIcon } from "lucide-react";
+import { ChartNoAxesColumnDecreasing as DevIcon } from "../lucide-archive/ChartNoAxesColumnDecreasing.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartNoAxesColumnDecreasing(props: IconProps) {

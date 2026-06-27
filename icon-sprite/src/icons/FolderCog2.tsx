@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderCog as DevIcon } from "lucide-react";
+import { FolderCog2 as DevIcon } from "../lucide-archive/FolderCog2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderCog2(props: IconProps) {

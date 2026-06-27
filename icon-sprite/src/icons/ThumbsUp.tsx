@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ThumbsUp as DevIcon } from "lucide-react";
+import { ThumbsUp as DevIcon } from "../lucide-archive/ThumbsUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ThumbsUp(props: IconProps) {

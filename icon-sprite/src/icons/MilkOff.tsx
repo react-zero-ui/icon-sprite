@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MilkOff as DevIcon } from "lucide-react";
+import { MilkOff as DevIcon } from "../lucide-archive/MilkOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MilkOff(props: IconProps) {

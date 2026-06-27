@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SendHorizontal as DevIcon } from "lucide-react";
+import { SendHorizontal as DevIcon } from "../lucide-archive/SendHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SendHorizontal(props: IconProps) {

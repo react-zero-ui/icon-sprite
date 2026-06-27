@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SignalMedium as DevIcon } from "lucide-react";
+import { SignalMedium as DevIcon } from "../lucide-archive/SignalMedium.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SignalMedium(props: IconProps) {

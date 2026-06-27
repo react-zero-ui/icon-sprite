@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareArrowRightExit as DevIcon } from "lucide-react";
+import { SquareArrowRightExit as DevIcon } from "../lucide-archive/SquareArrowRightExit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareArrowRightExit(props: IconProps) {

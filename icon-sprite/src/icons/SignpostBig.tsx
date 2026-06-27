@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SignpostBig as DevIcon } from "lucide-react";
+import { SignpostBig as DevIcon } from "../lucide-archive/SignpostBig.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SignpostBig(props: IconProps) {

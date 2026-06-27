@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Network as DevIcon } from "lucide-react";
+import { Network as DevIcon } from "../lucide-archive/Network.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Network(props: IconProps) {

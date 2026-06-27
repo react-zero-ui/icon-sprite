@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Combine as DevIcon } from "lucide-react";
+import { Combine as DevIcon } from "../lucide-archive/Combine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Combine(props: IconProps) {

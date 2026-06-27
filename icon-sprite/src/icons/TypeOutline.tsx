@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TypeOutline as DevIcon } from "lucide-react";
+import { TypeOutline as DevIcon } from "../lucide-archive/TypeOutline.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TypeOutline(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Fan as DevIcon } from "lucide-react";
+import { Fan as DevIcon } from "../lucide-archive/Fan.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Fan(props: IconProps) {

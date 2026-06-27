@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareCenterlineDashedVertical as DevIcon } from "lucide-react";
+import { SquareCenterlineDashedVertical as DevIcon } from "../lucide-archive/SquareCenterlineDashedVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareCenterlineDashedVertical(props: IconProps) {

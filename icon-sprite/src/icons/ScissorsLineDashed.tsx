@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ScissorsLineDashed as DevIcon } from "lucide-react";
+import { ScissorsLineDashed as DevIcon } from "../lucide-archive/ScissorsLineDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScissorsLineDashed(props: IconProps) {

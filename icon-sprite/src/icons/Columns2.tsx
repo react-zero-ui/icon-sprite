@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Columns2 as DevIcon } from "lucide-react";
+import { Columns2 as DevIcon } from "../lucide-archive/Columns2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Columns2(props: IconProps) {

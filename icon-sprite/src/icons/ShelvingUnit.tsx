@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShelvingUnit as DevIcon } from "lucide-react";
+import { ShelvingUnit as DevIcon } from "../lucide-archive/ShelvingUnit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShelvingUnit(props: IconProps) {

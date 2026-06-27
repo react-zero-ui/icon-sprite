@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MouseRight as DevIcon } from "lucide-react";
+import { MouseRight as DevIcon } from "../lucide-archive/MouseRight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MouseRight(props: IconProps) {

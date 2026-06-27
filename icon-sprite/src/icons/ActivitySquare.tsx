@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareActivity as DevIcon } from "lucide-react";
+import { ActivitySquare as DevIcon } from "../lucide-archive/ActivitySquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ActivitySquare(props: IconProps) {

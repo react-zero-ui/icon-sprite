@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TextCursor as DevIcon } from "lucide-react";
+import { TextCursor as DevIcon } from "../lucide-archive/TextCursor.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TextCursor(props: IconProps) {

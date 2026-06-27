@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderGit2 as DevIcon } from "lucide-react";
+import { FolderGit2 as DevIcon } from "../lucide-archive/FolderGit2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderGit2(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UnfoldHorizontal as DevIcon } from "lucide-react";
+import { UnfoldHorizontal as DevIcon } from "../lucide-archive/UnfoldHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UnfoldHorizontal(props: IconProps) {

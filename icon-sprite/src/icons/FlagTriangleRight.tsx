@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FlagTriangleRight as DevIcon } from "lucide-react";
+import { FlagTriangleRight as DevIcon } from "../lucide-archive/FlagTriangleRight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FlagTriangleRight(props: IconProps) {

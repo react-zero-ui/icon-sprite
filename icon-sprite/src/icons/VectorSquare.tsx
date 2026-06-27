@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VectorSquare as DevIcon } from "lucide-react";
+import { VectorSquare as DevIcon } from "../lucide-archive/VectorSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VectorSquare(props: IconProps) {

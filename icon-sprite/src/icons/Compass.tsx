@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Compass as DevIcon } from "lucide-react";
+import { Compass as DevIcon } from "../lucide-archive/Compass.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Compass(props: IconProps) {

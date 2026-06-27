@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StarPlus as DevIcon } from "lucide-react";
+import { StarPlus as DevIcon } from "../lucide-archive/StarPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StarPlus(props: IconProps) {

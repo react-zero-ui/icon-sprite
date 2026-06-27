@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Hammer as DevIcon } from "lucide-react";
+import { Hammer as DevIcon } from "../lucide-archive/Hammer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Hammer(props: IconProps) {

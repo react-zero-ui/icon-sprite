@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListOrdered as DevIcon } from "lucide-react";
+import { ListOrdered as DevIcon } from "../lucide-archive/ListOrdered.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ListOrdered(props: IconProps) {

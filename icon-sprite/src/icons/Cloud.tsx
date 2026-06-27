@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cloud as DevIcon } from "lucide-react";
+import { Cloud as DevIcon } from "../lucide-archive/Cloud.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cloud(props: IconProps) {

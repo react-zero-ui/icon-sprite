@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MailCheck as DevIcon } from "lucide-react";
+import { MailCheck as DevIcon } from "../lucide-archive/MailCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MailCheck(props: IconProps) {

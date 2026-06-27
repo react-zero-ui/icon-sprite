@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MailQuestionMark as DevIcon } from "lucide-react";
+import { MailQuestionMark as DevIcon } from "../lucide-archive/MailQuestionMark.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MailQuestionMark(props: IconProps) {

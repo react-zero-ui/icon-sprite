@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Helicopter as DevIcon } from "lucide-react";
+import { Helicopter as DevIcon } from "../lucide-archive/Helicopter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Helicopter(props: IconProps) {

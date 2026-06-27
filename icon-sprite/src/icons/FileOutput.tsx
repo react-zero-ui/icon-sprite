@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileOutput as DevIcon } from "lucide-react";
+import { FileOutput as DevIcon } from "../lucide-archive/FileOutput.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileOutput(props: IconProps) {

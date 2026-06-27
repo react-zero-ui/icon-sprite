@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CodeXml as DevIcon } from "lucide-react";
+import { Code2 as DevIcon } from "../lucide-archive/Code2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Code2(props: IconProps) {

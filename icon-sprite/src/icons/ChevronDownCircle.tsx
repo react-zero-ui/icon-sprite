@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleChevronDown as DevIcon } from "lucide-react";
+import { ChevronDownCircle as DevIcon } from "../lucide-archive/ChevronDownCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChevronDownCircle(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StepBack as DevIcon } from "lucide-react";
+import { StepBack as DevIcon } from "../lucide-archive/StepBack.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StepBack(props: IconProps) {

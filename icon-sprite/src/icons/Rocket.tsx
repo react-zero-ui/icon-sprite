@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rocket as DevIcon } from "lucide-react";
+import { Rocket as DevIcon } from "../lucide-archive/Rocket.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rocket(props: IconProps) {

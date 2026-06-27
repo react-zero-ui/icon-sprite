@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StarX as DevIcon } from "lucide-react";
+import { StarX as DevIcon } from "../lucide-archive/StarX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StarX(props: IconProps) {

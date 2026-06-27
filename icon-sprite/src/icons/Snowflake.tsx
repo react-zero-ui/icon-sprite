@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Snowflake as DevIcon } from "lucide-react";
+import { Snowflake as DevIcon } from "../lucide-archive/Snowflake.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Snowflake(props: IconProps) {

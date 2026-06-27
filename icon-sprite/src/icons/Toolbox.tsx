@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Toolbox as DevIcon } from "lucide-react";
+import { Toolbox as DevIcon } from "../lucide-archive/Toolbox.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Toolbox(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileVolume as DevIcon } from "lucide-react";
+import { FileVolume as DevIcon } from "../lucide-archive/FileVolume.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileVolume(props: IconProps) {

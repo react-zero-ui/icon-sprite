@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Anchor as DevIcon } from "lucide-react";
+import { Anchor as DevIcon } from "../lucide-archive/Anchor.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Anchor(props: IconProps) {

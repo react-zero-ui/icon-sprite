@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StretchHorizontal as DevIcon } from "lucide-react";
+import { StretchHorizontal as DevIcon } from "../lucide-archive/StretchHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StretchHorizontal(props: IconProps) {

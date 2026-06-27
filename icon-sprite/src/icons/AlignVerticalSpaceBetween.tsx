@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignVerticalSpaceBetween as DevIcon } from "lucide-react";
+import { AlignVerticalSpaceBetween as DevIcon } from "../lucide-archive/AlignVerticalSpaceBetween.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignVerticalSpaceBetween(props: IconProps) {

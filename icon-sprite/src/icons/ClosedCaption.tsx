@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClosedCaption as DevIcon } from "lucide-react";
+import { ClosedCaption as DevIcon } from "../lucide-archive/ClosedCaption.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClosedCaption(props: IconProps) {

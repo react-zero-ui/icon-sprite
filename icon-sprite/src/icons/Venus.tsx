@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Venus as DevIcon } from "lucide-react";
+import { Venus as DevIcon } from "../lucide-archive/Venus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Venus(props: IconProps) {

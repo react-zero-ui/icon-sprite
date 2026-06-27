@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartColumn as DevIcon } from "lucide-react";
+import { ChartColumn as DevIcon } from "../lucide-archive/ChartColumn.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartColumn(props: IconProps) {

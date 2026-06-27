@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bomb as DevIcon } from "lucide-react";
+import { Bomb as DevIcon } from "../lucide-archive/Bomb.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bomb(props: IconProps) {

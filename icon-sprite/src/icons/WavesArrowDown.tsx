@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WavesArrowDown as DevIcon } from "lucide-react";
+import { WavesArrowDown as DevIcon } from "../lucide-archive/WavesArrowDown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WavesArrowDown(props: IconProps) {

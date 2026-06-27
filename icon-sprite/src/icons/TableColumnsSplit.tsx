@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TableColumnsSplit as DevIcon } from "lucide-react";
+import { TableColumnsSplit as DevIcon } from "../lucide-archive/TableColumnsSplit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TableColumnsSplit(props: IconProps) {

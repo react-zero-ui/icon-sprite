@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Mars as DevIcon } from "lucide-react";
+import { Mars as DevIcon } from "../lucide-archive/Mars.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Mars(props: IconProps) {

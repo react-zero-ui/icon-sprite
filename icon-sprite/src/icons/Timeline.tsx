@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Timeline as DevIcon } from "lucide-react";
+import { Timeline as DevIcon } from "../lucide-archive/Timeline.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Timeline(props: IconProps) {

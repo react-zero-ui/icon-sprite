@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Calculator as DevIcon } from "lucide-react";
+import { Calculator as DevIcon } from "../lucide-archive/Calculator.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Calculator(props: IconProps) {

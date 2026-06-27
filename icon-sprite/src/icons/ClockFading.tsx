@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClockFading as DevIcon } from "lucide-react";
+import { ClockFading as DevIcon } from "../lucide-archive/ClockFading.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClockFading(props: IconProps) {

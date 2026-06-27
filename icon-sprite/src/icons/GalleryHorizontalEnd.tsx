@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GalleryHorizontalEnd as DevIcon } from "lucide-react";
+import { GalleryHorizontalEnd as DevIcon } from "../lucide-archive/GalleryHorizontalEnd.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GalleryHorizontalEnd(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CardSim as DevIcon } from "lucide-react";
+import { CardSim as DevIcon } from "../lucide-archive/CardSim.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CardSim(props: IconProps) {

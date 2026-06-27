@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileSignal as DevIcon } from "lucide-react";
+import { FileSignal as DevIcon } from "../lucide-archive/FileSignal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileSignal(props: IconProps) {

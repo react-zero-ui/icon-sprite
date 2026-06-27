@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ToggleLeft as DevIcon } from "lucide-react";
+import { ToggleLeft as DevIcon } from "../lucide-archive/ToggleLeft.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ToggleLeft(props: IconProps) {

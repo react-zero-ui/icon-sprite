@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowDownAZ as DevIcon } from "lucide-react";
+import { ArrowDownAZ as DevIcon } from "../lucide-archive/ArrowDownAZ.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowDownAZ(props: IconProps) {

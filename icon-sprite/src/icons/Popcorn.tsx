@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Popcorn as DevIcon } from "lucide-react";
+import { Popcorn as DevIcon } from "../lucide-archive/Popcorn.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Popcorn(props: IconProps) {

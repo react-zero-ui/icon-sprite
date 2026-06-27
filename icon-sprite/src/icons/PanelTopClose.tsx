@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelTopClose as DevIcon } from "lucide-react";
+import { PanelTopClose as DevIcon } from "../lucide-archive/PanelTopClose.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelTopClose(props: IconProps) {

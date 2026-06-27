@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ScreenShareOff as DevIcon } from "lucide-react";
+import { ScreenShareOff as DevIcon } from "../lucide-archive/ScreenShareOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScreenShareOff(props: IconProps) {

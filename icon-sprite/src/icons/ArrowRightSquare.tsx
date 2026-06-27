@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareArrowRight as DevIcon } from "lucide-react";
+import { ArrowRightSquare as DevIcon } from "../lucide-archive/ArrowRightSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowRightSquare(props: IconProps) {

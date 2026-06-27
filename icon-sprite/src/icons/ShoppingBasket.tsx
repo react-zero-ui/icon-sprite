@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShoppingBasket as DevIcon } from "lucide-react";
+import { ShoppingBasket as DevIcon } from "../lucide-archive/ShoppingBasket.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShoppingBasket(props: IconProps) {

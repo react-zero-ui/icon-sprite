@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LogOut as DevIcon } from "lucide-react";
+import { LogOut as DevIcon } from "../lucide-archive/LogOut.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LogOut(props: IconProps) {

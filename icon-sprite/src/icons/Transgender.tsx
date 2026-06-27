@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Transgender as DevIcon } from "lucide-react";
+import { Transgender as DevIcon } from "../lucide-archive/Transgender.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Transgender(props: IconProps) {

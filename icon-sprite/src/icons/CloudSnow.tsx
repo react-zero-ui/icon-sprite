@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudSnow as DevIcon } from "lucide-react";
+import { CloudSnow as DevIcon } from "../lucide-archive/CloudSnow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudSnow(props: IconProps) {

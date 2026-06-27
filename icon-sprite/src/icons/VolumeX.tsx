@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VolumeX as DevIcon } from "lucide-react";
+import { VolumeX as DevIcon } from "../lucide-archive/VolumeX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VolumeX(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PlugZap as DevIcon } from "lucide-react";
+import { PlugZap as DevIcon } from "../lucide-archive/PlugZap.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PlugZap(props: IconProps) {

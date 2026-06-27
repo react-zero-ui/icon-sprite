@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BookAlert as DevIcon } from "lucide-react";
+import { BookAlert as DevIcon } from "../lucide-archive/BookAlert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BookAlert(props: IconProps) {

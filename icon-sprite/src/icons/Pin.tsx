@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pin as DevIcon } from "lucide-react";
+import { Pin as DevIcon } from "../lucide-archive/Pin.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pin(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TableProperties as DevIcon } from "lucide-react";
+import { TableProperties as DevIcon } from "../lucide-archive/TableProperties.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TableProperties(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TestTubeDiagonal as DevIcon } from "lucide-react";
+import { TestTube2 as DevIcon } from "../lucide-archive/TestTube2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TestTube2(props: IconProps) {

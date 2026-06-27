@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BanknoteCheck as DevIcon } from "lucide-react";
+import { BanknoteCheck as DevIcon } from "../lucide-archive/BanknoteCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BanknoteCheck(props: IconProps) {

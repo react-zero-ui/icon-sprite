@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartNetwork as DevIcon } from "lucide-react";
+import { ChartNetwork as DevIcon } from "../lucide-archive/ChartNetwork.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartNetwork(props: IconProps) {

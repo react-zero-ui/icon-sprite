@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Brackets as DevIcon } from "lucide-react";
+import { Brackets as DevIcon } from "../lucide-archive/Brackets.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Brackets(props: IconProps) {

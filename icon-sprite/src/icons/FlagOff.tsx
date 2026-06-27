@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FlagOff as DevIcon } from "lucide-react";
+import { FlagOff as DevIcon } from "../lucide-archive/FlagOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FlagOff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareM as DevIcon } from "lucide-react";
+import { MSquare as DevIcon } from "../lucide-archive/MSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MSquare(props: IconProps) {

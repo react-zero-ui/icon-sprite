@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DraftingCompass as DevIcon } from "lucide-react";
+import { DraftingCompass as DevIcon } from "../lucide-archive/DraftingCompass.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DraftingCompass(props: IconProps) {

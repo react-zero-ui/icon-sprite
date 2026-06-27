@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CirclePause as DevIcon } from "lucide-react";
+import { CirclePause as DevIcon } from "../lucide-archive/CirclePause.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CirclePause(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldCog as DevIcon } from "lucide-react";
+import { ShieldCog as DevIcon } from "../lucide-archive/ShieldCog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldCog(props: IconProps) {

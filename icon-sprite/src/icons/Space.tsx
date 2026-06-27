@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Space as DevIcon } from "lucide-react";
+import { Space as DevIcon } from "../lucide-archive/Space.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Space(props: IconProps) {

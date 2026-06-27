@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareMenu as DevIcon } from "lucide-react";
+import { SquareMenu as DevIcon } from "../lucide-archive/SquareMenu.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareMenu(props: IconProps) {

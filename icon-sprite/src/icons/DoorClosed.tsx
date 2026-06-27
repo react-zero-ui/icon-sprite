@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DoorClosed as DevIcon } from "lucide-react";
+import { DoorClosed as DevIcon } from "../lucide-archive/DoorClosed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DoorClosed(props: IconProps) {

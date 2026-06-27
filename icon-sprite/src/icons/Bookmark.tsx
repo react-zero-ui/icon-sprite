@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bookmark as DevIcon } from "lucide-react";
+import { Bookmark as DevIcon } from "../lucide-archive/Bookmark.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bookmark(props: IconProps) {

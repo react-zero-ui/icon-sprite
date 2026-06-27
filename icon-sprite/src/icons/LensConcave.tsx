@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LensConcave as DevIcon } from "lucide-react";
+import { LensConcave as DevIcon } from "../lucide-archive/LensConcave.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LensConcave(props: IconProps) {

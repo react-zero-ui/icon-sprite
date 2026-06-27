@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Parentheses as DevIcon } from "lucide-react";
+import { Parentheses as DevIcon } from "../lucide-archive/Parentheses.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Parentheses(props: IconProps) {

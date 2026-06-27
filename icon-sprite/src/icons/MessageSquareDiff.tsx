@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MessageSquareDiff as DevIcon } from "lucide-react";
+import { MessageSquareDiff as DevIcon } from "../lucide-archive/MessageSquareDiff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MessageSquareDiff(props: IconProps) {

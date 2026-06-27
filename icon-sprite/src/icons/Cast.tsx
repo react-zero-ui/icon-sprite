@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cast as DevIcon } from "lucide-react";
+import { Cast as DevIcon } from "../lucide-archive/Cast.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cast(props: IconProps) {

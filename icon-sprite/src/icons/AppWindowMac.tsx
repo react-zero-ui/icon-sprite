@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AppWindowMac as DevIcon } from "lucide-react";
+import { AppWindowMac as DevIcon } from "../lucide-archive/AppWindowMac.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AppWindowMac(props: IconProps) {

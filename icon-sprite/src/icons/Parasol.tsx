@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Parasol as DevIcon } from "lucide-react";
+import { Parasol as DevIcon } from "../lucide-archive/Parasol.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Parasol(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareDashedBottomCode as DevIcon } from "lucide-react";
+import { SquareDashedBottomCode as DevIcon } from "../lucide-archive/SquareDashedBottomCode.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareDashedBottomCode(props: IconProps) {

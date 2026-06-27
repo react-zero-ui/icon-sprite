@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Trash as DevIcon } from "lucide-react";
+import { Trash as DevIcon } from "../lucide-archive/Trash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Trash(props: IconProps) {

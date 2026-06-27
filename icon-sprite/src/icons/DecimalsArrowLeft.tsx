@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DecimalsArrowLeft as DevIcon } from "lucide-react";
+import { DecimalsArrowLeft as DevIcon } from "../lucide-archive/DecimalsArrowLeft.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DecimalsArrowLeft(props: IconProps) {

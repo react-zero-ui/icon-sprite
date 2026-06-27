@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VenetianMask as DevIcon } from "lucide-react";
+import { VenetianMask as DevIcon } from "../lucide-archive/VenetianMask.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VenetianMask(props: IconProps) {

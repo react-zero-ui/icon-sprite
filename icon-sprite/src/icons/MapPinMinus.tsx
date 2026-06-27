@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MapPinMinus as DevIcon } from "lucide-react";
+import { MapPinMinus as DevIcon } from "../lucide-archive/MapPinMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MapPinMinus(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LeafyGreen as DevIcon } from "lucide-react";
+import { LeafyGreen as DevIcon } from "../lucide-archive/LeafyGreen.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LeafyGreen(props: IconProps) {

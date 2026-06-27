@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareBottomDashedScissors as DevIcon } from "lucide-react";
+import { ScissorsSquareDashedBottom as DevIcon } from "../lucide-archive/ScissorsSquareDashedBottom.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScissorsSquareDashedBottom(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HopOff as DevIcon } from "lucide-react";
+import { HopOff as DevIcon } from "../lucide-archive/HopOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HopOff(props: IconProps) {

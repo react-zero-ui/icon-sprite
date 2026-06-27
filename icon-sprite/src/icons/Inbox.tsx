@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Inbox as DevIcon } from "lucide-react";
+import { Inbox as DevIcon } from "../lucide-archive/Inbox.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Inbox(props: IconProps) {

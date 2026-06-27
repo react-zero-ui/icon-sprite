@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileCog as DevIcon } from "lucide-react";
+import { FileCog2 as DevIcon } from "../lucide-archive/FileCog2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileCog2(props: IconProps) {

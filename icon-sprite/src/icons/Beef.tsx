@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Beef as DevIcon } from "lucide-react";
+import { Beef as DevIcon } from "../lucide-archive/Beef.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Beef(props: IconProps) {

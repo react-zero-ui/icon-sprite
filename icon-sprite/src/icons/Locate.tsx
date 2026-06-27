@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Locate as DevIcon } from "lucide-react";
+import { Locate as DevIcon } from "../lucide-archive/Locate.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Locate(props: IconProps) {

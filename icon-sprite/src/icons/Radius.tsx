@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Radius as DevIcon } from "lucide-react";
+import { Radius as DevIcon } from "../lucide-archive/Radius.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Radius(props: IconProps) {

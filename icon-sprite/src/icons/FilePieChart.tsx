@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileChartPie as DevIcon } from "lucide-react";
+import { FilePieChart as DevIcon } from "../lucide-archive/FilePieChart.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FilePieChart(props: IconProps) {

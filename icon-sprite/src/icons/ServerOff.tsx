@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ServerOff as DevIcon } from "lucide-react";
+import { ServerOff as DevIcon } from "../lucide-archive/ServerOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ServerOff(props: IconProps) {

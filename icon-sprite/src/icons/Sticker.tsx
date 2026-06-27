@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sticker as DevIcon } from "lucide-react";
+import { Sticker as DevIcon } from "../lucide-archive/Sticker.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sticker(props: IconProps) {

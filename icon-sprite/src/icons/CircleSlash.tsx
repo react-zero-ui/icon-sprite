@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleSlash as DevIcon } from "lucide-react";
+import { CircleSlash as DevIcon } from "../lucide-archive/CircleSlash.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleSlash(props: IconProps) {

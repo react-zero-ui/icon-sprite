@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZodiacLeo as DevIcon } from "lucide-react";
+import { ZodiacLeo as DevIcon } from "../lucide-archive/ZodiacLeo.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZodiacLeo(props: IconProps) {

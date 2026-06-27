@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Eraser as DevIcon } from "lucide-react";
+import { Eraser as DevIcon } from "../lucide-archive/Eraser.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Eraser(props: IconProps) {

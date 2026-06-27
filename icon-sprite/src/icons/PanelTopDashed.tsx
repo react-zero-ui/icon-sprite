@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelTopDashed as DevIcon } from "lucide-react";
+import { PanelTopDashed as DevIcon } from "../lucide-archive/PanelTopDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelTopDashed(props: IconProps) {

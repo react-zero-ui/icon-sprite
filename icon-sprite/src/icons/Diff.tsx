@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Diff as DevIcon } from "lucide-react";
+import { Diff as DevIcon } from "../lucide-archive/Diff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Diff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Wallpaper as DevIcon } from "lucide-react";
+import { Wallpaper as DevIcon } from "../lucide-archive/Wallpaper.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Wallpaper(props: IconProps) {

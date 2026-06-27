@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquaresExclude as DevIcon } from "lucide-react";
+import { SquaresExclude as DevIcon } from "../lucide-archive/SquaresExclude.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquaresExclude(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TreePalm as DevIcon } from "lucide-react";
+import { TreePalm as DevIcon } from "../lucide-archive/TreePalm.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TreePalm(props: IconProps) {

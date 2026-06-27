@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Van as DevIcon } from "lucide-react";
+import { Van as DevIcon } from "../lucide-archive/Van.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Van(props: IconProps) {

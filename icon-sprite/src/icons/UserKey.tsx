@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UserKey as DevIcon } from "lucide-react";
+import { UserKey as DevIcon } from "../lucide-archive/UserKey.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UserKey(props: IconProps) {

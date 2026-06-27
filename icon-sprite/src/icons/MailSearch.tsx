@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MailSearch as DevIcon } from "lucide-react";
+import { MailSearch as DevIcon } from "../lucide-archive/MailSearch.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MailSearch(props: IconProps) {

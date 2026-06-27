@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RefreshCw as DevIcon } from "lucide-react";
+import { RefreshCw as DevIcon } from "../lucide-archive/RefreshCw.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RefreshCw(props: IconProps) {

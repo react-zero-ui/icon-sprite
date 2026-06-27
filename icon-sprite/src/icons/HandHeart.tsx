@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HandHeart as DevIcon } from "lucide-react";
+import { HandHeart as DevIcon } from "../lucide-archive/HandHeart.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HandHeart(props: IconProps) {

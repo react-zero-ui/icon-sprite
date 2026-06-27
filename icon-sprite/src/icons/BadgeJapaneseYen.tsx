@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeJapaneseYen as DevIcon } from "lucide-react";
+import { BadgeJapaneseYen as DevIcon } from "../lucide-archive/BadgeJapaneseYen.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgeJapaneseYen(props: IconProps) {

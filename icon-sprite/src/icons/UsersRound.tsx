@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UsersRound as DevIcon } from "lucide-react";
+import { UsersRound as DevIcon } from "../lucide-archive/UsersRound.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UsersRound(props: IconProps) {

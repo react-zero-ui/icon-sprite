@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HardDrive as DevIcon } from "lucide-react";
+import { HardDrive as DevIcon } from "../lucide-archive/HardDrive.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HardDrive(props: IconProps) {

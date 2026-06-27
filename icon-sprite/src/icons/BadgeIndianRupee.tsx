@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeIndianRupee as DevIcon } from "lucide-react";
+import { BadgeIndianRupee as DevIcon } from "../lucide-archive/BadgeIndianRupee.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgeIndianRupee(props: IconProps) {

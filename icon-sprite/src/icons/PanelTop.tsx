@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelTop as DevIcon } from "lucide-react";
+import { PanelTop as DevIcon } from "../lucide-archive/PanelTop.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelTop(props: IconProps) {

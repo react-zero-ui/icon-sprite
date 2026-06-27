@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CandyOff as DevIcon } from "lucide-react";
+import { CandyOff as DevIcon } from "../lucide-archive/CandyOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CandyOff(props: IconProps) {

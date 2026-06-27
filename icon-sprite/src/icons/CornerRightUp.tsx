@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CornerRightUp as DevIcon } from "lucide-react";
+import { CornerRightUp as DevIcon } from "../lucide-archive/CornerRightUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CornerRightUp(props: IconProps) {

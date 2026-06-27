@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TextAlignEnd as DevIcon } from "lucide-react";
+import { AlignRight as DevIcon } from "../lucide-archive/AlignRight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignRight(props: IconProps) {

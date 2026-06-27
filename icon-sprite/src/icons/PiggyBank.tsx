@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PiggyBank as DevIcon } from "lucide-react";
+import { PiggyBank as DevIcon } from "../lucide-archive/PiggyBank.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PiggyBank(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SpellCheck2 as DevIcon } from "lucide-react";
+import { SpellCheck2 as DevIcon } from "../lucide-archive/SpellCheck2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SpellCheck2(props: IconProps) {

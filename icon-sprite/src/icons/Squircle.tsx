@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Squircle as DevIcon } from "lucide-react";
+import { Squircle as DevIcon } from "../lucide-archive/Squircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Squircle(props: IconProps) {

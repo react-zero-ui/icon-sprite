@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Dot as DevIcon } from "lucide-react";
+import { Dot as DevIcon } from "../lucide-archive/Dot.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Dot(props: IconProps) {

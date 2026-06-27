@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FastForward as DevIcon } from "lucide-react";
+import { FastForward as DevIcon } from "../lucide-archive/FastForward.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FastForward(props: IconProps) {

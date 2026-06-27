@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Gpu as DevIcon } from "lucide-react";
+import { Gpu as DevIcon } from "../lucide-archive/Gpu.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Gpu(props: IconProps) {

@@ -1,9 +1,9 @@
 import { type IconProps } from "../_shared.js";
 
-export function ArrowUpZa({ size, width, height, ...rest }: IconProps) {
+export function ArrowUpZA({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-arrow-up-za"
+      className="lucide lucide-arrow-up-z-a"
   xmlns="http://www.w3.org/2000/svg"
  
  

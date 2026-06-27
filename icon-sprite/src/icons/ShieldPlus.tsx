@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldPlus as DevIcon } from "lucide-react";
+import { ShieldPlus as DevIcon } from "../lucide-archive/ShieldPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldPlus(props: IconProps) {

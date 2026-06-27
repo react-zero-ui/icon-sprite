@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClipboardList as DevIcon } from "lucide-react";
+import { ClipboardList as DevIcon } from "../lucide-archive/ClipboardList.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClipboardList(props: IconProps) {

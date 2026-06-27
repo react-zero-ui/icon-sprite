@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Mailbox as DevIcon } from "lucide-react";
+import { Mailbox as DevIcon } from "../lucide-archive/Mailbox.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Mailbox(props: IconProps) {

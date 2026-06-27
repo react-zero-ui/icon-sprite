@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderMinus as DevIcon } from "lucide-react";
+import { FolderMinus as DevIcon } from "../lucide-archive/FolderMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderMinus(props: IconProps) {

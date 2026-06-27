@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareDashedKanban as DevIcon } from "lucide-react";
+import { KanbanSquareDashed as DevIcon } from "../lucide-archive/KanbanSquareDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function KanbanSquareDashed(props: IconProps) {

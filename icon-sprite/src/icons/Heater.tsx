@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Heater as DevIcon } from "lucide-react";
+import { Heater as DevIcon } from "../lucide-archive/Heater.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Heater(props: IconProps) {

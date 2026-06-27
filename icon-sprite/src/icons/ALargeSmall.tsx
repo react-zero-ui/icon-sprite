@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ALargeSmall as DevIcon } from "lucide-react";
+import { ALargeSmall as DevIcon } from "../lucide-archive/ALargeSmall.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ALargeSmall(props: IconProps) {

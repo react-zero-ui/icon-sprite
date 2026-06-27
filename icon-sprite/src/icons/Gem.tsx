@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Gem as DevIcon } from "lucide-react";
+import { Gem as DevIcon } from "../lucide-archive/Gem.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Gem(props: IconProps) {

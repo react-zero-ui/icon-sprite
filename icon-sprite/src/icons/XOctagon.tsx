@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { OctagonX as DevIcon } from "lucide-react";
+import { XOctagon as DevIcon } from "../lucide-archive/XOctagon.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function XOctagon(props: IconProps) {

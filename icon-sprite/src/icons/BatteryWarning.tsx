@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BatteryWarning as DevIcon } from "lucide-react";
+import { BatteryWarning as DevIcon } from "../lucide-archive/BatteryWarning.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BatteryWarning(props: IconProps) {

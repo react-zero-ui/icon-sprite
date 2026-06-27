@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Nut as DevIcon } from "lucide-react";
+import { Nut as DevIcon } from "../lucide-archive/Nut.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Nut(props: IconProps) {

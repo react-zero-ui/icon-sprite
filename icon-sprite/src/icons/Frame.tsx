@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Frame as DevIcon } from "lucide-react";
+import { Frame as DevIcon } from "../lucide-archive/Frame.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Frame(props: IconProps) {

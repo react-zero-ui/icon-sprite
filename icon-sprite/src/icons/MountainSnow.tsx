@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MountainSnow as DevIcon } from "lucide-react";
+import { MountainSnow as DevIcon } from "../lucide-archive/MountainSnow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MountainSnow(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Hd as DevIcon } from "lucide-react";
+import { Hd as DevIcon } from "../lucide-archive/Hd.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Hd(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rat as DevIcon } from "lucide-react";
+import { Rat as DevIcon } from "../lucide-archive/Rat.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rat(props: IconProps) {

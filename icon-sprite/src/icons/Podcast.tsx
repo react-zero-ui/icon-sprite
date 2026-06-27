@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Podcast as DevIcon } from "lucide-react";
+import { Podcast as DevIcon } from "../lucide-archive/Podcast.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Podcast(props: IconProps) {

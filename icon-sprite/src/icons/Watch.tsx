@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Watch as DevIcon } from "lucide-react";
+import { Watch as DevIcon } from "../lucide-archive/Watch.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Watch(props: IconProps) {

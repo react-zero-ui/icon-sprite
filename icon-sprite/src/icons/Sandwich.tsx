@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sandwich as DevIcon } from "lucide-react";
+import { Sandwich as DevIcon } from "../lucide-archive/Sandwich.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sandwich(props: IconProps) {

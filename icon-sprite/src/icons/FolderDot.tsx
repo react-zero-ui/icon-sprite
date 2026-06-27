@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderDot as DevIcon } from "lucide-react";
+import { FolderDot as DevIcon } from "../lucide-archive/FolderDot.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderDot(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Boxes as DevIcon } from "lucide-react";
+import { Boxes as DevIcon } from "../lucide-archive/Boxes.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Boxes(props: IconProps) {

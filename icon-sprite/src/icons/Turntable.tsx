@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Turntable as DevIcon } from "lucide-react";
+import { Turntable as DevIcon } from "../lucide-archive/Turntable.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Turntable(props: IconProps) {

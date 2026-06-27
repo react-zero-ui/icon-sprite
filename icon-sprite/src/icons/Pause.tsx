@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pause as DevIcon } from "lucide-react";
+import { Pause as DevIcon } from "../lucide-archive/Pause.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pause(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DatabaseSearch as DevIcon } from "lucide-react";
+import { DatabaseSearch as DevIcon } from "../lucide-archive/DatabaseSearch.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DatabaseSearch(props: IconProps) {

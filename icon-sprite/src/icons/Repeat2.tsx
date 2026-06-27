@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Repeat2 as DevIcon } from "lucide-react";
+import { Repeat2 as DevIcon } from "../lucide-archive/Repeat2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Repeat2(props: IconProps) {

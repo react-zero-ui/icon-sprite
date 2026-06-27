@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Piano as DevIcon } from "lucide-react";
+import { Piano as DevIcon } from "../lucide-archive/Piano.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Piano(props: IconProps) {

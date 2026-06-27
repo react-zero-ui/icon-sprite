@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ReplyAll as DevIcon } from "lucide-react";
+import { ReplyAll as DevIcon } from "../lucide-archive/ReplyAll.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ReplyAll(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquarePower as DevIcon } from "lucide-react";
+import { PowerSquare as DevIcon } from "../lucide-archive/PowerSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PowerSquare(props: IconProps) {

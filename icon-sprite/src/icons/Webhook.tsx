@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Webhook as DevIcon } from "lucide-react";
+import { Webhook as DevIcon } from "../lucide-archive/Webhook.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Webhook(props: IconProps) {

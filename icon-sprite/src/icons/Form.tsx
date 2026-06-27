@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Form as DevIcon } from "lucide-react";
+import { Form as DevIcon } from "../lucide-archive/Form.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Form(props: IconProps) {

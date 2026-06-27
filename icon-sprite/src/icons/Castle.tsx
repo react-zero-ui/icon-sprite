@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Castle as DevIcon } from "lucide-react";
+import { Castle as DevIcon } from "../lucide-archive/Castle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Castle(props: IconProps) {

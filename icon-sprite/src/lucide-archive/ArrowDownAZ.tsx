@@ -1,9 +1,9 @@
 import { type IconProps } from "../_shared.js";
 
-export function ArrowDownAz({ size, width, height, ...rest }: IconProps) {
+export function ArrowDownAZ({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
-      className="lucide lucide-arrow-down-az"
+      className="lucide lucide-arrow-down-a-z"
   xmlns="http://www.w3.org/2000/svg"
  
  

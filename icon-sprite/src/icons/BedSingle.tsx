@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BedSingle as DevIcon } from "lucide-react";
+import { BedSingle as DevIcon } from "../lucide-archive/BedSingle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BedSingle(props: IconProps) {

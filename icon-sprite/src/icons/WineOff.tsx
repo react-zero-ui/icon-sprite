@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WineOff as DevIcon } from "lucide-react";
+import { WineOff as DevIcon } from "../lucide-archive/WineOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WineOff(props: IconProps) {

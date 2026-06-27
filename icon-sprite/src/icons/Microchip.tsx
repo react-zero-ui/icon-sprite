@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Microchip as DevIcon } from "lucide-react";
+import { Microchip as DevIcon } from "../lucide-archive/Microchip.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Microchip(props: IconProps) {

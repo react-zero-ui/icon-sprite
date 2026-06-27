@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CornerDownLeft as DevIcon } from "lucide-react";
+import { CornerDownLeft as DevIcon } from "../lucide-archive/CornerDownLeft.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CornerDownLeft(props: IconProps) {

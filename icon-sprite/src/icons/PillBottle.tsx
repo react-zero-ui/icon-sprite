@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PillBottle as DevIcon } from "lucide-react";
+import { PillBottle as DevIcon } from "../lucide-archive/PillBottle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PillBottle(props: IconProps) {

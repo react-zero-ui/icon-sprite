@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TreePine as DevIcon } from "lucide-react";
+import { TreePine as DevIcon } from "../lucide-archive/TreePine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TreePine(props: IconProps) {

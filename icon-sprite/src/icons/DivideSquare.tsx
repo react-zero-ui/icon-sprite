@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareDivide as DevIcon } from "lucide-react";
+import { DivideSquare as DevIcon } from "../lucide-archive/DivideSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DivideSquare(props: IconProps) {

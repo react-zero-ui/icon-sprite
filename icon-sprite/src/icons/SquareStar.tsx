@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareStar as DevIcon } from "lucide-react";
+import { SquareStar as DevIcon } from "../lucide-archive/SquareStar.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareStar(props: IconProps) {

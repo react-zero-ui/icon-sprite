@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ImagePlay as DevIcon } from "lucide-react";
+import { ImagePlay as DevIcon } from "../lucide-archive/ImagePlay.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ImagePlay(props: IconProps) {

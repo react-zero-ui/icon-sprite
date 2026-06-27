@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StarHalf as DevIcon } from "lucide-react";
+import { StarHalf as DevIcon } from "../lucide-archive/StarHalf.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StarHalf(props: IconProps) {

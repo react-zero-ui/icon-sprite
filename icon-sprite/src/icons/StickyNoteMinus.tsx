@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { StickyNoteMinus as DevIcon } from "lucide-react";
+import { StickyNoteMinus as DevIcon } from "../lucide-archive/StickyNoteMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function StickyNoteMinus(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileClock as DevIcon } from "lucide-react";
+import { FileClock as DevIcon } from "../lucide-archive/FileClock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileClock(props: IconProps) {

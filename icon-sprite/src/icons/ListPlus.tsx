@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListPlus as DevIcon } from "lucide-react";
+import { ListPlus as DevIcon } from "../lucide-archive/ListPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ListPlus(props: IconProps) {

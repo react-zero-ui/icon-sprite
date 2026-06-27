@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Atom as DevIcon } from "lucide-react";
+import { Atom as DevIcon } from "../lucide-archive/Atom.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Atom(props: IconProps) {

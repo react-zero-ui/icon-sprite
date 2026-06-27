@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderKey as DevIcon } from "lucide-react";
+import { FolderKey as DevIcon } from "../lucide-archive/FolderKey.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderKey(props: IconProps) {

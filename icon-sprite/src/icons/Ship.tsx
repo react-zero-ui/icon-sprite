@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ship as DevIcon } from "lucide-react";
+import { Ship as DevIcon } from "../lucide-archive/Ship.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ship(props: IconProps) {

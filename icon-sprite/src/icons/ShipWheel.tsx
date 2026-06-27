@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShipWheel as DevIcon } from "lucide-react";
+import { ShipWheel as DevIcon } from "../lucide-archive/ShipWheel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShipWheel(props: IconProps) {

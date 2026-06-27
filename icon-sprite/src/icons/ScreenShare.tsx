@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ScreenShare as DevIcon } from "lucide-react";
+import { ScreenShare as DevIcon } from "../lucide-archive/ScreenShare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScreenShare(props: IconProps) {

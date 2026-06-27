@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { IterationCw as DevIcon } from "lucide-react";
+import { IterationCw as DevIcon } from "../lucide-archive/IterationCw.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IterationCw(props: IconProps) {

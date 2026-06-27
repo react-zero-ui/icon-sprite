@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Underline as DevIcon } from "lucide-react";
+import { Underline as DevIcon } from "../lucide-archive/Underline.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Underline(props: IconProps) {

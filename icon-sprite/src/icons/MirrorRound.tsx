@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MirrorRound as DevIcon } from "lucide-react";
+import { MirrorRound as DevIcon } from "../lucide-archive/MirrorRound.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MirrorRound(props: IconProps) {

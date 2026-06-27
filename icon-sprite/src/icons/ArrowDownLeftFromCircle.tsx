@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleArrowOutDownLeft as DevIcon } from "lucide-react";
+import { ArrowDownLeftFromCircle as DevIcon } from "../lucide-archive/ArrowDownLeftFromCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowDownLeftFromCircle(props: IconProps) {

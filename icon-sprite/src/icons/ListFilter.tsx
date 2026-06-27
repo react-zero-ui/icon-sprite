@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ListFilter as DevIcon } from "lucide-react";
+import { ListFilter as DevIcon } from "../lucide-archive/ListFilter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ListFilter(props: IconProps) {

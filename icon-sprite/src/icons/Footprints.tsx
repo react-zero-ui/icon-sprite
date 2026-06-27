@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Footprints as DevIcon } from "lucide-react";
+import { Footprints as DevIcon } from "../lucide-archive/Footprints.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Footprints(props: IconProps) {

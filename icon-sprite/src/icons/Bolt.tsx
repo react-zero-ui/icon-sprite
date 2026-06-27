@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bolt as DevIcon } from "lucide-react";
+import { Bolt as DevIcon } from "../lucide-archive/Bolt.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bolt(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MessageCircleOff as DevIcon } from "lucide-react";
+import { MessageCircleOff as DevIcon } from "../lucide-archive/MessageCircleOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MessageCircleOff(props: IconProps) {

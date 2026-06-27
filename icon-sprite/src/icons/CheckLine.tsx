@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CheckLine as DevIcon } from "lucide-react";
+import { CheckLine as DevIcon } from "../lucide-archive/CheckLine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CheckLine(props: IconProps) {

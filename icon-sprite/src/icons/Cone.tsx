@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cone as DevIcon } from "lucide-react";
+import { Cone as DevIcon } from "../lucide-archive/Cone.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cone(props: IconProps) {

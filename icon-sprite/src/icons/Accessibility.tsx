@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Accessibility as DevIcon } from "lucide-react";
+import { Accessibility as DevIcon } from "../lucide-archive/Accessibility.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Accessibility(props: IconProps) {

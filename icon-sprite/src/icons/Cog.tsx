@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cog as DevIcon } from "lucide-react";
+import { Cog as DevIcon } from "../lucide-archive/Cog.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cog(props: IconProps) {

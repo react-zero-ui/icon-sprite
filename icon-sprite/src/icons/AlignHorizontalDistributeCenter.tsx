@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlignHorizontalDistributeCenter as DevIcon } from "lucide-react";
+import { AlignHorizontalDistributeCenter as DevIcon } from "../lucide-archive/AlignHorizontalDistributeCenter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlignHorizontalDistributeCenter(props: IconProps) {

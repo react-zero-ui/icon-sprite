@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderUp as DevIcon } from "lucide-react";
+import { FolderUp as DevIcon } from "../lucide-archive/FolderUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderUp(props: IconProps) {

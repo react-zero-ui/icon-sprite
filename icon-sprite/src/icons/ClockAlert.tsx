@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClockAlert as DevIcon } from "lucide-react";
+import { ClockAlert as DevIcon } from "../lucide-archive/ClockAlert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClockAlert(props: IconProps) {

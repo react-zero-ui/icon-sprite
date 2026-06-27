@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BellCheck as DevIcon } from "lucide-react";
+import { BellCheck as DevIcon } from "../lucide-archive/BellCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BellCheck(props: IconProps) {

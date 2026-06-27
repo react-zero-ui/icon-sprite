@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Grip as DevIcon } from "lucide-react";
+import { Grip as DevIcon } from "../lucide-archive/Grip.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Grip(props: IconProps) {

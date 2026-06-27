@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Brush as DevIcon } from "lucide-react";
+import { Brush as DevIcon } from "../lucide-archive/Brush.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Brush(props: IconProps) {

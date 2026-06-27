@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Timer as DevIcon } from "lucide-react";
+import { Timer as DevIcon } from "../lucide-archive/Timer.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Timer(props: IconProps) {

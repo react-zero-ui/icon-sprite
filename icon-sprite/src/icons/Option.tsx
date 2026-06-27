@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Option as DevIcon } from "lucide-react";
+import { Option as DevIcon } from "../lucide-archive/Option.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Option(props: IconProps) {

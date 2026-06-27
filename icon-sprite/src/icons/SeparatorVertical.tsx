@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SeparatorVertical as DevIcon } from "lucide-react";
+import { SeparatorVertical as DevIcon } from "../lucide-archive/SeparatorVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SeparatorVertical(props: IconProps) {

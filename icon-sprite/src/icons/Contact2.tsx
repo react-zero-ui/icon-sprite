@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ContactRound as DevIcon } from "lucide-react";
+import { Contact2 as DevIcon } from "../lucide-archive/Contact2.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Contact2(props: IconProps) {

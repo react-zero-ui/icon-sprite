@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VibrateOff as DevIcon } from "lucide-react";
+import { VibrateOff as DevIcon } from "../lucide-archive/VibrateOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VibrateOff(props: IconProps) {

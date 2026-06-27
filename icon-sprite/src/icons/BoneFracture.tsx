@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BoneFracture as DevIcon } from "lucide-react";
+import { BoneFracture as DevIcon } from "../lucide-archive/BoneFracture.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BoneFracture(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EyeClosed as DevIcon } from "lucide-react";
+import { EyeClosed as DevIcon } from "../lucide-archive/EyeClosed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EyeClosed(props: IconProps) {

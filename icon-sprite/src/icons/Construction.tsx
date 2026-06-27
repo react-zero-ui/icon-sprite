@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Construction as DevIcon } from "lucide-react";
+import { Construction as DevIcon } from "../lucide-archive/Construction.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Construction(props: IconProps) {

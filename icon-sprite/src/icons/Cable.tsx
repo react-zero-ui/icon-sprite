@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cable as DevIcon } from "lucide-react";
+import { Cable as DevIcon } from "../lucide-archive/Cable.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cable(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Minimize as DevIcon } from "lucide-react";
+import { Minimize as DevIcon } from "../lucide-archive/Minimize.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Minimize(props: IconProps) {

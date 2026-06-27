@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Fullscreen as DevIcon } from "lucide-react";
+import { Fullscreen as DevIcon } from "../lucide-archive/Fullscreen.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Fullscreen(props: IconProps) {

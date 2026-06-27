@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquarePi as DevIcon } from "lucide-react";
+import { PiSquare as DevIcon } from "../lucide-archive/PiSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PiSquare(props: IconProps) {

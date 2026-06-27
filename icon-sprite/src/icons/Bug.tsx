@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bug as DevIcon } from "lucide-react";
+import { Bug as DevIcon } from "../lucide-archive/Bug.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bug(props: IconProps) {

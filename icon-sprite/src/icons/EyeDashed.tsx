@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { EyeDashed as DevIcon } from "lucide-react";
+import { EyeDashed as DevIcon } from "../lucide-archive/EyeDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function EyeDashed(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { User as DevIcon } from "lucide-react";
+import { User as DevIcon } from "../lucide-archive/User.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function User(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CaptionsOff as DevIcon } from "lucide-react";
+import { CaptionsOff as DevIcon } from "../lucide-archive/CaptionsOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CaptionsOff(props: IconProps) {

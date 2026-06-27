@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartScatter as DevIcon } from "lucide-react";
+import { ChartScatter as DevIcon } from "../lucide-archive/ChartScatter.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartScatter(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Croissant as DevIcon } from "lucide-react";
+import { Croissant as DevIcon } from "../lucide-archive/Croissant.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Croissant(props: IconProps) {

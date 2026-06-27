@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Frown as DevIcon } from "lucide-react";
+import { Frown as DevIcon } from "../lucide-archive/Frown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Frown(props: IconProps) {

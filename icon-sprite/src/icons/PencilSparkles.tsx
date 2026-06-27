@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PencilSparkles as DevIcon } from "lucide-react";
+import { PencilSparkles as DevIcon } from "../lucide-archive/PencilSparkles.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PencilSparkles(props: IconProps) {

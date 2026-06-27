@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircuitBoard as DevIcon } from "lucide-react";
+import { CircuitBoard as DevIcon } from "../lucide-archive/CircuitBoard.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircuitBoard(props: IconProps) {

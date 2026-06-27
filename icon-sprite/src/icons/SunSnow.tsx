@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SunSnow as DevIcon } from "lucide-react";
+import { SunSnow as DevIcon } from "../lucide-archive/SunSnow.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SunSnow(props: IconProps) {

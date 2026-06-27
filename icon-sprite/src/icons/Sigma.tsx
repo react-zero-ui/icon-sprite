@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sigma as DevIcon } from "lucide-react";
+import { Sigma as DevIcon } from "../lucide-archive/Sigma.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sigma(props: IconProps) {

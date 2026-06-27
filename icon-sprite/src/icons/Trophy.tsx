@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Trophy as DevIcon } from "lucide-react";
+import { Trophy as DevIcon } from "../lucide-archive/Trophy.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Trophy(props: IconProps) {

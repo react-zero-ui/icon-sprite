@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RepeatOff as DevIcon } from "lucide-react";
+import { RepeatOff as DevIcon } from "../lucide-archive/RepeatOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RepeatOff(props: IconProps) {

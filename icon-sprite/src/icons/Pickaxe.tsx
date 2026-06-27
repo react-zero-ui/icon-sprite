@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pickaxe as DevIcon } from "lucide-react";
+import { Pickaxe as DevIcon } from "../lucide-archive/Pickaxe.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pickaxe(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TextWrap as DevIcon } from "lucide-react";
+import { WrapText as DevIcon } from "../lucide-archive/WrapText.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WrapText(props: IconProps) {

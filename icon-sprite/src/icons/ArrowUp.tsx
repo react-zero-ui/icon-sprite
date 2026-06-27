@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowUp as DevIcon } from "lucide-react";
+import { ArrowUp as DevIcon } from "../lucide-archive/ArrowUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowUp(props: IconProps) {

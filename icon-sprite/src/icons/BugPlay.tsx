@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BugPlay as DevIcon } from "lucide-react";
+import { BugPlay as DevIcon } from "../lucide-archive/BugPlay.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BugPlay(props: IconProps) {

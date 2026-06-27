@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CirclePlus as DevIcon } from "lucide-react";
+import { PlusCircle as DevIcon } from "../lucide-archive/PlusCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PlusCircle(props: IconProps) {

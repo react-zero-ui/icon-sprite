@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Gauge as DevIcon } from "lucide-react";
+import { Gauge as DevIcon } from "../lucide-archive/Gauge.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Gauge(props: IconProps) {

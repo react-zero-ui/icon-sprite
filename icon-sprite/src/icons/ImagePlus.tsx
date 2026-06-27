@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ImagePlus as DevIcon } from "lucide-react";
+import { ImagePlus as DevIcon } from "../lucide-archive/ImagePlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ImagePlus(props: IconProps) {

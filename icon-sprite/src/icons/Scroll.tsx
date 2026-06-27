@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Scroll as DevIcon } from "lucide-react";
+import { Scroll as DevIcon } from "../lucide-archive/Scroll.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Scroll(props: IconProps) {

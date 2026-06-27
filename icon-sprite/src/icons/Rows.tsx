@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rows2 as DevIcon } from "lucide-react";
+import { Rows as DevIcon } from "../lucide-archive/Rows.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rows(props: IconProps) {

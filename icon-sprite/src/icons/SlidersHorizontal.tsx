@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SlidersHorizontal as DevIcon } from "lucide-react";
+import { SlidersHorizontal as DevIcon } from "../lucide-archive/SlidersHorizontal.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SlidersHorizontal(props: IconProps) {

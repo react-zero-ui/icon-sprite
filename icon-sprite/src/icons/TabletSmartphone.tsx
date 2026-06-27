@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TabletSmartphone as DevIcon } from "lucide-react";
+import { TabletSmartphone as DevIcon } from "../lucide-archive/TabletSmartphone.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TabletSmartphone(props: IconProps) {

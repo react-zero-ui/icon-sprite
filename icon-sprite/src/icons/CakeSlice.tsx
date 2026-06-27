@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CakeSlice as DevIcon } from "lucide-react";
+import { CakeSlice as DevIcon } from "../lucide-archive/CakeSlice.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CakeSlice(props: IconProps) {

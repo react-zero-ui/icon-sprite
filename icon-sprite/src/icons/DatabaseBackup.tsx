@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DatabaseBackup as DevIcon } from "lucide-react";
+import { DatabaseBackup as DevIcon } from "../lucide-archive/DatabaseBackup.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DatabaseBackup(props: IconProps) {

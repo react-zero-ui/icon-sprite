@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZodiacLibra as DevIcon } from "lucide-react";
+import { ZodiacLibra as DevIcon } from "../lucide-archive/ZodiacLibra.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZodiacLibra(props: IconProps) {

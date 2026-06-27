@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZapOff as DevIcon } from "lucide-react";
+import { ZapOff as DevIcon } from "../lucide-archive/ZapOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZapOff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FerrisWheel as DevIcon } from "lucide-react";
+import { FerrisWheel as DevIcon } from "../lucide-archive/FerrisWheel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FerrisWheel(props: IconProps) {

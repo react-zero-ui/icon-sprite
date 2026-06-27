@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Clock9 as DevIcon } from "lucide-react";
+import { Clock9 as DevIcon } from "../lucide-archive/Clock9.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Clock9(props: IconProps) {

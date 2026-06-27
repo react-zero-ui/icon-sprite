@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WavesVertical as DevIcon } from "lucide-react";
+import { WavesVertical as DevIcon } from "../lucide-archive/WavesVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WavesVertical(props: IconProps) {

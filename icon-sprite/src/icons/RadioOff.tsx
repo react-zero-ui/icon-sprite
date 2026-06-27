@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RadioOff as DevIcon } from "lucide-react";
+import { RadioOff as DevIcon } from "../lucide-archive/RadioOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RadioOff(props: IconProps) {

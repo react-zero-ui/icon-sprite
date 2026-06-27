@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PinOff as DevIcon } from "lucide-react";
+import { PinOff as DevIcon } from "../lucide-archive/PinOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PinOff(props: IconProps) {

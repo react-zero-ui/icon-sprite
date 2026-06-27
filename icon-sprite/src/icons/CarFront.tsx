@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CarFront as DevIcon } from "lucide-react";
+import { CarFront as DevIcon } from "../lucide-archive/CarFront.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CarFront(props: IconProps) {

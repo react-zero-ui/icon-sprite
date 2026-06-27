@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SoapDispenserDroplet as DevIcon } from "lucide-react";
+import { SoapDispenserDroplet as DevIcon } from "../lucide-archive/SoapDispenserDroplet.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SoapDispenserDroplet(props: IconProps) {

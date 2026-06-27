@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MailPlus as DevIcon } from "lucide-react";
+import { MailPlus as DevIcon } from "../lucide-archive/MailPlus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MailPlus(props: IconProps) {

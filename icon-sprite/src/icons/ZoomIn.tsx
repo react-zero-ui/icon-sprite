@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ZoomIn as DevIcon } from "lucide-react";
+import { ZoomIn as DevIcon } from "../lucide-archive/ZoomIn.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ZoomIn(props: IconProps) {

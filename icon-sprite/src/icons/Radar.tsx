@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Radar as DevIcon } from "lucide-react";
+import { Radar as DevIcon } from "../lucide-archive/Radar.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Radar(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleFadingArrowUp as DevIcon } from "lucide-react";
+import { CircleFadingArrowUp as DevIcon } from "../lucide-archive/CircleFadingArrowUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleFadingArrowUp(props: IconProps) {

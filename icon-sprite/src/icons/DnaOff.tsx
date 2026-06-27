@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DnaOff as DevIcon } from "lucide-react";
+import { DnaOff as DevIcon } from "../lucide-archive/DnaOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DnaOff(props: IconProps) {

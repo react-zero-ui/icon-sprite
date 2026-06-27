@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileHeart as DevIcon } from "lucide-react";
+import { FileHeart as DevIcon } from "../lucide-archive/FileHeart.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileHeart(props: IconProps) {

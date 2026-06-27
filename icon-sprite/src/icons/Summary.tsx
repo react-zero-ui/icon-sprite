@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Summary as DevIcon } from "lucide-react";
+import { Summary as DevIcon } from "../lucide-archive/Summary.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Summary(props: IconProps) {

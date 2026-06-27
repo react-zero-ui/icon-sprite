@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tornado as DevIcon } from "lucide-react";
+import { Tornado as DevIcon } from "../lucide-archive/Tornado.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tornado(props: IconProps) {

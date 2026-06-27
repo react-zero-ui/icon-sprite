@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Languages as DevIcon } from "lucide-react";
+import { Languages as DevIcon } from "../lucide-archive/Languages.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Languages(props: IconProps) {

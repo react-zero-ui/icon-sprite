@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PoundSterling as DevIcon } from "lucide-react";
+import { PoundSterling as DevIcon } from "../lucide-archive/PoundSterling.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PoundSterling(props: IconProps) {

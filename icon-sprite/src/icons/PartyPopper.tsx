@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PartyPopper as DevIcon } from "lucide-react";
+import { PartyPopper as DevIcon } from "../lucide-archive/PartyPopper.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PartyPopper(props: IconProps) {

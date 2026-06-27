@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Expand as DevIcon } from "lucide-react";
+import { Expand as DevIcon } from "../lucide-archive/Expand.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Expand(props: IconProps) {

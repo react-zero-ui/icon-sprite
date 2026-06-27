@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorUp as DevIcon } from "lucide-react";
+import { MonitorUp as DevIcon } from "../lucide-archive/MonitorUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorUp(props: IconProps) {

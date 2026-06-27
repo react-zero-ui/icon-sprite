@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Droplet as DevIcon } from "lucide-react";
+import { Droplet as DevIcon } from "../lucide-archive/Droplet.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Droplet(props: IconProps) {

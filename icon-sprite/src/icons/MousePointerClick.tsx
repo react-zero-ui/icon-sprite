@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MousePointerClick as DevIcon } from "lucide-react";
+import { MousePointerClick as DevIcon } from "../lucide-archive/MousePointerClick.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MousePointerClick(props: IconProps) {

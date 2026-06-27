@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SwatchBook as DevIcon } from "lucide-react";
+import { SwatchBook as DevIcon } from "../lucide-archive/SwatchBook.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SwatchBook(props: IconProps) {

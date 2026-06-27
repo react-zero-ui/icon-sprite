@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Scan as DevIcon } from "lucide-react";
+import { Scan as DevIcon } from "../lucide-archive/Scan.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Scan(props: IconProps) {

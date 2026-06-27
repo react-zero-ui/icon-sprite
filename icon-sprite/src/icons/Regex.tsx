@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Regex as DevIcon } from "lucide-react";
+import { Regex as DevIcon } from "../lucide-archive/Regex.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Regex(props: IconProps) {

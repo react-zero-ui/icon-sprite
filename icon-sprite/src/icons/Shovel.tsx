@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Shovel as DevIcon } from "lucide-react";
+import { Shovel as DevIcon } from "../lucide-archive/Shovel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Shovel(props: IconProps) {

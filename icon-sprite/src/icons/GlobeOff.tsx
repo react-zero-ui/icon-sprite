@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GlobeOff as DevIcon } from "lucide-react";
+import { GlobeOff as DevIcon } from "../lucide-archive/GlobeOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GlobeOff(props: IconProps) {

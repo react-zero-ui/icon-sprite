@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Pyramid as DevIcon } from "lucide-react";
+import { Pyramid as DevIcon } from "../lucide-archive/Pyramid.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Pyramid(props: IconProps) {

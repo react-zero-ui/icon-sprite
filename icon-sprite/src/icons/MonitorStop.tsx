@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorStop as DevIcon } from "lucide-react";
+import { MonitorStop as DevIcon } from "../lucide-archive/MonitorStop.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorStop(props: IconProps) {

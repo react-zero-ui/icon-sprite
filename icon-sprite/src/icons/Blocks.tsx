@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Blocks as DevIcon } from "lucide-react";
+import { Blocks as DevIcon } from "../lucide-archive/Blocks.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Blocks(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChessPawn as DevIcon } from "lucide-react";
+import { ChessPawn as DevIcon } from "../lucide-archive/ChessPawn.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChessPawn(props: IconProps) {

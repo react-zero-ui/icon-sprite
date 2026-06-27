@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Birdhouse as DevIcon } from "lucide-react";
+import { Birdhouse as DevIcon } from "../lucide-archive/Birdhouse.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Birdhouse(props: IconProps) {

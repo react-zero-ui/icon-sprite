@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChevronsDown as DevIcon } from "lucide-react";
+import { ChevronsDown as DevIcon } from "../lucide-archive/ChevronsDown.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChevronsDown(props: IconProps) {

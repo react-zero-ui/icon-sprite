@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Split as DevIcon } from "lucide-react";
+import { Split as DevIcon } from "../lucide-archive/Split.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Split(props: IconProps) {

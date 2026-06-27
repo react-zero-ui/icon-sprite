@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Angry as DevIcon } from "lucide-react";
+import { Angry as DevIcon } from "../lucide-archive/Angry.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Angry(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleDivide as DevIcon } from "lucide-react";
+import { CircleDivide as DevIcon } from "../lucide-archive/CircleDivide.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleDivide(props: IconProps) {

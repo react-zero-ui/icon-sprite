@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Torus as DevIcon } from "lucide-react";
+import { Torus as DevIcon } from "../lucide-archive/Torus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Torus(props: IconProps) {

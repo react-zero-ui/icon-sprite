@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cross as DevIcon } from "lucide-react";
+import { Cross as DevIcon } from "../lucide-archive/Cross.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cross(props: IconProps) {

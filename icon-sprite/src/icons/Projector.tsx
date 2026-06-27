@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Projector as DevIcon } from "lucide-react";
+import { Projector as DevIcon } from "../lucide-archive/Projector.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Projector(props: IconProps) {

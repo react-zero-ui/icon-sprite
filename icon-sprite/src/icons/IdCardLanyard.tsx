@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { IdCardLanyard as DevIcon } from "lucide-react";
+import { IdCardLanyard as DevIcon } from "../lucide-archive/IdCardLanyard.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IdCardLanyard(props: IconProps) {

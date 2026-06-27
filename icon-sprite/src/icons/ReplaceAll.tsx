@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ReplaceAll as DevIcon } from "lucide-react";
+import { ReplaceAll as DevIcon } from "../lucide-archive/ReplaceAll.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ReplaceAll(props: IconProps) {

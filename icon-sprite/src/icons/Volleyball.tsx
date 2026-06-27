@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Volleyball as DevIcon } from "lucide-react";
+import { Volleyball as DevIcon } from "../lucide-archive/Volleyball.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Volleyball(props: IconProps) {

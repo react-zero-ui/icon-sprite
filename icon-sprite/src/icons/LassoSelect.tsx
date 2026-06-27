@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LassoSelect as DevIcon } from "lucide-react";
+import { LassoSelect as DevIcon } from "../lucide-archive/LassoSelect.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LassoSelect(props: IconProps) {

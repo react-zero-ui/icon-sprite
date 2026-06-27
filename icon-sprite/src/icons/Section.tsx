@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Section as DevIcon } from "lucide-react";
+import { Section as DevIcon } from "../lucide-archive/Section.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Section(props: IconProps) {

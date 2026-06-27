@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Satellite as DevIcon } from "lucide-react";
+import { Satellite as DevIcon } from "../lucide-archive/Satellite.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Satellite(props: IconProps) {

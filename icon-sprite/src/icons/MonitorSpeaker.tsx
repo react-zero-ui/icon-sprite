@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MonitorSpeaker as DevIcon } from "lucide-react";
+import { MonitorSpeaker as DevIcon } from "../lucide-archive/MonitorSpeaker.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MonitorSpeaker(props: IconProps) {

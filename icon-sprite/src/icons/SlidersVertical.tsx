@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SlidersVertical as DevIcon } from "lucide-react";
+import { SlidersVertical as DevIcon } from "../lucide-archive/SlidersVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SlidersVertical(props: IconProps) {

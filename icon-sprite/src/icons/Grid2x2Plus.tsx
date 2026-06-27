@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Grid2x2Plus as DevIcon } from "lucide-react";
+import { Grid2x2Plus as DevIcon } from "../lucide-archive/Grid2x2Plus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Grid2x2Plus(props: IconProps) {

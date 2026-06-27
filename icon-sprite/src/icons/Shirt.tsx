@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Shirt as DevIcon } from "lucide-react";
+import { Shirt as DevIcon } from "../lucide-archive/Shirt.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Shirt(props: IconProps) {

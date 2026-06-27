@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LineSquiggle as DevIcon } from "lucide-react";
+import { LineSquiggle as DevIcon } from "../lucide-archive/LineSquiggle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LineSquiggle(props: IconProps) {

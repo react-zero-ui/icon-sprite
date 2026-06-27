@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartBarDecreasing as DevIcon } from "lucide-react";
+import { ChartBarDecreasing as DevIcon } from "../lucide-archive/ChartBarDecreasing.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChartBarDecreasing(props: IconProps) {

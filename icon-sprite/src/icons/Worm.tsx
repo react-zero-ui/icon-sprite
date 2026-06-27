@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Worm as DevIcon } from "lucide-react";
+import { Worm as DevIcon } from "../lucide-archive/Worm.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Worm(props: IconProps) {

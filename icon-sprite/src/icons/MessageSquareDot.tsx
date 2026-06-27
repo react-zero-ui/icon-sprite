@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MessageSquareDot as DevIcon } from "lucide-react";
+import { MessageSquareDot as DevIcon } from "../lucide-archive/MessageSquareDot.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MessageSquareDot(props: IconProps) {

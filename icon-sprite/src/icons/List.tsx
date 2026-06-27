@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { List as DevIcon } from "lucide-react";
+import { List as DevIcon } from "../lucide-archive/List.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function List(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PencilRuler as DevIcon } from "lucide-react";
+import { PencilRuler as DevIcon } from "../lucide-archive/PencilRuler.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PencilRuler(props: IconProps) {

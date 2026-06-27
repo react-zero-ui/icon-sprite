@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Waypoints as DevIcon } from "lucide-react";
+import { Waypoints as DevIcon } from "../lucide-archive/Waypoints.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Waypoints(props: IconProps) {

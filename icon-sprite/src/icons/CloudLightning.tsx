@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudLightning as DevIcon } from "lucide-react";
+import { CloudLightning as DevIcon } from "../lucide-archive/CloudLightning.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudLightning(props: IconProps) {

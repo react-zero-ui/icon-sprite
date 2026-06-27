@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RotateCcwSquare as DevIcon } from "lucide-react";
+import { RotateCcwSquare as DevIcon } from "../lucide-archive/RotateCcwSquare.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RotateCcwSquare(props: IconProps) {

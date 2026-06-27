@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClipboardCheck as DevIcon } from "lucide-react";
+import { ClipboardCheck as DevIcon } from "../lucide-archive/ClipboardCheck.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClipboardCheck(props: IconProps) {

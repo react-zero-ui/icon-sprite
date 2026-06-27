@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Newspaper as DevIcon } from "lucide-react";
+import { Newspaper as DevIcon } from "../lucide-archive/Newspaper.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Newspaper(props: IconProps) {

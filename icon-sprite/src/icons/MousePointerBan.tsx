@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MousePointerBan as DevIcon } from "lucide-react";
+import { MousePointerBan as DevIcon } from "../lucide-archive/MousePointerBan.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MousePointerBan(props: IconProps) {

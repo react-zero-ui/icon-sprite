@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleAlert as DevIcon } from "lucide-react";
+import { AlertCircle as DevIcon } from "../lucide-archive/AlertCircle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlertCircle(props: IconProps) {

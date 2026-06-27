@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { VolumeOff as DevIcon } from "lucide-react";
+import { VolumeOff as DevIcon } from "../lucide-archive/VolumeOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function VolumeOff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CandyCane as DevIcon } from "lucide-react";
+import { CandyCane as DevIcon } from "../lucide-archive/CandyCane.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CandyCane(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CableCar as DevIcon } from "lucide-react";
+import { CableCar as DevIcon } from "../lucide-archive/CableCar.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CableCar(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChartBarBig as DevIcon } from "lucide-react";
+import { BarChartHorizontalBig as DevIcon } from "../lucide-archive/BarChartHorizontalBig.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BarChartHorizontalBig(props: IconProps) {

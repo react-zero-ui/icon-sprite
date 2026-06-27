@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AirVent as DevIcon } from "lucide-react";
+import { AirVent as DevIcon } from "../lucide-archive/AirVent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AirVent(props: IconProps) {

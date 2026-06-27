@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArchiveX as DevIcon } from "lucide-react";
+import { ArchiveX as DevIcon } from "../lucide-archive/ArchiveX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArchiveX(props: IconProps) {

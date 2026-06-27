@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BottleWine as DevIcon } from "lucide-react";
+import { BottleWine as DevIcon } from "../lucide-archive/BottleWine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BottleWine(props: IconProps) {

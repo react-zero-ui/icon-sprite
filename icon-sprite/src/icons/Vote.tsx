@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Vote as DevIcon } from "lucide-react";
+import { Vote as DevIcon } from "../lucide-archive/Vote.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Vote(props: IconProps) {

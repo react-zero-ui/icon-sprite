@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CircleDotDashed as DevIcon } from "lucide-react";
+import { CircleDotDashed as DevIcon } from "../lucide-archive/CircleDotDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CircleDotDashed(props: IconProps) {

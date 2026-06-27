@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ScanQrCode as DevIcon } from "lucide-react";
+import { ScanQrCode as DevIcon } from "../lucide-archive/ScanQrCode.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ScanQrCode(props: IconProps) {

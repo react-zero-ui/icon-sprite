@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Hamburger as DevIcon } from "lucide-react";
+import { Hamburger as DevIcon } from "../lucide-archive/Hamburger.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Hamburger(props: IconProps) {

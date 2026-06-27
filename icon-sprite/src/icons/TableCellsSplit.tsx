@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TableCellsSplit as DevIcon } from "lucide-react";
+import { TableCellsSplit as DevIcon } from "../lucide-archive/TableCellsSplit.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TableCellsSplit(props: IconProps) {

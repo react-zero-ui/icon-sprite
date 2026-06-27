@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BatteryFull as DevIcon } from "lucide-react";
+import { BatteryFull as DevIcon } from "../lucide-archive/BatteryFull.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BatteryFull(props: IconProps) {

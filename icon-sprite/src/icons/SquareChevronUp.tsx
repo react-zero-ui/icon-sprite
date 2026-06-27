@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareChevronUp as DevIcon } from "lucide-react";
+import { SquareChevronUp as DevIcon } from "../lucide-archive/SquareChevronUp.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareChevronUp(props: IconProps) {

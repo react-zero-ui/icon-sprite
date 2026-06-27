@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Coins as DevIcon } from "lucide-react";
+import { Coins as DevIcon } from "../lucide-archive/Coins.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Coins(props: IconProps) {

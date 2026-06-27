@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Spotlight as DevIcon } from "lucide-react";
+import { Spotlight as DevIcon } from "../lucide-archive/Spotlight.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Spotlight(props: IconProps) {

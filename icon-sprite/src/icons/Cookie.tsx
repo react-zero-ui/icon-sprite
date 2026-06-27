@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Cookie as DevIcon } from "lucide-react";
+import { Cookie as DevIcon } from "../lucide-archive/Cookie.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Cookie(props: IconProps) {

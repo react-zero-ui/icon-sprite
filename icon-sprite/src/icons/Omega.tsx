@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Omega as DevIcon } from "lucide-react";
+import { Omega as DevIcon } from "../lucide-archive/Omega.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Omega(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BeanOff as DevIcon } from "lucide-react";
+import { BeanOff as DevIcon } from "../lucide-archive/BeanOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BeanOff(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TextCursorInput as DevIcon } from "lucide-react";
+import { TextCursorInput as DevIcon } from "../lucide-archive/TextCursorInput.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TextCursorInput(props: IconProps) {

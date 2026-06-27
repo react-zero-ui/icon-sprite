@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgePercent as DevIcon } from "lucide-react";
+import { BadgePercent as DevIcon } from "../lucide-archive/BadgePercent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgePercent(props: IconProps) {

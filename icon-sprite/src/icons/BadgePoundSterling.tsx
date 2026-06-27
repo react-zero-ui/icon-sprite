@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgePoundSterling as DevIcon } from "lucide-react";
+import { BadgePoundSterling as DevIcon } from "../lucide-archive/BadgePoundSterling.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgePoundSterling(props: IconProps) {

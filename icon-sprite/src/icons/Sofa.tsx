@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sofa as DevIcon } from "lucide-react";
+import { Sofa as DevIcon } from "../lucide-archive/Sofa.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sofa(props: IconProps) {

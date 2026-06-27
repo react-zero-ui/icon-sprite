@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PackageOpen as DevIcon } from "lucide-react";
+import { PackageOpen as DevIcon } from "../lucide-archive/PackageOpen.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PackageOpen(props: IconProps) {

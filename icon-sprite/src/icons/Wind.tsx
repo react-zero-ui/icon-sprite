@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Wind as DevIcon } from "lucide-react";
+import { Wind as DevIcon } from "../lucide-archive/Wind.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Wind(props: IconProps) {

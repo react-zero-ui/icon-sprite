@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tangent as DevIcon } from "lucide-react";
+import { Tangent as DevIcon } from "../lucide-archive/Tangent.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tangent(props: IconProps) {

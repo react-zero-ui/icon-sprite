@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { IndianRupee as DevIcon } from "lucide-react";
+import { IndianRupee as DevIcon } from "../lucide-archive/IndianRupee.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IndianRupee(props: IconProps) {

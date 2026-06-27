@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Barrel as DevIcon } from "lucide-react";
+import { Barrel as DevIcon } from "../lucide-archive/Barrel.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Barrel(props: IconProps) {

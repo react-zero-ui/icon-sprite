@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Drill as DevIcon } from "lucide-react";
+import { Drill as DevIcon } from "../lucide-archive/Drill.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Drill(props: IconProps) {

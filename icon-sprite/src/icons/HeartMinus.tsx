@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HeartMinus as DevIcon } from "lucide-react";
+import { HeartMinus as DevIcon } from "../lucide-archive/HeartMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HeartMinus(props: IconProps) {

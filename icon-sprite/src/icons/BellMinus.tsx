@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BellMinus as DevIcon } from "lucide-react";
+import { BellMinus as DevIcon } from "../lucide-archive/BellMinus.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BellMinus(props: IconProps) {

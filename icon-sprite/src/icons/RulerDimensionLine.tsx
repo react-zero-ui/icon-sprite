@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { RulerDimensionLine as DevIcon } from "lucide-react";
+import { RulerDimensionLine as DevIcon } from "../lucide-archive/RulerDimensionLine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function RulerDimensionLine(props: IconProps) {

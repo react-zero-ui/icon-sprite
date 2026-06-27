@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PawPrint as DevIcon } from "lucide-react";
+import { PawPrint as DevIcon } from "../lucide-archive/PawPrint.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PawPrint(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MessageSquareDashed as DevIcon } from "lucide-react";
+import { MessageSquareDashed as DevIcon } from "../lucide-archive/MessageSquareDashed.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MessageSquareDashed(props: IconProps) {

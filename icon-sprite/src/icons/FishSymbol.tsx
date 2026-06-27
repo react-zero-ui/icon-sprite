@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FishSymbol as DevIcon } from "lucide-react";
+import { FishSymbol as DevIcon } from "../lucide-archive/FishSymbol.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FishSymbol(props: IconProps) {

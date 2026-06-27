@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TagX as DevIcon } from "lucide-react";
+import { TagX as DevIcon } from "../lucide-archive/TagX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TagX(props: IconProps) {

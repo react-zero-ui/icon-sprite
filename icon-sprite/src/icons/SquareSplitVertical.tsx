@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SquareSplitVertical as DevIcon } from "lucide-react";
+import { SquareSplitVertical as DevIcon } from "../lucide-archive/SquareSplitVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SquareSplitVertical(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderX as DevIcon } from "lucide-react";
+import { FolderX as DevIcon } from "../lucide-archive/FolderX.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderX(props: IconProps) {

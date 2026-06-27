@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FolderClock as DevIcon } from "lucide-react";
+import { FolderClock as DevIcon } from "../lucide-archive/FolderClock.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FolderClock(props: IconProps) {

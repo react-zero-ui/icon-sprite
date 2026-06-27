@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GalleryVertical as DevIcon } from "lucide-react";
+import { GalleryVertical as DevIcon } from "../lucide-archive/GalleryVertical.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GalleryVertical(props: IconProps) {

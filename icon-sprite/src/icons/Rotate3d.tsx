@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Rotate3d as DevIcon } from "lucide-react";
+import { Rotate3d as DevIcon } from "../lucide-archive/Rotate3d.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Rotate3d(props: IconProps) {

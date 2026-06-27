@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { UmbrellaOff as DevIcon } from "lucide-react";
+import { UmbrellaOff as DevIcon } from "../lucide-archive/UmbrellaOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function UmbrellaOff(props: IconProps) {

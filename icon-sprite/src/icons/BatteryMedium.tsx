@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BatteryMedium as DevIcon } from "lucide-react";
+import { BatteryMedium as DevIcon } from "../lucide-archive/BatteryMedium.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BatteryMedium(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { WashingMachine as DevIcon } from "lucide-react";
+import { WashingMachine as DevIcon } from "../lucide-archive/WashingMachine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function WashingMachine(props: IconProps) {

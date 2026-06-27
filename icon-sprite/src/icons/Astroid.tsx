@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Astroid as DevIcon } from "lucide-react";
+import { Astroid as DevIcon } from "../lucide-archive/Astroid.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Astroid(props: IconProps) {

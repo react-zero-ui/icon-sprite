@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BrickWallShield as DevIcon } from "lucide-react";
+import { BrickWallShield as DevIcon } from "../lucide-archive/BrickWallShield.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BrickWallShield(props: IconProps) {

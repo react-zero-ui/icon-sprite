@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Unplug as DevIcon } from "lucide-react";
+import { Unplug as DevIcon } from "../lucide-archive/Unplug.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Unplug(props: IconProps) {

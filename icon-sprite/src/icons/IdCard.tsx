@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { IdCard as DevIcon } from "lucide-react";
+import { IdCard as DevIcon } from "../lucide-archive/IdCard.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IdCard(props: IconProps) {

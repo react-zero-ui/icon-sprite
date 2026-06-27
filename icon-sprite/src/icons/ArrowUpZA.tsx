@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowUpZA as DevIcon } from "lucide-react";
+import { ArrowUpZA as DevIcon } from "../lucide-archive/ArrowUpZA.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowUpZA(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Aperture as DevIcon } from "lucide-react";
+import { Aperture as DevIcon } from "../lucide-archive/Aperture.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Aperture(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Factory as DevIcon } from "lucide-react";
+import { Factory as DevIcon } from "../lucide-archive/Factory.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Factory(props: IconProps) {

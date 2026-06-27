@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Replace as DevIcon } from "lucide-react";
+import { Replace as DevIcon } from "../lucide-archive/Replace.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Replace(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Warehouse as DevIcon } from "lucide-react";
+import { Warehouse as DevIcon } from "../lucide-archive/Warehouse.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Warehouse(props: IconProps) {

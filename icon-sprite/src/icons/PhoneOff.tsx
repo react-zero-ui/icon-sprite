@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PhoneOff as DevIcon } from "lucide-react";
+import { PhoneOff as DevIcon } from "../lucide-archive/PhoneOff.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PhoneOff(props: IconProps) {

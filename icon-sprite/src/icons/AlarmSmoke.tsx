@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AlarmSmoke as DevIcon } from "lucide-react";
+import { AlarmSmoke as DevIcon } from "../lucide-archive/AlarmSmoke.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AlarmSmoke(props: IconProps) {

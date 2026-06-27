@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Bot as DevIcon } from "lucide-react";
+import { Bot as DevIcon } from "../lucide-archive/Bot.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Bot(props: IconProps) {

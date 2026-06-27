@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Antenna as DevIcon } from "lucide-react";
+import { Antenna as DevIcon } from "../lucide-archive/Antenna.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Antenna(props: IconProps) {

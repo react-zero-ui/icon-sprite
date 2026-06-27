@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileChartLine as DevIcon } from "lucide-react";
+import { FileChartLine as DevIcon } from "../lucide-archive/FileChartLine.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileChartLine(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CloudDrizzle as DevIcon } from "lucide-react";
+import { CloudDrizzle as DevIcon } from "../lucide-archive/CloudDrizzle.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CloudDrizzle(props: IconProps) {

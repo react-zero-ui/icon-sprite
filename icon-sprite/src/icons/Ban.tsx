@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Ban as DevIcon } from "lucide-react";
+import { Ban as DevIcon } from "../lucide-archive/Ban.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Ban(props: IconProps) {

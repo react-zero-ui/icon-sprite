@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { TriangleAlert as DevIcon } from "lucide-react";
+import { TriangleAlert as DevIcon } from "../lucide-archive/TriangleAlert.js";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function TriangleAlert(props: IconProps) {
