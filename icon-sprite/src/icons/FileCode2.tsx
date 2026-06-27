@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileCode2 as DevIcon } from "lucide-react";
+import { FileCodeCorner as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileCode2(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BadgeHelp as DevIcon } from "lucide-react";
+import { BadgeQuestionMark as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BadgeHelp(props: IconProps) {

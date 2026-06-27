@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { DownloadCloud as DevIcon } from "lucide-react";
+import { CloudDownload as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function DownloadCloud(props: IconProps) {

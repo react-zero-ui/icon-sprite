@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { MousePointerSquareDashed as DevIcon } from "lucide-react";
+import { SquareDashedMousePointer as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function MousePointerSquareDashed(props: IconProps) {

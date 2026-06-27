@@ -19,6 +19,7 @@ const __dirname = path.resolve(process.cwd());
 // Where to write wrappers
 const OUT_DIR = path.resolve("src/icons");
 const MERGED_LUCIDE_DIR = path.resolve("scripts/lucide-icons");
+const ARCHIVED_LUCIDE_COMPONENT_DIR = path.resolve("src/lucide-archive");
 
 // Preserve manually maintained files
 const PRESERVE_FILES = ["CustomIcon.tsx"];
@@ -65,10 +66,10 @@ function recordSkippedIcon({ pack, svgId, componentName, reason, collidesWith })
 	});
 }
 
-function writeWrapper(componentName, spriteId, pack) {
+function writeWrapper(componentName, spriteId, pack, devComponentName = componentName) {
 	return `\
 import { SPRITE_PATH } from "../config.js";
-import { ${componentName} as DevIcon } from "${pack}";
+import { ${devComponentName} as DevIcon } from "${pack}";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ${componentName}(props: IconProps) {
@@ -99,14 +100,16 @@ export function ${componentName}(props: IconProps) {
 `;
 }
 
+function hasArchivedLucideComponent(componentName) {
+	return fs.existsSync(path.join(ARCHIVED_LUCIDE_COMPONENT_DIR, `${componentName}.tsx`));
+}
+
 // ============================================================================
 // LUCIDE ICONS
 // ============================================================================
 
 function getLucideStaticSvgIds() {
-	const svgDir = fs.existsSync(MERGED_LUCIDE_DIR)
-		? MERGED_LUCIDE_DIR
-		: path.resolve(__dirname, "node_modules/lucide-static/icons");
+	const svgDir = fs.existsSync(MERGED_LUCIDE_DIR) ? MERGED_LUCIDE_DIR : path.resolve(__dirname, "node_modules/lucide-static/icons");
 	if (!fs.existsSync(svgDir)) return new Set();
 
 	const files = fs.readdirSync(svgDir).filter((f) => f.endsWith(".svg"));
@@ -135,14 +138,29 @@ function getLucideReactExports() {
 	return exports;
 }
 
-function getLucideComponentName(svgId, reactExports) {
-	const normalizedKey = svgId.replace(/-/g, "");
+function getLucideAliasTargets() {
+	const dynamicDts = path.resolve(__dirname, "node_modules/lucide-react/dynamicIconImports.d.ts");
 
-	if (reactExports.has(normalizedKey)) {
-		return reactExports.get(normalizedKey);
+	if (!fs.existsSync(dynamicDts)) return new Map();
+
+	const content = fs.readFileSync(dynamicDts, "utf8");
+	const namespaceToComponent = new Map();
+	const namespaceMatches = content.matchAll(/declare namespace (__icons_[\w_]+) \{\s+export \{\s+[^,]+ as __iconNode,\s+(\w+) as default,/g);
+
+	for (const match of namespaceMatches) {
+		namespaceToComponent.set(match[1], match[2]);
 	}
 
-	return kebabToPascal(svgId);
+	const aliases = new Map();
+	const importMatches = content.matchAll(/(?:'([^']+)'|([A-Za-z0-9_]+)): \(\) => Promise<typeof (__icons_[\w_]+)>;/g);
+
+	for (const match of importMatches) {
+		const svgId = match[1] ?? match[2];
+		const componentName = namespaceToComponent.get(match[3]);
+		if (componentName) aliases.set(svgId, componentName);
+	}
+
+	return aliases;
 }
 
 // ============================================================================
@@ -213,12 +231,16 @@ const componentToSprite = new Map();
 // --- LUCIDE ---
 const lucideSvgIds = getLucideStaticSvgIds();
 const lucideReactExports = getLucideReactExports();
+const lucideAliasTargets = getLucideAliasTargets();
 let lucideCount = 0;
 let lucideSpriteOnlyCount = 0;
+let lucideAliasCount = 0;
+let lucideArchiveComponentCount = 0;
 
 for (const svgId of lucideSvgIds) {
 	const normalizedKey = svgId.replace(/-/g, "");
 	const hasDevExport = lucideReactExports.has(normalizedKey);
+	const aliasDevComponentName = lucideAliasTargets.get(svgId);
 	const componentName = hasDevExport ? lucideReactExports.get(normalizedKey) : kebabToPascal(svgId);
 	const lowerName = componentName.toLowerCase();
 
@@ -251,11 +273,17 @@ for (const svgId of lucideSvgIds) {
 
 	const wrapperTsx = hasDevExport
 		? writeWrapper(componentName, spriteId, "lucide-react")
+		: aliasDevComponentName
+		? writeWrapper(componentName, spriteId, "lucide-react", aliasDevComponentName)
+		: hasArchivedLucideComponent(componentName)
+		? writeWrapper(componentName, spriteId, `../lucide-archive/${componentName}.js`)
 		: writeSpriteOnlyWrapper(componentName, spriteId);
 
 	fs.writeFileSync(path.join(OUT_DIR, `${componentName}.tsx`), wrapperTsx);
 	lucideCount++;
-	if (!hasDevExport) lucideSpriteOnlyCount++;
+	if (!hasDevExport && aliasDevComponentName) lucideAliasCount++;
+	if (!hasDevExport && !aliasDevComponentName && hasArchivedLucideComponent(componentName)) lucideArchiveComponentCount++;
+	if (!hasDevExport && !aliasDevComponentName && !hasArchivedLucideComponent(componentName)) lucideSpriteOnlyCount++;
 	totalGenerated++;
 }
 
@@ -316,6 +344,8 @@ fs.writeFileSync(skippedFile, JSON.stringify(skippedIcons, null, 2), "utf8");
 // --- Summary ---
 console.log(`✅ Generated ${totalGenerated} icon wrappers in ${OUT_DIR}`);
 console.log(`   📦 Lucide: ${lucideCount} icons (${lucideReactExports.size} react-compatible)`);
+if (lucideAliasCount > 0) console.log(`      ↳ ${lucideAliasCount} archived Lucide aliases render current React components in dev`);
+if (lucideArchiveComponentCount > 0) console.log(`      ↳ ${lucideArchiveComponentCount} archived Lucide icons render local React components in dev`);
 if (lucideSpriteOnlyCount > 0) console.log(`      ↳ ${lucideSpriteOnlyCount} archived Lucide icons use sprite-only wrappers`);
 console.log(`   📦 Tabler: ${tablerCount} icons (${tablerReactExports.size} react-compatible)`);
 console.log(`   📁 Wrote mapping to ${mappingFile}`);

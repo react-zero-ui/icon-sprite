@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Layout as DevIcon } from "lucide-react";
+import { PanelsTopLeft as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Layout(props: IconProps) {

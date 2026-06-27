@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ParkingCircle as DevIcon } from "lucide-react";
+import { CircleParking as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ParkingCircle(props: IconProps) {

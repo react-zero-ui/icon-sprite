@@ -38,9 +38,10 @@
   ],
   "scripts": {
     "build": "rm -rf dist && node scripts/gen-wrappers.js && tsc && node scripts/gen-dist.js",
+    "prepack": "npm run build && npm run test",
+    "collect:lucide": "node scripts/collect-lucide-icons.js",
     "test": "node tests/run-all-tests.js",
     "test:integration": "node tests/integration-test.js",
-    "prepare": "npm run build && npm run test",
     "type-check": "tsc --noEmit | tee type-errors.log"
   },
   "bin": {

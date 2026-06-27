@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PowerCircle as DevIcon } from "lucide-react";
+import { CirclePower as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PowerCircle(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileBarChart2 as DevIcon } from "lucide-react";
+import { FileChartColumn as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileBarChart2(props: IconProps) {

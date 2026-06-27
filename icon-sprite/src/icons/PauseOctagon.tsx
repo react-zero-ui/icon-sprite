@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PauseOctagon as DevIcon } from "lucide-react";
+import { OctagonPause as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PauseOctagon(props: IconProps) {

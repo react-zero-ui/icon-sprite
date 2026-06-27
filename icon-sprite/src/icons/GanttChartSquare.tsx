@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GanttChartSquare as DevIcon } from "lucide-react";
+import { SquareChartGantt as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GanttChartSquare(props: IconProps) {

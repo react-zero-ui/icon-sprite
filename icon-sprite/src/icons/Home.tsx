@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Home as DevIcon } from "lucide-react";
+import { House as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Home(props: IconProps) {

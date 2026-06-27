@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Tv2 as DevIcon } from "lucide-react";
+import { TvMinimal as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Tv2(props: IconProps) {

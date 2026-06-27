@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CodeSquare as DevIcon } from "lucide-react";
+import { SquareCode as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CodeSquare(props: IconProps) {

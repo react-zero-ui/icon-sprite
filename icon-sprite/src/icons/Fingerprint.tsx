@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Fingerprint as DevIcon } from "lucide-react";
+import { FingerprintPattern as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Fingerprint(props: IconProps) {

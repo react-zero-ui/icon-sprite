@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Layers3 as DevIcon } from "lucide-react";
+import { Layers as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Layers3(props: IconProps) {

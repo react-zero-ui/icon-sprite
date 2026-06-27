@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ClipboardEdit as DevIcon } from "lucide-react";
+import { ClipboardPen as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ClipboardEdit(props: IconProps) {

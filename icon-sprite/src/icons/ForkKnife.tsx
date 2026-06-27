@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ForkKnife as DevIcon } from "lucide-react";
+import { Utensils as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ForkKnife(props: IconProps) {

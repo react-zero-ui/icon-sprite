@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FunctionSquare as DevIcon } from "lucide-react";
+import { SquareFunction as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FunctionSquare(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Train as DevIcon } from "lucide-react";
+import { TramFront as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Train(props: IconProps) {

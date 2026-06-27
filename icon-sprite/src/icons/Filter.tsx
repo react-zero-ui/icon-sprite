@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Filter as DevIcon } from "lucide-react";
+import { Funnel as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Filter(props: IconProps) {

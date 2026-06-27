@@ -29,6 +29,11 @@
     "spriteId": "activity",
     "svgFile": "activity.svg"
   },
+  "Ad": {
+    "pack": "lucide",
+    "spriteId": "ad",
+    "svgFile": "ad.svg"
+  },
   "AirVent": {
     "pack": "lucide",
     "spriteId": "air-vent",
@@ -829,6 +834,11 @@
     "spriteId": "banknote-arrow-up",
     "svgFile": "banknote-arrow-up.svg"
   },
+  "BanknoteCheck": {
+    "pack": "lucide",
+    "spriteId": "banknote-check",
+    "svgFile": "banknote-check.svg"
+  },
   "BanknoteX": {
     "pack": "lucide",
     "spriteId": "banknote-x",
@@ -1094,6 +1104,11 @@
     "spriteId": "blend",
     "svgFile": "blend.svg"
   },
+  "Blender": {
+    "pack": "lucide",
+    "spriteId": "blender",
+    "svgFile": "blender.svg"
+  },
   "Blinds": {
     "pack": "lucide",
     "spriteId": "blinds",
@@ -1138,6 +1153,11 @@
     "pack": "lucide",
     "spriteId": "bomb",
     "svgFile": "bomb.svg"
+  },
+  "BoneFracture": {
+    "pack": "lucide",
+    "spriteId": "bone-fracture",
+    "svgFile": "bone-fracture.svg"
   },
   "Bone": {
     "pack": "lucide",
@@ -1418,6 +1438,11 @@
     "pack": "lucide",
     "spriteId": "bring-to-front",
     "svgFile": "bring-to-front.svg"
+  },
+  "Broccoli": {
+    "pack": "lucide",
+    "spriteId": "broccoli",
+    "svgFile": "broccoli.svg"
   },
   "BrushCleaning": {
     "pack": "lucide",
@@ -2034,6 +2059,16 @@
     "spriteId": "chevrons-up",
     "svgFile": "chevrons-up.svg"
   },
+  "Chrome": {
+    "pack": "lucide",
+    "spriteId": "chrome",
+    "svgFile": "chrome.svg"
+  },
+  "Chromium": {
+    "pack": "lucide",
+    "spriteId": "chromium",
+    "svgFile": "chromium.svg"
+  },
   "Church": {
     "pack": "lucide",
     "spriteId": "church",
@@ -2444,6 +2479,16 @@
     "spriteId": "clock-arrow-down",
     "svgFile": "clock-arrow-down.svg"
   },
+  "ClockArrowLeft": {
+    "pack": "lucide",
+    "spriteId": "clock-arrow-left",
+    "svgFile": "clock-arrow-left.svg"
+  },
+  "ClockArrowRight": {
+    "pack": "lucide",
+    "spriteId": "clock-arrow-right",
+    "svgFile": "clock-arrow-right.svg"
+  },
   "ClockArrowUp": {
     "pack": "lucide",
     "spriteId": "clock-arrow-up",
@@ -2608,6 +2653,16 @@
     "pack": "lucide",
     "spriteId": "code",
     "svgFile": "code.svg"
+  },
+  "Codepen": {
+    "pack": "lucide",
+    "spriteId": "codepen",
+    "svgFile": "codepen.svg"
+  },
+  "Codesandbox": {
+    "pack": "lucide",
+    "spriteId": "codesandbox",
+    "svgFile": "codesandbox.svg"
   },
   "Coffee": {
     "pack": "lucide",
@@ -3094,6 +3149,11 @@
     "spriteId": "drama",
     "svgFile": "drama.svg"
   },
+  "Dribbble": {
+    "pack": "lucide",
+    "spriteId": "dribbble",
+    "svgFile": "dribbble.svg"
+  },
   "Drill": {
     "pack": "lucide",
     "spriteId": "drill",
@@ -3259,6 +3319,11 @@
     "spriteId": "eye-closed",
     "svgFile": "eye-closed.svg"
   },
+  "EyeDashed": {
+    "pack": "lucide",
+    "spriteId": "eye-dashed",
+    "svgFile": "eye-dashed.svg"
+  },
   "EyeOff": {
     "pack": "lucide",
     "spriteId": "eye-off",
@@ -3268,6 +3333,11 @@
     "pack": "lucide",
     "spriteId": "eye",
     "svgFile": "eye.svg"
+  },
+  "Facebook": {
+    "pack": "lucide",
+    "spriteId": "facebook",
+    "svgFile": "facebook.svg"
   },
   "Factory": {
     "pack": "lucide",
@@ -3298,6 +3368,11 @@
     "pack": "lucide",
     "spriteId": "ferris-wheel",
     "svgFile": "ferris-wheel.svg"
+  },
+  "Figma": {
+    "pack": "lucide",
+    "spriteId": "figma",
+    "svgFile": "figma.svg"
   },
   "FileArchive": {
     "pack": "lucide",
@@ -4074,6 +4149,11 @@
     "spriteId": "frame",
     "svgFile": "frame.svg"
   },
+  "Framer": {
+    "pack": "lucide",
+    "spriteId": "framer",
+    "svgFile": "framer.svg"
+  },
   "Frown": {
     "pack": "lucide",
     "spriteId": "frown",
@@ -4284,6 +4364,16 @@
     "spriteId": "git-pull-request",
     "svgFile": "git-pull-request.svg"
   },
+  "Github": {
+    "pack": "lucide",
+    "spriteId": "github",
+    "svgFile": "github.svg"
+  },
+  "Gitlab": {
+    "pack": "lucide",
+    "spriteId": "gitlab",
+    "svgFile": "gitlab.svg"
+  },
   "GlassWater": {
     "pack": "lucide",
     "spriteId": "glass-water",
@@ -4298,6 +4388,11 @@
     "pack": "lucide",
     "spriteId": "globe-2",
     "svgFile": "globe-2.svg"
+  },
+  "GlobeCheck": {
+    "pack": "lucide",
+    "spriteId": "globe-check",
+    "svgFile": "globe-check.svg"
   },
   "GlobeLock": {
     "pack": "lucide",
@@ -4819,6 +4914,11 @@
     "spriteId": "inspection-panel",
     "svgFile": "inspection-panel.svg"
   },
+  "Instagram": {
+    "pack": "lucide",
+    "spriteId": "instagram",
+    "svgFile": "instagram.svg"
+  },
   "Italic": {
     "pack": "lucide",
     "spriteId": "italic",
@@ -5134,6 +5234,11 @@
     "spriteId": "link",
     "svgFile": "link.svg"
   },
+  "Linkedin": {
+    "pack": "lucide",
+    "spriteId": "linkedin",
+    "svgFile": "linkedin.svg"
+  },
   "ListCheck": {
     "pack": "lucide",
     "spriteId": "list-check",
@@ -5208,6 +5313,16 @@
     "pack": "lucide",
     "spriteId": "list-restart",
     "svgFile": "list-restart.svg"
+  },
+  "ListSortAscending": {
+    "pack": "lucide",
+    "spriteId": "list-sort-ascending",
+    "svgFile": "list-sort-ascending.svg"
+  },
+  "ListSortDescending": {
+    "pack": "lucide",
+    "spriteId": "list-sort-descending",
+    "svgFile": "list-sort-descending.svg"
   },
   "ListStart": {
     "pack": "lucide",
@@ -6384,6 +6499,11 @@
     "spriteId": "paperclip",
     "svgFile": "paperclip.svg"
   },
+  "Parasol": {
+    "pack": "lucide",
+    "spriteId": "parasol",
+    "svgFile": "parasol.svg"
+  },
   "Parentheses": {
     "pack": "lucide",
     "spriteId": "parentheses",
@@ -6488,6 +6608,11 @@
     "pack": "lucide",
     "spriteId": "pencil-ruler",
     "svgFile": "pencil-ruler.svg"
+  },
+  "PencilSparkles": {
+    "pack": "lucide",
+    "spriteId": "pencil-sparkles",
+    "svgFile": "pencil-sparkles.svg"
   },
   "Pencil": {
     "pack": "lucide",
@@ -6674,6 +6799,11 @@
     "spriteId": "play-circle",
     "svgFile": "play-circle.svg"
   },
+  "PlayOff": {
+    "pack": "lucide",
+    "spriteId": "play-off",
+    "svgFile": "play-off.svg"
+  },
   "PlaySquare": {
     "pack": "lucide",
     "spriteId": "play-square",
@@ -6724,10 +6854,20 @@
     "spriteId": "pocket-knife",
     "svgFile": "pocket-knife.svg"
   },
+  "Pocket": {
+    "pack": "lucide",
+    "spriteId": "pocket",
+    "svgFile": "pocket.svg"
+  },
   "Podcast": {
     "pack": "lucide",
     "spriteId": "podcast",
     "svgFile": "podcast.svg"
+  },
+  "Podium": {
+    "pack": "lucide",
+    "spriteId": "podium",
+    "svgFile": "podium.svg"
   },
   "PointerOff": {
     "pack": "lucide",
@@ -6868,6 +7008,11 @@
     "pack": "lucide",
     "spriteId": "radius",
     "svgFile": "radius.svg"
+  },
+  "RailSymbol": {
+    "pack": "lucide",
+    "spriteId": "rail-symbol",
+    "svgFile": "rail-symbol.svg"
   },
   "Rainbow": {
     "pack": "lucide",
@@ -7209,10 +7354,25 @@
     "spriteId": "save-all",
     "svgFile": "save-all.svg"
   },
+  "SaveCheck": {
+    "pack": "lucide",
+    "spriteId": "save-check",
+    "svgFile": "save-check.svg"
+  },
   "SaveOff": {
     "pack": "lucide",
     "spriteId": "save-off",
     "svgFile": "save-off.svg"
+  },
+  "SavePen": {
+    "pack": "lucide",
+    "spriteId": "save-pen",
+    "svgFile": "save-pen.svg"
+  },
+  "SavePlus": {
+    "pack": "lucide",
+    "spriteId": "save-plus",
+    "svgFile": "save-plus.svg"
   },
   "Save": {
     "pack": "lucide",
@@ -7693,6 +7853,11 @@
     "pack": "lucide",
     "spriteId": "skull",
     "svgFile": "skull.svg"
+  },
+  "Slack": {
+    "pack": "lucide",
+    "spriteId": "slack",
+    "svgFile": "slack.svg"
   },
   "SlashSquare": {
     "pack": "lucide",
@@ -8274,15 +8439,35 @@
     "spriteId": "stamp",
     "svgFile": "stamp.svg"
   },
+  "StarCheck": {
+    "pack": "lucide",
+    "spriteId": "star-check",
+    "svgFile": "star-check.svg"
+  },
   "StarHalf": {
     "pack": "lucide",
     "spriteId": "star-half",
     "svgFile": "star-half.svg"
   },
+  "StarMinus": {
+    "pack": "lucide",
+    "spriteId": "star-minus",
+    "svgFile": "star-minus.svg"
+  },
   "StarOff": {
     "pack": "lucide",
     "spriteId": "star-off",
     "svgFile": "star-off.svg"
+  },
+  "StarPlus": {
+    "pack": "lucide",
+    "spriteId": "star-plus",
+    "svgFile": "star-plus.svg"
+  },
+  "StarX": {
+    "pack": "lucide",
+    "spriteId": "star-x",
+    "svgFile": "star-x.svg"
   },
   "Star": {
     "pack": "lucide",
@@ -8314,10 +8499,40 @@
     "spriteId": "sticker",
     "svgFile": "sticker.svg"
   },
+  "StickyNoteCheck": {
+    "pack": "lucide",
+    "spriteId": "sticky-note-check",
+    "svgFile": "sticky-note-check.svg"
+  },
+  "StickyNoteMinus": {
+    "pack": "lucide",
+    "spriteId": "sticky-note-minus",
+    "svgFile": "sticky-note-minus.svg"
+  },
+  "StickyNoteOff": {
+    "pack": "lucide",
+    "spriteId": "sticky-note-off",
+    "svgFile": "sticky-note-off.svg"
+  },
+  "StickyNotePlus": {
+    "pack": "lucide",
+    "spriteId": "sticky-note-plus",
+    "svgFile": "sticky-note-plus.svg"
+  },
+  "StickyNoteX": {
+    "pack": "lucide",
+    "spriteId": "sticky-note-x",
+    "svgFile": "sticky-note-x.svg"
+  },
   "StickyNote": {
     "pack": "lucide",
     "spriteId": "sticky-note",
     "svgFile": "sticky-note.svg"
+  },
+  "StickyNotes": {
+    "pack": "lucide",
+    "spriteId": "sticky-notes",
+    "svgFile": "sticky-notes.svg"
   },
   "Stone": {
     "pack": "lucide",
@@ -8358,6 +8573,11 @@
     "pack": "lucide",
     "spriteId": "subtitles",
     "svgFile": "subtitles.svg"
+  },
+  "Summary": {
+    "pack": "lucide",
+    "spriteId": "summary",
+    "svgFile": "summary.svg"
   },
   "SunDim": {
     "pack": "lucide",
@@ -8488,6 +8708,16 @@
     "pack": "lucide",
     "spriteId": "tablets",
     "svgFile": "tablets.svg"
+  },
+  "TagPlus": {
+    "pack": "lucide",
+    "spriteId": "tag-plus",
+    "svgFile": "tag-plus.svg"
+  },
+  "TagX": {
+    "pack": "lucide",
+    "spriteId": "tag-x",
+    "svgFile": "tag-x.svg"
   },
   "Tag": {
     "pack": "lucide",
@@ -8869,6 +9099,11 @@
     "spriteId": "trees",
     "svgFile": "trees.svg"
   },
+  "Trello": {
+    "pack": "lucide",
+    "spriteId": "trello",
+    "svgFile": "trello.svg"
+  },
   "TrendingDown": {
     "pack": "lucide",
     "spriteId": "trending-down",
@@ -8953,6 +9188,16 @@
     "pack": "lucide",
     "spriteId": "tv",
     "svgFile": "tv.svg"
+  },
+  "Twitch": {
+    "pack": "lucide",
+    "spriteId": "twitch",
+    "svgFile": "twitch.svg"
+  },
+  "Twitter": {
+    "pack": "lucide",
+    "spriteId": "twitter",
+    "svgFile": "twitter.svg"
   },
   "TypeOutline": {
     "pack": "lucide",
@@ -9123,6 +9368,11 @@
     "pack": "lucide",
     "spriteId": "user-plus",
     "svgFile": "user-plus.svg"
+  },
+  "UserRoundArrowLeft": {
+    "pack": "lucide",
+    "spriteId": "user-round-arrow-left",
+    "svgFile": "user-round-arrow-left.svg"
   },
   "UserRoundCheck": {
     "pack": "lucide",
@@ -9439,6 +9689,11 @@
     "spriteId": "waypoints",
     "svgFile": "waypoints.svg"
   },
+  "WebcamOff": {
+    "pack": "lucide",
+    "spriteId": "webcam-off",
+    "svgFile": "webcam-off.svg"
+  },
   "Webcam": {
     "pack": "lucide",
     "spriteId": "webcam",
@@ -9554,6 +9809,11 @@
     "spriteId": "wrap-text",
     "svgFile": "wrap-text.svg"
   },
+  "WrenchOff": {
+    "pack": "lucide",
+    "spriteId": "wrench-off",
+    "svgFile": "wrench-off.svg"
+  },
   "Wrench": {
     "pack": "lucide",
     "spriteId": "wrench",
@@ -9583,6 +9843,11 @@
     "pack": "lucide",
     "spriteId": "x",
     "svgFile": "x.svg"
+  },
+  "Youtube": {
+    "pack": "lucide",
+    "spriteId": "youtube",
+    "svgFile": "youtube.svg"
   },
   "ZapOff": {
     "pack": "lucide",

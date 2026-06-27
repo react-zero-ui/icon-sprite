@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { IceCream2 as DevIcon } from "lucide-react";
+import { IceCreamBowl as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function IceCream2(props: IconProps) {

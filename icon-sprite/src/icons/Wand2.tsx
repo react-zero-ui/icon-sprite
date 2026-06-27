@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Wand2 as DevIcon } from "lucide-react";
+import { WandSparkles as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Wand2(props: IconProps) {

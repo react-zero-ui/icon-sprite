@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { CheckCircle as DevIcon } from "lucide-react";
+import { CircleCheckBig as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function CheckCircle(props: IconProps) {

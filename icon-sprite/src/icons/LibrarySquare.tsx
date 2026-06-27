@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { LibrarySquare as DevIcon } from "lucide-react";
+import { SquareLibrary as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function LibrarySquare(props: IconProps) {

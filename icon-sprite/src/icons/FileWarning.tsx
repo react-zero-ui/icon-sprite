@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileWarning as DevIcon } from "lucide-react";
+import { FileExclamationPoint as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileWarning(props: IconProps) {

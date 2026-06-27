@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AsteriskSquare as DevIcon } from "lucide-react";
+import { SquareAsterisk as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AsteriskSquare(props: IconProps) {

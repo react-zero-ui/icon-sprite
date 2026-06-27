@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { SortDesc as DevIcon } from "lucide-react";
+import { ArrowDownWideNarrow as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function SortDesc(props: IconProps) {

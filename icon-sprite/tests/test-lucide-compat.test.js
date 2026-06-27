@@ -52,16 +52,67 @@ function getLucideReactExports() {
 	return iconExports;
 }
 
+function getArchivedLucideSvgFiles() {
+	const iconsDir = path.resolve(__dirname, "../scripts/lucide-icons");
+	if (!fs.existsSync(iconsDir)) return new Set();
+
+	return new Set(
+		fs.readdirSync(iconsDir)
+			.filter((file) => file.endsWith(".svg"))
+	);
+}
+
+function getSkippedLucideSvgFiles() {
+	const skippedFile = path.resolve(__dirname, "../scripts/skipped-icons.json");
+	if (!fs.existsSync(skippedFile)) return new Set();
+
+	const skipped = JSON.parse(fs.readFileSync(skippedFile, "utf8"));
+	return new Set(
+		skipped
+			.filter((item) => item.pack === "lucide")
+			.map((item) => `${item.svgId}.svg`)
+	);
+}
+
+function getLucideSpriteMapping() {
+	const mappingFile = path.resolve(__dirname, "../scripts/component-sprite-map.json");
+	if (!fs.existsSync(mappingFile)) {
+		throw new Error("component-sprite-map.json not found. Run build first.");
+	}
+
+	const mapping = JSON.parse(fs.readFileSync(mappingFile, "utf8"));
+	const bySvgFile = new Map();
+	for (const [componentName, info] of Object.entries(mapping)) {
+		if (info.pack === "lucide") {
+			bySvgFile.set(info.svgFile, componentName);
+		}
+	}
+	return bySvgFile;
+}
+
 // Run the test
 try {
 	const ourExports = getOurExports();
 	const lucideExports = getLucideReactExports();
+	const archivedLucideSvgFiles = getArchivedLucideSvgFiles();
+	const skippedLucideSvgFiles = getSkippedLucideSvgFiles();
+	const lucideMapping = getLucideSpriteMapping();
 	
 	// Find icons in lucide-react that we don't have
 	const missing = [];
 	for (const name of lucideExports) {
 		if (!ourExports.has(name)) {
 			missing.push(name);
+		}
+	}
+
+	const missingArchived = [];
+	for (const svgFile of archivedLucideSvgFiles) {
+		if (skippedLucideSvgFiles.has(svgFile)) continue;
+
+		const componentName = lucideMapping.get(svgFile);
+		if (!componentName || !ourExports.has(componentName)) {
+			missingArchived.push(svgFile);
 		}
 	}
 	
@@ -75,6 +126,7 @@ try {
 	
 	console.log(`📊 Export comparison:`);
 	console.log(`   lucide-react exports: ${lucideExports.size} icons`);
+	console.log(`   archived Lucide SVGs: ${archivedLucideSvgFiles.size} icons`);
 	console.log(`   Our library exports:  ${ourExports.size} items (icons + types)`);
 	
 	if (missing.length > 0) {
@@ -83,12 +135,22 @@ try {
 		console.error(`\n   Users importing these from lucide-react won't find them in our library.`);
 		process.exit(1);
 	}
+
+	if (missingArchived.length > 0) {
+		console.error(`\n❌ Missing ${missingArchived.length} archived Lucide icons:`);
+		console.error(`   ${missingArchived.slice(0, 20).join(", ")}${missingArchived.length > 20 ? "..." : ""}`);
+		console.error(`\n   Users importing these from older lucide-react versions won't find them in our library.`);
+		process.exit(1);
+	}
 	
 	if (extras.length > 0) {
 		console.log(`   Extra exports: ${extras.length} (CustomIcon, types, etc.)`);
 	}
 	
 	console.log(`\n✅ All ${lucideExports.size} lucide-react icons are available.`);
+	if (archivedLucideSvgFiles.size > 0) {
+		console.log(`   All ${archivedLucideSvgFiles.size - skippedLucideSvgFiles.size} archived Lucide SVGs are mapped to exports.`);
+	}
 	console.log(`   Drop-in replacement supported! ✨`);
 	
 } catch (e) {

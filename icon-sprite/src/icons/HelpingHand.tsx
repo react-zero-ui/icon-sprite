@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { HelpingHand as DevIcon } from "lucide-react";
+import { HandHelping as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function HelpingHand(props: IconProps) {

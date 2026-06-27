@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Subtitles as DevIcon } from "lucide-react";
+import { Captions as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Subtitles(props: IconProps) {

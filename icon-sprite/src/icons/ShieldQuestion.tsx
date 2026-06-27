@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ShieldQuestion as DevIcon } from "lucide-react";
+import { ShieldQuestionMark as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ShieldQuestion(props: IconProps) {

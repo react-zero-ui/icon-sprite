@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileAudio2 as DevIcon } from "lucide-react";
+import { FileHeadphone as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileAudio2(props: IconProps) {

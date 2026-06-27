@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Globe2 as DevIcon } from "lucide-react";
+import { Earth as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Globe2(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { AreaChart as DevIcon } from "lucide-react";
+import { ChartArea as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function AreaChart(props: IconProps) {

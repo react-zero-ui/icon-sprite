@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { FileVideo as DevIcon } from "lucide-react";
+import { FilePlay as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function FileVideo(props: IconProps) {

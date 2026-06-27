@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ChevronLeftCircle as DevIcon } from "lucide-react";
+import { CircleChevronLeft as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ChevronLeftCircle(props: IconProps) {

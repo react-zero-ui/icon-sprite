@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { ArrowRightCircle as DevIcon } from "lucide-react";
+import { CircleArrowRight as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function ArrowRightCircle(props: IconProps) {

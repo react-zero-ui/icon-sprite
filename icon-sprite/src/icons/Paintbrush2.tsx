@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Paintbrush2 as DevIcon } from "lucide-react";
+import { PaintbrushVertical as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Paintbrush2(props: IconProps) {

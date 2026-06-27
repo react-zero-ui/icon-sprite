@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { Sidebar as DevIcon } from "lucide-react";
+import { PanelLeft as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function Sidebar(props: IconProps) {

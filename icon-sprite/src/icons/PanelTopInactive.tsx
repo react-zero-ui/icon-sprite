@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { PanelTopInactive as DevIcon } from "lucide-react";
+import { PanelTopDashed as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function PanelTopInactive(props: IconProps) {

@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { GanttChart as DevIcon } from "lucide-react";
+import { ChartNoAxesGantt as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function GanttChart(props: IconProps) {

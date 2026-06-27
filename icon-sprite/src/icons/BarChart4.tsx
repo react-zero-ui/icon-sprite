@@ -1,5 +1,5 @@
 import { SPRITE_PATH } from "../config.js";
-import { BarChart4 as DevIcon } from "lucide-react";
+import { ChartColumnIncreasing as DevIcon } from "lucide-react";
 import { renderUse, type IconProps } from "../_shared.js";
 
 export function BarChart4(props: IconProps) {
