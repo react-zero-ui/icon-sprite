@@ -38,6 +38,11 @@ const testSuites = [
 		file: "test-scanner-exclusion.test.js",
 		description: "Verify directory exclusion and ROOT_DIR functionality",
 	},
+	{
+		name: "Tabler Resolution Tests",
+		file: "test-tabler-resolution.test.js",
+		description: "Verify Tabler SVGs resolve through the package export map",
+	},
 ];
 
 // Color codes for terminal output

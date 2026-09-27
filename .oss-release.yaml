@@ -1,0 +1,11 @@
+version: 1
+repository: react-zero-ui/icon-sprite
+branch: main
+targets:
+  - github
+  - npm
+github:
+  tagPrefix: v
+  assets: []
+npm:
+  packageDir: icon-sprite

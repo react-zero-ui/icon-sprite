@@ -8,6 +8,7 @@ import { createRequire } from "module";
 import { fileURLToPath } from "url";
 import svgstore from "svgstore";
 import { ICONS } from "./used-icons.js";
+import { resolveTablerIconsDir } from "./resolve-icon-pack.js";
 import { loadConfig } from "../dist/loadConfig.js";
 
 const require = createRequire(import.meta.url);
@@ -38,26 +39,6 @@ function resolveLucideIconsDir() {
 	
 	// Fallback: check in process.cwd()/node_modules
 	const fallbackPath = path.join(process.cwd(), "node_modules", "lucide-static", "icons");
-	if (fs.existsSync(fallbackPath)) {
-		return fallbackPath;
-	}
-	
-	return null;
-}
-
-function resolveTablerIconsDir() {
-	try {
-		// First try to find @tabler/icons package.json
-		const pkgPath = require.resolve("@tabler/icons/package.json");
-		const pkgDir = path.dirname(pkgPath);
-		const outlineDir = path.join(pkgDir, "icons", "outline");
-		if (fs.existsSync(outlineDir)) {
-			return outlineDir;
-		}
-	} catch {}
-	
-	// Fallback: check in process.cwd()/node_modules
-	const fallbackPath = path.join(process.cwd(), "node_modules", "@tabler", "icons", "icons", "outline");
 	if (fs.existsSync(fallbackPath)) {
 		return fallbackPath;
 	}

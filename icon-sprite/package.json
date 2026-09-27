@@ -1,6 +1,6 @@
 {
   "name": "@react-zero-ui/icon-sprite",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Generate a single SVG sprite containing only the icons you used (Lucide + Tabler + custom). Lucid to SVG sprite solution for React.",
   "keywords": [
     "react",

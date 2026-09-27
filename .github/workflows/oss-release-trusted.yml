@@ -1,0 +1,137 @@
+name: OSS Release Trusted Publishing
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version
+        required: true
+        type: string
+      release_tag:
+        description: GitHub release tag containing any exact prebuilt artifacts
+        required: false
+        default: ""
+        type: string
+      targets:
+        description: Comma-separated trusted publishing targets
+        required: true
+        type: string
+      npm_dir:
+        description: npm package directory
+        required: false
+        default: .
+        type: string
+      pypi_dir:
+        description: PyPI package directory
+        required: false
+        default: .
+        type: string
+      vscode_dir:
+        description: VS Code extension directory
+        required: false
+        default: .
+        type: string
+      vscode_artifact_names:
+        description: Comma-separated exact GitHub Release VSIX asset names
+        required: false
+        default: ""
+        type: string
+      mcp_server_file:
+        description: MCP server.json path
+        required: false
+        default: server.json
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        if: contains(inputs.targets, 'npm') || contains(inputs.targets, 'vscode_marketplace')
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Verify package version
+        if: contains(inputs.targets, 'npm')
+        working-directory: ${{ inputs.npm_dir }}
+        run: test "$(node -p "require('./package.json').version")" = "${{ inputs.version }}"
+      - name: Install dependencies
+        if: contains(inputs.targets, 'npm')
+        working-directory: ${{ inputs.npm_dir }}
+        run: npm ci
+      - name: Publish to npm
+        if: contains(inputs.targets, 'npm')
+        working-directory: ${{ inputs.npm_dir }}
+        run: |
+          npm install --global npm@latest
+          npm publish --access public
+
+      - name: Set up Python
+        if: contains(inputs.targets, 'pypi')
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Build distribution
+        if: contains(inputs.targets, 'pypi')
+        working-directory: ${{ inputs.pypi_dir }}
+        run: |
+          python -m pip install --upgrade build
+          python -m build --outdir "$GITHUB_WORKSPACE/dist"
+      - name: Publish to PyPI
+        if: contains(inputs.targets, 'pypi')
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Install VS Code extension dependencies
+        if: contains(inputs.targets, 'vscode_marketplace') && inputs.vscode_artifact_names == ''
+        working-directory: ${{ inputs.vscode_dir }}
+        run: npm ci
+      - name: Publish VS Code extension from source
+        if: contains(inputs.targets, 'vscode_marketplace') && inputs.vscode_artifact_names == ''
+        working-directory: ${{ inputs.vscode_dir }}
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npx --yes @vscode/vsce@4.0.0 publish --skip-duplicate
+      - name: Download exact VS Code release artifacts
+        if: contains(inputs.targets, 'vscode_marketplace') && inputs.vscode_artifact_names != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          destination="$RUNNER_TEMP/oss-release-vscode"
+          mkdir -p "$destination"
+          IFS=',' read -ra names <<< "${{ inputs.vscode_artifact_names }}"
+          for name in "${names[@]}"; do
+            gh release download "${{ inputs.release_tag }}" --repo "$GITHUB_REPOSITORY" --pattern "$name" --dir "$destination"
+            test -f "$destination/$name"
+          done
+      - name: Publish exact VS Code release artifacts
+        if: contains(inputs.targets, 'vscode_marketplace') && inputs.vscode_artifact_names != ''
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          set -euo pipefail
+          destination="$RUNNER_TEMP/oss-release-vscode"
+          IFS=',' read -ra names <<< "${{ inputs.vscode_artifact_names }}"
+          for name in "${names[@]}"; do
+            npx --yes @vscode/vsce@4.0.0 publish --packagePath "$destination/$name" --skip-duplicate
+          done
+
+      - name: Install MCP publisher
+        if: contains(inputs.targets, 'mcp_registry')
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+      - name: Authenticate to MCP Registry
+        if: contains(inputs.targets, 'mcp_registry')
+        run: ./mcp-publisher login github-oidc
+      - name: Publish to MCP Registry
+        if: contains(inputs.targets, 'mcp_registry')
+        run: ./mcp-publisher publish "${{ inputs.mcp_server_file }}"
