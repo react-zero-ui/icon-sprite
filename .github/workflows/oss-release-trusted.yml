@@ -19,7 +19,7 @@ on:
       npm_dir:
         description: npm package directory
         required: false
-        default: .
+        default: packages/icon-sprite
         type: string
       pypi_dir:
         description: PyPI package directory
@@ -56,9 +56,13 @@ jobs:
         if: contains(inputs.targets, 'npm') || contains(inputs.targets, 'vscode_marketplace')
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
+
+      - name: Use the repository npm version
+        if: contains(inputs.targets, 'npm') || contains(inputs.targets, 'vscode_marketplace')
+        run: npm install --global "$(node -p "require('./package.json').packageManager")"
 
       - name: Verify package version
         if: contains(inputs.targets, 'npm')
@@ -66,13 +70,14 @@ jobs:
         run: test "$(node -p "require('./package.json').version")" = "${{ inputs.version }}"
       - name: Install dependencies
         if: contains(inputs.targets, 'npm')
-        working-directory: ${{ inputs.npm_dir }}
         run: npm ci
+      - name: Check package
+        if: contains(inputs.targets, 'npm')
+        run: npm run check
       - name: Publish to npm
         if: contains(inputs.targets, 'npm')
         working-directory: ${{ inputs.npm_dir }}
         run: |
-          npm install --global npm@latest
           npm publish --access public
 
       - name: Set up Python

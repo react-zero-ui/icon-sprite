@@ -1,46 +1,29 @@
-# dependencies
+# Dependencies and build output
 node_modules/
-/lucide-static
-/lucide-react
-/dist
-# package-lock.json
-package-lock.json
-!icon-sprite/package-lock.json
-
-# testing
-/coverage
-/playwright-report
-sprite-icons/type-errors.log
-# next.js
-/.next/
-/out/
-.vercel
 dist/
-
-# playwright
-/test-results
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# typescript
+.next/
+out/
+build/
+coverage/
+playwright-report/
+test-results/
 *.tsbuildinfo
 next-env.d.ts
-
-# VS Code
-# .vscode/
-# *.code-workspace
-.history/
 *.tgz
 
+# Generated from packages/icon-sprite/assets/lucide and installed icon packs
+/packages/icon-sprite/src/icons/
+/packages/icon-sprite/src/lucide-archive/
+/packages/icon-sprite/src/index.ts
+/packages/icon-sprite/generated/
+/fixtures/next-app/public/icons.svg
 
+# Local assets, credentials, and editor state
+.env*
+*.pem
+.DS_Store
+.vercel/
+.history/
+**/.vscode/settings.json
+*-debug.log*
+type-errors.log

@@ -1,0 +1,170 @@
+import assert from "node:assert/strict";
+import { execFileSync, spawnSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { generateSprite } from "../dist/cli/generate-sprite.js";
+import { createProject, svg, writeProject } from "./cli-fixtures.js";
+
+const cli = fileURLToPath(new URL("../dist/cli/index.js", import.meta.url));
+
+function symbolIds(file) {
+  return [...fs.readFileSync(file, "utf8").matchAll(/<symbol\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]).sort();
+}
+
+test("sprite contains both packs and every custom SVG, with attributes and CSS stroke width", async (t) => {
+  const root = createProject(t, {
+    "src/view.tsx": `import { Check, IconCheck, CustomIcon, MyLogo } from "@react-zero-ui/icon-sprite";
+			export const icons = <><Check/><Check/><IconCheck/><CustomIcon name="CaseSensitive"/><MyLogo/></>;`,
+    "public/zero-ui-icons/my-logo.svg": svg,
+    "public/zero-ui-icons/CaseSensitive.svg": svg,
+    "public/zero-ui-icons/unused.svg": svg,
+    "public/zero-ui-icons/notes.txt": "not an SVG",
+  });
+  const result = await generateSprite(root);
+  assert.deepEqual(symbolIds(result.outputFile), ["CaseSensitive", "check", "my-logo", "tabler-check", "unused"]);
+  assert.equal(result.iconCount, 5);
+  assert.deepEqual(result.warnings, []);
+  const output = fs.readFileSync(result.outputFile, "utf8");
+  assert.match(output, /viewBox="0 0 16 16"/);
+  assert.match(output, /fill="none"/);
+  assert.match(output, /stroke="currentColor"/);
+  assert.match(output, /stroke-width="var\(--icon-stroke-width, 2\)"/);
+  assert.match(output, /aria-hidden="true"/);
+});
+
+test("nested sprite paths stay under the configured consumer output directory", async (t) => {
+  const root = createProject(t, {
+    "zero-ui.config.js":
+      'export default { OUTPUT_DIR: "static", SPRITE_PATH: "/assets/icons/site.svg", CUSTOM_SVG_DIR: "logos" };',
+    "src/index.js": "export const value = 1;",
+    "static/logos/only-custom.svg": svg,
+  });
+  const result = await generateSprite(root);
+  assert.equal(result.outputFile, path.join(root, "static/assets/icons/site.svg"));
+  assert.deepEqual(symbolIds(result.outputFile), ["only-custom"]);
+});
+
+test("repeated and concurrent consumers stay isolated and rescan changed sources", async (t) => {
+  const cwd = process.cwd();
+  const first = createProject(t, {
+    "zero-ui.config.js": String.raw`import fs from "node:fs";
+			fs.appendFileSync(new URL("./config-loads", import.meta.url), "loaded\n");
+			export default { ROOT_DIR: "app" };`,
+    "app/icon.js": 'import { Check } from "@react-zero-ui/icon-sprite"; export const icons = [Check];',
+  });
+  const second = createProject(t, {
+    "zero-ui.config.js": 'export default { OUTPUT_DIR: "static", SPRITE_PATH: "/other.svg" };',
+    "src/icon.js": 'import { Heart } from "@react-zero-ui/icon-sprite"; export const icons = [Heart];',
+  });
+  const [a, b] = await Promise.all([generateSprite(first), generateSprite(second)]);
+  assert.deepEqual(symbolIds(a.outputFile), ["check"]);
+  assert.deepEqual(symbolIds(b.outputFile), ["heart"]);
+  assert.equal(fs.readFileSync(path.join(first, "config-loads"), "utf8"), "loaded\n");
+  writeProject(first, {
+    "app/icon.js": 'import { Star } from "@react-zero-ui/icon-sprite"; export const icons = [Star];',
+  });
+  const repeat = await generateSprite(first);
+  assert.deepEqual(symbolIds(repeat.outputFile), ["star"]);
+  assert.deepEqual(symbolIds(b.outputFile), ["heart"]);
+  assert.equal(process.cwd(), cwd);
+});
+
+test("missing icons remain warning-only, including static custom names", async (t) => {
+  const root = createProject(t, {
+    "src/view.jsx": `import { UnknownIcon, CustomIcon, Check } from "@react-zero-ui/icon-sprite";
+			export const icons = <><UnknownIcon/><CustomIcon name="missing-logo"/><Check/></>;`,
+  });
+  const result = await generateSprite(root);
+  assert.deepEqual(symbolIds(result.outputFile), ["check"]);
+  assert.equal(result.warnings.length, 2);
+  assert.match(result.warnings[0], /Missing icon: UnknownIcon/);
+  assert.match(result.warnings[1], /Missing custom icon: missing-logo/);
+  const run = spawnSync(process.execPath, [cli], { cwd: root, encoding: "utf8" });
+  assert.equal(run.status, 0, run.stderr);
+  assert.match(run.stderr, /Missing icon: UnknownIcon/);
+  assert.match(run.stdout, /with 1 icons/);
+});
+
+test("custom SVG symlinks are bundled even without source references", async (t) => {
+  const root = createProject(t, { "src/index.js": "", "assets/logo.svg": svg });
+  fs.mkdirSync(path.join(root, "public/zero-ui-icons"), { recursive: true });
+  fs.symlinkSync(path.join(root, "assets/logo.svg"), path.join(root, "public/zero-ui-icons/linked.svg"));
+  const result = await generateSprite(root);
+  assert.deepEqual(symbolIds(result.outputFile), ["linked"]);
+  assert.deepEqual(result.warnings, []);
+});
+
+test("an empty source tree produces an empty sprite, not stale icons", async (t) => {
+  const root = createProject(t, { "src/index.js": "", "public/icons.svg": "old output" });
+  const result = await generateSprite(root);
+  assert.equal(result.iconCount, 0);
+  assert.deepEqual(symbolIds(result.outputFile), []);
+  assert.deepEqual(result.warnings, []);
+});
+
+test("parse and SVG failures do not replace an existing output", async (t) => {
+  for (const files of [
+    { "src/view.jsx": "export const broken = <;" },
+    {
+      "src/view.jsx":
+        'import { Icon } from "@react-zero-ui/icon-sprite"; export const icon = <Icon name={props.name}/>;',
+    },
+    { "src/view.js": "", "public/zero-ui-icons/broken.svg": "<html/>" },
+  ]) {
+    const root = createProject(t, { ...files, "public/icons.svg": "previous sprite" });
+    await assert.rejects(generateSprite(root));
+    assert.equal(fs.readFileSync(path.join(root, "public/icons.svg"), "utf8"), "previous sprite");
+    assert.deepEqual(
+      fs.readdirSync(path.join(root, "public")).filter((name) => name.endsWith(".tmp")),
+      [],
+    );
+  }
+});
+
+test("write failures clean up the temporary output and preserve the existing target", async (t) => {
+  const root = createProject(t, { "src/index.js": "", "public/icons.svg/keep": "existing directory" });
+  await assert.rejects(generateSprite(root));
+  assert.equal(fs.readFileSync(path.join(root, "public/icons.svg/keep"), "utf8"), "existing directory");
+  assert.deepEqual(fs.readdirSync(path.join(root, "public")), ["icons.svg"]);
+});
+
+test("imports do not load consumer configuration or generate output", (t) => {
+  const root = createProject(t, {
+    "zero-ui.config.js":
+      'import fs from "node:fs"; fs.writeFileSync(new URL("./loaded", import.meta.url), "unexpected"); export default {};',
+  });
+  const modules = ["../dist/cli/index.js", "../dist/cli/generate-sprite.js", "../dist/config-loader.js"].map(
+    (relative) => new URL(relative, import.meta.url).href,
+  );
+  const script = modules.map((url) => `await import(${JSON.stringify(url)});`).join("\n");
+  assert.equal(
+    execFileSync(process.execPath, ["--input-type=module", "--eval", script], { cwd: root, encoding: "utf8" }),
+    "",
+  );
+  assert.deepEqual(fs.readdirSync(root).sort(), ["package.json", "zero-ui.config.js"]);
+});
+
+test("the CLI runs through a bin symlink and reports failures with a nonzero exit", (t) => {
+  const root = createProject(t, {
+    "src/view.jsx": 'import { Check } from "@react-zero-ui/icon-sprite"; export const icon = <Check opacity={0.5}/>;',
+  });
+  const bin = path.join(root, "zero-icons");
+  fs.symlinkSync(cli, bin);
+  if (process.platform !== "win32") fs.accessSync(cli, fs.constants.X_OK);
+  const invoke = () =>
+    process.platform === "win32"
+      ? spawnSync(process.execPath, [bin], { cwd: root, encoding: "utf8" })
+      : spawnSync(bin, [], { cwd: root, encoding: "utf8" });
+  const success = invoke();
+  assert.equal(success.status, 0, success.stderr);
+  assert.match(success.stdout, /Built .*icons\.svg with 1 icons/);
+  assert.match(success.stderr, /view\.jsx:1: <Check> prop "opacity"/);
+  writeProject(root, { "src/view.jsx": "export const broken = <;" });
+  const failure = invoke();
+  assert.equal(failure.status, 1);
+  assert.match(failure.stderr, /zero-icons:.*view\.jsx/);
+  assert.doesNotMatch(failure.stdout, /Built/);
+  assert.deepEqual(symbolIds(path.join(root, "public/icons.svg")), ["check"]);
+});

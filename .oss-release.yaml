@@ -8,4 +8,4 @@ github:
   tagPrefix: v
   assets: []
 npm:
-  packageDir: icon-sprite
+  packageDir: packages/icon-sprite

@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/.next",
+      "!**/package-lock.json",
+      "!**/next-env.d.ts",
+      "!**/.vscode",
+      "!packages/icon-sprite/assets",
+      "!packages/icon-sprite/generated",
+      "!packages/icon-sprite/src/icons",
+      "!packages/icon-sprite/src/lucide-archive",
+      "!packages/icon-sprite/src/index.ts",
+      "!fixtures/next-app/public"
+    ]
+  },
+  "formatter": { "enabled": true, "indentStyle": "space", "indentWidth": 2, "lineWidth": 120 },
+  "javascript": { "formatter": { "quoteStyle": "double", "semicolons": "always", "trailingCommas": "all" } },
+  "css": { "parser": { "tailwindDirectives": true } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "noUndeclaredDependencies": "error",
+        "noUnresolvedImports": "error"
+      },
+      "suspicious": { "noExplicitAny": "error", "noImportCycles": "error" },
+      "style": { "useFilenamingConvention": { "level": "error", "options": { "filenameCases": ["kebab-case"] } } },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "noMisusedPromises": "error",
+        "noUnsafeTypeAssertion": "error",
+        "useExhaustiveSwitchCases": "error"
+      }
+    }
+  },
+  "overrides": [
+    { "includes": ["**/*.tsx"], "linter": { "domains": { "react": "recommended" } } },
+    {
+      "includes": ["fixtures/next-app/**"],
+      "linter": {
+        "domains": { "next": "recommended" },
+        "rules": { "suspicious": { "noConsole": { "level": "warn", "options": { "allow": ["warn", "error"] } } } }
+      }
+    },
+    { "includes": ["**/*.test.js"], "linter": { "domains": { "test": "recommended" } } }
+  ]
+}

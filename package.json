@@ -1,0 +1,32 @@
+{
+  "name": "zero-icon-sprite-repository",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.20.0",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "workspaces": [
+    "packages/icon-sprite",
+    "fixtures/next-app"
+  ],
+  "scripts": {
+    "dev": "npm run build && npm run dev --workspace @react-zero-ui/icon-sprite-fixture",
+    "build": "npm run build --workspace @react-zero-ui/icon-sprite",
+    "build:fixture": "npm run build && npm run build --workspace @react-zero-ui/icon-sprite-fixture",
+    "typecheck": "npm run build && npm run typecheck:tools && npm run typecheck --workspace @react-zero-ui/icon-sprite-fixture",
+    "typecheck:tools": "tsc --project tsconfig.tools.json",
+    "test": "npm run build && npm run test --workspace @react-zero-ui/icon-sprite",
+    "test:integration": "npm run build && node scripts/test-integration.ts",
+    "check": "npm run build && npm run lint && npm run typecheck:tools && npm run typecheck --workspace @react-zero-ui/icon-sprite-fixture && npm run test --workspace @react-zero-ui/icon-sprite",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write --unsafe .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "^24.19.0",
+    "typescript": "7.0.2"
+  }
+}
