@@ -2,37 +2,40 @@
   "version": 1,
   "pages": {
     "pages/architecture.md": {
-      "fingerprint": "sha256:7989ca09dc13773794a4d97bbae97b6e85978f4589f9b8e3dd53458d48de34ea"
+      "fingerprint": "sha256:b3cfaa5e5848e5887aa149cfda08c726c350b2c6b441e04f633fab7f22ad4b0a"
     },
     "pages/build-system/configuration.md": {
-      "fingerprint": "sha256:bfee355535d508d3ee78bc09f45aaed61449c32d992c578709de68891f128907"
+      "fingerprint": "sha256:1dd49dace05dd09f1545ced9bc3d78542e6ff1957d700c10d9d1b48adf84666a"
     },
     "pages/build-system/icon-catalog.md": {
-      "fingerprint": "sha256:2bd3f6d60c64e9b77bb9cc0bb5bb6e8b1971230bab1cdedbae5c934a51caa8f6"
+      "fingerprint": "sha256:a66a781d51fed599f1364530f3c9947282638a1b8957b48686bb717cb0882e5e"
     },
     "pages/build-system/source-scanning.md": {
-      "fingerprint": "sha256:ab05920b34842157f4855604317e30452d6367135fe9451dc8b06ac3f9c08d4d"
+      "fingerprint": "sha256:a96ed97689b7e51575178aeac95ba1dfa934907f70a93d3a17a389582222896f"
     },
     "pages/build-system/sprite-output.md": {
-      "fingerprint": "sha256:99311bea4a4b08086e8f64d23422927278e209ca5b01086432fc9941a2bb8d08"
+      "fingerprint": "sha256:209b8944d81e814075386d80419a10476a99d34a50eba9ee2db4de58e6e1e90f"
+    },
+    "pages/development/code-quality.md": {
+      "fingerprint": "sha256:c2ed8bd59ef895c7005b53f9fa93c251aa13dc27ce8584c3a130787df1a55693"
     },
     "pages/development/publishing.md": {
-      "fingerprint": "sha256:c9be73849328359899bedba6e6f2e808d0af105f62c6f7ca0a3f00eb7d93f921"
+      "fingerprint": "sha256:6de0a4c985a0a1230096e011fdfd13dc0a9f357f689a4061a066ed80e3a83f24"
     },
     "pages/development/validation.md": {
-      "fingerprint": "sha256:ab58d24d58d26362ebec1740118fffb54f605452b727a2ad17c5402143ba215b"
+      "fingerprint": "sha256:aca9292d8d113ff2a866614cb8d1c95952343efe04f57a4d8a1023ce7381a3dd"
     },
     "pages/development/workflow.md": {
-      "fingerprint": "sha256:e920c15592ad536b7a995836b1eeb2d15a2a666ee29eb6c9ad538dfc4e6fc6fb"
+      "fingerprint": "sha256:889cf9787a220077ed2af6ae791452ff574a306ce38a120769927d534d0e48c0"
     },
     "pages/open-questions-risks.md": {
-      "fingerprint": "sha256:635eed91fa69c4293fa9d2ca896dce21ca0dfd0321512a3a86984a355a4d120d"
+      "fingerprint": "sha256:3e30e1eaceb7fff3cbc0b586f72894e8d64d9423ecd0a5fc7389893816b52eca"
     },
     "pages/runtime/custom-icons.md": {
-      "fingerprint": "sha256:5ebbd4616e19d003f73817cb5a6a1f02e04a9c73e2c8f141b72e029385ad135a"
+      "fingerprint": "sha256:5660cc04f6b21de7fbb330b1da8a155fb30fcb63ccf63ab849d5afbe5d818c85"
     },
     "pages/runtime/rendering.md": {
-      "fingerprint": "sha256:5fe783c857ad7574388431a23a4e4029fdc59c7268b76aeba8dc092307935229"
+      "fingerprint": "sha256:001d8c0cac3a67f437637fd8e874d89d1060ec83d50732cea5552978e7158334"
     }
   }
 }

@@ -1,6 +1,6 @@
-import type { CSSProperties, SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react"
 
-export type Dim = number | string | undefined;
+export type Dim = number | string | undefined
 
 /**
  * Icon props - extends all SVG props for maximum compatibility.
@@ -18,18 +18,29 @@ export type Dim = number | string | undefined;
  *   - These work in dev but may not apply in prod sprite mode
  */
 export type IconProps = SVGProps<SVGSVGElement> & {
-  size?: Dim;
-};
+  size?: Dim
+}
 
-type IconStyle = CSSProperties & { "--icon-stroke-width"?: IconProps["strokeWidth"] };
+type IconStyle = CSSProperties & { "--icon-stroke-width"?: IconProps["strokeWidth"] }
 
 // Ultra-minimal renderUse - all logic in one place
-export function renderUse(id: string, path: string, { size, width, height, style, strokeWidth, ...rest }: IconProps) {
+export function renderUse(
+  id: string,
+  path: string,
+  { size, width, height, style, strokeWidth, ...rest }: IconProps
+) {
   const iconStyle: IconStyle | undefined =
-    strokeWidth != null ? { "--icon-stroke-width": strokeWidth, ...style } : style;
+    strokeWidth != null ? { "--icon-stroke-width": strokeWidth, ...style } : style
   return (
-    <svg aria-hidden="true" {...rest} width={width ?? size ?? 24} height={height ?? size ?? 24} style={iconStyle}>
+    <svg
+      aria-hidden="true"
+      {...rest}
+      height={height ?? size ?? 24}
+      style={iconStyle}
+      // aria-hidden is overridden by ...rest when passed in
+      width={width ?? size ?? 24}
+    >
       <use href={`${path}#${id}`} />
     </svg>
-  );
+  )
 }

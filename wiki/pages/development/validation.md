@@ -15,6 +15,8 @@ paths:
 
 `npm run check` builds the library, runs Biome, checks maintainer TypeScript, generates/checks fixture types, and runs package tests. The library build already performs its compiler check. Fixture production builds and isolated installs are separate steps.
 
+The read-only Biome step fails on warnings as well as errors. Use [code quality](code-quality.md) for rule choices, targeted exceptions, and policy probes.
+
 | Changed contract | Focused evidence |
 | --- | --- |
 | Public names, generated files, pack resolution | `test-mapping`, `test-lucide-compat`, `test-tabler-resolution`, and the naming tests in `test-sprite-id-match` |

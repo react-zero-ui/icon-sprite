@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "declaration": true,
+    "jsx": "react-jsx",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "jsx": "react-jsx",
-    "strict": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "rootDir": "src",
     "outDir": "dist",
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
     "types": ["node", "react"]
   },
   "include": ["src"]

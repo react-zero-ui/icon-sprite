@@ -134,7 +134,7 @@ import {
   Baseline,
   Bath,
   Battery,
-} from "@react-zero-ui/icon-sprite";
+} from "@react-zero-ui/icon-sprite"
 
 const page = () => {
   return (
@@ -278,7 +278,7 @@ const page = () => {
         <Battery size={24} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

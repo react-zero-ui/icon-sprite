@@ -31,9 +31,9 @@ import {
   IconZodiacTaurus,
   IconZodiacVirgo,
   IconZzz,
-} from "@react-zero-ui/icon-sprite";
+} from "@react-zero-ui/icon-sprite"
 
-const icons = { AArrowDown, AArrowUp, ALargeSmall, Accessibility, Activity };
+const icons = { AArrowDown, AArrowUp, ALargeSmall, Accessibility, Activity }
 
 const Home = () => {
   return (
@@ -69,15 +69,19 @@ const Home = () => {
       <div className="grid grid-cols-10 gap-1 **:rounded-lg **:bg-blue-500 **:text-white">
         {/*  */}
         {Object.entries(icons).map(([name, Icon]) => {
-          return <Icon key={name} className="h-20 w-20" />;
+          return <Icon className="h-20 w-20" key={name} />
         })}
         <div className="flex-center border border-red-800">
-          <CustomIcon name="google-ads" size={80} className="h-20 w-20 fill-red-500! text-red-500" />
-          <CustomIcon name="ai" size={80} className="h-20 w-20 fill-red-500!" />
-          <CustomIcon name="react-svgrepo-com" size={80} className="h-20 w-20 fill-red-500!" />
+          <CustomIcon
+            className="h-20 w-20 fill-red-500! text-red-500"
+            name="google-ads"
+            size={80}
+          />
+          <CustomIcon className="h-20 w-20 fill-red-500!" name="ai" size={80} />
+          <CustomIcon className="h-20 w-20 fill-red-500!" name="react-svgrepo-com" size={80} />
         </div>
-        <AlarmClockCheck size={80} color="#000" strokeWidth={3} />
-        <AlarmClockMinus size={80} className="h-20 w-20 fill-red-500" />
+        <AlarmClockCheck color="#000" size={80} strokeWidth={3} />
+        <AlarmClockMinus className="h-20 w-20 fill-red-500" size={80} />
         <ArrowDownAZ className="h-20 w-20 text-red-500" />
         <AlarmClockOff className="h-20 w-20" />
         <AlarmClockPlus className="h-20 w-20" />
@@ -93,6 +97,6 @@ const Home = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default Home;
+  )
+}
+export default Home

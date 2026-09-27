@@ -23,7 +23,8 @@ npm run dev
 npm run check             # Build, Biome, workspace types, and unit tests
 npm run test:integration  # Install the tarball in a temporary app and test dev/prod
 npm run build:fixture     # Build the local fixture for manual inspection
-npm run lint:fix          # Apply Biome fixes; review unsafe fixes
+npm run lint:fix          # Apply fixes classified safe by Biome
+npm run lint:fix:unsafe   # Explicitly enable additional fixes; review the diff
 npm run format
 ```
 
@@ -68,5 +69,7 @@ The package's `prepack` builds and tests it. Integration tests check the actual 
 ## Tooling
 
 Biome owns JS/TS/CSS/JSON formatting, import organization, and linting. Generated code and SVG archives are excluded; handwritten code uses kebab-case filenames. The runtime, CLI, maintainer scripts, and integration harness are TypeScript. Node runs maintainer scripts with native type stripping; `typecheck:tools` checks them strictly. The library build emits the CLI as JavaScript for consumers. Install the Biome editor extension to use the same configuration locally.
+
+Lint warnings fail repository checks and CI. The [code quality policy](wiki/pages/development/code-quality.md) explains nursery rules, import boundaries, and intentional exceptions.
 
 Licensed under [MIT](LICENSE).

@@ -1,133 +1,173 @@
-import assert from "node:assert/strict";
-import { execFileSync, spawn } from "node:child_process";
-import { once } from "node:events";
-import fs from "node:fs/promises";
-import net from "node:net";
-import os from "node:os";
-import path from "node:path";
-import { setTimeout as delay } from "node:timers/promises";
-import { fileURLToPath } from "node:url";
+import assert from "node:assert/strict"
+import { execFileSync, spawn } from "node:child_process"
+import { once } from "node:events"
+import fs from "node:fs/promises"
+import net from "node:net"
+import os from "node:os"
+import path from "node:path"
+import { setTimeout as delay } from "node:timers/promises"
+import { fileURLToPath } from "node:url"
 
-const root = fileURLToPath(new URL("../", import.meta.url));
-const fixturePath = path.join(root, "fixtures/next-app");
-const libraryPath = path.join(root, "packages/icon-sprite");
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" };
+const root = fileURLToPath(new URL("../", import.meta.url))
+const fixturePath = path.join(root, "fixtures/next-app")
+const libraryPath = path.join(root, "packages/icon-sprite")
+const npm = process.platform === "win32" ? "npm.cmd" : "npm"
+const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" }
+const repositoryOnlyPathPattern = /^(src|assets|tests|scripts|node_modules)\//
+const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
+const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
+const inlinePathPattern = /<path\b/
+const arrowRightSpritePattern = /<use\b[^>]*href="\/icons\.svg#arrow-right"/
 
 interface FixtureManifest {
-  dependencies: Record<string, string>;
-  devDependencies: Record<string, string>;
+  dependencies: Record<string, string>
+  devDependencies: Record<string, string>
 }
 
 interface PackageLock {
-  packages: Record<string, { version?: string }>;
+  packages: Record<string, { version?: string }>
 }
 
 interface PackedPackage {
-  filename: string;
-  files: { path: string }[];
+  filename: string
+  files: { path: string }[]
 }
 
 function run(args: string[], cwd: string): string {
   try {
-    return execFileSync(npm, args, { cwd, env, encoding: "utf8", timeout: 300_000, maxBuffer: 16 * 1024 * 1024 });
+    return execFileSync(npm, args, {
+      cwd,
+      encoding: "utf8",
+      env,
+      maxBuffer: 16 * 1024 * 1024,
+      timeout: 300_000,
+    })
   } catch (error) {
-    const stdout = error instanceof Error && "stdout" in error ? String(error.stdout ?? "") : "";
-    const stderr = error instanceof Error && "stderr" in error ? String(error.stderr ?? "") : "";
-    throw new Error(`npm ${args.join(" ")} failed:\n${stdout.slice(-12_000)}\n${stderr.slice(-12_000)}`, {
-      cause: error,
-    });
+    const stdout = error instanceof Error && "stdout" in error ? String(error.stdout ?? "") : ""
+    const stderr = error instanceof Error && "stderr" in error ? String(error.stderr ?? "") : ""
+    throw new Error(
+      `npm ${args.join(" ")} failed:\n${stdout.slice(-12_000)}\n${stderr.slice(-12_000)}`,
+      {
+        cause: error,
+      }
+    )
+  }
+}
+
+// Wait for in-flight operations before propagating failures so cleanup can safely remove their resources.
+async function finishAll(tasks: Promise<void>[]): Promise<void> {
+  try {
+    await Promise.all(tasks)
+  } catch (error) {
+    await Promise.allSettled(tasks)
+    throw error
   }
 }
 
 async function availablePort(): Promise<number> {
-  const server = net.createServer();
-  server.listen(0, "127.0.0.1");
-  await once(server, "listening");
-  const address = server.address();
-  assert(address && typeof address === "object", "Expected a TCP address for the test server");
-  const { port } = address;
-  await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
-  return port;
+  const server = net.createServer()
+  server.listen(0, "127.0.0.1")
+  await once(server, "listening")
+  const address = server.address()
+  assert(address && typeof address === "object", "Expected a TCP address for the test server")
+  const { port } = address
+  await new Promise<void>((resolve, reject) =>
+    server.close((error) => (error ? reject(error) : resolve()))
+  )
+  return port
 }
 
 // Each server owns its process group and cleanup, including failed assertions.
 async function verifyServer(
-  directory: string,
+  projectDir: string,
   mode: "start" | "dev",
-  verify: (base: string) => Promise<void>,
+  verify: (base: string) => Promise<void>
 ): Promise<void> {
-  const port = await availablePort();
-  const nextCli = path.join(directory, "node_modules/next/dist/bin/next");
-  const child = spawn(process.execPath, [nextCli, mode, "--hostname", "127.0.0.1", "--port", String(port)], {
-    cwd: directory,
-    env: { ...env, NODE_ENV: mode === "start" ? "production" : "development" },
-    detached: process.platform !== "win32",
-    stdio: ["ignore", "pipe", "pipe"],
-  });
-  let output = "";
-  let processError: Error | undefined;
+  const port = await availablePort()
+  const nextCli = path.join(projectDir, "node_modules/next/dist/bin/next")
+  const child = spawn(
+    process.execPath,
+    [nextCli, mode, "--hostname", "127.0.0.1", "--port", String(port)],
+    {
+      cwd: projectDir,
+      detached: process.platform !== "win32",
+      env: { ...env, NODE_ENV: mode === "start" ? "production" : "development" },
+      stdio: ["ignore", "pipe", "pipe"],
+    }
+  )
+  let output = ""
+  let processError: Error | undefined
   const append = (chunk: Buffer) => {
-    output = (output + chunk).slice(-24_000);
-  };
-  child.stdout.on("data", append);
-  child.stderr.on("data", append);
+    output = (output + chunk).slice(-24_000)
+  }
+  child.stdout.on("data", append)
+  child.stderr.on("data", append)
   child.on("error", (error) => {
-    processError = error;
-  });
-  const base = `http://127.0.0.1:${port}`;
+    processError = error
+  })
+  const base = `http://127.0.0.1:${port}`
 
   try {
-    const deadline = Date.now() + 180_000;
-    let ready = false;
+    const deadline = Date.now() + 180_000
+    let ready = false
     while (Date.now() < deadline) {
       if (processError || child.exitCode !== null) {
-        throw new Error(`Next ${mode} exited before readiness.\n${output}`, { cause: processError });
+        throw new Error(`Next ${mode} exited before readiness.\n${output}`, { cause: processError })
       }
       try {
-        const response = await fetch(base, { signal: AbortSignal.timeout(5_000) });
+        // biome-ignore lint/performance/noAwaitInLoops: Readiness probes must finish before the retry delay and next attempt.
+        const response = await fetch(base, { signal: AbortSignal.timeout(5_000) })
         if (response.ok) {
-          ready = true;
-          break;
+          ready = true
+          break
         }
       } catch {
         // Connection failures are expected while Next compiles and starts.
       }
-      await delay(250);
+      await delay(250)
     }
-    assert(ready, `Next ${mode} did not become ready.\n${output}`);
-    await verify(base);
+    assert(ready, `Next ${mode} did not become ready.\n${output}`)
+    await verify(base)
   } finally {
-    const pid = child.pid;
+    const pid = child.pid
     if (child.exitCode === null && pid) {
       const signal = (value: NodeJS.Signals) => {
         try {
-          if (process.platform === "win32") child.kill(value);
-          else process.kill(-pid, value);
+          if (process.platform === "win32") {
+            child.kill(value)
+          } else {
+            process.kill(-pid, value)
+          }
         } catch (error) {
-          if (!(error instanceof Error && "code" in error && error.code === "ESRCH")) throw error;
+          if (!(error instanceof Error && "code" in error && error.code === "ESRCH")) {
+            throw error
+          }
         }
-      };
-      const exited = once(child, "exit");
-      const killTimer = setTimeout(() => signal("SIGKILL"), 5_000);
-      signal("SIGTERM");
+      }
+      const exited = once(child, "exit")
+      const killTimer = setTimeout(() => signal("SIGKILL"), 5_000)
+      signal("SIGTERM")
       try {
-        await exited;
+        await exited
       } finally {
-        clearTimeout(killTimer);
+        clearTimeout(killTimer)
       }
     }
   }
 }
 
-const directory = await fs.mkdtemp(path.join(os.tmpdir(), "zero-icon-integration-"));
+const directory = await fs.mkdtemp(path.join(os.tmpdir(), "zero-icon-integration-"))
 try {
-  const fixture: FixtureManifest = JSON.parse(await fs.readFile(path.join(fixturePath, "package.json"), "utf8"));
-  const lock: PackageLock = JSON.parse(await fs.readFile(path.join(root, "package-lock.json"), "utf8"));
+  const fixture: FixtureManifest = JSON.parse(
+    await fs.readFile(path.join(fixturePath, "package.json"), "utf8")
+  )
+  const lock: PackageLock = JSON.parse(
+    await fs.readFile(path.join(root, "package-lock.json"), "utf8")
+  )
   const [packed]: PackedPackage[] = JSON.parse(
-    run(["pack", "--json", "--ignore-scripts", "--pack-destination", directory], libraryPath),
-  );
-  const packedPaths = packed.files.map((file) => file.path);
+    run(["pack", "--json", "--ignore-scripts", "--pack-destination", directory], libraryPath)
+  )
+  const packedPaths = packed.files.map((file) => file.path)
   for (const required of [
     "dist/index.js",
     "dist/index.d.ts",
@@ -136,86 +176,111 @@ try {
     "generated/component-sprite-map.json",
     "generated/lucide-icons.json",
   ]) {
-    assert(packedPaths.includes(required), `Packed package is missing ${required}`);
+    assert(packedPaths.includes(required), `Packed package is missing ${required}`)
   }
   assert(
-    !packedPaths.some((file) => /^(src|assets|tests|scripts|node_modules)\//.test(file)),
-    "Package contains repository-only files",
-  );
+    !packedPaths.some((file) => repositoryOnlyPathPattern.test(file)),
+    "Package contains repository-only files"
+  )
 
-  for (const entry of ["app", "public", "next.config.ts", "postcss.config.mjs", "zero-ui.config.ts", "tsconfig.json"]) {
-    await fs.cp(path.join(fixturePath, entry), path.join(directory, entry), {
-      recursive: true,
-      filter: (source) => source !== path.join(fixturePath, "public/icons.svg"),
-    });
-  }
-  const dependencies: Record<string, string> = {};
+  await finishAll(
+    [
+      "app",
+      "public",
+      "next.config.ts",
+      "postcss.config.mjs",
+      "zero-ui.config.ts",
+      "tsconfig.json",
+    ].map((entry) =>
+      fs.cp(path.join(fixturePath, entry), path.join(directory, entry), {
+        filter: (source) => source !== path.join(fixturePath, "public/icons.svg"),
+        recursive: true,
+      })
+    )
+  )
+  const dependencies: Record<string, string> = {}
   for (const name of Object.keys({ ...fixture.dependencies, ...fixture.devDependencies })) {
-    if (name === "@react-zero-ui/icon-sprite") continue;
-    const entry = lock.packages[`fixtures/next-app/node_modules/${name}`] ?? lock.packages[`node_modules/${name}`];
-    assert(entry?.version, `No locked fixture dependency: ${name}`);
-    dependencies[name] = entry.version;
+    if (name === "@react-zero-ui/icon-sprite") {
+      continue
+    }
+    const entry =
+      lock.packages[`fixtures/next-app/node_modules/${name}`] ??
+      lock.packages[`node_modules/${name}`]
+    assert(entry?.version, `No locked fixture dependency: ${name}`)
+    dependencies[name] = entry.version
   }
-  dependencies["@react-zero-ui/icon-sprite"] = `file:./${packed.filename}`;
+  dependencies["@react-zero-ui/icon-sprite"] = `file:./${packed.filename}`
   await fs.writeFile(
     path.join(directory, "package.json"),
     JSON.stringify(
       {
+        dependencies,
         name: "icon-sprite-package-test",
         private: true,
+        scripts: { build: "next build", prebuild: "zero-icons" },
         type: "module",
-        scripts: { prebuild: "zero-icons", build: "next build" },
-        dependencies,
       },
       null,
-      2,
-    ),
-  );
+      2
+    )
+  )
 
-  console.log("Installing the packed library in an isolated Next fixture...");
-  run(["install", "--no-audit", "--no-fund"], directory);
-  console.log("Building the production fixture and sprite...");
-  run(["run", "build"], directory);
+  console.log("Installing the packed library in an isolated Next fixture...")
+  run(["install", "--no-audit", "--no-fund"], directory)
+  console.log("Building the production fixture and sprite...")
+  run(["run", "build"], directory)
   assert.equal(
-    (await fs.lstat(path.join(directory, "node_modules/@react-zero-ui/icon-sprite"))).isSymbolicLink(),
+    (
+      await fs.lstat(path.join(directory, "node_modules/@react-zero-ui/icon-sprite"))
+    ).isSymbolicLink(),
     false,
-    "Fixture unexpectedly uses a workspace symlink",
-  );
+    "Fixture unexpectedly uses a workspace symlink"
+  )
 
   await verifyServer(directory, "start", async (base) => {
-    const spriteResponse = await fetch(`${base}/icons.svg`, { signal: AbortSignal.timeout(10_000) });
-    assert.equal(spriteResponse.status, 200);
-    const sprite = await spriteResponse.text();
-    const symbols = new Set([...sprite.matchAll(/<symbol\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]));
-    for (const route of ["/", "/zero-icon-sprite"]) {
-      const response = await fetch(`${base}${route}`, { signal: AbortSignal.timeout(30_000) });
-      assert.equal(response.status, 200);
-      const html = await response.text();
-      const ids = [...html.matchAll(/<use\b[^>]*href="\/icons\.svg#([^"]+)"/g)].map((match) => match[1]);
-      assert(ids.length > 0, `${route} has no production sprite references`);
-      for (const id of ids) assert(symbols.has(id), `Missing sprite symbol: ${id}`);
+    const spriteResponse = await fetch(`${base}/icons.svg`, { signal: AbortSignal.timeout(10_000) })
+    assert.equal(spriteResponse.status, 200)
+    const sprite = await spriteResponse.text()
+    const symbols = new Set([...sprite.matchAll(spriteSymbolPattern)].map((match) => match[1]))
+    await finishAll(
+      ["/", "/zero-icon-sprite"].map(async (route) => {
+        const response = await fetch(`${base}${route}`, { signal: AbortSignal.timeout(30_000) })
+        assert.equal(response.status, 200)
+        const html = await response.text()
+        const ids = [...html.matchAll(spriteReferencePattern)].map((match) => match[1])
+        assert(ids.length > 0, `${route} has no production sprite references`)
+        for (const id of ids) {
+          assert(symbols.has(id), `Missing sprite symbol: ${id}`)
+        }
+      })
+    )
+    for (const id of [
+      "arrow-right",
+      "tabler-accessible",
+      "google-ads",
+      "ai",
+      "react-svgrepo-com",
+    ]) {
+      assert(symbols.has(id), `Missing required fixture symbol: ${id}`)
     }
-    for (const id of ["arrow-right", "tabler-accessible", "google-ads", "ai", "react-svgrepo-com"]) {
-      assert(symbols.has(id), `Missing required fixture symbol: ${id}`);
-    }
-    const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) });
-    assert.equal(comparison.status, 200);
-    assert.match(await comparison.text(), /<path\b/);
-  });
+    const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) })
+    assert.equal(comparison.status, 200)
+    assert.match(await comparison.text(), inlinePathPattern)
+  })
   await verifyServer(directory, "dev", async (base) => {
-    const response = await fetch(base, { signal: AbortSignal.timeout(30_000) });
-    const html = await response.text();
-    assert.equal(response.status, 200);
-    assert.match(html, /<path\b/, "Development icons should render inline SVG paths");
+    const response = await fetch(base, { signal: AbortSignal.timeout(30_000) })
+    const html = await response.text()
+    assert.equal(response.status, 200)
+    assert.match(html, inlinePathPattern, "Development icons should render inline SVG paths")
     assert.doesNotMatch(
       html,
-      /<use\b[^>]*href="\/icons\.svg#arrow-right"/,
-      "Development ArrowRight unexpectedly uses the production sprite",
-    );
-  });
+      arrowRightSpritePattern,
+      "Development ArrowRight unexpectedly uses the production sprite"
+    )
+  })
   console.log(
-    "Passed: package contents, isolated install, production build, served sprite symbols, and development rendering.",
-  );
+    "Passed: package contents, isolated install, production build, served sprite symbols, and development rendering."
+  )
 } finally {
-  await fs.rm(directory, { recursive: true, force: true });
+  await fs.rm(directory, { force: true, recursive: true })
 }

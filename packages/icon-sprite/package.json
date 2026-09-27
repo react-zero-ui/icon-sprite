@@ -1,6 +1,7 @@
 {
   "name": "@react-zero-ui/icon-sprite",
   "version": "0.4.2",
+  "private": false,
   "description": "Generate a single SVG sprite containing only the icons you used (Lucide + Tabler + custom). Lucid to SVG sprite solution for React.",
   "keywords": [
     "react",
@@ -21,14 +22,16 @@
     "url": "git+https://github.com/react-zero-ui/icon-sprite.git",
     "directory": "packages/icon-sprite"
   },
+  "license": "MIT",
   "author": "Austinserb <austin@zero-ui.dev>",
   "sideEffects": false,
-  "license": "MIT",
-  "private": false,
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "zero-icons": "dist/cli/index.js"
+  },
   "files": [
     "dist",
     "generated/component-sprite-map.json",
@@ -36,21 +39,12 @@
     "README.md"
   ],
   "scripts": {
-    "generate": "node scripts/generate-icons.ts",
     "build": "node scripts/build.ts",
-    "prepack": "npm run build && npm run test",
     "collect:lucide": "node scripts/collect-lucide-icons.ts",
+    "generate": "node scripts/generate-icons.ts",
+    "prepack": "npm run build && npm run test",
     "test": "node --test tests/*.test.js",
     "typecheck": "tsc --noEmit"
-  },
-  "bin": {
-    "zero-icons": "dist/cli/index.js"
-  },
-  "peerDependencies": {
-    "react": ">=17"
-  },
-  "engines": {
-    "node": "^22.18.0 || >=24.11.0"
   },
   "dependencies": {
     "@babel/parser": "^8.0.6",
@@ -67,5 +61,11 @@
     "lucide-static": "^1.48.0",
     "react": "^19.3.0",
     "typescript": "7.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0"
   }
 }

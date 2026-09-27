@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from "react"
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return <main className="p-10">{children}</main>;
-};
+  return <main className="p-10">{children}</main>
+}
 
-export default Layout;
+export default Layout

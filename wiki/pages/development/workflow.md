@@ -35,6 +35,6 @@ PostCSS configuration remains an `.mjs` tool entrypoint. Tests are JavaScript us
 
 Generated wrappers, local Lucide components, the source barrel, manifests, `dist`, and fixture sprites are ignored output. Canonical archives and handwritten generators stay versioned. [Catalog guidance](../build-system/icon-catalog.md) explains how to refresh upstream assets safely.
 
-[`biome.json`](../../../biome.json) owns formatting and strict handwritten-code rules, with generated output excluded. `svgstore` has a narrow documented import-resolution exception and local type declaration. Preserve such explanations when tools disagree with verified Node behavior; inspect the underlying boundary before broadening an exception.
+[`biome.json`](../../../biome.json) owns formatting and strict handwritten-code rules. The [code quality policy](code-quality.md) explains nursery adoption, import boundaries, generated-file exclusions, fix commands, and documented tool exceptions.
 
 Choose checks through [validation](validation.md). Refer to the [root README](../../../README.md) for command syntax and [publishing](publishing.md) for artifact preparation.

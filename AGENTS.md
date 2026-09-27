@@ -10,7 +10,7 @@ Use npm from the repository root and preserve one lockfile. Keep public imports,
 
 Prefer cohesive modules with small contracts and one owner for each rule or representation. Introduce shared packages or extra layers when an actual shared responsibility justifies them. Preserve local assets, credentials, and unrelated work.
 
-Choose checks using [validation](wiki/pages/development/validation.md). Packaging, dependency, CLI, and runtime changes require isolated-package validation. Biome covers handwritten code; generated files remain excluded. Keep narrow explanations for verified tooling exceptions.
+Choose checks using [validation](wiki/pages/development/validation.md). Packaging, dependency, CLI, and runtime changes require isolated-package validation. Follow the [code quality policy](wiki/pages/development/code-quality.md) for Biome rules, import boundaries, and fix commands. Keep narrow explanations for verified tooling exceptions.
 
 ## Maintain Project Knowledge
 

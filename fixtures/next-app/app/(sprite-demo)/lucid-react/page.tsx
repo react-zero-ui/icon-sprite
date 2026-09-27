@@ -134,7 +134,7 @@ import {
   Baseline,
   Bath,
   Battery,
-} from "lucide-react";
+} from "lucide-react"
 
 const page = () => {
   return (
@@ -275,7 +275,7 @@ const page = () => {
       <Bath />
       <Battery />
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

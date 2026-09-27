@@ -2,15 +2,15 @@
 // biome-ignore lint/correctness/noUnresolvedImports: Node resolves svgstore's CommonJS main; this declaration types its verified API.
 declare module "svgstore" {
   interface Options {
-    copyAttrs?: string[];
-    svgAttrs?: Record<string, string>;
-    inline?: boolean;
+    copyAttrs?: string[]
+    inline?: boolean
+    svgAttrs?: Record<string, string>
   }
 
   interface Store {
-    add(id: string, svg: string, options?: Options): Store;
-    toString(options?: Options): string;
+    add(id: string, svg: string, options?: Options): Store
+    toString(options?: Options): string
   }
 
-  export default function svgstore(options?: Options): Store;
+  export default function svgstore(options?: Options): Store
 }
