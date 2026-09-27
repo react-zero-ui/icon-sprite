@@ -1,5 +1,5 @@
 ---
-summary: "Preserve tarball completeness, CLI execution, root-lock release checks, and the distinction between configured publishing and verified deployment."
+summary: "Preserve React/build entrypoints, tarball completeness, the compatibility command, root-lock release checks, and publication verification."
 paths:
   - packages/icon-sprite/package.json
   - packages/icon-sprite/scripts/build.ts
@@ -13,9 +13,11 @@ paths:
 
 ## Artifact boundary
 
-The public package ships compiled runtime and CLI files, type declarations, catalog/SVG manifests, and its README. `dist/LICENSE` is copied during build. Canonical SVG directories, maintainer scripts, test sources, and fixture files stay outside the tarball.
+The public package ships compiled runtime and build modules, the compatibility command, declarations, catalog/SVG manifests, and its README. `dist/LICENSE` is copied during build. Canonical SVG directories, maintainer scripts, tests, and fixture files stay outside the tarball.
 
-Lucide consumer assets and development components are self-contained in those generated artifacts. Tabler remains an installed dependency. The compiled CLI reads sibling packaged manifests through module-relative URLs; changing output layout requires coordinated packaging and path validation.
+Lucide assets and development components are self-contained in generated artifacts. Tabler remains an installed dependency. The catalog reader locates packaged manifests relative to its module; changing layout requires coordinated packaging validation.
+
+The export map identifies the React root and `/build` Node API with their declarations. A file wildcard keeps deep-file access compatible where files remain shipped; application integrations should use the supported entrypoints. `zero-icons` targets `dist/command.js` and delegates to the build API.
 
 [`package.json`](../../../packages/icon-sprite/package.json) defines the public entrypoints, package file allowlist, and `zero-icons` bin. Its `prepack` builds and runs package tests. Root `npm pack --workspace @react-zero-ui/icon-sprite` exercises that lifecycle. The integration harness deliberately skips lifecycle scripts because its caller has already built; direct harness execution requires current output.
 

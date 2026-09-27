@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prebuild": "zero-icons",
     "build": "next build",
     "dev": "next dev",
     "start": "next start",

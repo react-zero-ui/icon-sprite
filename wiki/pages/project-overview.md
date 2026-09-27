@@ -8,6 +8,8 @@ summary: "Start here: React icon delivery, two build stages, compatibility commi
 
 The repository has one publishable library and one private Next.js integration fixture. The fixture exercises the library as an application would consume it. Native npm workspaces coordinate their development.
 
+The handwritten React entrypoint is `src/index.ts`; the Node build interface is `generateSprite()` in `src/build.ts`. Application build integrations call this operation directly. The historical `zero-icons` command delegates to it for compatibility.
+
 Two build stages shape the architecture. Maintainers generate the library's complete catalog, wrappers, and packaged manifests. Consumers scan their application and generate a sprite before the application build. Changes must preserve agreement between component names, wrapper symbol IDs, and emitted symbols across both stages.
 
 Public imports, historical icon names, default URLs, and development/production behavior are compatibility commitments. The SVG archive is canonical input; generated React files and manifests are replaceable output.

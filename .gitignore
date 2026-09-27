@@ -4,6 +4,9 @@ dist/
 .next/
 out/
 build/
+# The library's build implementation is handwritten source.
+!/packages/icon-sprite/src/build/
+!/packages/icon-sprite/src/build/**
 coverage/
 playwright-report/
 test-results/
@@ -14,7 +17,6 @@ next-env.d.ts
 # Generated from packages/icon-sprite/assets/lucide and installed icon packs
 /packages/icon-sprite/src/icons/
 /packages/icon-sprite/src/lucide-archive/
-/packages/icon-sprite/src/index.ts
 /packages/icon-sprite/generated/
 /fixtures/next-app/public/icons.svg
 

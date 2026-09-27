@@ -32,7 +32,6 @@
       "!!packages/icon-sprite/generated",
       "!packages/icon-sprite/src/icons",
       "!packages/icon-sprite/src/lucide-archive",
-      "!packages/icon-sprite/src/index.ts",
       "!!fixtures/next-app/public"
     ]
   },
@@ -119,6 +118,13 @@
         "noXorAsExponentiation": "error",
         "useArraySome": "error",
         "useAwaitThenable": "error",
+        "useConsistentFunctionStyle": {
+          "level": "on",
+          "options": {
+            "allowArrowFunctions": true,
+            "style": "declaration"
+          }
+        },
         "useExhaustiveSwitchCases": "error",
         "useImportsFirst": "error",
         "useIncludes": "error",
@@ -210,6 +216,14 @@
   },
   "overrides": [
     {
+      "includes": ["packages/icon-sprite/src/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": { "noBarrelFile": "off", "noReExportAll": "off" }
+        }
+      }
+    },
+    {
       "includes": ["packages/icon-sprite/src/**"],
       "linter": {
         "rules": {
@@ -230,9 +244,10 @@
     },
     {
       "includes": [
-        "packages/icon-sprite/src/**",
-        "!packages/icon-sprite/src/cli/**",
-        "!packages/icon-sprite/src/config-loader.ts"
+        "packages/icon-sprite/src/runtime/**",
+        "packages/icon-sprite/src/index.ts",
+        "packages/icon-sprite/src/config.ts",
+        "packages/icon-sprite/src/sprite-contract.ts"
       ],
       "linter": {
         "rules": {
@@ -243,8 +258,8 @@
               "options": {
                 "patterns": [
                   {
-                    "group": ["**/config-loader.*", "**/cli/**"],
-                    "message": "Keep browser runtime modules independent of the Node-only CLI and configuration loader."
+                    "group": ["**/build.*", "**/build/**", "**/catalog.*", "**/command.*"],
+                    "message": "Keep React rendering independent of Node build machinery."
                   }
                 ]
               }
@@ -257,7 +272,7 @@
       "includes": [
         "scripts/**",
         "packages/icon-sprite/scripts/**",
-        "packages/icon-sprite/src/cli/index.ts",
+        "packages/icon-sprite/src/command.ts",
         "packages/icon-sprite/tests/**"
       ],
       "linter": {

@@ -2,7 +2,7 @@
 
 React icon components during development, a shared SVG sprite in production.
 
-`@react-zero-ui/icon-sprite` supports Lucide, Tabler, and custom SVGs. Consumers keep familiar component imports and run `zero-icons` before their application build. Production icons reference reusable symbols in `public/icons.svg`.
+`@react-zero-ui/icon-sprite` supports Lucide, Tabler, and custom SVGs. Consumers import React components and invoke `generateSprite()` from their build integration. Production icons reference reusable symbols in `public/icons.svg`.
 
 See the [package documentation](packages/icon-sprite/README.md) for installation, props, configuration, and usage.
 
@@ -34,7 +34,13 @@ npm run format
 packages/icon-sprite/       Publishable library
   assets/lucide/           Canonical SVG archive, including historical icons
   src/                    React rendering and configuration
-    cli/                  Typed source scanning and sprite generation
+    index.ts              Handwritten React public interface
+    build.ts              Node build API: generateSprite(projectDirectory?)
+    runtime/              SVG rendering and custom development loading
+    build/                Project resolution, source scanning, assets, sprite writing
+    catalog.ts            Packaged catalog storage and asset resolution
+    sprite-contract.ts    Shared URLs, dimensions, and stroke-width transport
+    command.ts            Compatibility adapter for zero-icons
   scripts/                Maintainer code generation and package build
   tests/                  Behavior and compatibility tests
 fixtures/next-app/         Private integration fixture and comparison pages
@@ -45,7 +51,9 @@ The two npm workspaces share one root lockfile and one Biome configuration. The 
 
 ## Icon generation
 
-`npm run build` regenerates the component wrappers, local Lucide development components, source exports, and CLI manifests, then compiles the package. Component naming and sprite IDs are owned by `scripts/icon-catalog.ts` inside the library. Generated output is reproducible from the SVG archive and locked icon-pack dependencies.
+`npm run build` regenerates component wrappers, local Lucide components, the icon barrel, and packaged manifests, then compiles the library. `src/index.ts` remains handwritten. Component naming and sprite IDs belong to `scripts/icon-catalog.ts`; `src/catalog.ts` owns writing and reading the packaged representation.
+
+The fixture invokes the Node API from `next.config.ts` during the production configuration phase. It needs no separate sprite command. Existing applications can continue using the published `zero-icons` prebuild command, which delegates to the same operation.
 
 To refresh Lucide assets after upgrading its packages:
 
@@ -68,7 +76,7 @@ The package's `prepack` builds and tests it. Integration tests check the actual 
 
 ## Tooling
 
-Biome owns JS/TS/CSS/JSON formatting, import organization, and linting. Generated code and SVG archives are excluded; handwritten code uses kebab-case filenames. The runtime, CLI, maintainer scripts, and integration harness are TypeScript. Node runs maintainer scripts with native type stripping; `typecheck:tools` checks them strictly. The library build emits the CLI as JavaScript for consumers. Install the Biome editor extension to use the same configuration locally.
+Biome owns JS/TS/CSS/JSON formatting, import organization, and linting. Generated code and SVG archives are excluded; handwritten code uses kebab-case filenames. The runtime, build API, maintainer scripts, and integration harness are TypeScript. Node runs maintainer scripts with native type stripping; `typecheck:tools` checks them strictly. The library build emits JavaScript and declarations for consumers. Install the Biome editor extension to use the same configuration locally.
 
 Lint warnings fail repository checks and CI. The [code quality policy](wiki/pages/development/code-quality.md) explains nursery rules, import boundaries, and intentional exceptions.
 

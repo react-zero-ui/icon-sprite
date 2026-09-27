@@ -26,11 +26,22 @@
   "author": "Austinserb <austin@zero-ui.dev>",
   "sideEffects": false,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./build": {
+      "types": "./dist/build.d.ts",
+      "default": "./dist/build.js"
+    },
+    "./*": "./*"
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "zero-icons": "dist/cli/index.js"
+    "zero-icons": "dist/command.js"
   },
   "files": [
     "dist",

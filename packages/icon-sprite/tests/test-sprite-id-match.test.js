@@ -5,16 +5,23 @@ import test from "node:test"
 const mapping = JSON.parse(
   readFileSync(new URL("../generated/component-sprite-map.json", import.meta.url), "utf8")
 )
-const renderUsePattern = /return renderUse\("([^"]+)", SPRITE_PATH, props\);/
-
-test("all wrappers use their mapped sprite IDs and the shared renderer without any casts", () => {
+test("every public icon renders the catalog's production symbol", async (t) => {
+  const previousEnvironment = process.env.NODE_ENV
+  t.after(() => {
+    if (previousEnvironment === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = previousEnvironment
+    }
+  })
+  process.env.NODE_ENV = "production"
+  const api = await import("../dist/index.js")
   assert.ok(Object.keys(mapping).length > 0)
   for (const [name, { spriteId }] of Object.entries(mapping)) {
-    const source = readFileSync(new URL(`../src/icons/${name}.tsx`, import.meta.url), "utf8")
-    assert.equal(source.match(renderUsePattern)?.[1], spriteId, name)
-    assert.ok(source.includes('from "../render-use.js"'), name)
-    assert.ok(source.includes('if (process.env.NODE_ENV !== "production")'))
-    assert.ok(!source.includes("as any"))
+    const element = api[name]({ size: 0 })
+    assert.equal(element.type, "svg", name)
+    assert.equal(element.props.children.props.href, `/icons.svg#${spriteId}`, name)
+    assert.equal(element.props.width, 0, name)
   }
 })
 

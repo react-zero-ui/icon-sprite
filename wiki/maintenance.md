@@ -50,4 +50,4 @@ After adding, moving, renaming, deleting, or materially changing wiki pages or i
 
 ## Repository Routing Boundaries
 
-The root `.gitignore` excludes directories named `build` at every depth. Build documentation therefore uses `pages/build-system/`. Check new wiki paths with `git check-ignore` before completion: local routing validation can succeed even when Git would omit a page. Keep every authored page and the machine-maintained audit state eligible for version control.
+The root `.gitignore` excludes generic build-output directories and explicitly includes `packages/icon-sprite/src/build/` as handwritten source. Build documentation uses `pages/build-system/`. Check new wiki paths with `git check-ignore` before completion: local routing validation can succeed even when Git would omit a page. Keep every authored page and the machine-maintained audit state eligible for version control.

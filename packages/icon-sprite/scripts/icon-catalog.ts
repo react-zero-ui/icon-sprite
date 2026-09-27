@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import type { IconInfo } from "../src/icon-info.ts"
+import type { IconInfo } from "../src/catalog.ts"
 import { resolveTablerIconsDir } from "./resolve-icon-pack.ts"
 
 type IconPack = IconInfo["pack"]

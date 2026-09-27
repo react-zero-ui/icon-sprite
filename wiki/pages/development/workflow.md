@@ -10,7 +10,9 @@ paths:
   - packages/icon-sprite/tsconfig.json
   - packages/icon-sprite/scripts/build.ts
   - fixtures/next-app/package.json
+  - fixtures/next-app/next.config.ts
   - fixtures/next-app/tsconfig.json
+  - packages/icon-sprite/src/index.ts
 ---
 
 # Development Workflow
@@ -21,11 +23,11 @@ The [root manifest](../../../package.json) coordinates the public library and pr
 
 `npm ci` installs dependencies. `npm run build` generates and compiles the library. Tests and the fixture import compiled package output, so a fresh checkout needs that build before standalone test or lint commands that resolve generated imports. Root `check`, `test`, and `typecheck` arrange their prerequisites.
 
-`npm run dev` builds once and then starts the fixture against the workspace package. Editing library source requires rebuilding it; this command has no library watch loop. `build:fixture` first builds the library, then the fixture's prebuild generates the sprite before Next builds the application.
+`npm run dev` builds once and then starts the fixture against the workspace package. Editing library source requires rebuilding it; this command has no library watch loop. `build:fixture` first builds the library. The fixture's Next configuration calls the Node build API in its production phase. Next type generation also loads that phase and can regenerate the ignored sprite.
 
 ## Execution modes
 
-[`build.ts`](../../../packages/icon-sprite/scripts/build.ts) invokes generation, recreates `dist`, runs the compiler, copies the license, and restores the CLI executable bit. Recreating the compiled bin without `chmod` previously caused workspace execution to fail. The direct-bin test protects this contract.
+[`scripts/build.ts`](../../../packages/icon-sprite/scripts/build.ts) invokes generation, recreates `dist`, runs the compiler, copies the license, and restores the compatibility command's executable bit. `src/build.ts` is the separate consumer operation. Recreating a compiled executable without `chmod` previously caused workspace execution to fail; the direct-bin test protects that contract.
 
 Library TypeScript uses NodeNext and `.js` runtime import specifiers so emitted JavaScript runs in Node. Maintainer scripts execute directly under Node type stripping and use `.ts` runtime imports. [`tsconfig.tools.json`](../../../tsconfig.tools.json) strictly checks these scripts without emitting them. The fixture has a separate bundler-oriented configuration and generates route types before its typecheck.
 
@@ -33,7 +35,7 @@ PostCSS configuration remains an `.mjs` tool entrypoint. Tests are JavaScript us
 
 ## Ownership during edits
 
-Generated wrappers, local Lucide components, the source barrel, manifests, `dist`, and fixture sprites are ignored output. Canonical archives and handwritten generators stay versioned. [Catalog guidance](../build-system/icon-catalog.md) explains how to refresh upstream assets safely.
+Generated wrappers, local Lucide components, `src/icons/index.ts`, manifests, `dist`, and fixture sprites are ignored output. The public `src/index.ts`, canonical archives, and handwritten generators stay versioned. `.gitignore` explicitly retains `src/build/` despite the generic build-output exclusion. [Catalog guidance](../build-system/icon-catalog.md) explains how to refresh upstream assets safely.
 
 [`biome.json`](../../../biome.json) owns formatting and strict handwritten-code rules. The [code quality policy](code-quality.md) explains nursery adoption, import boundaries, generated-file exclusions, fix commands, and documented tool exceptions.
 

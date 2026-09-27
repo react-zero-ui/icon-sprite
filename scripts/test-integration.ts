@@ -172,7 +172,8 @@ try {
     "dist/index.js",
     "dist/index.d.ts",
     "dist/LICENSE",
-    "dist/cli/index.js",
+    "dist/build.js",
+    "dist/command.js",
     "generated/component-sprite-map.json",
     "generated/lucide-icons.json",
   ]) {
@@ -217,7 +218,7 @@ try {
         dependencies,
         name: "icon-sprite-package-test",
         private: true,
-        scripts: { build: "next build", prebuild: "zero-icons" },
+        scripts: { build: "next build" },
         type: "module",
       },
       null,

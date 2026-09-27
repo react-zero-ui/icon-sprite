@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import { existsSync, realpathSync } from "node:fs"
 import { pathToFileURL } from "node:url"
-import { generateSprite } from "./generate-sprite.js"
+import { generateSprite } from "./build.js"
 
-// Importing the bin has no side effects; direct execution runs one operation.
+// Compatibility adapter for published `zero-icons` prebuild scripts. The library
+// build API owns all behavior; importing this file performs no generation.
 if (
   process.argv[1] &&
   existsSync(process.argv[1]) &&

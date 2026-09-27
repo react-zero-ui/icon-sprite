@@ -1,7 +1,7 @@
-// src/config.ts
-// Client-safe config - NO fs, NO Node.js modules
-// Runtime URLs are fixed defaults. User config controls CLI inputs and output;
-// custom output locations must still be served at these runtime URLs.
+import { CUSTOM_SVG_DIR, SPRITE_PATH } from "./sprite-contract.js"
+
+// These exports retain the historical config-module import contract.
+export { CUSTOM_SVG_DIR, SPRITE_PATH }
 
 /** Configuration options for zero-ui.config.js or zero-ui.config.ts */
 export interface ZeroUIConfig {
@@ -22,9 +22,58 @@ export interface ZeroUIConfig {
 }
 
 export const IMPORT_NAME = "@react-zero-ui/icon-sprite"
-export const SPRITE_PATH = "/icons.svg"
 export const ROOT_DIR = "src"
-export const CUSTOM_SVG_DIR = "zero-ui-icons"
 export const OUTPUT_DIR = "public"
 export const IGNORE_ICONS = ["CustomIcon"]
 export const EXCLUDE_DIRS = ["node_modules", ".git", "dist", "build", ".next", "out"]
+
+/** Defaults are copied per build; arrays returned to a consumer never alias these values. */
+export const DEFAULT_CONFIG: Readonly<Required<ZeroUIConfig>> = {
+  IMPORT_NAME,
+  SPRITE_PATH,
+  ROOT_DIR,
+  CUSTOM_SVG_DIR,
+  OUTPUT_DIR,
+  IGNORE_ICONS,
+  EXCLUDE_DIRS,
+}
+
+/**
+ * Validate the public configuration representation without I/O or default merging.
+ * Unknown keys are ignored for compatibility; arrays are copied. Project resolution
+ * owns filesystem interpretation and decides which config file wins.
+ */
+export function parseConfig(value: unknown): ZeroUIConfig {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    throw new Error("Expected a configuration object.")
+  }
+  const entries: Record<string, unknown> = { ...value }
+  const config: ZeroUIConfig = {}
+  for (const key of [
+    "IMPORT_NAME",
+    "SPRITE_PATH",
+    "ROOT_DIR",
+    "CUSTOM_SVG_DIR",
+    "OUTPUT_DIR",
+  ] as const) {
+    const entry = entries[key]
+    if (entry === undefined) {
+      continue
+    }
+    if (typeof entry !== "string") {
+      throw new Error(`${key} must be a string.`)
+    }
+    config[key] = entry
+  }
+  for (const key of ["IGNORE_ICONS", "EXCLUDE_DIRS"] as const) {
+    const entry = entries[key]
+    if (entry === undefined) {
+      continue
+    }
+    if (!Array.isArray(entry) || !entry.every((item: unknown) => typeof item === "string")) {
+      throw new Error(`${key} must be an array of strings.`)
+    }
+    config[key] = [...entry]
+  }
+  return config
+}

@@ -5,7 +5,8 @@ paths:
   - packages/icon-sprite/scripts/generate-icons.ts
   - packages/icon-sprite/scripts/collect-lucide-icons.ts
   - packages/icon-sprite/scripts/resolve-icon-pack.ts
-  - packages/icon-sprite/src/icon-info.ts
+  - packages/icon-sprite/src/catalog.ts
+  - packages/icon-sprite/tests/test-catalog.test.js
   - packages/icon-sprite/assets/lucide/
   - packages/icon-sprite/package.json
   - package-lock.json
@@ -35,7 +36,9 @@ Declaration parsing understands specific upstream declaration shapes. A dependen
 
 ## Derived representations
 
-[`generateIcons`](../../../packages/icon-sprite/scripts/generate-icons.ts) derives wrappers, local Lucide development components, the runtime/type barrel, and manifests in one operation. The barrel exports mapped icons, `CustomIcon`, `IconProps`, and `ZeroUIConfig`.
+[`generateIcons`](../../../packages/icon-sprite/scripts/generate-icons.ts) derives wrappers, local Lucide components, the generated icon barrel, and manifests. The handwritten `src/index.ts` exposes the icon barrel together with custom rendering and public types; generation leaves this interface intact.
+
+[`catalog.ts`](../../../packages/icon-sprite/src/catalog.ts) owns the packaged `IconInfo` representation, manifest filenames, serialization, validation, and consumer lookup. Both the generator and asset collector use this module. `writeCatalog` writes maintainer data; `openCatalog` returns a resolver that hides installed pack locations and missing-asset metadata. [`test-catalog`](../../../packages/icon-sprite/tests/test-catalog.test.js) tests protocol agreement and corrupt input diagnostics.
 
 It finishes reading and rendering before replacing generated directories. Filesystem writes across the whole generated tree form a sequence; interrupted generation requires rebuilding. Keep handwritten files outside those directories.
 

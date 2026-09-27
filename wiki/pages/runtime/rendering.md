@@ -1,34 +1,32 @@
 ---
-summary: "Change icon props or rendering while preserving environment branches, dimensions, accessibility, and the shared stroke-width contract."
+summary: "Follow the handwritten React interface into shared dimensions, inline adaptation, sprite rendering, and environment-specific behavior."
 paths:
-  - packages/icon-sprite/src/render-use.tsx
-  - packages/icon-sprite/src/custom-icon.tsx
+  - packages/icon-sprite/src/index.ts
+  - packages/icon-sprite/src/runtime/icon.tsx
+  - packages/icon-sprite/src/runtime/custom-icon.tsx
+  - packages/icon-sprite/src/sprite-contract.ts
   - packages/icon-sprite/scripts/generate-icons.ts
-  - packages/icon-sprite/src/cli/generate-sprite.ts
-  - packages/icon-sprite/tests/test-accessibility-props.test.js
+  - packages/icon-sprite/tests/test-runtime.test.js
   - packages/icon-sprite/tests/test-sprite-id-match.test.js
+  - packages/icon-sprite/tests/test-runtime-boundary.test.js
 ---
 
 # Runtime Rendering
 
-## Environment branches
+[`src/index.ts`](../../../packages/icon-sprite/src/index.ts) is the stable React interface. Generated icons are exposed through a generated barrel; build machinery has a separate package `/build` entrypoint.
 
-The [`wrapper` template](../../../packages/icon-sprite/scripts/generate-icons.ts) uses inline components whenever `NODE_ENV` differs from `production`. Lucide uses generated local components derived from the SVG archive; Tabler uses its React dependency. The local Lucide implementation retains SVG geometry and forwarded props, with behavior defined by this generator.
+## Shared renderer
 
-Production calls [`renderUse`](../../../packages/icon-sprite/src/render-use.tsx) with the catalog's symbol ID and runtime sprite URL. This is a React wrapper around `<svg><use>`. The application bundler owns replacing `NODE_ENV` and removing development imports. Merely generating a sprite leaves that optimization to the application build.
+[`runtime/icon.tsx`](../../../packages/icon-sprite/src/runtime/icon.tsx) owns `IconProps`, `CustomIconProps`, `iconDimensions`, `renderInline`, and `renderIcon`. Generated wrappers know their symbol identity and development component. They delegate dimensions, prop adaptation, URL construction, and production markup to this module.
 
-`CustomIcon` activates its lazy client renderer only for `development`; other environments use the sprite directly. A test environment therefore takes different branches for built-in and custom icons. Tests changing `NODE_ENV` after module import must account for the custom module's initialization-time lazy-component choice.
+Each dimension resolves as explicit width/height, then `size`, then the shared default. Nullish fallback preserves zero. `renderInline` keeps absent dimensions optional for upstream components. `renderIcon` forwards SVG props, allows an explicit ARIA override, and transports `strokeWidth` through the shared CSS property. Caller style entries take precedence.
 
-## Instance contract
+[`sprite-contract.ts`](../../../packages/icon-sprite/src/sprite-contract.ts) supplies URLs, size, and the stroke-width property consumed by both renderer and writer. Presentation values fixed inside symbols may differ from inline SVG behavior; accepting a prop in TypeScript establishes its shape, while visual equivalence needs browser evidence.
 
-Each dimension resolves independently as explicit dimension, then `size`, then `24`. Nullish fallback preserves zero. General SVG props reach the outer element. Default `aria-hidden="true"` precedes caller props, allowing explicit accessibility overrides. A meaningful label needs the corresponding override as well as its role or accessible name.
+## Environment boundaries
 
-`strokeWidth` becomes `--icon-stroke-width` on the outer SVG. The [sprite builder](../build-system/sprite-output.md) inserts the matching variable into SVG content. Caller `style` entries take precedence in that merge. Changes to either half require checking the other.
+Built-in wrappers branch inline whenever `NODE_ENV` differs from `production`. Keep that branch visible in the generator so bundlers can remove development imports. Lucide uses local generated components; Tabler uses its React dependency.
 
-Presentation attributes stored inside the symbol can behave differently from inline props. Color should flow through CSS `color` when the asset uses `currentColor`. Types accepting an SVG prop establish API shape; browser visual equivalence needs validation. The [scanner](../build-system/source-scanning.md) warns about some explicit risky props.
+`CustomIcon` activates its lazy client loader only in `development`. Other environments use the sprite. Tests that change `NODE_ENV` must account for initialization of that lazy component.
 
-## Debug and test route
-
-For missing production icons, inspect `href`, asset response, and symbol ID before changing markup. A stale or misplaced sprite belongs to [consumer output](../build-system/sprite-output.md). Changes intended for every icon belong in the shared renderer or wrapper template.
-
-[`test-sprite-id-match`](../../../packages/icon-sprite/tests/test-sprite-id-match.test.js) checks compiled element structure, environment branches, geometry, dimensions, and forwarded props. [`test-accessibility-props`](../../../packages/icon-sprite/tests/test-accessibility-props.test.js) checks default and overridden ARIA behavior. Browser styling, assistive-technology behavior, hydration, and bundle size remain separate [validation concerns](../development/validation.md).
+[`test-runtime`](../../../packages/icon-sprite/tests/test-runtime.test.js) covers shared rendering contracts. [`test-sprite-id-match`](../../../packages/icon-sprite/tests/test-sprite-id-match.test.js) renders every mapped public icon against its symbol ID. [`test-runtime-boundary`](../../../packages/icon-sprite/tests/test-runtime-boundary.test.js) follows the complete compiled dependency graph, including lazy imports, to reject Node build dependencies. [Custom loading](custom-icons.md) and [validation limits](../development/validation.md) cover browser-specific concerns.

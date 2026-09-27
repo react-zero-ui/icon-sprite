@@ -4,10 +4,10 @@ import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
 import { fileURLToPath } from "node:url"
-import { generateSprite } from "../dist/cli/generate-sprite.js"
+import { generateSprite } from "@react-zero-ui/icon-sprite/build"
 import { createProject, svg, writeProject } from "./cli-fixtures.js"
 
-const cli = fileURLToPath(new URL("../dist/cli/index.js", import.meta.url))
+const cli = fileURLToPath(new URL("../dist/command.js", import.meta.url))
 const compareText = (left, right) => left.localeCompare(right)
 const symbolIdPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 
@@ -16,6 +16,22 @@ function symbolIds(file) {
     .map((match) => match[1])
     .sort(compareText)
 }
+
+test("the public build API returns config diagnostics without console side effects", async (t) => {
+  const root = createProject(t, {
+    "zero-ui.config.ts": "export default { invalid",
+    "src/view.js": "export const value = 1;",
+  })
+  const log = t.mock.method(console, "log", () => undefined)
+  const warn = t.mock.method(console, "warn", () => undefined)
+  const result = await generateSprite(root)
+  assert.equal(result.iconCount, 0)
+  assert.equal(result.outputFile, path.join(root, "public/icons.svg"))
+  assert.equal(result.warnings.length, 1)
+  assert.ok(result.warnings[0].includes("zero-ui.config.ts"))
+  assert.equal(log.mock.callCount(), 0)
+  assert.equal(warn.mock.callCount(), 0)
+})
 
 test("sprite contains both packs and every custom SVG, with attributes and CSS stroke width", async (t) => {
   const root = createProject(t, {
@@ -160,11 +176,9 @@ test("imports do not load consumer configuration or generate output", (t) => {
     "zero-ui.config.js":
       'import fs from "node:fs"; fs.writeFileSync(new URL("./loaded", import.meta.url), "unexpected"); export default {};',
   })
-  const modules = [
-    "../dist/cli/index.js",
-    "../dist/cli/generate-sprite.js",
-    "../dist/config-loader.js",
-  ].map((relative) => new URL(relative, import.meta.url).href)
+  const modules = ["../dist/command.js", "../dist/build.js", "../dist/build/project.js"].map(
+    (relative) => new URL(relative, import.meta.url).href
+  )
   const script = modules.map((url) => `await import(${JSON.stringify(url)});`).join("\n")
   assert.equal(
     execFileSync(process.execPath, ["--input-type=module", "--eval", script], {

@@ -1,18 +1,16 @@
 "use client"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { CUSTOM_SVG_DIR, SPRITE_PATH } from "./config.js"
-import { type IconProps, renderUse } from "./render-use.js"
-
-interface CustomIconProps extends IconProps {
-  name: string
-}
+import { CUSTOM_SVG_DIR } from "../sprite-contract.js"
+import { type CustomIconProps, iconDimensions, renderIcon } from "./icon.js"
 
 type Payload = { attrs: Record<string, string | undefined>; innerHTML: string }
-const mem = new Map<string, Payload>()
+// A cache supplies first paint on remount. Every mount still refreshes from disk.
+const payloadCache = new Map<string, Payload>()
 const dimensionAttribute = /^(width|height)$/i
-const eventHandlerAttribute = /^on[a-z]+$/i
+const eventHandlerAttribute = /^on[a-z]+/i
 const surroundingSlashes = /^\/+|\/+$/g
 
+/** Extract trusted local SVG. Untrusted uploads need a separate sanitization boundary. */
 function extractSVGContent(svg: string): Payload {
   const div = document.createElement("div")
   div.innerHTML = svg.trim()
@@ -39,6 +37,7 @@ function extractSVGContent(svg: string): Payload {
   return { attrs, innerHTML: svgEl.innerHTML.trim() }
 }
 
+/** Asset root attributes retain their historical precedence over matching React props. */
 function applyPayload(el: SVGSVGElement, payload: Payload, incomingClass: string): void {
   const payloadClass = payload.attrs.class ?? payload.attrs.className ?? ""
   const mergedClass = [incomingClass, payloadClass].filter(Boolean).join(" ").trim()
@@ -62,7 +61,7 @@ function applyPayload(el: SVGSVGElement, payload: Payload, incomingClass: string
 
 function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) {
   const [payload, setPayload] = useState<Payload | null>(() =>
-    typeof globalThis.document !== "undefined" ? (mem.get(name) ?? null) : null
+    typeof globalThis.document !== "undefined" ? (payloadCache.get(name) ?? null) : null
   )
   const svgRef = useRef<SVGSVGElement>(null)
   const incomingClass = rest.className ?? ""
@@ -89,7 +88,7 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
           return
         }
         const p = extractSVGContent(txt)
-        mem.set(name, p)
+        payloadCache.set(name, p)
         setPayload(p)
       })
       .catch((err) => {
@@ -106,14 +105,11 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
   }, [name])
 
   if (payload) {
-    const w = width ?? size ?? 24
-    const h = height ?? size ?? 24
     return (
       <svg
         aria-hidden="true"
-        height={h}
         ref={svgRef}
-        width={w}
+        {...iconDimensions({ size, width, height })}
         {...rest}
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted local SVG assets require raw markup; extractSVGContent removes scripts and event handlers.
         dangerouslySetInnerHTML={{ __html: payload.innerHTML }}
@@ -122,7 +118,7 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
   }
 
   // fallback if fetch fails in dev
-  return renderUse(name, SPRITE_PATH, { size, width, height, ...rest })
+  return renderIcon(name, { size, width, height, ...rest })
 }
 
 export default DevCustomIcon

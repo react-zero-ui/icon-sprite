@@ -1,46 +1,36 @@
 ---
-summary: "Map the two build stages, runtime boundary, canonical inputs, and owners before making changes across subsystems."
+summary: "Start with the React and Node interfaces; locate the owners of project settings, scanning, packaged catalogs, assets, and SVG output."
 paths:
-  - packages/icon-sprite/scripts/build.ts
+  - packages/icon-sprite/src/index.ts
+  - packages/icon-sprite/src/build.ts
+  - packages/icon-sprite/src/build/
+  - packages/icon-sprite/src/catalog.ts
+  - packages/icon-sprite/src/runtime/
+  - packages/icon-sprite/src/sprite-contract.ts
   - packages/icon-sprite/scripts/generate-icons.ts
-  - packages/icon-sprite/src/cli/
-  - packages/icon-sprite/src/render-use.tsx
   - packages/icon-sprite/package.json
 ---
 
 # Architecture
 
-## Two independent build stages
+## Two application interfaces
+
+[`src/index.ts`](../../packages/icon-sprite/src/index.ts) is the handwritten React facade. It exports custom rendering and public types, then exposes the generated icon barrel. Generation replaces `src/icons/index.ts` while preserving this interface.
+
+[`src/build.ts`](../../packages/icon-sprite/src/build.ts) exposes `generateSprite(projectDirectory?)` through the package's `/build` export. It owns sequencing and combines diagnostics. Consumers supply an application root and receive an output file, symbol count, and warnings. The [fixture config](../../fixtures/next-app/next.config.ts) calls it directly. `command.ts` preserves historical prebuild scripts as a reporting adapter.
 
 ```text
-Maintainer build
-  archived Lucide SVGs + installed icon-pack declarations/assets
-    → catalog of public names, symbol IDs, and SVG filenames
-    → generated React sources + CLI manifests
-    → compiled npm package
-
-Consumer prebuild
-  application source + consumer config + packaged manifests/assets
-    → detected icon references + local custom SVGs
-    → public sprite
-
-Application render
-  development → local Lucide components / Tabler components / custom loader
-  production  → shared SVG renderer → external sprite symbol
+Maintainer: source catalog → generated components + packaged manifests → npm artifact
+Consumer:  resolveProject → scanIcons → collectSymbols → writeSprite
+Runtime:   React facade → inline development components / shared production renderer
 ```
-
-The catalog covers the library. A consumer sprite covers statically discovered built-in references plus all custom SVGs in its configured directory. Library compilation alone leaves the consumer sprite to its separate prebuild step.
 
 ## Knowledge ownership
 
-[Catalog and generation](build-system/icon-catalog.md) owns public naming, collision handling, archive preservation, and generated representations. The shared [manifest type](../../packages/icon-sprite/src/icon-info.ts) connects that stage to consumer generation.
+[Project resolution](build-system/configuration.md) interprets settings once and returns absolute paths plus narrow scanner options. [Source scanning](build-system/source-scanning.md) hides Babel, traversal, and per-operation state. [Asset collection and writing](build-system/sprite-output.md) consume semantic icon usage and SVG symbols; orchestration never reads a manifest or manipulates XML.
 
-[Configuration](build-system/configuration.md) resolves consumer settings. [Source scanning](build-system/source-scanning.md) returns discovered references and diagnostics. [Sprite output](build-system/sprite-output.md) owns asset loading and replacement of the consumer's output file.
+[`catalog.ts`](../../packages/icon-sprite/src/catalog.ts) owns both directions of the packaged manifest protocol and resolves upstream asset locations. [Maintainer catalog generation](build-system/icon-catalog.md) owns public naming, historical aliases, and canonical input preservation.
 
-[Rendering](runtime/rendering.md) owns the production SVG contract. [Custom icons](runtime/custom-icons.md) adds the browser-only development loader. Node-only configuration and CLI imports stay outside the public runtime barrel.
+[`sprite-contract.ts`](../../packages/icon-sprite/src/sprite-contract.ts) defines shared URLs, default dimensions, the stroke-width CSS property, and presentation constraints. [Rendering](runtime/rendering.md) hides those details from generated wrappers. [Custom rendering](runtime/custom-icons.md) owns browser loading and payload state.
 
-The consumer application owns hosting, cache invalidation, and production bundler optimization. Production still passes through a small React wrapper; removal of development code depends on the application's bundler.
-
-## Working across boundaries
-
-Use [development workflow](development/workflow.md) for build order, [validation](development/validation.md) for checks, and [publishing](development/publishing.md) for tarball contents. The [risk map](open-questions-risks.md) routes unresolved behavior to its detailed owner.
+Runtime imports stay independent of Node build modules. The application owns asset hosting, caching, and dead-code elimination. [Validation](development/validation.md) checks both the local workspace and the actual consumer artifact.

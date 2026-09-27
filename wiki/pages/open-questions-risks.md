@@ -2,8 +2,8 @@
 summary: "Route unresolved runtime configuration, browser validation, custom SVG trust, and packaging claims to their evidence and owners."
 paths:
   - packages/icon-sprite/src/config.ts
-  - packages/icon-sprite/src/custom-dev-icon.tsx
-  - packages/icon-sprite/src/cli/generate-sprite.ts
+  - packages/icon-sprite/src/runtime/custom-icon-dev.tsx
+  - packages/icon-sprite/src/build/sprite-writer.ts
   - scripts/test-integration.ts
   - .github/workflows/check.yml
   - .github/workflows/oss-release-trusted.yml
@@ -13,7 +13,7 @@ paths:
 
 ## Runtime URL configuration
 
-Consumer config currently changes CLI paths while runtime URLs stay fixed. Making URLs configurable per consumer needs a design that preserves shared-install isolation and development/production agreement. Current behavior and diagnostic steps belong to [configuration](build-system/configuration.md).
+Consumer config changes build paths while runtime URLs stay fixed. Making URLs configurable per consumer needs a design that preserves shared-install isolation and development/production agreement. Current behavior and diagnostic steps belong to [configuration](build-system/configuration.md).
 
 ## Browser and performance evidence
 

@@ -3,6 +3,7 @@ summary: "Choose unit, type, fixture, or isolated-package checks and understand 
 paths:
   - package.json
   - packages/icon-sprite/tests/
+  - fixtures/next-app/next.config.ts
   - scripts/test-integration.ts
   - fixtures/next-app/app/
   - fixtures/next-app/package.json
@@ -23,14 +24,18 @@ The read-only Biome step fails on warnings as well as errors. Use [code quality]
 | Source discovery and configuration | `test-scanner-exclusion` and `test-config` |
 | Sprite output, failures, concurrency, executable bin | `test-sprite` |
 | Runtime element structure and ARIA forwarding | `test-sprite-id-match` and `test-accessibility-props` |
+| Public module boundaries and shared rendering | `test-runtime-boundary` and `test-runtime` |
+| Packaged manifest representation | `test-catalog` |
 
 These files live in [`packages/icon-sprite/tests`](../../../packages/icon-sprite/tests/). Most invoke compiled code. Generation tests write isolated temporary directories, compare manifests, and check that regeneration removes stale generated files while preserving handwritten files.
 
-`npm run build:fixture` exercises the local application's production prebuild and Next build. The fixture deliberately contains presentation props that trigger warnings. Review those warnings against the [rendering contract](../runtime/rendering.md).
+`npm run build:fixture` exercises direct API integration in Next configuration and the production application build. Type generation may invoke the same production config phase. The fixture deliberately contains presentation props that trigger warnings. Review them against the [rendering contract](../runtime/rendering.md).
 
 ## Consumer installation boundary
 
 `npm run test:integration` builds, then runs [`scripts/test-integration.ts`](../../../scripts/test-integration.ts). The harness packs existing output with lifecycle scripts disabled, verifies included/excluded files, copies the fixture to a temporary directory, and installs the tarball there. It excludes the local generated sprite so the temporary app must build its own.
+
+The copied Next config imports `generateSprite` from the installed package's `/build` export. The temporary app has no sprite prebuild command, so successful output proves the callable interface works independently of the compatibility adapter. Package tests separately exercise that adapter.
 
 The harness pins direct fixture dependencies to root-lock versions. Their transitive dependencies resolve during the temporary `npm install`; this exercises registry installation and can vary independently of a root `npm ci`.
 

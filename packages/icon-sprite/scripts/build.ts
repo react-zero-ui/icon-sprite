@@ -25,4 +25,4 @@ fs.copyFileSync(
   new URL("../dist/LICENSE", import.meta.url)
 )
 // Workspace bin links target this regenerated file directly.
-fs.chmodSync(new URL("../dist/cli/index.js", import.meta.url), 0o755)
+fs.chmodSync(new URL("../dist/command.js", import.meta.url), 0o755)

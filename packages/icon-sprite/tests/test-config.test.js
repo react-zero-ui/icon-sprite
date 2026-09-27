@@ -2,43 +2,39 @@ import assert from "node:assert/strict"
 import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
-import {
-  EXCLUDE_DIRS,
-  IGNORE_ICONS,
-  IMPORT_NAME,
-  OUTPUT_DIR,
-  ROOT_DIR,
-  SPRITE_PATH,
-} from "../dist/config.js"
-import { loadConfig } from "../dist/config-loader.js"
+import { resolveProject } from "../dist/build/project.js"
+import { DEFAULT_CONFIG } from "../dist/config.js"
 import { createProject } from "./cli-fixtures.js"
 
-test("defaults and source detection belong to the specified consumer, not cwd", async (t) => {
+test("project resolution owns defaults, absolute paths, and source detection without changing cwd", async (t) => {
   const cwd = process.cwd()
   const root = createProject(t, { "app/index.js": "", "pages/index.js": "" })
-  const config = await loadConfig(root)
-  assert.deepEqual(config, {
-    IMPORT_NAME,
-    ROOT_DIR: "app",
-    SPRITE_PATH,
-    CUSTOM_SVG_DIR: "zero-ui-icons",
-    OUTPUT_DIR,
-    IGNORE_ICONS: [...IGNORE_ICONS],
-    EXCLUDE_DIRS: [...EXCLUDE_DIRS],
+  const project = await resolveProject(root)
+  assert.deepEqual(project, {
+    customDirectory: path.join(root, "public/zero-ui-icons"),
+    outputFile: path.join(root, "public/icons.svg"),
+    scan: {
+      sourceDirectory: path.join(root, "app"),
+      projectDirectory: root,
+      importName: DEFAULT_CONFIG.IMPORT_NAME,
+      ignoreIcons: [...DEFAULT_CONFIG.IGNORE_ICONS],
+      excludeDirectories: [...DEFAULT_CONFIG.EXCLUDE_DIRS],
+    },
+    warnings: [],
   })
   assert.equal(process.cwd(), cwd)
   fs.mkdirSync(path.join(root, "src"))
-  assert.equal((await loadConfig(root)).ROOT_DIR, "src")
+  assert.equal((await resolveProject(root)).scan.sourceDirectory, path.join(root, "src"))
 })
 
 test("source detection skips files and falls back to src", async (t) => {
   const root = createProject(t, { src: "not a directory", "pages/index.js": "" })
-  assert.equal((await loadConfig(root)).ROOT_DIR, "pages")
+  assert.equal((await resolveProject(root)).scan.sourceDirectory, path.join(root, "pages"))
   fs.rmSync(path.join(root, "pages"), { recursive: true })
-  assert.equal((await loadConfig(root)).ROOT_DIR, "src")
+  assert.equal((await resolveProject(root)).scan.sourceDirectory, path.join(root, "src"))
 })
 
-test("JavaScript configuration supports relative imports and every existing override", async (t) => {
+test("relative config imports and all existing overrides resolve at one boundary", async (t) => {
   const overrides = {
     IMPORT_NAME: "@example/icons",
     ROOT_DIR: "lib",
@@ -52,74 +48,81 @@ test("JavaScript configuration supports relative imports and every existing over
     "settings.js": `export default ${JSON.stringify(overrides)};`,
     "zero-ui.config.js": 'import config from "./settings.js"; export default config;',
   })
-  assert.deepEqual(await loadConfig(root), overrides)
+  assert.deepEqual(await resolveProject(root), {
+    customDirectory: path.join(root, "static/logos"),
+    outputFile: path.join(root, "static/nested/icons.svg"),
+    scan: {
+      sourceDirectory: path.join(root, "lib"),
+      projectDirectory: root,
+      importName: "@example/icons",
+      ignoreIcons: ["Ignored"],
+      excludeDirectories: ["vendor"],
+    },
+    warnings: [],
+  })
 })
 
-test("named exports and CommonJS configurations still work", async (t) => {
+test("named exports and CommonJS configuration remain supported", async (t) => {
   const named = createProject(t, { "zero-ui.config.js": 'export const ROOT_DIR = "lib";' })
   const commonjs = createProject(t, {
     "package.json": '{"type":"commonjs"}',
     "zero-ui.config.js": 'module.exports = { ROOT_DIR: "components" };',
   })
-  assert.equal((await loadConfig(named)).ROOT_DIR, "lib")
-  assert.equal((await loadConfig(commonjs)).ROOT_DIR, "components")
+  assert.equal((await resolveProject(named)).scan.sourceDirectory, path.join(named, "lib"))
+  assert.equal(
+    (await resolveProject(commonjs)).scan.sourceDirectory,
+    path.join(commonjs, "components")
+  )
 })
 
-test("TypeScript config takes precedence and preserves the typed config API", async (t) => {
+test("valid TypeScript config prevents execution of the lower-priority JavaScript module", async (t) => {
   const root = createProject(t, {
-    "zero-ui.config.ts": `import type { ZeroUIConfig } from "@react-zero-ui/icon-sprite";
-			export default { ROOT_DIR: "typed" } satisfies ZeroUIConfig;`,
-    "zero-ui.config.js": 'export default { ROOT_DIR: "javascript" };',
+    "zero-ui.config.ts":
+      'import type { ZeroUIConfig } from "@react-zero-ui/icon-sprite"; export default { ROOT_DIR: "typed" } satisfies ZeroUIConfig;',
+    "zero-ui.config.js": 'throw new Error("The lower-priority config must remain unexecuted");',
   })
-  assert.equal((await loadConfig(root)).ROOT_DIR, "typed")
+  const result = await resolveProject(root)
+  assert.equal(result.scan.sourceDirectory, path.join(root, "typed"))
+  assert.deepEqual(result.warnings, [])
 })
 
-test("broken TypeScript config warns with its path and falls back to JavaScript", async (t) => {
-  const warning = t.mock.method(console, "warn", () => {
-    // Expected warnings are inspected through the mock below.
-  })
+test("broken TypeScript config returns an actionable warning and falls back to JavaScript", async (t) => {
   const root = createProject(t, {
     "zero-ui.config.ts": "export default { invalid",
     "zero-ui.config.js": 'export default { ROOT_DIR: "fallback" };',
   })
-  assert.equal((await loadConfig(root)).ROOT_DIR, "fallback")
-  assert.equal(warning.mock.callCount(), 1)
-  assert.ok(warning.mock.calls[0].arguments[0].includes(path.join(root, "zero-ui.config.ts")))
+  const result = await resolveProject(root)
+  assert.equal(result.scan.sourceDirectory, path.join(root, "fallback"))
+  assert.equal(result.warnings.length, 1)
+  assert.ok(result.warnings[0].includes(path.join(root, "zero-ui.config.ts")))
 })
 
-test("invalid config values warn and use defaults rather than breaking the scanner", async (t) => {
-  const warning = t.mock.method(console, "warn", () => {
-    // Expected warnings are inspected through the mock below.
-  })
+test("invalid config values fall back and preserve per-project diagnostics", async (t) => {
   const roots = ['"not an object"', "{ ROOT_DIR: 42 }", "{ EXCLUDE_DIRS: [null] }"].map((config) =>
-    createProject(t, {
-      "app/index.js": "",
-      "zero-ui.config.js": `export default ${config};`,
-    })
+    createProject(t, { "app/index.js": "", "zero-ui.config.js": `export default ${config};` })
   )
-  const configs = await Promise.all(roots.map((root) => loadConfig(root)))
-  for (const config of configs) {
-    assert.equal(config.ROOT_DIR, "app")
+  const projects = await Promise.all(roots.map((root) => resolveProject(root)))
+  for (const [index, project] of projects.entries()) {
+    assert.equal(project.scan.sourceDirectory, path.join(roots[index], "app"))
+    assert.equal(project.warnings.length, 1)
   }
-  assert.equal(warning.mock.callCount(), 3)
-  assert.ok(warning.mock.calls[1].arguments[0].includes("ROOT_DIR must be a string"))
-  assert.ok(warning.mock.calls[2].arguments[0].includes("EXCLUDE_DIRS must be an array of strings"))
+  assert.ok(projects[1].warnings[0].includes("ROOT_DIR must be a string"))
+  assert.ok(projects[2].warnings[0].includes("EXCLUDE_DIRS must be an array of strings"))
 })
 
-test("repeated and concurrent loads cannot mutate other consumers or runtime defaults", async (t) => {
+test("repeated and concurrent resolutions cannot mutate another consumer or runtime defaults", async (t) => {
   const first = createProject(t, {
     "zero-ui.config.js":
       'export default { ROOT_DIR: "lib", IGNORE_ICONS: ["Skip"], EXCLUDE_DIRS: [] };',
   })
   const second = createProject(t)
-  const [a, b] = await Promise.all([loadConfig(first), loadConfig(second)])
-  a.IGNORE_ICONS.push("Check")
-  a.EXCLUDE_DIRS.push("src")
-  b.IGNORE_ICONS.push("Heart")
-  const again = await loadConfig(first)
-  assert.deepEqual(again.IGNORE_ICONS, ["Skip"])
-  assert.deepEqual(again.EXCLUDE_DIRS, [])
-  assert.deepEqual((await loadConfig(second)).IGNORE_ICONS, ["CustomIcon"])
-  assert.deepEqual(IGNORE_ICONS, ["CustomIcon"])
-  assert.equal(ROOT_DIR, "src")
+  const [a, b] = await Promise.all([resolveProject(first), resolveProject(second)])
+  a.scan.ignoreIcons.push("Check")
+  a.scan.excludeDirectories.push("src")
+  b.scan.ignoreIcons.push("Heart")
+  const again = await resolveProject(first)
+  assert.deepEqual(again.scan.ignoreIcons, ["Skip"])
+  assert.deepEqual(again.scan.excludeDirectories, [])
+  assert.deepEqual((await resolveProject(second)).scan.ignoreIcons, ["CustomIcon"])
+  assert.deepEqual(DEFAULT_CONFIG.IGNORE_ICONS, ["CustomIcon"])
 })
