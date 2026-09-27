@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "pages": {
+    "pages/architecture.md": {
+      "fingerprint": "sha256:7989ca09dc13773794a4d97bbae97b6e85978f4589f9b8e3dd53458d48de34ea"
+    },
+    "pages/build-system/configuration.md": {
+      "fingerprint": "sha256:bfee355535d508d3ee78bc09f45aaed61449c32d992c578709de68891f128907"
+    },
+    "pages/build-system/icon-catalog.md": {
+      "fingerprint": "sha256:2bd3f6d60c64e9b77bb9cc0bb5bb6e8b1971230bab1cdedbae5c934a51caa8f6"
+    },
+    "pages/build-system/source-scanning.md": {
+      "fingerprint": "sha256:ab05920b34842157f4855604317e30452d6367135fe9451dc8b06ac3f9c08d4d"
+    },
+    "pages/build-system/sprite-output.md": {
+      "fingerprint": "sha256:99311bea4a4b08086e8f64d23422927278e209ca5b01086432fc9941a2bb8d08"
+    },
+    "pages/development/publishing.md": {
+      "fingerprint": "sha256:c9be73849328359899bedba6e6f2e808d0af105f62c6f7ca0a3f00eb7d93f921"
+    },
+    "pages/development/validation.md": {
+      "fingerprint": "sha256:ab58d24d58d26362ebec1740118fffb54f605452b727a2ad17c5402143ba215b"
+    },
+    "pages/development/workflow.md": {
+      "fingerprint": "sha256:e920c15592ad536b7a995836b1eeb2d15a2a666ee29eb6c9ad538dfc4e6fc6fb"
+    },
+    "pages/open-questions-risks.md": {
+      "fingerprint": "sha256:635eed91fa69c4293fa9d2ca896dce21ca0dfd0321512a3a86984a355a4d120d"
+    },
+    "pages/runtime/custom-icons.md": {
+      "fingerprint": "sha256:5ebbd4616e19d003f73817cb5a6a1f02e04a9c73e2c8f141b72e029385ad135a"
+    },
+    "pages/runtime/rendering.md": {
+      "fingerprint": "sha256:5fe783c857ad7574388431a23a4e4029fdc59c7268b76aeba8dc092307935229"
+    }
+  }
+}

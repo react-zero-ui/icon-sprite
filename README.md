@@ -6,6 +6,8 @@ React icon components during development, a shared SVG sprite in production.
 
 See the [package documentation](packages/icon-sprite/README.md) for installation, props, configuration, and usage.
 
+Agents and maintainers should start with [wiki/AGENTS.md](wiki/AGENTS.md) for project context and routes to architecture, subsystem contracts, debugging, and validation.
+
 ## Development
 
 Use the Node 24 LTS version in `.node-version` and npm 11. Run commands from the repository root:

@@ -1,21 +1,17 @@
-# Repository guide
+# Repository Guide
 
-This repository has one public package, `packages/icon-sprite`, and one private integration fixture, `fixtures/next-app`. Use npm from the root. Preserve the public icon imports, default URLs, sprite IDs, and development/production branch behavior.
+Before coding, read [wiki/AGENTS.md](wiki/AGENTS.md), including its mandatory project overview, then follow the wiki index to the smallest relevant pages and source files.
 
-## Route changes to their owners
+The wiki owns durable architecture, behavior, ownership, and validation knowledge. Verify change-sensitive facts against source. The [root README](README.md) owns setup and command usage.
 
-- Runtime SVG rendering: `packages/icon-sprite/src/render-use.tsx`.
-- Custom icons: `src/custom-icon.tsx` and `src/custom-dev-icon.tsx` inside the package. The development renderer handles trusted local SVG markup; review raw markup changes carefully.
-- Runtime defaults and configuration types: `src/config.ts`. Node-only config loading: `src/config-loader.ts`.
-- Consumer builds: `src/cli/generate-sprite.ts` owns configuration, asset loading, and atomic output. `src/cli/scan-icons.ts` owns source analysis. These operations must leave package files and process cwd unchanged. The package bin runs compiled `dist/cli/index.js`.
-- Public icon names and IDs: `scripts/icon-catalog.ts`. `scripts/generate-icons.ts` derives wrappers, exports, and manifests from that catalog. `src/icon-info.ts` is the shared manifest type. `assets/lucide` preserves historical SVGs.
+## Working Rules
 
-Generated `src/icons`, `src/lucide-archive`, `src/index.ts`, `generated`, and `dist` are disposable build output. Edit their generator or canonical inputs. Keep handwritten files outside generated directories.
+Use npm from the repository root and preserve one lockfile. Keep public imports, symbol IDs, default URLs, and environment behavior compatible. Keep canonical assets and handwritten code separate from generated output.
 
-Prefer cohesive modules with small contracts. Keep each naming rule, path rule, and representation with one owner. Avoid extra packages, pass-through layers, or task runners without a demonstrated shared responsibility.
+Prefer cohesive modules with small contracts and one owner for each rule or representation. Introduce shared packages or extra layers when an actual shared responsibility justifies them. Preserve local assets, credentials, and unrelated work.
 
-## Validation
+Choose checks using [validation](wiki/pages/development/validation.md). Packaging, dependency, CLI, and runtime changes require isolated-package validation. Biome covers handwritten code; generated files remain excluded. Keep narrow explanations for verified tooling exceptions.
 
-Use `npm run check` for build, lint, tooling and fixture types, and unit tests. Run `npm run test:integration` for changes to packaging, dependencies, CLI output, or runtime rendering. The TypeScript integration harness installs the package tarball outside the workspace and cleans up after itself. `npm run dev` starts the local fixture after building the library.
+## Maintain Project Knowledge
 
-Biome has strict rules for handwritten code. Use targeted explanations for genuine tool limitations; keep generated files excluded. Keep one root lockfile, preserve local assets and credentials, and update package paths in `.oss-release.yaml` and CI when restructuring.
+Use the `wiki-system` skill when relevant contracts, workflows, boundaries, or decisions change. Follow [wiki maintenance](wiki/maintenance.md), regenerate routing indexes, and review freshness warnings before marking affected pages current. Keep transient status in handoffs and durable knowledge in the wiki.
