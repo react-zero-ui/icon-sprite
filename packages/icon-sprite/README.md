@@ -9,6 +9,7 @@ npm install @react-zero-ui/icon-sprite
 ```
 
 React 17 or newer is a peer dependency. Build integration requires Node.js 22.18+ on the 22.x line, or Node.js 24.11+.
+Consumers do not install Lucide or Tabler packages. Published icon data is derived from this repository's reviewed catalog and cumulative SVG archives.
 
 ```tsx
 import { ArrowRight, IconBrandGithub, CustomIcon } from "@react-zero-ui/icon-sprite"
@@ -33,7 +34,7 @@ for (const warning of result.warnings) {
 }
 ```
 
-`generateSprite(projectDirectory?)` returns `{ outputFile, iconCount, warnings }`. It handles config discovery, source analysis, asset resolution, and atomic writing. Callers decide how to report warnings. Parse, manifest, asset, and write failures reject the operation and preserve an existing sprite. Missing definitions produce warnings and require review before deployment.
+`generateSprite(projectDirectory?)` returns `{ outputFile, iconCount, warnings }`. It handles config discovery, source analysis, package-owned asset resolution, and atomic writing. Callers decide how to report warnings. Parse, catalog, asset, and write failures reject the operation and preserve an existing sprite. Missing definitions produce warnings and require review before deployment.
 
 For Next.js, integrate directly in `next.config.ts`:
 
@@ -113,8 +114,8 @@ Configuration controls build input and output locations. Runtime URLs stay `/ico
 
 This library lives in `packages/icon-sprite`; the private integration fixture lives in `fixtures/next-app`. Run `npm ci`, `npm run check`, and `npm run test:integration` from the repository root.
 
-Start with `src/index.ts` for the React interface and `src/build.ts` for build integration. `src/runtime/` owns rendering; `src/build/` owns project resolution, scanning, asset collection, and writing. `src/catalog.ts` owns the packaged manifest protocol. `src/sprite-contract.ts` owns shared rendering/build constants.
+Start with `src/index.ts` for the React interface and `src/build.ts` for build integration. `src/runtime/` owns rendering; `src/build/` owns project resolution, scanning, asset collection, and writing. `src/catalog.ts` owns the committed catalog format and package-owned asset lookup. `src/sprite-contract.ts` owns shared rendering/build constants.
 
-The handwritten entrypoint remains versioned. Maintainer scripts regenerate the icon barrel, wrappers, local development components, and manifests from `assets/lucide` and installed packs. Edit canonical inputs or their generator for generated behavior. Internal module paths may change; root and `/build` are the supported application interfaces.
+The handwritten entrypoint remains versioned. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` are canonical package-owned source. Maintainer packages are used only by `npm run sync:icons` to import reviewed upstream changes. Sync is additive: removed upstream icons stay available, renamed identities stay stable, and current SVG bytes refresh existing assets. Internal module paths may change; root and `/build` are the supported application interfaces.
 
-Licensed under MIT. The license is included in `dist/LICENSE`.
+Licensed under MIT. The package license is included in `dist/LICENSE`; upstream icon licenses ship under `assets/licenses/`.

@@ -29,9 +29,7 @@
       "!!**/test-results",
       "!!wiki/.wiki-system",
       "!!packages/icon-sprite/assets",
-      "!!packages/icon-sprite/generated",
       "!packages/icon-sprite/src/icons",
-      "!packages/icon-sprite/src/lucide-archive",
       "!!fixtures/next-app/public"
     ]
   },

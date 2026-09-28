@@ -2,9 +2,7 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import test from "node:test"
 
-const mapping = JSON.parse(
-  readFileSync(new URL("../generated/component-sprite-map.json", import.meta.url), "utf8")
-)
+const mapping = JSON.parse(readFileSync(new URL("../assets/catalog.json", import.meta.url), "utf8"))
 test("every public icon renders the catalog's production symbol", async (t) => {
   const previousEnvironment = process.env.NODE_ENV
   t.after(() => {
@@ -59,21 +57,33 @@ test("compiled Lucide and Tabler wrappers preserve production props and developm
   }
 })
 
-test("compiled local Lucide development SVGs retain geometry and dimension overrides", async () => {
-  const { ArrowDown01 } = await import("../dist/lucide-archive/ArrowDown01.js")
-  const element = ArrowDown01({ size: 32, width: 40, strokeWidth: 3, "aria-label": "Sort" })
+test("compiled local development SVGs retain geometry and dimension overrides", async (t) => {
+  const previousEnvironment = process.env.NODE_ENV
+  t.after(() => {
+    if (previousEnvironment === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = previousEnvironment
+    }
+  })
+  process.env.NODE_ENV = "development"
+  const { ArrowDown01 } = await import("../dist/icons/ArrowDown01.js")
+  const wrapper = ArrowDown01({ size: 32, width: 40, strokeWidth: 3, "aria-label": "Sort" })
+  const element = wrapper.type(wrapper.props)
   assert.equal(element.type, "svg")
   assert.equal(element.props.width, 40)
   assert.equal(element.props.height, 32)
   assert.equal(element.props.strokeWidth, 3)
   assert.equal(element.props.strokeLinecap, "round")
-  assert.equal(element.props.className, "lucide lucide-arrow-down-0-1")
+  assert.equal(element.props.className, "lucide lucide-arrow-down-01")
   assert.equal(element.props.viewBox, "0 0 24 24")
   assert.equal(element.props["aria-label"], "Sort")
   assert.equal(element.props.children[0].type, "path")
   assert.equal(element.props.children[0].props.d, "m3 16 4 4 4-4")
-  assert.equal(ArrowDown01({}).props.width, 24)
-  assert.equal(ArrowDown01({ size: 0 }).props.height, 0)
+  const defaultSvg = ArrowDown01({})
+  assert.equal(defaultSvg.type(defaultSvg.props).props.width, 24)
+  const zeroSvg = ArrowDown01({ size: 0 })
+  assert.equal(zeroSvg.type(zeroSvg.props).props.height, 0)
 })
 
 test("renamed Tabler icons retain published export names and sprite IDs", async () => {

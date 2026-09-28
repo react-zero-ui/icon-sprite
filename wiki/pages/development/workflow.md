@@ -35,7 +35,9 @@ PostCSS configuration remains an `.mjs` tool entrypoint. Tests are JavaScript us
 
 ## Ownership during edits
 
-Generated wrappers, local Lucide components, `src/icons/index.ts`, manifests, `dist`, and fixture sprites are ignored output. The public `src/index.ts`, canonical archives, and handwritten generators stay versioned. `.gitignore` explicitly retains `src/build/` despite the generic build-output exclusion. [Catalog guidance](../build-system/icon-catalog.md) explains how to refresh upstream assets safely.
+Generated wrappers, local icon components, `src/icons/index.ts`, `dist`, and fixture sprites are ignored output. The public `src/index.ts`, `assets/catalog.json`, both cumulative SVG archives, and handwritten generators stay versioned. `.gitignore` explicitly retains `src/build/` despite the generic build-output exclusion. [Catalog guidance](../build-system/icon-catalog.md) explains manual upstream synchronization.
+
+After intentionally upgrading Lucide or Tabler maintainer dependencies, run `npm run sync:icons --workspace @react-zero-ui/icon-sprite`, review catalog/asset changes, then run repository validation. Ordinary builds never synchronize upstream packages.
 
 [`biome.json`](../../../biome.json) owns formatting and strict handwritten-code rules. The [code quality policy](code-quality.md) explains nursery adoption, import boundaries, generated-file exclusions, fix commands, and documented tool exceptions.
 

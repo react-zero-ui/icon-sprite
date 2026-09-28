@@ -13,15 +13,15 @@ paths:
 
 ## Artifact boundary
 
-The public package ships compiled runtime and build modules, the compatibility command, declarations, catalog/SVG manifests, and its README. `dist/LICENSE` is copied during build. Canonical SVG directories, maintainer scripts, tests, and fixture files stay outside the tarball.
+The public package ships compiled runtime/build modules, the compatibility command, declarations, `assets/catalog.json`, the derived `dist/icon-assets.json` SVG bundle, upstream license texts, and its README. `dist/LICENSE` is copied during build. Raw cumulative SVG archives, maintainer scripts, tests, and fixture files stay outside the tarball.
 
-Lucide assets and development components are self-contained in generated artifacts. Tabler remains an installed dependency. The catalog reader locates packaged manifests relative to its module; changing layout requires coordinated packaging validation.
+Lucide and Tabler are maintainer-only dev dependencies. Consumer installs resolve both development components and production sprites from data derived during package build from committed archives. The catalog reader locates packaged catalog/bundle files relative to its module; changing asset layout requires coordinated packaging validation.
 
 The export map identifies the React root and `/build` Node API with their declarations. A file wildcard keeps deep-file access compatible where files remain shipped; application integrations should use the supported entrypoints. `zero-icons` targets `dist/command.js` and delegates to the build API.
 
 [`package.json`](../../../packages/icon-sprite/package.json) defines the public entrypoints, package file allowlist, and `zero-icons` bin. Its `prepack` builds and runs package tests. Root `npm pack --workspace @react-zero-ui/icon-sprite` exercises that lifecycle. The integration harness deliberately skips lifecycle scripts because its caller has already built; direct harness execution requires current output.
 
-Use [isolated package validation](validation.md) after changing dependencies, output locations, manifests, or bin handling. Workspace development can resolve files and dependencies unavailable in a consumer tarball.
+Use [isolated package validation](validation.md) after changing dependencies, asset layout, output locations, or bin handling. Workspace development can resolve files and dependencies unavailable in a consumer tarball.
 
 ## Release configuration
 

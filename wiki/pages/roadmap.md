@@ -1,12 +1,12 @@
 ---
-summary: "Planned simplification: make this package fully own cumulative Lucide and Tabler assets so consumers depend only on @react-zero-ui/icon-sprite."
+summary: "Completed icon-ownership roadmap and the remaining intentionally deferred automation boundary."
 ---
 
 # Roadmap
 
-## Own both icon libraries
+## Completed: own both icon libraries
 
-Move Tabler to the same ownership model already used for Lucide. Keep cumulative committed SVG archives for both packs inside this repository. Lucide and Tabler packages become maintainer-only synchronization inputs, never consumer runtime or build dependencies.
+Implemented. Both packs now use cumulative committed SVG archives plus a committed public catalog. Lucide and Tabler packages are maintainer-only synchronization inputs, never consumer runtime or build dependencies.
 
 Target flow:
 
@@ -29,16 +29,16 @@ Synchronization stays additive:
 - Upstream icon disappears → keep archived icon and public API.
 - Upstream icon is renamed → preserve published name and sprite ID; add explicit alias when useful.
 
-The committed catalog and archives become package-owned truth. Upstream packages only provide reviewed updates.
+The committed catalog and archives are package-owned truth. Upstream packages only provide reviewed updates.
 
-## Simplification goals
+## Completed simplification goals
 
-- Remove Lucide and Tabler from consumer dependencies.
-- Resolve production sprite assets only from package-owned archives.
-- Generate development React components from those same canonical SVGs where practical.
-- Keep one synchronization command responsible for importing upstream changes.
-- Preserve published component names and sprite IDs automatically through cumulative storage.
-- Keep synchronization manual and reviewable.
+- Lucide and Tabler removed from consumer dependencies.
+- Production sprite assets resolve only from package-owned archives.
+- Development React components generate from the same canonical SVGs.
+- `sync:icons` owns upstream import.
+- Existing public names and sprite IDs survive cumulative sync.
+- Synchronization remains manual and reviewable.
 
 ## Out of scope
 

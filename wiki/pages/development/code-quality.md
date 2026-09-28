@@ -30,7 +30,7 @@ Console warnings and errors remain available throughout the project. `command.ts
 
 ## Exclusions and exceptions
 
-Generated wrappers, declarations, compiled library output, and Next types use regular `!` exclusions. Biome can still resolve them for import and type analysis while leaving their formatting untouched. [Force exclusions](https://biomejs.dev/reference/configuration/#interaction-with-the-scanner) use `!!` for SVG assets, packaged data manifests, public assets, reports, editor state, and wiki audit state. Those files provide no module-analysis input. Keep `dist` resolvable because the fixture and tests consume the built library.
+Generated wrappers, declarations, compiled library output, and Next types use regular `!` exclusions. Biome can still resolve them for import and type analysis while leaving their formatting untouched. [Force exclusions](https://biomejs.dev/reference/configuration/#interaction-with-the-scanner) use `!!` for package-owned icon assets, public assets, reports, editor state, and wiki audit state. Those files provide no module-analysis input. Keep `dist` resolvable because the fixture and tests consume the built library.
 
 The handwritten `src/index.ts` is checked. Its exact-file override permits a public facade and the generated icon export barrel. Other handwritten files retain the barrel restrictions. This exception gives maintainers one visible supported React interface without duplicating generated names.
 

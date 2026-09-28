@@ -20,14 +20,14 @@ The read-only Biome step fails on warnings as well as errors. Use [code quality]
 
 | Changed contract | Focused evidence |
 | --- | --- |
-| Public names, generated files, pack resolution | `test-mapping`, `test-lucide-compat`, `test-tabler-resolution`, and the naming tests in `test-sprite-id-match` |
+| Public names, package-owned archives, sync behavior | `test-icon-sync`, `test-mapping`, and the naming tests in `test-sprite-id-match` |
 | Source discovery and configuration | `test-scanner-exclusion` and `test-config` |
 | Sprite output, failures, concurrency, executable bin | `test-sprite` |
 | Runtime element structure and ARIA forwarding | `test-sprite-id-match` and `test-accessibility-props` |
 | Public module boundaries and shared rendering | `test-runtime-boundary` and `test-runtime` |
-| Packaged manifest representation | `test-catalog` |
+| Committed catalog representation and asset lookup | `test-catalog` |
 
-These files live in [`packages/icon-sprite/tests`](../../../packages/icon-sprite/tests/). Most invoke compiled code. Generation tests write isolated temporary directories, compare manifests, and check that regeneration removes stale generated files while preserving handwritten files.
+These files live in [`packages/icon-sprite/tests`](../../../packages/icon-sprite/tests/). Most invoke compiled code. Generation tests write isolated temporary directories and check that regeneration removes stale generated files while preserving handwritten files. Sync tests verify cumulative archive behavior against installed maintainer sources.
 
 `npm run build:fixture` exercises direct API integration in Next configuration and the production application build. Type generation may invoke the same production config phase. The fixture deliberately contains presentation props that trigger warnings. Review them against the [rendering contract](../runtime/rendering.md).
 

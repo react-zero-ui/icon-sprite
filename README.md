@@ -32,7 +32,10 @@ npm run format
 
 ```text
 packages/icon-sprite/       Publishable library
-  assets/lucide/           Canonical SVG archive, including historical icons
+  assets/catalog.json      Canonical public names, sprite IDs, and SVG filenames
+  assets/lucide/           Cumulative package-owned Lucide SVG archive
+  assets/tabler/           Cumulative package-owned Tabler SVG archive
+  assets/licenses/         Upstream icon licenses shipped with the package
   src/                    React rendering and configuration
     index.ts              Handwritten React public interface
     build.ts              Node build API: generateSprite(projectDirectory?)
@@ -47,22 +50,22 @@ fixtures/next-app/         Private integration fixture and comparison pages
 scripts/test-integration.ts  Isolated package installation and server smoke tests
 ```
 
-The two npm workspaces share one root lockfile and one Biome configuration. The fixture is private and never published. Generated wrappers, archived React components, manifests, compiled output, and fixture sprites are ignored by Git.
+The two npm workspaces share one root lockfile and one Biome configuration. The fixture is private and never published. Generated wrappers, local React icon components, compiled output, and fixture sprites are ignored by Git.
 
 ## Icon generation
 
-`npm run build` regenerates component wrappers, local Lucide components, the icon barrel, and packaged manifests, then compiles the library. `src/index.ts` remains handwritten. Component naming and sprite IDs belong to `scripts/icon-catalog.ts`; `src/catalog.ts` owns writing and reading the packaged representation.
+`npm run build` regenerates component wrappers, local development components, and the icon barrel from the committed catalog and SVG archives, then compiles the library. `src/index.ts` remains handwritten. Ordinary builds do not read Lucide or Tabler packages.
 
 The fixture invokes the Node API from `next.config.ts` during the production configuration phase. It needs no separate sprite command. Existing applications can continue using the published `zero-icons` prebuild command, which delegates to the same operation.
 
-To refresh Lucide assets after upgrading its packages:
+After intentionally upgrading Lucide or Tabler maintainer dependencies, synchronize both archives:
 
 ```sh
-npm run collect:lucide --workspace @react-zero-ui/icon-sprite
+npm run sync:icons --workspace @react-zero-ui/icon-sprite
 npm run check
 ```
 
-The collector preserves historical SVG filenames. Review asset changes with the dependency update.
+Synchronization refreshes current SVG bytes and adds new public icons without deleting historical assets or published identities. Review the catalog and asset changes before release.
 
 ## Packaging and release
 

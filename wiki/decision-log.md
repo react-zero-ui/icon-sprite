@@ -19,5 +19,5 @@ The Next fixture calls the build operation directly. The historical command rema
 
 Upstream icon packages can remove or rename icons between versions. Earlier upgrades caused existing applications to lose icons or fail builds after the local package moved forward. The library therefore keeps a cumulative compatibility archive: new upstream icons are added, previously published icons remain available after upstream removal, and updated SVG bytes replace older geometry for the same identity.
 
-Public component names and sprite IDs are compatibility commitments owned by this package. Upstream packages supply current assets and names, but an upgrade must never silently delete an already published icon. Renames require aliases or another explicit compatibility mapping.
+Public component names and sprite IDs are compatibility commitments owned by this package. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` now implement that ownership directly. Lucide and Tabler packages are dev-only synchronization sources; consumer installs never resolve icon data from them. `sync:icons` refreshes current bytes and adds new identities without deleting old ones. Renames keep historical IDs, and ambiguous identity changes require review.
 

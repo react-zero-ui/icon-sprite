@@ -10,8 +10,8 @@ The repository has one publishable library and one private Next.js integration f
 
 The handwritten React entrypoint is `src/index.ts`; the Node build interface is `generateSprite()` in `src/build.ts`. Application build integrations call this operation directly. The historical `zero-icons` command delegates to it for compatibility.
 
-Two build stages shape the architecture. Maintainers generate the library's complete catalog, wrappers, and packaged manifests. Consumers scan their application and generate a sprite before the application build. Changes must preserve agreement between component names, wrapper symbol IDs, and emitted symbols across both stages.
+Package-owned `assets/catalog.json` plus cumulative Lucide and Tabler SVG archives define the icon library. Upstream icon packages are maintainer-only synchronization inputs. Ordinary library builds generate React code only from committed package-owned state; consumer builds scan application usage and generate a sprite from those same assets.
 
-Public imports, historical icon names, default URLs, and development/production behavior are compatibility commitments. The SVG archive is canonical input; generated React files and manifests are replaceable output.
+Public imports, sprite IDs, historical icon names, default URLs, and development/production behavior are compatibility commitments. Catalog and SVG archives are canonical input; generated React files are replaceable output.
 
 Prefer deep modules with small contracts. Give each naming rule, representation, and side effect one owner. Keep runtime rendering independent of Node-only build machinery. Consumer generation owns its operation's state and output, leaving shared package files and process cwd unchanged.

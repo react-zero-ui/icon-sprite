@@ -13,7 +13,8 @@ const fixturePath = path.join(root, "fixtures/next-app")
 const libraryPath = path.join(root, "packages/icon-sprite")
 const npm = process.platform === "win32" ? "npm.cmd" : "npm"
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" }
-const repositoryOnlyPathPattern = /^(src|assets|tests|scripts|node_modules)\//
+const repositoryOnlyPathPattern = /^(src|tests|scripts|node_modules)\//
+const rawArchivePathPattern = /^assets\/(lucide|tabler)\//
 const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
 const inlinePathPattern = /<path\b/
@@ -174,14 +175,20 @@ try {
     "dist/LICENSE",
     "dist/build.js",
     "dist/command.js",
-    "generated/component-sprite-map.json",
-    "generated/lucide-icons.json",
+    "dist/icon-assets.json",
+    "assets/catalog.json",
+    "assets/licenses/lucide.txt",
+    "assets/licenses/tabler.txt",
   ]) {
     assert(packedPaths.includes(required), `Packed package is missing ${required}`)
   }
   assert(
     !packedPaths.some((file) => repositoryOnlyPathPattern.test(file)),
     "Package contains repository-only files"
+  )
+  assert(
+    !packedPaths.some((file) => rawArchivePathPattern.test(file)),
+    "Package contains raw canonical SVG archives instead of the derived asset bundle"
   )
 
   await finishAll(
@@ -237,6 +244,19 @@ try {
     false,
     "Fixture unexpectedly uses a workspace symlink"
   )
+  const installedManifest = JSON.parse(
+    await fs.readFile(
+      path.join(directory, "node_modules/@react-zero-ui/icon-sprite/package.json"),
+      "utf8"
+    )
+  )
+  for (const name of ["lucide-react", "lucide-static", "@tabler/icons", "@tabler/icons-react"]) {
+    assert.equal(
+      installedManifest.dependencies?.[name],
+      undefined,
+      `Unexpected consumer dependency: ${name}`
+    )
+  }
 
   await verifyServer(directory, "start", async (base) => {
     const spriteResponse = await fetch(`${base}/icons.svg`, { signal: AbortSignal.timeout(10_000) })

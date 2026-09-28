@@ -7,5 +7,5 @@
 - [Build system](./pages/build-system/index.md) — Library catalog upgrades, missing production icons, source discovery, consumer configuration, and sprite output guarantees.
 - [Development](./pages/development/index.md) — Build and edit the repository, choose meaningful validation, and inspect package/release boundaries without relying on workspace-only success.
 - [Open Questions and Risks](./pages/open-questions-risks.md) — Route unresolved runtime configuration, browser validation, custom SVG trust, and packaging claims to their evidence and owners.
-- [Roadmap](./pages/roadmap.md) — Planned simplification: make this package fully own cumulative Lucide and Tabler assets so consumers depend only on @react-zero-ui/icon-sprite.
+- [Roadmap](./pages/roadmap.md) — Completed icon-ownership roadmap and the remaining intentionally deferred automation boundary.
 - [Runtime](./pages/runtime/index.md) — Development/production rendering, dimensions, accessibility, styling, and the custom SVG loader's lifecycle and trust boundary.

@@ -1,5 +1,5 @@
 ---
-summary: "Follow the Node build operation through asset collection and atomic writing without exposing manifests, XML state, or config interpretation."
+summary: "Follow the Node build operation through package-owned asset collection and atomic writing without exposing catalog, XML, or config internals."
 paths:
   - packages/icon-sprite/src/build.ts
   - packages/icon-sprite/src/build/icon-assets.ts
@@ -15,7 +15,7 @@ paths:
 
 ## Asset boundary
 
-[`collectSymbols`](../../../packages/icon-sprite/src/build/icon-assets.ts) accepts semantic icon usage and the resolved custom directory. [`openCatalog`](../../../packages/icon-sprite/src/catalog.ts) hides manifests, upstream SVG lookup, and legacy custom-name normalization. Unknown built-in names can resolve to custom filenames; this compatibility fallback creates no public React export.
+[`collectSymbols`](../../../packages/icon-sprite/src/build/icon-assets.ts) accepts semantic icon usage and the resolved custom directory. [`openCatalog`](../../../packages/icon-sprite/src/catalog.ts) hides committed catalog parsing, package-owned SVG lookup, and legacy custom-name normalization. Unknown built-in names can resolve to custom filenames; this compatibility fallback creates no public React export.
 
 Built-in symbols deduplicate by ID. Every `.svg` directly inside the custom directory is included, including unused files and file symlinks. Custom IDs preserve case. Static custom names affect warnings, never inclusion. Existing custom/built-in collisions remain possible and require input review.
 
@@ -25,7 +25,7 @@ The resulting `SpriteSymbol` contains identity, markup, and a source label for d
 
 [`writeSprite`](../../../packages/icon-sprite/src/build/sprite-writer.ts) owns svgstore, SVG-root checks, attribute copying, stroke-width rewriting, and atomic replacement. The CSS variable comes from the shared [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts), also consumed by rendering.
 
-Serialization completes before writing a unique temporary sibling. Rename replaces the destination; failure cleanup removes the temporary file. Parse, manifest, asset-processing, and write failures preserve an existing sprite. Missing definitions remain warnings and can produce a partial successful result.
+Serialization completes before writing a unique temporary sibling. Rename replaces the destination; failure cleanup removes the temporary file. Parse, catalog, asset-processing, and write failures preserve an existing sprite. Missing definitions remain warnings and can produce a partial successful result.
 
 Distinct projects remain isolated. Same-target concurrent calls are last-writer-wins; there is no lock or fsync guarantee. Inputs are trusted SVG assets and config paths.
 

@@ -14,10 +14,8 @@ test-results/
 next-env.d.ts
 *.tgz
 
-# Generated from packages/icon-sprite/assets/lucide and installed icon packs
+# Generated from package-owned icon assets
 /packages/icon-sprite/src/icons/
-/packages/icon-sprite/src/lucide-archive/
-/packages/icon-sprite/generated/
 /fixtures/next-app/public/icons.svg
 
 # Local assets, credentials, and editor state

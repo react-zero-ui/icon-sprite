@@ -19,13 +19,13 @@ paths:
 
 [`runtime/icon.tsx`](../../../packages/icon-sprite/src/runtime/icon.tsx) owns `IconProps`, `CustomIconProps`, `iconDimensions`, `renderInline`, and `renderIcon`. Generated wrappers know their symbol identity and development component. They delegate dimensions, prop adaptation, URL construction, and production markup to this module.
 
-Each dimension resolves as explicit width/height, then `size`, then the shared default. Nullish fallback preserves zero. `renderInline` keeps absent dimensions optional for upstream components. `renderIcon` forwards SVG props, allows an explicit ARIA override, and transports `strokeWidth` through the shared CSS property. Caller style entries take precedence.
+Each dimension resolves as explicit width/height, then `size`, then the shared default. Nullish fallback preserves zero. `renderInline` adapts props to generated inline components. `renderIcon` forwards SVG props, allows an explicit ARIA override, and transports `strokeWidth` through the shared CSS property. Caller style entries take precedence.
 
 [`sprite-contract.ts`](../../../packages/icon-sprite/src/sprite-contract.ts) supplies URLs, size, and the stroke-width property consumed by both renderer and writer. Presentation values fixed inside symbols may differ from inline SVG behavior; accepting a prop in TypeScript establishes its shape, while visual equivalence needs browser evidence.
 
 ## Environment boundaries
 
-Built-in wrappers branch inline whenever `NODE_ENV` differs from `production`. Keep that branch visible in the generator so bundlers can remove development imports. Lucide uses local generated components; Tabler uses its React dependency.
+Built-in wrappers branch inline whenever `NODE_ENV` differs from `production`. Each generated wrapper contains its own development SVG implementation derived from the package-owned archive, so neither Lucide nor Tabler React packages participate in consumer rendering. Keep the environment branch visible so bundlers can erase development markup from production output.
 
 `CustomIcon` activates its lazy client loader only in `development`. Other environments use the sprite. Tests that change `NODE_ENV` must account for initialization of that lazy component.
 
