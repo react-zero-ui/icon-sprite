@@ -3,22 +3,24 @@
   "private": true,
   "type": "module",
   "workspaces": [
+    "packages/icon-library",
     "packages/icon-sprite",
     "fixtures/next-app"
   ],
   "scripts": {
     "build": "npm run build --workspace @react-zero-ui/icon-sprite",
     "build:fixture": "npm run build && npm run build --workspace @react-zero-ui/icon-sprite-fixture",
-    "check": "npm run build && npm run lint && npm run typecheck:tools && npm run typecheck --workspace @react-zero-ui/icon-sprite-fixture && npm run test --workspace @react-zero-ui/icon-sprite",
+    "check": "npm run build && npm run lint && npm run typecheck:tools && npm run typecheck --workspace @react-zero-ui/icon-sprite-fixture && npm run test --workspace @react-zero-ui/icon-library && npm run test --workspace @react-zero-ui/icon-sprite",
     "dev": "npm run build && npm run dev --workspace @react-zero-ui/icon-sprite-fixture",
     "format": "biome format --write .",
     "lint": "biome check . --error-on-warnings",
     "lint:fix": "biome check --write . --error-on-warnings",
     "lint:fix:unsafe": "biome check --write --unsafe . --error-on-warnings",
-    "test": "npm run build && npm run test --workspace @react-zero-ui/icon-sprite",
+    "sync:icons": "npm run sync --workspace @react-zero-ui/icon-library",
+    "test": "npm run build && npm run test --workspace @react-zero-ui/icon-library && npm run test --workspace @react-zero-ui/icon-sprite",
     "test:integration": "npm run build && node scripts/test-integration.ts",
     "typecheck": "npm run build && npm run typecheck:tools && npm run typecheck --workspace @react-zero-ui/icon-sprite-fixture",
-    "typecheck:tools": "tsc --project tsconfig.tools.json"
+    "typecheck:tools": "tsc --project tsconfig.node.json"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",

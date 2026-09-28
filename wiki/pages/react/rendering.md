@@ -3,14 +3,16 @@ summary: "Preserve built-in dev/production rendering, compact server code, sizin
 paths:
   - packages/icon-sprite/src/react/icon.tsx
   - packages/icon-sprite/src/sprite-contract.ts
-  - packages/icon-sprite/icon-library/component-generation.ts
+  - packages/icon-library/src/component-generation.ts
 ---
 
 # React Icon Rendering
 
 ## Environment choice
 
-Each generated named component selects inline `DevIcon` whenever `NODE_ENV` differs from `production`; production calls `renderProdIcon(id, props)`. Keep the branch in the [component generator](../../../packages/icon-sprite/icon-library/component-generation.ts) so bundlers can eliminate development geometry. Centralize production defaults and sizing to keep each surviving server-side wrapper small.
+Each generated named component selects inline `DevIcon` whenever `NODE_ENV` differs from `production`; production calls `renderProdIcon(id, props)`. Keep the branch in the private [component generator](../../../packages/icon-library/src/component-generation.ts) so bundlers can eliminate development geometry. Centralize production defaults and sizing to keep each surviving server-side wrapper small.
+
+Generation drops upstream root `class` plus authored width/height from built-in `DevIcon` source. Provider-specific classes therefore do not leak into application markup; caller `className` comes only from React props. Canonical SVG files remain unchanged.
 
 [react/icon.tsx](../../../packages/icon-sprite/src/react/icon.tsx) creates React elements. `renderProdIcon` applies library defaults, then uses `renderSvgUseElement` for `<svg><use /></svg>`. File creation belongs to [sprite output](../build-system/sprite-output.md). [Custom icons](custom-icons.md) have their own loading lifecycle.
 

@@ -28,6 +28,7 @@
       "!!**/playwright-report",
       "!!**/test-results",
       "!!wiki/.wiki-system",
+      "!!packages/icon-library/assets",
       "!!packages/icon-sprite/assets",
       "!packages/icon-sprite/src/icons",
       "!!fixtures/next-app/public"
@@ -300,6 +301,7 @@
     {
       "includes": [
         "scripts/**",
+        "packages/icon-library/src/**",
         "packages/icon-sprite/scripts/**",
         "packages/icon-sprite/src/command.ts",
         "packages/icon-sprite/tests/**"

@@ -17,7 +17,7 @@ const fixturePath = path.join(root, "fixtures/next-app")
 const libraryPath = path.join(root, "packages/icon-sprite")
 const npm = process.platform === "win32" ? "npm.cmd" : "npm"
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" }
-const repositoryOnlyPathPattern = /^(src|tests|scripts|icon-library|node_modules)\//
+const repositoryOnlyPathPattern = /^(src|tests|scripts|node_modules)\//
 const rawArchivePathPattern = /^assets\/(lucide|tabler)\//
 const browserIconImplementationPattern = /\/icons\.svg#|icon-tabler-|lucide lucide-/
 const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
@@ -414,6 +414,11 @@ try {
       path.join(directory, "node_modules/@react-zero-ui/icon-sprite/package.json"),
       "utf8"
     )
+  )
+  assert.equal(
+    installedManifest.dependencies?.["@react-zero-ui/icon-library"],
+    undefined,
+    "Published package unexpectedly depends on the private icon-library workspace"
   )
   for (const name of ["lucide-react", "lucide-static", "@tabler/icons", "@tabler/icons-react"]) {
     assert.equal(

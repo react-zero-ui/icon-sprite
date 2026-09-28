@@ -16,6 +16,7 @@ next-env.d.ts
 
 # Generated from package-owned icon assets
 /packages/icon-sprite/src/icons/
+/packages/icon-sprite/assets/
 /fixtures/next-app/public/icons.svg
 
 # Local assets, credentials, and editor state

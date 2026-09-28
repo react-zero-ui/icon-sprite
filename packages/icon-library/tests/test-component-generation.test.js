@@ -33,6 +33,8 @@ test("every mapped icon has exactly one wrapper and public export", async () => 
       "utf8"
     )
     assert.ok(wrapper.includes("function DevIcon"), name)
+    assert.ok(!wrapper.includes('className="lucide '), name)
+    assert.ok(!wrapper.includes('className="icon icon-tabler'), name)
     assert.ok(!wrapper.includes("lucide-react"), name)
     assert.ok(!wrapper.includes("@tabler/icons-react"), name)
   }

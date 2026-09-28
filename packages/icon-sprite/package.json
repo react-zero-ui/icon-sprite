@@ -51,9 +51,7 @@
   ],
   "scripts": {
     "build": "node scripts/build.ts",
-    "generate": "node scripts/generate-icons.ts",
     "prepack": "npm run build && npm run test",
-    "sync:icons": "node scripts/sync-icons.ts",
     "test": "node --test tests/*.test.js",
     "typecheck": "tsc --noEmit"
   },
@@ -64,12 +62,8 @@
   },
   "devDependencies": {
     "@babel/types": "^8.0.6",
-    "@tabler/icons": "^3.48.0",
-    "@tabler/icons-react": "^3.48.0",
     "@types/node": "^24.19.0",
     "@types/react": "^19.3.0",
-    "lucide-react": "^1.48.0",
-    "lucide-static": "^1.48.0",
     "react": "^19.3.0",
     "typescript": "7.0.2"
   },

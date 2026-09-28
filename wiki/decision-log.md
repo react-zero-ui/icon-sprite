@@ -26,9 +26,9 @@ Lucide and Tabler callers already use `<Icon size={...} />`. Keeping this small 
 
 Explicit styling on a shared sprite symbol blocked ordinary per-instance overrides. The archives shared root defaults, allowing us to move those defaults to the outer SVG and make symbols inherit. This replaced the stroke-width CSS-variable transport, preserved text-color styling, and kept defaults out of individual production wrappers. [React rendering](pages/react/rendering.md) owns the contract; [icon library](pages/icon-library.md) owns ingestion validation.
 
-## 2026-09-28: Name modules by their owned domain
+## 2026-09-28: Separate canonical icon source from the published package
 
-Repeated renderer renames failed to clarify code that mixed canonical generation, consumer builds, and React elements. We separated `icon-library/`, `src/build/`, and `src/react/` inside one package so components and sprite identities stay versioned together. Names now follow those responsibilities. [Architecture](pages/architecture.md) is the current navigation map.
+Repeated renderer renames exposed two different ownership levels: canonical icon maintenance and consumer product behavior. Canonical assets, upstream dependencies, validation, and generation now live in private `packages/icon-library`; published `packages/icon-sprite` contains React rendering, consumer sprite building, and generated package inputs. The private workspace generates the product one-way. No runtime or consumer-build dependency points back to it. [Architecture](pages/architecture.md) maps the current boundary.
 
 ## 2026-09-28: Give each wiki topic one detailed owner
 

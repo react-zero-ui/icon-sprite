@@ -32,8 +32,7 @@ npm run format
 
 ```text
 packages/icon-sprite/       One published npm package
-  icon-library/            Canonical catalog, upstream sync/validation, component generation
-  assets/                  Committed catalog, cumulative SVG archives, upstream licenses
+  assets/                  Generated package-ready catalog and licenses
   src/
     react/                 React icon instances and custom development loading
     build/                 Consumer sprite-sheet creation and packaged-data reading
@@ -44,25 +43,29 @@ packages/icon-sprite/       One published npm package
     config.ts              Public consumer configuration
     command.ts             zero-icons command adapter
   scripts/                 Thin command adapters and package compilation
-  tests/                   Domain behavior and compatibility tests
+  tests/                   Product behavior and compatibility tests
+packages/icon-library/      Private canonical-source workspace
+  assets/                  Catalog, cumulative SVG archives, upstream licenses
+  src/                     Upstream sync/validation and product generation
+  tests/                   Canonical compatibility and generation tests
 fixtures/next-app/          Private React/Next integration fixture
 scripts/test-integration.ts Isolated tarball, server output, and three-browser parity checks
 ```
 
-The two npm workspaces share one root lockfile and one Biome configuration. The fixture is private and never published. Generated wrappers, local React icon components, compiled output, and fixture sprites are ignored by Git.
+The repository has one published workspace and two private workspaces. They share one root lockfile and Biome configuration. Generated product assets, wrappers, compiled output, and fixture sprites are ignored by Git.
 
 ## Icon generation
 
 `npm run build` regenerates component wrappers, local development components, and the icon barrel from the committed catalog and SVG archives, then compiles the library. `src/index.ts` remains handwritten. Ordinary builds do not read Lucide or Tabler packages.
 
-`icon-library/component-generation.ts` owns `generateIconComponents()`. It creates source files for the package. The independent `src/build/build-sprite-sheet.ts` owns `buildSpriteSheet()`, which creates a consuming application's `icons.svg`. React rendering selects inline development markup or a production `<use>` reference and performs no file generation.
+`packages/icon-library/src/component-generation.ts` owns product generation from canonical inputs. The independent `packages/icon-sprite/src/build/build-sprite-sheet.ts` owns `buildSpriteSheet()`, which creates a consuming application's `icons.svg`. React rendering performs no file generation.
 
 The fixture invokes the Node API from `next.config.ts` during the production configuration phase. It needs no separate sprite command. Existing applications can continue using the published `zero-icons` prebuild command, which delegates to the same operation.
 
 After intentionally upgrading Lucide or Tabler maintainer dependencies, synchronize both archives:
 
 ```sh
-npm run sync:icons --workspace @react-zero-ui/icon-sprite
+npm run sync:icons
 npm run check
 ```
 
@@ -80,7 +83,7 @@ The package's `prepack` builds and tests it. Integration tests check the actual 
 
 ## Tooling
 
-Biome owns JS/TS/CSS/JSON formatting, import organization, and linting. Generated code and SVG archives are excluded; handwritten code uses kebab-case filenames. React and consumer-build code compile from `src/`. Node runs `icon-library/` and command scripts with native type stripping; `typecheck:tools` checks them strictly. The library build emits JavaScript and declarations for consumers. Install the Biome editor extension to use the same configuration locally.
+Biome owns JS/TS/CSS/JSON formatting, import organization, and linting. Generated code and canonical SVG archives are excluded; handwritten code uses kebab-case filenames. React and consumer-build code compile from `packages/icon-sprite/src/`. Node runs private icon-library source and command scripts with native type stripping; `typecheck:tools` checks them strictly. The product build emits JavaScript and declarations for consumers.
 
 Lint warnings fail repository checks and CI. The [code quality policy](wiki/pages/development/code-quality.md) explains nursery rules, import boundaries, and intentional exceptions.
 

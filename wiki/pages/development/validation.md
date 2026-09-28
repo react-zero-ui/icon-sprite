@@ -2,6 +2,7 @@
 summary: "Select checks and interpret their evidence: unit contracts, isolated installation, three-browser parity, and remaining gaps."
 paths:
   - package.json
+  - packages/icon-library/tests/
   - packages/icon-sprite/tests/
   - scripts/test-integration.ts
   - fixtures/next-app/app/presentation-parity/page.tsx
@@ -15,7 +16,7 @@ paths:
 
 `npm run check` prepares compiled output, runs lint and TypeScript checks, and executes package tests. `build:fixture` additionally builds the local Next application. Packaging, React, dependency, and CLI changes require `test:integration`.
 
-Focused tests live in [packages/icon-sprite/tests](../../../packages/icon-sprite/tests/):
+Focused tests follow ownership: canonical generation/sync tests live in [packages/icon-library/tests](../../../packages/icon-library/tests/); product tests live in [packages/icon-sprite/tests](../../../packages/icon-sprite/tests/).
 
 | Contract | Tests |
 | --- | --- |

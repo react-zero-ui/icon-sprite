@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2022",
+    "types": ["node"]
+  },
+  "include": [
+    "scripts/**/*.ts",
+    "packages/icon-sprite/scripts/**/*.ts",
+    "packages/icon-library/src/**/*.ts"
+  ]
+}

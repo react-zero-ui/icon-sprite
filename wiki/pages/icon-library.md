@@ -1,7 +1,9 @@
 ---
 summary: "Change canonical icons safely: additive upgrades, validation before copying, and reproducible component generation."
 paths:
-  - packages/icon-sprite/icon-library/
+  - packages/icon-library/package.json
+  - packages/icon-library/src/
+  - packages/icon-library/assets/
   - packages/icon-sprite/src/build/icon-data-format.ts
   - packages/icon-sprite/src/sprite-contract.ts
 ---
@@ -10,18 +12,18 @@ paths:
 
 ## Canonical state
 
-[catalog.ts](../../packages/icon-sprite/icon-library/catalog.ts) owns the committed name-to-asset catalog, archive reads, and packaged SVG generation. Existing public identities survive upstream releases. Several component names may reference one SVG; packaged data stores its bytes once.
+[catalog.ts](../../packages/icon-library/src/catalog.ts) owns the committed name-to-asset catalog, archive reads, and packaged SVG generation. Existing public identities survive upstream releases. Several component names may reference one SVG; packaged data stores its bytes once.
 
-Canonical inputs live under `assets/`. The producer and consumer reader share the [data-format contract](../../packages/icon-sprite/src/build/icon-data-format.ts). Preserve that single format owner when changing serialization; [publishing](development/publishing.md) defines which artifacts ship.
+Canonical inputs live only under `packages/icon-library/assets/`. Generated copies under `packages/icon-sprite/assets/` are disposable package inputs. The producer imports the product's [data-format contract](../../packages/icon-sprite/src/build/icon-data-format.ts); published code has no import back to this workspace.
 
 ## Upstream updates
 
-[syncUpstreamIcons](../../packages/icon-sprite/icon-library/upstream-sync.ts) reads installed upstream development dependencies. It adds new identities and refreshes SVG bytes while retaining entries and files absent from upstream. When a component keeps its name but its SVG filename changes, the historical filename receives the new bytes and its sprite ID stays stable. Case-insensitive name collisions are skipped and counted; cross-pack identity changes fail.
+[syncUpstreamIcons](../../packages/icon-library/src/upstream-sync.ts) reads upstream dependencies owned by this private workspace. It adds new identities and refreshes SVG bytes while retaining entries and files absent from upstream. When a component keeps its name but its SVG filename changes, the historical filename receives the new bytes and its sprite ID stays stable. Case-insensitive name collisions are skipped and counted; cross-pack identity changes fail.
 
-[validateUpstreamIcon](../../packages/icon-sprite/icon-library/upstream-validation.ts) checks both packs before copying begins. Roots must match the shared [presentation contract](react/rendering.md); root style overrides and descendant stroke widths are rejected. Intentional descendant paint values remain authored. License texts accompany imported assets. Review catalog, asset, and collision changes after the [sync command](../../README.md#icon-generation).
+[validateUpstreamIcon](../../packages/icon-library/src/upstream-validation.ts) checks both packs before copying begins. Roots must match the product [presentation contract](react/rendering.md); root style overrides and descendant stroke widths are rejected. Intentional descendant paint values remain authored. Run `npm run sync:icons` from repository root.
 
 ## Generated components
 
-[generateIconComponents](../../packages/icon-sprite/icon-library/component-generation.ts) reads committed inputs and replaces only `src/icons/`, preserving the handwritten entrypoint. All source reads and rendering finish before prior generated files are removed. Ordinary package builds use these inputs without synchronizing upstream.
+[generateIconPackage](../../packages/icon-library/src/component-generation.ts) writes generated React components, package-ready catalog/licenses, and the deduplicated SVG bundle into `packages/icon-sprite`. Generation never synchronizes upstream. `packages/icon-sprite/scripts/build.ts` removes old compiled output, invokes this generator, then compiles the published package.
 
 Follow [workflow](development/workflow.md) for compilation order and [validation](development/validation.md) for compatibility and repeatability checks.

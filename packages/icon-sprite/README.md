@@ -114,10 +114,10 @@ Configuration controls build input and output locations. Runtime URLs stay `/ico
 
 ## Contributing
 
-This library lives in `packages/icon-sprite`; the private integration fixture lives in `fixtures/next-app`. Run `npm ci`, `npm run check`, and `npm run test:integration` from the repository root.
+This published library lives in `packages/icon-sprite`; canonical icon source lives in private `packages/icon-library`; the integration fixture lives in `fixtures/next-app`. Run `npm ci`, `npm run check`, and `npm run test:integration` from repository root.
 
-Start with `src/index.ts` for React components and `src/build.ts` for application build integration. `src/react/` owns instance rendering. `src/build/` owns source scanning, packaged icon lookup, and sprite-sheet output. `icon-library/` owns upstream synchronization, canonical assets, validation, and generated React source. Its code stays outside the published artifact.
+Start with `src/index.ts` for React components and `src/build.ts` for application build integration. `src/react/` owns instance rendering. `src/build/` owns source scanning, packaged icon lookup, and sprite-sheet output. Private `../icon-library/` owns upstream synchronization, canonical assets, validation, and generation into this package.
 
-The handwritten entrypoint remains versioned. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` are canonical package-owned source. Maintainer packages are used only by `npm run sync:icons` to import reviewed upstream changes. Sync is additive: removed upstream icons stay available, renamed identities stay stable, and current SVG bytes refresh existing assets. Internal module paths may change; root and `/build` are the supported application interfaces.
+The handwritten entrypoints remain versioned. This package's `assets/catalog.json` and licenses are generated package inputs; canonical catalog/SVGs/licenses live only in `packages/icon-library/assets/`. Upstream packages are private-workspace dependencies used only by root `npm run sync:icons`. Internal module paths may change; root and `/build` are the supported application interfaces.
 
 Licensed under MIT. The package license is included in `dist/LICENSE`; upstream icon licenses ship under `assets/licenses/`.

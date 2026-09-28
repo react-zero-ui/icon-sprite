@@ -2,7 +2,9 @@
 summary: "Avoid stale builds: local fixture behavior, package compilation order, direct TypeScript execution, and generated-file ownership."
 paths:
   - package.json
-  - tsconfig.tools.json
+  - tsconfig.node.json
+  - packages/icon-library/package.json
+  - packages/icon-library/src/
   - packages/icon-sprite/scripts/build.ts
   - packages/icon-sprite/tsconfig.json
   - fixtures/next-app/next.config.ts
@@ -18,12 +20,12 @@ Use the [root README](../../../README.md#development) for setup, version pins, a
 
 `npm run dev` builds the library once, then starts the workspace fixture. Library edits require another build. Next configuration runs the consumer build API during its production phase; Next type generation also loads that phase and can rewrite the ignored sprite.
 
-[scripts/build.ts](../../../packages/icon-sprite/scripts/build.ts) generates component source, recreates `dist`, compiles, then writes packaged data and copies the license. It restores the regenerated CLI's executable bit; omitting that step previously broke workspace bin execution.
+[scripts/build.ts](../../../packages/icon-sprite/scripts/build.ts) clears `dist`, invokes the private icon-library generator, compiles the product, copies the package license, and restores the CLI executable bit. The generator creates React source plus package-ready catalog/licenses/SVG data before compilation.
 
 ## Editing boundaries
 
-`src/` uses `.js` import specifiers for compiled NodeNext output. `icon-library/` and scripts use `.ts` imports for direct Node execution and are checked by [tsconfig.tools.json](../../../tsconfig.tools.json). Preserve these separate execution modes when changing imports.
+`packages/icon-sprite/src/` uses `.js` import specifiers for compiled NodeNext output. `packages/icon-library/src/` and repository scripts execute directly with `.ts` imports and are checked by [tsconfig.node.json](../../../tsconfig.node.json).
 
-Canonical assets and handwritten entrypoints stay versioned. Generated `src/icons/`, `dist`, and fixture sprites are disposable. `.gitignore` explicitly retains handwritten `src/build/` despite the generic output exclusion.
+Canonical assets under `packages/icon-library/assets/` stay versioned. Generated `packages/icon-sprite/src/icons/`, `packages/icon-sprite/assets/`, `dist`, and fixture sprites are disposable. `.gitignore` explicitly retains handwritten `src/build/` despite the generic output exclusion.
 
 Use [icon-library guidance](../icon-library.md) for upstream updates and [validation](validation.md) to select checks.

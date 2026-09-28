@@ -7,7 +7,7 @@ import { readCanonicalCatalog, readCanonicalSvg, writePackagedIconData } from ".
 const libraryDirectory = fileURLToPath(new URL("../", import.meta.url))
 const defaultOutputDirectory = fileURLToPath(new URL("../../icon-sprite/", import.meta.url))
 const svgRootPattern = /<svg\b([^>]*)>([\s\S]*?)<\/svg>/
-const dimensionPattern = /\s(?:width|height)="[^"]*"/g
+const omittedRootAttributePattern = /\s(?:class|width|height)=(["'])[^"']*\1/g
 const jsxAttributePattern = /\b([\w:-]+)=/g
 const kebabAttributePattern = /[-:]([a-z])/g
 
@@ -30,7 +30,7 @@ function createIconComponentSource(componentName: string, info: IconInfo, svg: s
   if (!match) {
     throw new Error(`Expected an <svg> root for ${componentName} (${info.pack}/${info.svgFile})`)
   }
-  const attributes = jsxAttributes(match[1].replace(dimensionPattern, "")).trim()
+  const attributes = jsxAttributes(match[1].replace(omittedRootAttributePattern, "")).trim()
   const children = jsxAttributes(match[2]).trim()
   return `// Generated from assets/${info.pack}/${info.svgFile} by icon-library/component-generation.ts. Do not edit.
 import { resolveIconDimensions, renderProdIcon, type IconProps } from "../react/icon.js";
