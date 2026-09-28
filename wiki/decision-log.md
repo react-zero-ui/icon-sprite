@@ -15,3 +15,9 @@ The broad refactor replaced shared scanner state passed through helper chains an
 
 The Next fixture calls the build operation directly. The historical command remains a compatibility adapter because existing documented package scripts use it. New integration work starts at the callable API. Narrow lint exceptions permit the React facade and cohesive scanner logic while preserving runtime/build dependency checks.
 
+## 2026-09-27: Preserve published icons across upstream upgrades
+
+Upstream icon packages can remove or rename icons between versions. Earlier upgrades caused existing applications to lose icons or fail builds after the local package moved forward. The library therefore keeps a cumulative compatibility archive: new upstream icons are added, previously published icons remain available after upstream removal, and updated SVG bytes replace older geometry for the same identity.
+
+Public component names and sprite IDs are compatibility commitments owned by this package. Upstream packages supply current assets and names, but an upgrade must never silently delete an already published icon. Renames require aliases or another explicit compatibility mapping.
+
