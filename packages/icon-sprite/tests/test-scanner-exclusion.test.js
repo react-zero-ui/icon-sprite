@@ -124,9 +124,8 @@ test("risky prop diagnostics identify the source line and imported component", a
       'import { Heart as Favorite } from "@react-zero-ui/icon-sprite";\nexport const icon = <Favorite stroke="red" opacity={0.5} strokeWidth={3}/>;',
   })
   const { warnings } = scanIcons((await resolveProject(root)).scan)
-  assert.equal(warnings.length, 2)
-  assert.ok(warnings[0].replaceAll("\\", "/").includes('src/view.jsx:2: <Heart> prop "stroke"'))
-  assert.ok(warnings[1].includes('"opacity"'))
+  assert.equal(warnings.length, 1)
+  assert.ok(warnings[0].replaceAll("\\", "/").includes('src/view.jsx:2: <Heart> prop "opacity"'))
 })
 
 test("unknown generic names and overriding spreads fail with actionable locations", async (t) => {

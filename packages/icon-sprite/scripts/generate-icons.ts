@@ -33,7 +33,7 @@ function iconModule(componentName: string, info: IconInfo, svg: string): string 
   const attributes = jsxAttributes(match[1].replace(dimensionPattern, "")).trim()
   const children = jsxAttributes(match[2]).trim()
   return `// Generated from assets/${info.pack}/${info.svgFile} by scripts/generate-icons.ts. Do not edit.
-import { iconDimensions, renderIcon, renderInline, type IconProps } from "../runtime/icon.js";
+import { iconDimensions, renderBuiltInIcon, type IconProps } from "../runtime/icon.js";
 
 function DevIcon({ size, width, height, ...rest }: IconProps) {
   return (
@@ -49,9 +49,9 @@ function DevIcon({ size, width, height, ...rest }: IconProps) {
 
 export function ${componentName}(props: IconProps) {
   if (process.env.NODE_ENV !== "production") {
-    return renderInline(DevIcon, props);
+    return <DevIcon {...props} />;
   }
-  return renderIcon("${info.spriteId}", props);
+  return renderBuiltInIcon("${info.spriteId}", props);
 }
 `
 }

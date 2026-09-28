@@ -70,7 +70,7 @@ Production retains a small React wrapper. Bundlers that replace `process.env.NOD
 
 ## Props
 
-Icon props extend React's SVG props. Each dimension resolves as explicit width/height, then `size`, then `24`. Zero remains valid. `className`, `style`, `id`, `role`, `aria-*`, and `data-*` reach the outer SVG. `strokeWidth` uses `--icon-stroke-width` to reach sprite contents; explicit values in `style` take precedence.
+Icon props extend React's SVG props. Each dimension resolves as explicit width/height, then `size`, then `24`. Zero remains valid. `className`, `style`, `id`, `role`, `aria-*`, and `data-*` reach the outer SVG. Built-in Lucide/Tabler icons preserve their shared root defaults for `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin` on the outer SVG; explicit props or CSS can override them. `color` also works with the default `stroke="currentColor"` behavior.
 
 Sprite-rendered icons default to `aria-hidden="true"`. A meaningful icon needs an accessible label and an explicit override:
 
@@ -78,7 +78,7 @@ Sprite-rendered icons default to `aria-hidden="true"`. A meaningful icon needs a
 <ArrowRight aria-hidden={false} role="img" aria-label="Continue" />
 ```
 
-Use CSS `color` or a text-color class for assets drawn with `currentColor`. Presentation attributes fixed inside a symbol can differ from inline component behavior. Source scanning warns about explicit potentially incompatible props such as `fill`, `stroke`, and `strokeLinecap`.
+Use CSS `color` or a text-color class for assets drawn with `currentColor`. Built-in sprite symbols inherit the supported root presentation values from each icon instance, while authored descendant overrides remain intact. Source scanning warns only for presentation props outside that parity contract.
 
 ## Custom SVGs
 

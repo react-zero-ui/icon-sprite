@@ -15,6 +15,7 @@ const npm = process.platform === "win32" ? "npm.cmd" : "npm"
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" }
 const repositoryOnlyPathPattern = /^(src|tests|scripts|node_modules)\//
 const rawArchivePathPattern = /^assets\/(lucide|tabler)\//
+const browserIconImplementationPattern = /\/icons\.svg#|icon-tabler-|lucide lucide-/
 const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
 const inlinePathPattern = /<path\b/
@@ -76,6 +77,14 @@ async function availablePort(): Promise<number> {
     server.close((error) => (error ? reject(error) : resolve()))
   )
   return port
+}
+
+async function readJavaScriptTree(rootDirectory: string): Promise<string> {
+  const entries = await fs.readdir(rootDirectory, { recursive: true, withFileTypes: true })
+  const files = entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".js"))
+    .map((entry) => path.join(entry.parentPath, entry.name))
+  return (await Promise.all(files.map((file) => fs.readFile(file, "utf8")))).join("\n")
 }
 
 // Each server owns its process group and cleanup, including failed assertions.
@@ -237,6 +246,12 @@ try {
   run(["install", "--no-audit", "--no-fund"], directory)
   console.log("Building the production fixture and sprite...")
   run(["run", "build"], directory)
+  const browserJavaScript = await readJavaScriptTree(path.join(directory, ".next/static/chunks"))
+  assert.doesNotMatch(
+    browserJavaScript,
+    browserIconImplementationPattern,
+    "Server Component icon implementations unexpectedly leaked into production client JavaScript"
+  )
   assert.equal(
     (
       await fs.lstat(path.join(directory, "node_modules/@react-zero-ui/icon-sprite"))
@@ -270,6 +285,11 @@ try {
         const html = await response.text()
         const ids = [...html.matchAll(spriteReferencePattern)].map((match) => match[1])
         assert(ids.length > 0, `${route} has no production sprite references`)
+        assert.doesNotMatch(
+          html,
+          inlinePathPattern,
+          `${route} rendered inline icon paths instead of compact production sprite references`
+        )
         for (const id of ids) {
           assert(symbols.has(id), `Missing sprite symbol: ${id}`)
         }

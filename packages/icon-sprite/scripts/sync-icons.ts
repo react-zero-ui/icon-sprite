@@ -10,12 +10,17 @@ import {
   readCatalog,
   writeCatalog,
 } from "../src/catalog.ts"
+import {
+  BUILT_IN_PRESENTATION_ATTRIBUTES,
+  BUILT_IN_PRESENTATION_DEFAULTS,
+} from "../src/sprite-contract.ts"
 
 interface UpstreamPack {
   archiveDirectory: string
   iconDirectory: string
   licenseFile: string
   pack: IconPack
+
   reactPackage: string
 }
 
@@ -30,6 +35,13 @@ const packageDirectory = fileURLToPath(new URL("../", import.meta.url))
 const require = createRequire(import.meta.url)
 const declarationPattern =
   /declare const (\w+): (?:LucideIcon\b|react\.ForwardRefExoticComponent\b)/g
+const rootSvgPattern = /<svg\b([^>]*)>([\s\S]*?)<\/svg>/i
+const strokeWidthAttributePattern = /\bstroke-width\s*=\s*(["'])(.*?)\1/i
+const strokeWidthStylePattern = /\bstyle\s*=\s*(["'])[^"']*\bstroke-width\s*:/i
+const rootPresentationStylePattern = new RegExp(
+  `\\b(?:${Object.values(BUILT_IN_PRESENTATION_ATTRIBUTES).join("|")})\\s*:`,
+  "i"
+)
 
 function resolveReactPackage(packageName: string): string {
   return require.resolve(`${packageName}/package.json`)
@@ -60,6 +72,56 @@ function svgFiles(directory: string): string[] {
   return readdirSync(directory)
     .filter((file) => file.endsWith(".svg"))
     .sort((left, right) => left.localeCompare(right))
+}
+
+function rootAttribute(attributes: string, name: string): string | undefined {
+  return attributes.match(new RegExp(`(?:^|\\s)${name}\\s*=\\s*(["'])(.*?)\\1`, "i"))?.[2]
+}
+
+/**
+ * Built-in rendering lifts shared root presentation defaults onto each outer SVG.
+ * Reject upstream changes that would make those shared defaults inaccurate.
+ */
+export function validateBuiltInPresentation(svg: string, source: string): void {
+  const root = svg.match(rootSvgPattern)
+  if (!root) {
+    throw new Error(`Invalid built-in SVG ${source}: <svg> root not found.`)
+  }
+  const expectedPresentation = [
+    [BUILT_IN_PRESENTATION_ATTRIBUTES.fill, BUILT_IN_PRESENTATION_DEFAULTS.fill],
+    [BUILT_IN_PRESENTATION_ATTRIBUTES.stroke, BUILT_IN_PRESENTATION_DEFAULTS.stroke],
+    [BUILT_IN_PRESENTATION_ATTRIBUTES.strokeWidth, BUILT_IN_PRESENTATION_DEFAULTS.strokeWidth],
+    [BUILT_IN_PRESENTATION_ATTRIBUTES.strokeLinecap, BUILT_IN_PRESENTATION_DEFAULTS.strokeLinecap],
+    [
+      BUILT_IN_PRESENTATION_ATTRIBUTES.strokeLinejoin,
+      BUILT_IN_PRESENTATION_DEFAULTS.strokeLinejoin,
+    ],
+  ]
+  for (const [attribute, value] of expectedPresentation) {
+    const expected = String(value)
+    const actual = rootAttribute(root[1], attribute)
+    if (actual !== expected) {
+      throw new Error(
+        `Unsupported built-in SVG ${source}: root ${attribute} must be "${expected}", found ${actual === undefined ? "none" : JSON.stringify(actual)}.`
+      )
+    }
+  }
+  const rootStyle = rootAttribute(root[1], "style")
+  if (rootStyle !== undefined && rootPresentationStylePattern.test(rootStyle)) {
+    throw new Error(
+      `Unsupported built-in SVG ${source}: root style must not redefine built-in presentation defaults.`
+    )
+  }
+  if (strokeWidthAttributePattern.test(root[2]) || strokeWidthStylePattern.test(root[2])) {
+    throw new Error(`Unsupported built-in SVG ${source}: descendants must not define stroke-width.`)
+  }
+}
+
+function validateUpstreamPack(pack: UpstreamPack, files: readonly string[]): void {
+  for (const file of files) {
+    const source = path.join(pack.iconDirectory, file)
+    validateBuiltInPresentation(readFileSync(source, "utf8"), `${pack.pack}/${file}`)
+  }
 }
 
 /**
@@ -127,18 +189,20 @@ function addCurrentIcons(
 ): { added: number; skippedCollisions: number } {
   const names = readCanonicalNames(pack.reactPackage, pack.pack)
   const namesByCase = new Map(Object.keys(catalog).map((name) => [name.toLowerCase(), name]))
+  const referencedFiles = new Set(
+    Object.values(catalog)
+      .filter((entry) => entry.pack === pack.pack)
+      .map((entry) => entry.svgFile)
+  )
   let added = 0
   let skippedCollisions = 0
   for (const svgFile of files) {
     const key = svgFile.slice(0, -4).replaceAll("-", "")
-    const alreadyReferenced = Object.values(catalog).some(
-      (entry) => entry.pack === pack.pack && entry.svgFile === svgFile
-    )
     const componentName =
       names.get(key) ??
       (pack.pack === "lucide" ? derivedComponentName(pack.pack, svgFile) : undefined)
     if (!componentName) {
-      if (alreadyReferenced) {
+      if (referencedFiles.has(svgFile)) {
         continue
       }
       throw new Error(
@@ -170,6 +234,7 @@ function addCurrentIcons(
     }
     catalog[componentName] = info
     namesByCase.set(componentName.toLowerCase(), componentName)
+    referencedFiles.add(svgFile)
     added += 1
   }
   return { added, skippedCollisions }
@@ -181,6 +246,13 @@ function addCurrentIcons(
  */
 export function syncIcons(directory = packageDirectory): SyncSummary {
   const catalog = readCatalog(directory)
+  const packs = upstreamPacks(directory).map((pack) => ({
+    pack,
+    files: svgFiles(pack.iconDirectory),
+  }))
+  for (const { pack, files } of packs) {
+    validateUpstreamPack(pack, files)
+  }
   const retained = Object.keys(catalog).length
   let added = 0
   let skippedCollisions = 0
@@ -188,8 +260,8 @@ export function syncIcons(directory = packageDirectory): SyncSummary {
   const licenses = path.join(directory, "assets/licenses")
   mkdirSync(licenses, { recursive: true })
 
-  for (const pack of upstreamPacks(directory)) {
-    const files = syncArchive(pack.iconDirectory, pack.archiveDirectory)
+  for (const { pack, files } of packs) {
+    syncArchive(pack.iconDirectory, pack.archiveDirectory)
     copied[pack.pack] = files.length
     const merged = addCurrentIcons(catalog, pack, files)
     added += merged.added

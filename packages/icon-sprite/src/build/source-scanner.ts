@@ -3,11 +3,11 @@ import path from "node:path"
 import { type ParserPlugin, parse } from "@babel/parser"
 import traverse, { type NodePath } from "@babel/traverse"
 import type { ImportDeclaration, JSXOpeningElement } from "@babel/types"
-import { SPRITE_PRESENTATION_PROPS } from "../sprite-contract.js"
+import { RISKY_SPRITE_PRESENTATION_PROPS } from "../sprite-contract.js"
 
 const sourceFilePattern = /\.[jt]sx?$/
 const genericIcons = new Set(["Icon", "CustomIcon"])
-const riskyProps: ReadonlySet<string> = new Set(SPRITE_PRESENTATION_PROPS)
+const riskyProps: ReadonlySet<string> = new Set(RISKY_SPRITE_PRESENTATION_PROPS)
 
 /** Discovery results use imported public names, independent of local JSX aliases. */
 export interface IconUsage {

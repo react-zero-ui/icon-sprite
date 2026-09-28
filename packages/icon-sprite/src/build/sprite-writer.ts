@@ -3,17 +3,20 @@ import fs from "node:fs"
 import path from "node:path"
 // biome-ignore lint/correctness/noUnresolvedImports: Node resolves svgstore's CommonJS main; isolated package tests verify the dependency.
 import svgstore from "svgstore"
-import { STROKE_WIDTH_PROPERTY } from "../sprite-contract.js"
+import { BUILT_IN_PRESENTATION_ATTRIBUTES } from "../sprite-contract.js"
 
 /** Provider-independent input; source is included in malformed-SVG diagnostics. */
 export interface SpriteSymbol {
   id: string
   markup: string
+  presentation: "authored" | "inherit"
   source: string
 }
 
 const svgRoot = /<svg\b/i
-const strokeWidth = /stroke-width=(["'])(.*?)\1/g
+const inheritedPresentationAttributes = Object.fromEntries(
+  Object.values(BUILT_IN_PRESENTATION_ATTRIBUTES).map((attribute) => [attribute, "inherit"])
+)
 
 /**
  * Assemble XML and atomically replace one sprite; return the distinct symbol count.
@@ -24,16 +27,7 @@ const strokeWidth = /stroke-width=(["'])(.*?)\1/g
  */
 export function writeSprite(outputFile: string, symbols: readonly SpriteSymbol[]): number {
   const store = svgstore({
-    copyAttrs: [
-      "viewBox",
-      "fill",
-      "stroke",
-      "stroke-width",
-      "stroke-linecap",
-      "stroke-linejoin",
-      "style",
-      "size",
-    ],
+    copyAttrs: ["viewBox", ...Object.values(BUILT_IN_PRESENTATION_ATTRIBUTES), "style", "size"],
     svgAttrs: { xmlns: "http://www.w3.org/2000/svg", "aria-hidden": "true", focusable: "false" },
   })
   for (const symbol of symbols) {
@@ -42,10 +36,10 @@ export function writeSprite(outputFile: string, symbols: readonly SpriteSymbol[]
     }
     store.add(
       symbol.id,
-      symbol.markup.replace(
-        strokeWidth,
-        (_match, _quote, width) => `stroke-width="var(${STROKE_WIDTH_PROPERTY}, ${width})"`
-      )
+      symbol.markup,
+      symbol.presentation === "inherit"
+        ? { symbolAttrs: inheritedPresentationAttributes }
+        : undefined
     )
   }
   const markup = store.toString({ inline: true })

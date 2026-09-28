@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
 import test from "node:test"
-import { iconDimensions, renderIcon, renderInline } from "../dist/runtime/icon.js"
+import { iconDimensions, renderBuiltInIcon, renderIcon } from "../dist/runtime/icon.js"
 
 test("all renderers share dimension precedence, including explicit zero", () => {
   assert.deepEqual(iconDimensions({}), { width: 24, height: 24 })
@@ -12,8 +12,8 @@ test("all renderers share dimension precedence, including explicit zero", () => 
   assert.deepEqual(iconDimensions({ size: 32, width: null }), { width: 32, height: 32 })
 })
 
-test("sprite rendering preserves explicit accessibility and CSS variable overrides", () => {
-  const style = { color: "red", "--icon-stroke-width": 5 }
+test("sprite rendering preserves explicit accessibility and normal SVG presentation props", () => {
+  const style = { color: "red" }
   const icon = renderIcon("check", {
     size: 32,
     strokeWidth: 3,
@@ -24,18 +24,39 @@ test("sprite rendering preserves explicit accessibility and CSS variable overrid
   assert.equal(icon.props.children.props.href, "/icons.svg#check")
   assert.equal(icon.props["aria-hidden"], false)
   assert.equal(icon.props.role, "img")
-  assert.equal(icon.props.style["--icon-stroke-width"], 5)
-  assert.deepEqual(style, { color: "red", "--icon-stroke-width": 5 })
+  assert.equal(icon.props.strokeWidth, 3)
+  assert.equal(icon.props.style, style)
+  assert.deepEqual(style, { color: "red" })
   assert.equal(renderIcon("check", {}).props["aria-hidden"], "true")
-})
-
-test("inline adaptation forwards props while leaving absent dimensions to the component", (t) => {
-  const Component = t.mock.fn()
-  const onClick = t.mock.fn()
-  const icon = renderInline(Component, { size: 0, width: 12, onClick })
-  assert.equal(icon.type, Component)
-  assert.deepEqual(icon.props, { size: 0, width: 12, onClick })
-  assert.deepEqual(renderInline(Component, { width: undefined, height: null }).props, { size: 24 })
+  assert.deepEqual(
+    {
+      fill: renderBuiltInIcon("check", {}).props.fill,
+      stroke: renderBuiltInIcon("check", {}).props.stroke,
+      strokeWidth: renderBuiltInIcon("check", {}).props.strokeWidth,
+      strokeLinecap: renderBuiltInIcon("check", {}).props.strokeLinecap,
+      strokeLinejoin: renderBuiltInIcon("check", {}).props.strokeLinejoin,
+    },
+    {
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    }
+  )
+  const overridden = renderBuiltInIcon("check", {
+    fill: "red",
+    stroke: "blue",
+    strokeWidth: 4,
+    strokeLinecap: "square",
+    strokeLinejoin: "bevel",
+  })
+  assert.equal(overridden.props.fill, "red")
+  assert.equal(overridden.props.stroke, "blue")
+  assert.equal(overridden.props.strokeWidth, 4)
+  assert.equal(overridden.props.strokeLinecap, "square")
+  assert.equal(overridden.props.strokeLinejoin, "bevel")
+  assert.equal(renderBuiltInIcon("check", { stroke: undefined }).props.stroke, undefined)
 })
 
 test("custom names isolate development component state and keep the sprite fallback", async (t) => {

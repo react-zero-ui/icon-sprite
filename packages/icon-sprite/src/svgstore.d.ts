@@ -5,6 +5,7 @@ declare module "svgstore" {
     copyAttrs?: string[]
     inline?: boolean
     svgAttrs?: Record<string, string>
+    symbolAttrs?: Record<string, string>
   }
 
   interface Store {

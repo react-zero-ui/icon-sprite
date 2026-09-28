@@ -9,7 +9,10 @@ import { createProject, svg, writeProject } from "./cli-fixtures.js"
 
 const cli = fileURLToPath(new URL("../dist/command.js", import.meta.url))
 const compareText = (left, right) => left.localeCompare(right)
+const builtInCheckSymbolPattern = /<symbol\b[^>]*id="check"[^>]*>/
+const customCaseSensitiveSymbolPattern = /<symbol\b[^>]*id="CaseSensitive"[^>]*>/
 const symbolIdPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
+const tablerCheckSymbolPattern = /<symbol\b[^>]*id="tabler-check"[^>]*>/
 
 function symbolIds(file) {
   return [...fs.readFileSync(file, "utf8").matchAll(symbolIdPattern)]
@@ -33,7 +36,7 @@ test("the public build API returns config diagnostics without console side effec
   assert.equal(warn.mock.callCount(), 0)
 })
 
-test("sprite contains both packs and every custom SVG, with attributes and CSS stroke width", async (t) => {
+test("built-in symbols inherit root presentation while custom SVGs stay authored", async (t) => {
   const root = createProject(t, {
     "src/view.tsx": `import { Check, IconCheck, CustomIcon, MyLogo } from "@react-zero-ui/icon-sprite";
 			export const icons = <><Check/><Check/><IconCheck/><CustomIcon name="CaseSensitive"/><MyLogo/></>;`,
@@ -56,7 +59,19 @@ test("sprite contains both packs and every custom SVG, with attributes and CSS s
   assert.ok(output.includes('viewBox="0 0 16 16"'))
   assert.ok(output.includes('fill="none"'))
   assert.ok(output.includes('stroke="currentColor"'))
-  assert.ok(output.includes('stroke-width="var(--icon-stroke-width, 2)"'))
+  const builtInSymbol = output.match(builtInCheckSymbolPattern)?.[0]
+  const tablerSymbol = output.match(tablerCheckSymbolPattern)?.[0]
+  const customSymbol = output.match(customCaseSensitiveSymbolPattern)?.[0]
+  for (const symbol of [builtInSymbol, tablerSymbol]) {
+    assert.ok(symbol?.includes('fill="inherit"'))
+    assert.ok(symbol?.includes('stroke="inherit"'))
+    assert.ok(symbol?.includes('stroke-width="inherit"'))
+    assert.ok(symbol?.includes('stroke-linecap="inherit"'))
+    assert.ok(symbol?.includes('stroke-linejoin="inherit"'))
+  }
+  assert.ok(customSymbol?.includes('fill="none"'))
+  assert.ok(customSymbol?.includes('stroke="currentColor"'))
+  assert.ok(customSymbol?.includes('stroke-width="2"'))
   assert.ok(output.includes('aria-hidden="true"'))
 })
 

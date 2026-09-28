@@ -7,15 +7,27 @@
 export const SPRITE_PATH = "/icons.svg"
 export const CUSTOM_SVG_DIR = "zero-ui-icons"
 export const DEFAULT_ICON_SIZE = 24
-export const STROKE_WIDTH_PROPERTY = "--icon-stroke-width"
 
-/** Presentation props whose values can be shadowed by attributes inside a symbol. */
-export const SPRITE_PRESENTATION_PROPS = [
-  "stroke",
-  "fill",
-  "color",
-  "strokeLinecap",
-  "strokeLinejoin",
+/** Shared root defaults validated for every package-owned Lucide/Tabler SVG. */
+export const BUILT_IN_PRESENTATION_DEFAULTS = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+} as const
+
+/** React presentation prop to serialized SVG attribute mapping. */
+export const BUILT_IN_PRESENTATION_ATTRIBUTES = {
+  fill: "fill",
+  stroke: "stroke",
+  strokeWidth: "stroke-width",
+  strokeLinecap: "stroke-linecap",
+  strokeLinejoin: "stroke-linejoin",
+} as const
+
+/** Presentation props not covered by the built-in dev/production parity contract. */
+export const RISKY_SPRITE_PRESENTATION_PROPS = [
   "strokeDasharray",
   "strokeDashoffset",
   "strokeMiterlimit",

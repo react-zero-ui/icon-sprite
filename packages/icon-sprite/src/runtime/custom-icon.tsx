@@ -11,16 +11,16 @@ const DevIcon =
  * other environments use its sprite symbol. Remounting on name changes prevents
  * a previous asset's payload and DOM attributes from leaking into its replacement.
  */
-export function CustomIcon({ name, ...props }: CustomIconProps) {
+export function CustomIcon({ name, ...rest }: CustomIconProps) {
   if (process.env.NODE_ENV === "development" && DevIcon) {
-    const fallback = renderIcon(name, props)
+    const fallback = renderIcon(name, rest)
     return (
       <React.Suspense fallback={fallback}>
-        <DevIcon key={name} name={name} {...props} />
+        <DevIcon key={name} name={name} {...rest} />
       </React.Suspense>
     )
   }
-  return renderIcon(name, props)
+  return renderIcon(name, rest)
 }
 
 export default CustomIcon

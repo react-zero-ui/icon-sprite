@@ -22,6 +22,7 @@ function readCustomSymbols(directory: string): SpriteSymbol[] {
       symbols.push({
         id: entry.name.slice(0, -4),
         markup: fs.readFileSync(file, "utf8"),
+        presentation: "authored",
         source: file,
       })
     }
@@ -48,7 +49,12 @@ export function collectSymbols(
   const added = new Set<string>()
   for (const icon of requested) {
     if (icon.svg && !added.has(icon.id)) {
-      symbols.push({ id: icon.id, markup: icon.svg, source: icon.description })
+      symbols.push({
+        id: icon.id,
+        markup: icon.svg,
+        presentation: "inherit",
+        source: icon.description,
+      })
       added.add(icon.id)
     }
   }

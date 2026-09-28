@@ -17,11 +17,11 @@ paths:
 
 ## Shared renderer
 
-[`runtime/icon.tsx`](../../../packages/icon-sprite/src/runtime/icon.tsx) owns `IconProps`, `CustomIconProps`, `iconDimensions`, `renderInline`, and `renderIcon`. Generated wrappers know their symbol identity and development component. They delegate dimensions, prop adaptation, URL construction, and production markup to this module.
+[`runtime/icon.tsx`](../../../packages/icon-sprite/src/runtime/icon.tsx) owns `IconProps`, `CustomIconProps`, `iconDimensions`, `renderIcon`, and `renderBuiltInIcon`. Generated wrappers own their development component and production symbol identity.
 
-Each dimension resolves as explicit width/height, then `size`, then the shared default. Nullish fallback preserves zero. `renderInline` adapts props to generated inline components. `renderIcon` forwards SVG props, allows an explicit ARIA override, and transports `strokeWidth` through the shared CSS property. Caller style entries take precedence.
+Each dimension resolves as explicit width/height, then `size`, then the shared default. Nullish fallback preserves zero. Development wrappers pass props directly to their generated `DevIcon`, whose outer SVG calls `iconDimensions`. `renderIcon` forwards ordinary SVG props and allows an explicit ARIA override. `renderBuiltInIcon` supplies the validated shared root defaults `fill="none"`, `stroke="currentColor"`, `strokeWidth="2"`, `strokeLinecap="round"`, and `strokeLinejoin="round"` before user props. Production symbols inherit those values from the outer SVG, so explicit props and CSS have the same root ownership model as development without per-icon generated defaults.
 
-[`sprite-contract.ts`](../../../packages/icon-sprite/src/sprite-contract.ts) supplies URLs, size, and the stroke-width property consumed by both renderer and writer. Presentation values fixed inside symbols may differ from inline SVG behavior; accepting a prop in TypeScript establishes its shape, while visual equivalence needs browser evidence.
+[`sprite-contract.ts`](../../../packages/icon-sprite/src/sprite-contract.ts) supplies shared URLs, default size, the built-in presentation contract, and the remaining presentation-risk metadata. Built-ins guarantee root-prop parity for `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, `strokeLinejoin`, and `color`; authored descendant attributes still override inherited root values in both modes. Other SVG presentation props remain outside that guarantee and can produce scanner warnings.
 
 ## Environment boundaries
 

@@ -19,11 +19,11 @@ paths:
 
 Built-in symbols deduplicate by ID. Every `.svg` directly inside the custom directory is included, including unused files and file symlinks. Custom IDs preserve case. Static custom names affect warnings, never inclusion. Existing custom/built-in collisions remain possible and require input review.
 
-The resulting `SpriteSymbol` contains identity, markup, and a source label for diagnostics. The orchestration layer knows neither pack locations nor XML representation.
+The resulting `SpriteSymbol` contains identity, markup, a source label for diagnostics, and one presentation policy: package-owned built-ins inherit root presentation from the rendered icon instance, while custom SVGs preserve authored presentation. The orchestration layer knows neither pack locations nor XML representation.
 
 ## Writer boundary
 
-[`writeSprite`](../../../packages/icon-sprite/src/build/sprite-writer.ts) owns svgstore, SVG-root checks, attribute copying, stroke-width rewriting, and atomic replacement. The CSS variable comes from the shared [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts), also consumed by rendering.
+[`collectSymbols`](../../../packages/icon-sprite/src/build/icon-assets.ts) marks built-ins as inherited and custom SVGs as authored without rewriting markup. [`writeSprite`](../../../packages/icon-sprite/src/build/sprite-writer.ts) owns svgstore, SVG-root checks, attribute copying, and atomic replacement. For built-ins it uses svgstore's per-symbol attributes to set `fill`, `stroke`, `stroke-width`, `stroke-linecap`, and `stroke-linejoin` to `inherit`; custom symbols retain their copied root values.
 
 Serialization completes before writing a unique temporary sibling. Rename replaces the destination; failure cleanup removes the temporary file. Parse, catalog, asset-processing, and write failures preserve an existing sprite. Missing definitions remain warnings and can produce a partial successful result.
 

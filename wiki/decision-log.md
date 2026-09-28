@@ -21,3 +21,13 @@ Upstream icon packages can remove or rename icons between versions. Earlier upgr
 
 Public component names and sprite IDs are compatibility commitments owned by this package. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` now implement that ownership directly. Lucide and Tabler packages are dev-only synchronization sources; consumer installs never resolve icon data from them. `sync:icons` refreshes current bytes and adds new identities without deleting old ones. Renames keep historical IDs, and ambiguous identity changes require review.
 
+## 2026-09-28: Keep the `size` prop for upstream compatibility
+
+Both Lucide React and Tabler React expose `size?: string | number`. Keeping the same prop lets applications switch icon imports to this package without rewriting existing `<Icon size={...} />` usage. Native `width`/`height` and CSS could replace it internally, but removing `size` would break a useful drop-in compatibility guarantee for little architectural benefit.
+
+## 2026-09-28: Put built-in root presentation on each icon instance
+
+The earlier sprite contract rewrote authored `stroke-width` values to a CSS variable so per-instance React props could cross the external `<use>` boundary. Auditing the package-owned Lucide and Tabler archives showed all built-ins share the same root defaults: `fill="none"`, `stroke="currentColor"`, `stroke-width="2"`, `stroke-linecap="round"`, and `stroke-linejoin="round"`.
+
+The built-in renderer therefore owns those shared defaults once on the outer SVG, user props overwrite them normally, and each built-in sprite symbol sets the corresponding presentation attributes to `inherit`. This preserves direct props such as `stroke="red"` while retaining `currentColor` behavior for CSS text-color utilities. `sync:icons` validates the upstream root defaults before copying assets, and custom SVGs remain authored as provided. The writer applies inheritance through svgstore's per-symbol attributes rather than rewriting source markup.
+

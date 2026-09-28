@@ -33,6 +33,6 @@ Runtime:    React facade → inline development components / shared production r
 
 [`catalog.ts`](../../packages/icon-sprite/src/catalog.ts) owns the committed catalog format and package-owned asset lookup. [Icon synchronization](build-system/icon-catalog.md) imports reviewed upstream changes while preserving existing catalog identities and archived files.
 
-[`sprite-contract.ts`](../../packages/icon-sprite/src/sprite-contract.ts) defines shared URLs, default dimensions, the stroke-width CSS property, and presentation constraints. [Rendering](runtime/rendering.md) hides those details from generated wrappers. [Custom rendering](runtime/custom-icons.md) owns browser loading and payload state.
+[`sprite-contract.ts`](../../packages/icon-sprite/src/sprite-contract.ts) defines shared URLs, default dimensions, validated built-in presentation defaults, SVG attribute mappings, and remaining presentation-risk metadata. [Rendering](runtime/rendering.md) owns outer SVG behavior and generated built-in defaults. [Custom rendering](runtime/custom-icons.md) owns browser loading and payload state.
 
 Runtime imports stay independent of Node build modules. The application owns asset hosting, caching, and dead-code elimination. [Validation](development/validation.md) checks both the local workspace and the actual consumer artifact.

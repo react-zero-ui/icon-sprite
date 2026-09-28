@@ -29,7 +29,7 @@ The read-only Biome step fails on warnings as well as errors. Use [code quality]
 
 These files live in [`packages/icon-sprite/tests`](../../../packages/icon-sprite/tests/). Most invoke compiled code. Generation tests write isolated temporary directories and check that regeneration removes stale generated files while preserving handwritten files. Sync tests verify cumulative archive behavior against installed maintainer sources.
 
-`npm run build:fixture` exercises direct API integration in Next configuration and the production application build. Type generation may invoke the same production config phase. The fixture deliberately contains presentation props that trigger warnings. Review them against the [rendering contract](../runtime/rendering.md).
+`npm run build:fixture` exercises direct API integration in Next configuration and the production application build. Type generation may invoke the same production config phase. The fixture contains supported presentation overrides such as `fill`, `color`, and `strokeWidth`; these should remain warning-free. Risky presentation diagnostics are covered separately by scanner tests.
 
 ## Consumer installation boundary
 
@@ -39,12 +39,12 @@ The copied Next config imports `generateSprite` from the installed package's `/b
 
 The harness pins direct fixture dependencies to root-lock versions. Their transitive dependencies resolve during the temporary `npm install`; this exercises registry installation and can vary independently of a root `npm ci`.
 
-Production HTTP checks require sprite references to resolve to served symbol IDs. Development HTTP checks require inline SVG paths and verify that `ArrowRight` avoids its production reference. The standalone Lucide comparison route is also requested. Workspace symlinks are explicitly rejected for the installed test package.
+Production HTTP checks require sprite references to resolve to served symbol IDs and reject inline icon paths on sprite routes. The built Next client chunks are also scanned to ensure Server Component icon implementations do not leak into browser JavaScript. Development HTTP checks require inline SVG paths and verify that `ArrowRight` avoids its production reference. The standalone Lucide comparison route is also requested. Workspace symlinks are explicitly rejected for the installed test package.
 
 Temporary ports and servers belong to `verifyServer`; cleanup handles ordinary success/failure and escalates termination when needed. The harness needs registry access and loopback listeners. Preserve its ownership of temporary files and process groups when extending it.
 
 ## Coverage limits
 
-HTTP checks inspect server responses. Browser execution, hydration, custom-icon fetches, SVG visual styling, cache invalidation, and accessibility-tree behavior remain untested by this harness. There is no bundle-size assertion or browser/framework compatibility matrix.
+HTTP checks inspect server responses. Browser execution, hydration, custom-icon fetches, SVG visual styling, cache invalidation, and accessibility-tree behavior remain untested by this harness. Client chunks are checked for icon-code absence on the current Server Component fixture, but there is no byte-size threshold or browser/framework compatibility matrix.
 
 [`check.yml`](../../../.github/workflows/check.yml) configures Ubuntu with the repository runtime pin, runs `check`, then invokes the already-built integration harness directly. Local passing tests and workflow configuration provide different evidence from an observed remote CI run. Consult [publishing](publishing.md) for the separate release gate.

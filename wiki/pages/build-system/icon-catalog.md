@@ -30,6 +30,8 @@ paths:
 
 Sync never deletes an existing catalog entry or archived SVG automatically. Upstream removal therefore leaves published icons intact. When upstream keeps a component name but changes its SVG filename, sync refreshes bytes under the historical filename so the public sprite ID remains stable. New case-insensitive name collisions are skipped for review. Cross-pack identity changes fail.
 
+Before copying any upstream assets, sync validates the built-in root presentation contract: every Lucide/Tabler root must declare `fill="none"`, `stroke="currentColor"`, `stroke-width="2"`, `stroke-linecap="round"`, and `stroke-linejoin="round"`. Root styles may not redefine those defaults. Descendant stroke widths remain rejected so the package's stroke-width override contract cannot silently change. This keeps shared runtime defaults aligned with upstream before files enter the cumulative archive.
+
 Lucide and Tabler packages are dev dependencies used only for sync. They are not consumer dependencies and do not participate in normal generation or sprite builds. Their license texts are copied to `assets/licenses/`.
 
 ## Generation

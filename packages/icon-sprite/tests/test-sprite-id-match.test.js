@@ -45,14 +45,22 @@ test("compiled Lucide and Tabler wrappers preserve production props and developm
     assert.equal(production.props.height, 0)
     assert.equal(production.props["aria-label"], "example")
     assert.equal(production.props.onClick, onClick)
+    assert.equal(production.props.strokeWidth, "2")
     assert.equal(production.props.children.props.href, `/icons.svg#${mapping[name].spriteId}`)
+    assert.equal(Icon({ strokeWidth: 4 }).props.strokeWidth, 4)
     for (const environment of ["development", "test"]) {
       process.env.NODE_ENV = environment
       const element = Icon(props)
       assert.notEqual(element.type, "svg")
       assert.deepEqual(element.props, props)
-      assert.deepEqual(Icon({ width: null, height: undefined }).props, { size: 24 })
-      assert.equal(Icon({ size: 0 }).props.size, 0)
+      const defaultElement = Icon({ width: null, height: undefined })
+      const defaultSvg = defaultElement.type(defaultElement.props)
+      assert.equal(defaultSvg.props.width, 24)
+      assert.equal(defaultSvg.props.height, 24)
+      const zeroElement = Icon({ size: 0 })
+      const zeroSvg = zeroElement.type(zeroElement.props)
+      assert.equal(zeroSvg.props.width, 0)
+      assert.equal(zeroSvg.props.height, 0)
     }
   }
 })
@@ -84,6 +92,52 @@ test("compiled local development SVGs retain geometry and dimension overrides", 
   assert.equal(defaultSvg.type(defaultSvg.props).props.width, 24)
   const zeroSvg = ArrowDown01({ size: 0 })
   assert.equal(zeroSvg.type(zeroSvg.props).props.height, 0)
+})
+
+test("built-in presentation props match between development and production", async (t) => {
+  const previousEnvironment = process.env.NODE_ENV
+  t.after(() => {
+    if (previousEnvironment === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = previousEnvironment
+    }
+  })
+  const names = ["ArrowDownAZ", "IconAB2"]
+  const modules = await Promise.all(names.map((name) => import(`../dist/icons/${name}.js`)))
+  const cases = [
+    {},
+    {
+      color: "blue",
+      fill: "red",
+      stroke: "green",
+      strokeWidth: 4,
+      strokeLinecap: "square",
+      strokeLinejoin: "bevel",
+    },
+    {
+      fill: null,
+      stroke: undefined,
+      strokeWidth: undefined,
+      strokeLinecap: undefined,
+      strokeLinejoin: undefined,
+    },
+    { color: "blue", stroke: "red" },
+  ]
+  const props = ["color", "fill", "stroke", "strokeWidth", "strokeLinecap", "strokeLinejoin"]
+  for (const [index, name] of names.entries()) {
+    const Icon = modules[index][name]
+    for (const iconProps of cases) {
+      process.env.NODE_ENV = "development"
+      const wrapper = Icon(iconProps)
+      const development = wrapper.type(wrapper.props)
+      process.env.NODE_ENV = "production"
+      const production = Icon(iconProps)
+      for (const prop of props) {
+        assert.equal(production.props[prop], development.props[prop], `${name} ${prop}`)
+      }
+    }
+  }
 })
 
 test("renamed Tabler icons retain published export names and sprite IDs", async () => {
