@@ -7,6 +7,10 @@ import os from "node:os"
 import path from "node:path"
 import { setTimeout as delay } from "node:timers/promises"
 import { fileURLToPath } from "node:url"
+// biome-ignore lint/performance/noNamespaceImport: Playwright re-exports browser types through playwright-core; this Node-only harness is never bundled.
+import * as playwright from "playwright"
+
+type Browser = Awaited<ReturnType<typeof playwright.chromium.launch>>
 
 const root = fileURLToPath(new URL("../", import.meta.url))
 const fixturePath = path.join(root, "fixtures/next-app")
@@ -20,6 +24,15 @@ const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
 const inlinePathPattern = /<path\b/
 const arrowRightSpritePattern = /<use\b[^>]*href="\/icons\.svg#arrow-right"/
+const presentationCases = [
+  "default",
+  "text-color",
+  "stroke-over-color",
+  "fill",
+  "stroke-width",
+  "line-cap",
+  "line-join",
+] as const
 
 interface FixtureManifest {
   dependencies: Record<string, string>
@@ -33,6 +46,11 @@ interface PackageLock {
 interface PackedPackage {
   filename: string
   files: { path: string }[]
+}
+
+interface PresentationCapture {
+  screenshots: Map<string, Buffer>
+  styles: Record<string, Record<string, string>>
 }
 
 function run(args: string[], cwd: string): string {
@@ -85,6 +103,126 @@ async function readJavaScriptTree(rootDirectory: string): Promise<string> {
     .filter((entry) => entry.isFile() && entry.name.endsWith(".js"))
     .map((entry) => path.join(entry.parentPath, entry.name))
   return (await Promise.all(files.map((file) => fs.readFile(file, "utf8")))).join("\n")
+}
+
+async function capturePresentation(
+  browserInstance: Browser,
+  base: string,
+  mode: "production" | "development"
+): Promise<PresentationCapture> {
+  const context = await browserInstance.newContext({
+    colorScheme: "light",
+    deviceScaleFactor: 1,
+    reducedMotion: "reduce",
+    viewport: { height: 720, width: 900 },
+  })
+  const page = await context.newPage()
+  try {
+    await page.goto(`${base}/presentation-parity`, { waitUntil: "load" })
+    await page.getByTestId("default").waitFor()
+    await page.waitForFunction(
+      (testIds) =>
+        testIds.every((testId) => {
+          const element = document.querySelector(`[data-testid="${testId}"]`)
+          if (!(element instanceof SVGGraphicsElement)) {
+            return false
+          }
+          const box = element.getBBox()
+          return box.width > 0 && box.height > 0
+        }),
+      presentationCases
+    )
+
+    const captureCase = async (testId: (typeof presentationCases)[number]) => {
+      const icon = page.getByTestId(testId)
+      const useCount = await icon.locator("use").count()
+      assert.equal(
+        useCount > 0,
+        mode === "production",
+        `${testId}: expected ${mode} icon structure`
+      )
+      const styles = await icon.evaluate((element) => {
+        const style = getComputedStyle(element)
+        return {
+          color: style.color,
+          fill: style.fill,
+          stroke: style.stroke,
+          strokeLinecap: style.strokeLinecap,
+          strokeLinejoin: style.strokeLinejoin,
+          strokeWidth: style.strokeWidth,
+        }
+      })
+      const screenshot = await icon.screenshot({ animations: "disabled" })
+      return { screenshot, styles, testId }
+    }
+    const captures: Array<{
+      screenshot: Buffer
+      styles: Record<string, string>
+      testId: (typeof presentationCases)[number]
+    }> = []
+    for (const testId of presentationCases) {
+      // biome-ignore lint/performance/noAwaitInLoops: Screenshots share one page and are intentionally serialized for deterministic capture.
+      captures.push(await captureCase(testId))
+    }
+    return {
+      screenshots: new Map(captures.map(({ screenshot, testId }) => [testId, screenshot])),
+      styles: Object.fromEntries(captures.map(({ styles, testId }) => [testId, styles])),
+    }
+  } finally {
+    await context.close()
+  }
+}
+
+function assertExpectedPresentation(capture: PresentationCapture): void {
+  assert.equal(capture.styles.default.fill, "none")
+  assert.equal(capture.styles.default.stroke, capture.styles.default.color)
+  assert.equal(capture.styles.default.strokeWidth, "2px")
+  assert.equal(capture.styles.default.strokeLinecap, "round")
+  assert.equal(capture.styles.default.strokeLinejoin, "round")
+  assert.equal(capture.styles["text-color"].stroke, capture.styles["text-color"].color)
+  assert.notEqual(capture.styles["text-color"].color, capture.styles.default.color)
+  assert.equal(capture.styles["stroke-over-color"].color, "rgb(0, 0, 255)")
+  assert.equal(capture.styles["stroke-over-color"].stroke, "rgb(255, 0, 0)")
+  assert.equal(capture.styles.fill.fill, "rgb(255, 0, 0)")
+  assert.equal(capture.styles.fill.stroke, "rgb(0, 0, 255)")
+  assert.equal(capture.styles["stroke-width"].strokeWidth, "4px")
+  assert.equal(capture.styles["line-cap"].strokeLinecap, "square")
+  assert.equal(capture.styles["line-join"].strokeLinejoin, "bevel")
+}
+
+async function assertPresentationParity(
+  production: PresentationCapture,
+  development: PresentationCapture
+): Promise<void> {
+  assertExpectedPresentation(production)
+  assertExpectedPresentation(development)
+  assert.deepEqual(
+    production.styles,
+    development.styles,
+    "Computed presentation styles differ between production and development"
+  )
+  const failureDirectory = path.join(root, "test-results/presentation-parity")
+  await fs.rm(failureDirectory, { force: true, recursive: true })
+  const mismatch = presentationCases.find((testId) => {
+    const productionScreenshot = production.screenshots.get(testId)
+    const developmentScreenshot = development.screenshots.get(testId)
+    assert(productionScreenshot && developmentScreenshot, `Missing screenshot for ${testId}`)
+    return !productionScreenshot.equals(developmentScreenshot)
+  })
+  if (!mismatch) {
+    return
+  }
+  const productionScreenshot = production.screenshots.get(mismatch)
+  const developmentScreenshot = development.screenshots.get(mismatch)
+  assert(productionScreenshot && developmentScreenshot, `Missing screenshot for ${mismatch}`)
+  await fs.mkdir(failureDirectory, { recursive: true })
+  await Promise.all([
+    fs.writeFile(path.join(failureDirectory, `${mismatch}-production.png`), productionScreenshot),
+    fs.writeFile(path.join(failureDirectory, `${mismatch}-development.png`), developmentScreenshot),
+  ])
+  assert.fail(
+    `${mismatch}: browser rendering differs between production and development; screenshots written to test-results/presentation-parity`
+  )
 }
 
 // Each server owns its process group and cleanup, including failed assertions.
@@ -167,6 +305,7 @@ async function verifyServer(
 }
 
 const directory = await fs.mkdtemp(path.join(os.tmpdir(), "zero-icon-integration-"))
+let browser: Browser | undefined
 try {
   const fixture: FixtureManifest = JSON.parse(
     await fs.readFile(path.join(fixturePath, "package.json"), "utf8")
@@ -273,6 +412,9 @@ try {
     )
   }
 
+  browser = await playwright.chromium.launch({ headless: true })
+  const activeBrowser = browser
+  let productionPresentation: PresentationCapture | undefined
   await verifyServer(directory, "start", async (base) => {
     const spriteResponse = await fetch(`${base}/icons.svg`, { signal: AbortSignal.timeout(10_000) })
     assert.equal(spriteResponse.status, 200)
@@ -307,6 +449,7 @@ try {
     const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) })
     assert.equal(comparison.status, 200)
     assert.match(await comparison.text(), inlinePathPattern)
+    productionPresentation = await capturePresentation(activeBrowser, base, "production")
   })
   await verifyServer(directory, "dev", async (base) => {
     const response = await fetch(base, { signal: AbortSignal.timeout(30_000) })
@@ -318,10 +461,14 @@ try {
       arrowRightSpritePattern,
       "Development ArrowRight unexpectedly uses the production sprite"
     )
+    const developmentPresentation = await capturePresentation(activeBrowser, base, "development")
+    assert(productionPresentation, "Production presentation capture did not run")
+    await assertPresentationParity(productionPresentation, developmentPresentation)
   })
   console.log(
-    "Passed: package contents, isolated install, production build, served sprite symbols, and development rendering."
+    "Passed: package contents, isolated install, production build, served sprite symbols, development rendering, and browser presentation parity."
   )
 } finally {
+  await browser?.close()
   await fs.rm(directory, { force: true, recursive: true })
 }

@@ -24,6 +24,7 @@ The read-only Biome step fails on warnings as well as errors. Use [code quality]
 | Source discovery and configuration | `test-scanner-exclusion` and `test-config` |
 | Sprite output, failures, concurrency, executable bin | `test-sprite` |
 | Runtime element structure and ARIA forwarding | `test-sprite-id-match` and `test-accessibility-props` |
+| Built-in dev/production presentation parity | Playwright capture in `test:integration` |
 | Public module boundaries and shared rendering | `test-runtime-boundary` and `test-runtime` |
 | Committed catalog representation and asset lookup | `test-catalog` |
 
@@ -41,10 +42,12 @@ The harness pins direct fixture dependencies to root-lock versions. Their transi
 
 Production HTTP checks require sprite references to resolve to served symbol IDs and reject inline icon paths on sprite routes. The built Next client chunks are also scanned to ensure Server Component icon implementations do not leak into browser JavaScript. Development HTTP checks require inline SVG paths and verify that `ArrowRight` avoids its production reference. The standalone Lucide comparison route is also requested. Workspace symlinks are explicitly rejected for the installed test package.
 
+The same harness launches headless Chromium with Playwright and renders `/presentation-parity` once against the production server and once against the development server. It verifies the expected inline-versus-`<use>` structure, compares computed outer-SVG values for `color`, `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin`, then compares exact screenshots for representative defaults and overrides. A visual mismatch writes the production and development PNGs to `test-results/presentation-parity/`. Install the matching local browser once with `npx playwright install chromium`; CI installs Chromium and its system dependencies explicitly.
+
 Temporary ports and servers belong to `verifyServer`; cleanup handles ordinary success/failure and escalates termination when needed. The harness needs registry access and loopback listeners. Preserve its ownership of temporary files and process groups when extending it.
 
 ## Coverage limits
 
-HTTP checks inspect server responses. Browser execution, hydration, custom-icon fetches, SVG visual styling, cache invalidation, and accessibility-tree behavior remain untested by this harness. Client chunks are checked for icon-code absence on the current Server Component fixture, but there is no byte-size threshold or browser/framework compatibility matrix.
+Browser coverage now validates built-in presentation inheritance in Chromium. Hydration-specific behavior, custom-icon fetches, cache invalidation, accessibility-tree behavior, Firefox/WebKit rendering, and broader browser/framework compatibility remain untested. Client chunks are checked for icon-code absence on the current Server Component fixture, but there is no byte-size threshold.
 
 [`check.yml`](../../../.github/workflows/check.yml) configures Ubuntu with the repository runtime pin, runs `check`, then invokes the already-built integration harness directly. Local passing tests and workflow configuration provide different evidence from an observed remote CI run. Consult [publishing](publishing.md) for the separate release gate.

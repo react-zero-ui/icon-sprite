@@ -42,6 +42,6 @@ Internal barrel files, implicit control-flow blocks, nested ternaries, namespace
 
 Cognitive complexity is capped at 21 for handwritten functions. A documented scanner exception retains one complete import-binding operation at 23. Treat violations as design feedback: move cohesive knowledge behind focused interfaces or reduce branching before considering an exception. Avoid extracting naming-only wrappers solely to lower a score.
 
-`noAwaitInLoops` is enforced. Parallelize independent work with `Promise.all`; keep a narrow documented suppression only when ordering or retry timing is part of the contract, such as readiness polling. `useTopLevelRegex` is also enforced so repeated code paths reuse compiled expressions. Inline styles remain valid because per-icon CSS variables are part of the rendering contract.
+`noAwaitInLoops` is enforced. Parallelize independent work with `Promise.all`; keep a narrow documented suppression only when ordering or retry timing is part of the contract, such as readiness polling or serialized browser screenshots. `useTopLevelRegex` is also enforced so repeated code paths reuse compiled expressions.
 
 After changes, run [validation](validation.md). Policy probes should include rejected runtime Node/build imports, unhandled and misused promises, explicit `any`, focused/skipped Node tests, and fixture logging, together with accepted build-module Node access and both import-extension modes. Verify a warning-only run exits unsuccessfully with the strict command. Remove temporary probes before building the package.

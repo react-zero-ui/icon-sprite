@@ -8,7 +8,7 @@
       "fingerprint": "sha256:57d590b84973095e26809f7f59442f860871c22a3a75fb35339a91e15ddeb8be"
     },
     "pages/build-system/icon-catalog.md": {
-      "fingerprint": "sha256:bdda8e37b2a90c1f856e3741572dc63f3540ca0c2bbac056af8a122ab9ac8cab"
+      "fingerprint": "sha256:7e1fe2bb8cb0f169b7dde2e92844c1fd753f0b3b45c83ac7e6ed333b0283698e"
     },
     "pages/build-system/source-scanning.md": {
       "fingerprint": "sha256:800d0a462b3423f210a10b9a49eb31a102cc5775aa74944473a29098a14fba80"
@@ -17,22 +17,22 @@
       "fingerprint": "sha256:261b8a1fb65f5ab5e7520ab62c75b26565455e3e8ab17b3676f3acb2114c20fe"
     },
     "pages/development/code-quality.md": {
-      "fingerprint": "sha256:1a09811a66b5f6ba0dde36f58931bc599a2b5ad796b5de6e8d71e264bdc49894"
+      "fingerprint": "sha256:b96c18929ee5b1343c0eb6e06327a7c3346a40ee70e3d09ed19c1a3c7e5d97d3"
     },
     "pages/development/publishing.md": {
-      "fingerprint": "sha256:4bf0a308e7e1e4177ae7ba3fa9df39ef178d53e7904ed43e5efa8d6074befee9"
+      "fingerprint": "sha256:909eadc9298ab8f0026155d0faa3d971b43103f8fb266f03eeab35d6e0cf5789"
     },
     "pages/development/validation.md": {
-      "fingerprint": "sha256:3765dc4ec0fe4657b4ca3feb3382a508e0d57a21fc4878c50308dd1d1598c38f"
+      "fingerprint": "sha256:aa573cb3123453c9ff8e8b64deb6fa34257ac102437c202458cf470e5678f352"
     },
     "pages/development/workflow.md": {
-      "fingerprint": "sha256:613a36066ef8847e6ed83a685ef0da5010c5c801947f36af2f48c25313aca26c"
+      "fingerprint": "sha256:a093f4abb90754b9118e7df54d96335db01d0f6dcec59bd0df2523433bde8043"
     },
     "pages/open-questions-risks.md": {
-      "fingerprint": "sha256:45f708fe2cf1924badc83b2c594b7a1cf4a345f19db589aeeb2e3d2e7c076f68"
+      "fingerprint": "sha256:f2ba4de175b12f5d5426bf82cadd95cdba5ec06c9b801b9d82accaca7f8a3876"
     },
     "pages/runtime/custom-icons.md": {
-      "fingerprint": "sha256:5ebe596839720ee39b6dd4de95203b44a33c6afc249bba25669913ce7d9a3d33"
+      "fingerprint": "sha256:136209a6f7791c661502fd2c4a3cef9ae80e9b3a61acac2746b84b1267d4916f"
     },
     "pages/runtime/rendering.md": {
       "fingerprint": "sha256:3e96503bb2edeea50bca439bf8b457e017437d0465a46463a9d5992ba7dd5ca0"

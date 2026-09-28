@@ -17,7 +17,7 @@ Consumer config changes build paths while runtime URLs stay fixed. Making URLs c
 
 ## Browser and performance evidence
 
-Automated integration inspects HTTP markup and served symbol IDs. Visual SVG inheritance, custom-loader lifecycle, accessibility, browser caching, and production bundle weight need additional evidence before broader guarantees are made. [Validation](development/validation.md) defines the current proof boundary; [rendering](runtime/rendering.md) owns the behavior.
+Automated integration inspects HTTP markup and served symbol IDs, and Chromium now compares built-in development inline rendering against production external-`<use>` rendering for the supported presentation contract. Custom-loader lifecycle, accessibility-tree behavior, browser caching, Firefox/WebKit parity, and production bundle weight still need additional evidence before broader guarantees are made. [Validation](development/validation.md) defines the current proof boundary; [rendering](runtime/rendering.md) owns the behavior.
 
 ## Custom asset scope
 
