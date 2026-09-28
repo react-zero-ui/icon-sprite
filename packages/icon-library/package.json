@@ -1,0 +1,17 @@
+{
+  "name": "@react-zero-ui/icon-library",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node src/component-generation.ts",
+    "sync": "node src/upstream-sync.ts",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "@tabler/icons": "^3.48.0",
+    "@tabler/icons-react": "^3.48.0",
+    "lucide-react": "^1.48.0",
+    "lucide-static": "^1.48.0"
+  }
+}
