@@ -1,53 +1,43 @@
 ---
-summary: "Choose unit, type, fixture, or isolated-package checks and understand what each proves, including browser and platform gaps."
+summary: "Select checks and interpret their evidence: unit contracts, isolated installation, three-browser parity, and remaining gaps."
 paths:
   - package.json
   - packages/icon-sprite/tests/
-  - fixtures/next-app/next.config.ts
   - scripts/test-integration.ts
-  - fixtures/next-app/app/
-  - fixtures/next-app/package.json
+  - fixtures/next-app/app/presentation-parity/page.tsx
+  - fixtures/next-app/next.config.ts
   - .github/workflows/check.yml
 ---
 
 # Validation
 
-## Choose the proof needed
+## Select checks
 
-`npm run check` builds the library, runs Biome, checks maintainer TypeScript, generates/checks fixture types, and runs package tests. The library build already performs its compiler check. Fixture production builds and isolated installs are separate steps.
+`npm run check` prepares compiled output, runs lint and TypeScript checks, and executes package tests. `build:fixture` additionally builds the local Next application. Packaging, React, dependency, and CLI changes require `test:integration`.
 
-The read-only Biome step fails on warnings as well as errors. Use [code quality](code-quality.md) for rule choices, targeted exceptions, and policy probes.
+Focused tests live in [packages/icon-sprite/tests](../../../packages/icon-sprite/tests/):
 
-| Changed contract | Focused evidence |
+| Contract | Tests |
 | --- | --- |
-| Public names, package-owned archives, sync behavior | `test-icon-sync`, `test-mapping`, and the naming tests in `test-sprite-id-match` |
-| Source discovery and configuration | `test-scanner-exclusion` and `test-config` |
-| Sprite output, failures, concurrency, executable bin | `test-sprite` |
-| Runtime element structure and ARIA forwarding | `test-sprite-id-match` and `test-accessibility-props` |
-| Built-in dev/production presentation parity | Playwright capture in `test:integration` |
-| Public module boundaries and shared rendering | `test-runtime-boundary` and `test-runtime` |
-| Committed catalog representation and asset lookup | `test-catalog` |
+| Canonical upgrades and generated exports | `test-upstream-sync`, `test-component-generation` |
+| Input discovery and config | `test-icon-usage`, `test-build-config` |
+| Installed lookup, sprite output, and CLI | `test-packaged-icons`, `test-sprite-sheet` |
+| React props, identities, and import boundaries | `test-react`, `test-sprite-id-match`, `test-react-boundary`, `test-accessibility-props` |
 
-These files live in [`packages/icon-sprite/tests`](../../../packages/icon-sprite/tests/). Most invoke compiled code. Generation tests write isolated temporary directories and check that regeneration removes stale generated files while preserving handwritten files. Sync tests verify cumulative archive behavior against installed maintainer sources.
+## Installed-package validation
 
-`npm run build:fixture` exercises direct API integration in Next configuration and the production application build. Type generation may invoke the same production config phase. The fixture contains supported presentation overrides such as `fill`, `color`, and `strokeWidth`; these should remain warning-free. Risky presentation diagnostics are covered separately by scanner tests.
+[test-integration.ts](../../../scripts/test-integration.ts) packs existing output with lifecycle scripts disabled, checks the artifact, and installs it into a temporary copy of the fixture. It rejects workspace symlinks and omits the local sprite so the installed `/build` API must create one. Direct harness execution requires a current build.
 
-## Consumer installation boundary
+Direct fixture dependencies follow root-lock versions; transitive versions resolve during installation and can vary from `npm ci`. The harness needs registry access and loopback listeners. Preserve its ownership of temporary servers, process groups, and cleanup when extending it.
 
-`npm run test:integration` builds, then runs [`scripts/test-integration.ts`](../../../scripts/test-integration.ts). The harness packs existing output with lifecycle scripts disabled, verifies included/excluded files, copies the fixture to a temporary directory, and installs the tarball there. It excludes the local generated sprite so the temporary app must build its own.
+HTTP checks validate production references against served symbol IDs and reject inline paths on sprite routes. Development checks require inline geometry. Client chunks are scanned for leaked icon implementations on the Server Component fixture.
 
-The copied Next config imports `generateSprite` from the installed package's `/build` export. The temporary app has no sprite prebuild command, so successful output proves the callable interface works independently of the compatibility adapter. Package tests separately exercise that adapter.
+## Browser parity and limits
 
-The harness pins direct fixture dependencies to root-lock versions. Their transitive dependencies resolve during the temporary `npm install`; this exercises registry installation and can vary independently of a root `npm ci`.
+Install the matching Playwright engines with `npx playwright install chromium firefox webkit`. Each engine renders [presentation-parity](../../../fixtures/next-app/app/presentation-parity/page.tsx) against production and development servers. Checks compare structure, computed outer-SVG styles, and exact screenshots for seven representative default/override cases. Comparisons stay within each engine. The [React contract](../react/rendering.md#instance-props) defines the supported properties.
 
-Production HTTP checks require sprite references to resolve to served symbol IDs and reject inline icon paths on sprite routes. The built Next client chunks are also scanned to ensure Server Component icon implementations do not leak into browser JavaScript. Development HTTP checks require inline SVG paths and verify that `ArrowRight` avoids its production reference. The standalone Lucide comparison route is also requested. Workspace symlinks are explicitly rejected for the installed test package.
+Failures write paired PNGs under `test-results/presentation-parity/<browser>/`. Keep screenshots serialized on their shared page for deterministic capture.
 
-The same harness launches headless Chromium, Firefox, and WebKit with Playwright and renders `/presentation-parity` once against the production server and once against the development server. For each engine independently it verifies the expected inline-versus-`<use>` structure, compares computed outer-SVG values for `color`, `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin`, then compares exact development/production screenshots for representative defaults and overrides. It does not compare screenshots across different engines. A visual mismatch writes the production and development PNGs to `test-results/presentation-parity/<browser>/`. Install the matching local browsers once with `npx playwright install chromium firefox webkit`; CI installs all three engines and their system dependencies explicitly.
+Coverage includes external `<use>` visual behavior in Chromium, Firefox, and WebKit. It does not establish parity for arbitrary props, every icon, or every browser/version. Hydration-specific behavior, custom-icon fetches, cache invalidation, and accessibility-tree behavior remain untested. Client-code absence has a regression check; byte-size thresholds do not.
 
-Temporary ports and servers belong to `verifyServer`; cleanup handles ordinary success/failure and escalates termination when needed. The harness needs registry access and loopback listeners. Preserve its ownership of temporary files and process groups when extending it.
-
-## Coverage limits
-
-Browser coverage now validates built-in presentation inheritance in Chromium, Firefox, and WebKit. Hydration-specific behavior, custom-icon fetches, cache invalidation, accessibility-tree behavior, and broader browser/framework/version compatibility remain untested. Client chunks are checked for icon-code absence on the current Server Component fixture, but there is no byte-size threshold.
-
-[`check.yml`](../../../.github/workflows/check.yml) configures Ubuntu with the repository runtime pin, runs `check`, then invokes the already-built integration harness directly. Local passing tests and workflow configuration provide different evidence from an observed remote CI run. Consult [publishing](publishing.md) for the separate release gate.
+The [check workflow](../../../.github/workflows/check.yml) runs `check`, installs engines with system dependencies, then runs the harness. Release-specific requirements belong to [publishing](publishing.md#release-gate).

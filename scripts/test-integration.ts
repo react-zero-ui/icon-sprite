@@ -17,7 +17,7 @@ const fixturePath = path.join(root, "fixtures/next-app")
 const libraryPath = path.join(root, "packages/icon-sprite")
 const npm = process.platform === "win32" ? "npm.cmd" : "npm"
 const env = { ...process.env, NEXT_TELEMETRY_DISABLED: "1" }
-const repositoryOnlyPathPattern = /^(src|tests|scripts|node_modules)\//
+const repositoryOnlyPathPattern = /^(src|tests|scripts|icon-library|node_modules)\//
 const rawArchivePathPattern = /^assets\/(lucide|tabler)\//
 const browserIconImplementationPattern = /\/icons\.svg#|icon-tabler-|lucide lucide-/
 const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
@@ -330,6 +330,9 @@ try {
     "dist/index.d.ts",
     "dist/LICENSE",
     "dist/build.js",
+    "dist/react/icon.js",
+    "dist/build/build-sprite-sheet.js",
+    "dist/build/packaged-icons.js",
     "dist/command.js",
     "dist/icon-assets.json",
     "assets/catalog.json",

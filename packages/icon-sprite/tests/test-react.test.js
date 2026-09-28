@@ -1,20 +1,20 @@
 import assert from "node:assert/strict"
 import test from "node:test"
-import { iconDimensions, renderBuiltInIcon, renderIcon } from "../dist/runtime/icon.js"
+import { renderProdIcon, renderSvgUseElement, resolveIconDimensions } from "../dist/react/icon.js"
 
-test("all renderers share dimension precedence, including explicit zero", () => {
-  assert.deepEqual(iconDimensions({}), { width: 24, height: 24 })
-  assert.deepEqual(iconDimensions({ size: 0 }), { width: 0, height: 0 })
-  assert.deepEqual(iconDimensions({ size: 32, width: "2em", height: 0 }), {
+test("all React renderers share dimension precedence, including explicit zero", () => {
+  assert.deepEqual(resolveIconDimensions({}), { width: 24, height: 24 })
+  assert.deepEqual(resolveIconDimensions({ size: 0 }), { width: 0, height: 0 })
+  assert.deepEqual(resolveIconDimensions({ size: 32, width: "2em", height: 0 }), {
     width: "2em",
     height: 0,
   })
-  assert.deepEqual(iconDimensions({ size: 32, width: null }), { width: 32, height: 32 })
+  assert.deepEqual(resolveIconDimensions({ size: 32, width: null }), { width: 32, height: 32 })
 })
 
 test("sprite rendering preserves explicit accessibility and normal SVG presentation props", () => {
   const style = { color: "red" }
-  const icon = renderIcon("check", {
+  const icon = renderSvgUseElement("check", {
     size: 32,
     strokeWidth: 3,
     style,
@@ -27,14 +27,14 @@ test("sprite rendering preserves explicit accessibility and normal SVG presentat
   assert.equal(icon.props.strokeWidth, 3)
   assert.equal(icon.props.style, style)
   assert.deepEqual(style, { color: "red" })
-  assert.equal(renderIcon("check", {}).props["aria-hidden"], "true")
+  assert.equal(renderSvgUseElement("check", {}).props["aria-hidden"], "true")
   assert.deepEqual(
     {
-      fill: renderBuiltInIcon("check", {}).props.fill,
-      stroke: renderBuiltInIcon("check", {}).props.stroke,
-      strokeWidth: renderBuiltInIcon("check", {}).props.strokeWidth,
-      strokeLinecap: renderBuiltInIcon("check", {}).props.strokeLinecap,
-      strokeLinejoin: renderBuiltInIcon("check", {}).props.strokeLinejoin,
+      fill: renderProdIcon("check", {}).props.fill,
+      stroke: renderProdIcon("check", {}).props.stroke,
+      strokeWidth: renderProdIcon("check", {}).props.strokeWidth,
+      strokeLinecap: renderProdIcon("check", {}).props.strokeLinecap,
+      strokeLinejoin: renderProdIcon("check", {}).props.strokeLinejoin,
     },
     {
       fill: "none",
@@ -44,7 +44,7 @@ test("sprite rendering preserves explicit accessibility and normal SVG presentat
       strokeLinejoin: "round",
     }
   )
-  const overridden = renderBuiltInIcon("check", {
+  const overridden = renderProdIcon("check", {
     fill: "red",
     stroke: "blue",
     strokeWidth: 4,
@@ -56,7 +56,7 @@ test("sprite rendering preserves explicit accessibility and normal SVG presentat
   assert.equal(overridden.props.strokeWidth, 4)
   assert.equal(overridden.props.strokeLinecap, "square")
   assert.equal(overridden.props.strokeLinejoin, "bevel")
-  assert.equal(renderBuiltInIcon("check", { stroke: undefined }).props.stroke, undefined)
+  assert.equal(renderProdIcon("check", { stroke: undefined }).props.stroke, undefined)
 })
 
 test("custom names isolate development component state and keep the sprite fallback", async (t) => {
@@ -69,7 +69,7 @@ test("custom names isolate development component state and keep the sprite fallb
     }
   })
   process.env.NODE_ENV = "development"
-  const moduleUrl = new URL("../dist/runtime/custom-icon.js?runtime-test", import.meta.url)
+  const moduleUrl = new URL("../dist/react/custom-icon.js?react-test", import.meta.url)
   const { CustomIcon } = await import(moduleUrl.href)
   const first = CustomIcon({ name: "first", size: 48 })
   const second = CustomIcon({ name: "second" })

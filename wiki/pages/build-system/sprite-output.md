@@ -1,32 +1,26 @@
 ---
-summary: "Follow the Node build operation through package-owned asset collection and atomic writing without exposing catalog, XML, or config internals."
+summary: "Change consumer sprite construction: packaged lookup, custom inclusion, symbol presentation policy, and atomic output."
 paths:
-  - packages/icon-sprite/src/build.ts
-  - packages/icon-sprite/src/build/icon-assets.ts
-  - packages/icon-sprite/src/build/sprite-writer.ts
-  - packages/icon-sprite/src/catalog.ts
-  - packages/icon-sprite/src/command.ts
-  - packages/icon-sprite/tests/test-sprite.test.js
+  - packages/icon-sprite/src/build/build-sprite-sheet.ts
+  - packages/icon-sprite/src/build/collect-sprite-symbols.ts
+  - packages/icon-sprite/src/build/write-sprite-sheet.ts
+  - packages/icon-sprite/src/build/packaged-icons.ts
 ---
 
 # Sprite Output
 
-[`generateSprite(projectDirectory)`](../../../packages/icon-sprite/src/build.ts) is the Node integration interface. It resolves a project, discovers usage, collects symbols, writes the result, and returns `{ outputFile, iconCount, warnings }`. Each call owns its operation state and leaves cwd and package files unchanged.
+[buildSpriteSheet](../../../packages/icon-sprite/src/build/build-sprite-sheet.ts) resolves config, scans usage, collects symbols, and writes the file. It returns file/count/warnings without console reporting. Calls own their state and leave cwd and installed package files unchanged. [Configuration](configuration.md) and [scanning](source-scanning.md) own input discovery.
 
-## Asset boundary
+## Symbol selection
 
-[`collectSymbols`](../../../packages/icon-sprite/src/build/icon-assets.ts) accepts semantic icon usage and the resolved custom directory. [`openCatalog`](../../../packages/icon-sprite/src/catalog.ts) hides committed catalog parsing, package-owned SVG lookup, and legacy custom-name normalization. Unknown built-in names can resolve to custom filenames; this compatibility fallback creates no public React export.
+[collectSpriteSymbols](../../../packages/icon-sprite/src/build/collect-sprite-symbols.ts) resolves imported names through [packaged-icons.ts](../../../packages/icon-sprite/src/build/packaged-icons.ts). Lookup uses installed JSON data. Unknown names retain a legacy custom-filename fallback without creating React exports.
 
-Built-in symbols deduplicate by ID. Every `.svg` directly inside the custom directory is included, including unused files and file symlinks. Custom IDs preserve case. Static custom names affect warnings, never inclusion. Existing custom/built-in collisions remain possible and require input review.
+Built-ins deduplicate by ID. Every SVG directly inside the custom directory is included, including unused files and file symlinks, so dynamic names work. Custom IDs are exact case-sensitive filename stems. Static custom names affect warnings only. Built-in/custom ID collisions and collisions inside SVG definitions remain possible and require input review.
 
-The resulting `SpriteSymbol` contains identity, markup, a source label for diagnostics, and one presentation policy: package-owned built-ins inherit root presentation from the rendered icon instance, while custom SVGs preserve authored presentation. The orchestration layer knows neither pack locations nor XML representation.
+## Serialization and failure contract
 
-## Writer boundary
+[writeSpriteSheet](../../../packages/icon-sprite/src/build/write-sprite-sheet.ts) receives markup plus an `inherit` or `authored` policy. Per-symbol svgstore options implement the [built-in presentation contract](../react/rendering.md#instance-props); descendant markup remains intact. Custom roots retain attributes selected by `copyAttrs`. SVG input is trusted and root checking is limited container validation.
 
-[`collectSymbols`](../../../packages/icon-sprite/src/build/icon-assets.ts) marks built-ins as inherited and custom SVGs as authored without rewriting markup. [`writeSprite`](../../../packages/icon-sprite/src/build/sprite-writer.ts) owns svgstore, SVG-root checks, attribute copying, and atomic replacement. For built-ins it uses svgstore's per-symbol attributes to set `fill`, `stroke`, `stroke-width`, `stroke-linecap`, and `stroke-linejoin` to `inherit`; custom symbols retain their copied root values.
+Serialization finishes before creating a unique temporary sibling. Rename replaces the target; cleanup removes failed temporary output. Parse, data, asset-processing, and write errors preserve an existing sprite. Missing definitions remain warnings and can produce partial successful output.
 
-Serialization completes before writing a unique temporary sibling. Rename replaces the destination; failure cleanup removes the temporary file. Parse, catalog, asset-processing, and write failures preserve an existing sprite. Missing definitions remain warnings and can produce a partial successful result.
-
-Distinct projects remain isolated. Same-target concurrent calls are last-writer-wins; there is no lock or fsync guarantee. Inputs are trusted SVG assets and config paths.
-
-[`command.ts`](../../../packages/icon-sprite/src/command.ts) adapts the result to historical `zero-icons` stdout/stderr and exit status. Applications can call the same operation directly. [`test-sprite`](../../../packages/icon-sprite/tests/test-sprite.test.js) verifies both interfaces and failure behavior; [isolated installation](../development/validation.md) checks the packaged operation in Next configuration.
+Concurrent writes to the same target are last-writer-wins. There is no locking or fsync guarantee. See [validation](../development/validation.md) for regression coverage.

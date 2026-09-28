@@ -25,7 +25,7 @@ const inheritedPresentationAttributes = Object.fromEntries(
  * Serialization finishes before writing a sibling temp file. Failure preserves the
  * existing target; concurrent writers to the same path remain last-writer-wins.
  */
-export function writeSprite(outputFile: string, symbols: readonly SpriteSymbol[]): number {
+export function writeSpriteSheet(outputFile: string, symbols: readonly SpriteSymbol[]): number {
   const store = svgstore({
     copyAttrs: ["viewBox", ...Object.values(BUILT_IN_PRESENTATION_ATTRIBUTES), "style", "size"],
     svgAttrs: { xmlns: "http://www.w3.org/2000/svg", "aria-hidden": "true", focusable: "false" },

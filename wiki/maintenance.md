@@ -1,53 +1,25 @@
 # Wiki Maintenance
 
-Wiki pages and raw-source metadata are agent-authored. Generated indexes are derived routing artifacts.
+Use the `wiki-system` skill and its update workflow. The wiki routes agents from project context to a focused contract and current source.
 
-## Front Matter Metadata
+## Knowledge ownership
 
-- `summary` is required for routable pages and should stay concise. `wiki clean` warns above 240 characters.
-- `paths` is optional and defines the source scope whose meaningful changes could invalidate the page's knowledge. Do not aim for complete repository path coverage. `project-overview.md` should usually omit `paths` unless a narrow source scope genuinely governs its global knowledge.
-- Update front matter when a page's knowledge scope changes.
+Keep mandatory startup context in `pages/project-overview.md` short. `architecture.md` maps domains and shared boundaries. Detailed behavior belongs to the relevant topic page. A short orientation sentence and a link are sufficient elsewhere.
 
-When creating a nested knowledge directory, add an `index.md` with only a `summary` in front matter. `wiki clean` generates and maintains the index body.
+The root README owns setup and command usage; the package README owns consumer instructions. Source files own exact types, defaults, rule lists, and scripts. Wiki pages preserve relationships, subtle invariants, failure semantics, and evidence limits that require synthesis.
 
-## Page Structure
+Keep historical reasons in `decision-log.md` and deferred work in `pages/roadmap.md`. Link completed roadmap work to its current owner. Keep transient status and test-run results out of durable pages.
 
-These are not hard rules but heuristics:
-- Keep one cohesive subject per page.
-- `wiki clean` warns when `project-overview.md` exceeds 2,000 words or another routable page exceeds 3,000 words. These are review thresholds, not targets or limits.
-- Keep indexes small enough to route cheaply. Roughly 10–20 entries is a useful heuristic, not a limit.
-- Split large knowledge areas into meaningful nested directories. The hierarchy may recurse as needed.
-- Keep supporting evidence under `raw/`.
+## Routing and freshness
 
-## Freshness Audit
+Each routable page needs a concise `summary`. Use `paths` only for source changes that could invalidate its explanation. Avoid watching whole asset archives or unrelated tests merely to increase coverage.
 
-`wiki audit` compares the current Git-visible contents under each page's `paths` with the fingerprint recorded when that page was last reviewed. A mismatch means review is suggested, not that the page is necessarily stale. Pages without `paths` are not audited.
+Branch directories require an `index.md` with summary front matter. Index bodies are generated. After edits, use the skill's helper to run `wiki clean wiki`, then `wiki audit wiki`. Review flagged pages against source before `wiki audit mark <page> wiki`; use `baseline` only for initially reviewed pages. Never edit `.wiki-system/` state manually.
 
-- Keep `.wiki-system/audit-state.json` committed with the wiki, but treat `.wiki-system/` as machine-maintained state; do not read or edit it directly.
-- After creating or migrating a reviewed wiki, run `wiki audit baseline` once. It records only pages without an existing baseline and never clears later review warnings.
-- After reviewing a reported page against current source, update the page if needed, then run `wiki audit mark <wiki-page>` to record the reviewed state. Mark it even when review confirms that no wiki content change is needed.
-- `wiki audit` includes tracked files and non-ignored untracked working-tree files, so it can detect relevant changes before they are committed.
-- Repeated irrelevant audit warnings suggest a page's `paths` are too broad; missed stale knowledge suggests they are too narrow.
+Check routes for realistic rendering, sync, build, and release tasks. Follow links through to existing source and preserve useful failure/compatibility knowledge when merging pages.
 
-## Raw Sources
+## Repository constraints
 
-Raw sources are read-only captured evidence originating outside the maintained semantic wiki, such as confirmed interview transcripts or copied human-authored documentation.
+`raw/` contains read-only captured evidence. Copy imported evidence there, preserve originals, and leave raw bodies unchanged without approval.
 
-- Ingest external evidence by copying it into `raw/`; never move or delete the original source. Capture all raw evidence as Markdown, converting copied source material to Markdown when necessary.
-- When first ingesting a raw source, add front matter containing only a concise `summary` describing what the source is and why it matters. Write summaries as routing signals. A summary should help an agent decide whether to open the page from an index, including the behaviors or boundaries that distinguish it from neighboring pages.
-- Preserve the captured body after ingestion. Do not edit an existing raw source without explicit user approval.
-- `wiki clean` generates `raw/index.md` from raw Markdown summaries, including Markdown stored in nested raw directories.
-
-## Decision Log
-
-`decision-log.md` preserves major historical reasoning that explains why the project took its current direction. Add a concise entry when a significant decision, reversal, discovery, rejected approach, validation, or lesson from real usage would help a future agent and the reasoning is not obvious from the current code, wiki, or Git history. Do not use it as a changelog.
-
-Before finishing substantial wiki maintenance, ask whether the work exposed or changed durable reasoning that will still matter after the implementation details are forgotten. If yes, append one concise entry.
-
-## Cleanup
-
-After adding, moving, renaming, deleting, or materially changing wiki pages or ingesting raw Markdown sources, run `wiki clean` to regenerate indexes from current metadata and structure. Fix reported errors and useful warnings in the owning metadata.
-
-## Repository Routing Boundaries
-
-The root `.gitignore` excludes generic build-output directories and explicitly includes `packages/icon-sprite/src/build/` as handwritten source. Build documentation uses `pages/build-system/`. Check new wiki paths with `git check-ignore` before completion: local routing validation can succeed even when Git would omit a page. Keep every authored page and the machine-maintained audit state eligible for version control.
+Keep authored pages and `.wiki-system/audit-state.json` Git-visible. Generic `build/` paths are ignored, so this wiki uses `pages/build-system/`; verify new paths with `git check-ignore`.

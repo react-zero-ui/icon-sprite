@@ -17,14 +17,14 @@ export const BUILT_IN_PRESENTATION_DEFAULTS = {
   strokeLinejoin: "round",
 } as const
 
-/** React presentation prop to serialized SVG attribute mapping. */
+/** React presentation prop to serialized SVG attribute mapping, kept complete with the defaults. */
 export const BUILT_IN_PRESENTATION_ATTRIBUTES = {
   fill: "fill",
   stroke: "stroke",
   strokeWidth: "stroke-width",
   strokeLinecap: "stroke-linecap",
   strokeLinejoin: "stroke-linejoin",
-} as const
+} as const satisfies Record<keyof typeof BUILT_IN_PRESENTATION_DEFAULTS, string>
 
 /** Presentation props not covered by the built-in dev/production parity contract. */
 export const RISKY_SPRITE_PRESENTATION_PROPS = [

@@ -26,26 +26,28 @@ Place `company-logo.svg` in `public/zero-ui-icons/` for the custom example. The 
 Import the Node build API from your build tool or application configuration:
 
 ```ts
-import { generateSprite } from "@react-zero-ui/icon-sprite/build"
+import { buildSpriteSheet } from "@react-zero-ui/icon-sprite/build"
 
-const result = await generateSprite() // Defaults to the application's working directory.
+const result = await buildSpriteSheet() // Defaults to the application's working directory.
 for (const warning of result.warnings) {
   console.warn(warning)
 }
 ```
 
-`generateSprite(projectDirectory?)` returns `{ outputFile, iconCount, warnings }`. It handles config discovery, source analysis, package-owned asset resolution, and atomic writing. Callers decide how to report warnings. Parse, catalog, asset, and write failures reject the operation and preserve an existing sprite. Missing definitions produce warnings and require review before deployment.
+`buildSpriteSheet(projectDirectory?)` returns `{ outputFile, iconCount, warnings }`. It handles config discovery, source analysis, package-owned asset resolution, and atomic writing. Callers decide how to report warnings. Parse, catalog, asset, and write failures reject the operation and preserve an existing sprite. Missing definitions produce warnings and require review before deployment.
+
+Existing integrations may continue importing `generateSprite`; it is an alias of `buildSpriteSheet`.
 
 For Next.js, integrate directly in `next.config.ts`:
 
 ```ts
-import { generateSprite } from "@react-zero-ui/icon-sprite/build"
+import { buildSpriteSheet } from "@react-zero-ui/icon-sprite/build"
 import type { NextConfig } from "next"
 import { PHASE_PRODUCTION_BUILD } from "next/constants.js"
 
 export default async function configureNext(phase: string): Promise<NextConfig> {
   if (phase === PHASE_PRODUCTION_BUILD) {
-    const { warnings } = await generateSprite()
+    const { warnings } = await buildSpriteSheet()
     for (const warning of warnings) {
       console.warn(warning)
     }
@@ -114,7 +116,7 @@ Configuration controls build input and output locations. Runtime URLs stay `/ico
 
 This library lives in `packages/icon-sprite`; the private integration fixture lives in `fixtures/next-app`. Run `npm ci`, `npm run check`, and `npm run test:integration` from the repository root.
 
-Start with `src/index.ts` for the React interface and `src/build.ts` for build integration. `src/runtime/` owns rendering; `src/build/` owns project resolution, scanning, asset collection, and writing. `src/catalog.ts` owns the committed catalog format and package-owned asset lookup. `src/sprite-contract.ts` owns shared rendering/build constants.
+Start with `src/index.ts` for React components and `src/build.ts` for application build integration. `src/react/` owns instance rendering. `src/build/` owns source scanning, packaged icon lookup, and sprite-sheet output. `icon-library/` owns upstream synchronization, canonical assets, validation, and generated React source. Its code stays outside the published artifact.
 
 The handwritten entrypoint remains versioned. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` are canonical package-owned source. Maintainer packages are used only by `npm run sync:icons` to import reviewed upstream changes. Sync is additive: removed upstream icons stay available, renamed identities stay stable, and current SVG bytes refresh existing assets. Internal module paths may change; root and `/build` are the supported application interfaces.
 

@@ -1,44 +1,29 @@
 ---
-summary: "Use the correct build order, rebuild local fixture dependencies, distinguish TypeScript execution modes, and keep generated files disposable."
+summary: "Avoid stale builds: local fixture behavior, package compilation order, direct TypeScript execution, and generated-file ownership."
 paths:
   - package.json
-  - .node-version
-  - .gitignore
-  - biome.json
   - tsconfig.tools.json
-  - packages/icon-sprite/package.json
-  - packages/icon-sprite/tsconfig.json
   - packages/icon-sprite/scripts/build.ts
-  - fixtures/next-app/package.json
+  - packages/icon-sprite/tsconfig.json
   - fixtures/next-app/next.config.ts
-  - fixtures/next-app/tsconfig.json
-  - packages/icon-sprite/src/index.ts
+  - fixtures/next-app/package.json
+  - .gitignore
 ---
 
 # Development Workflow
 
-## Root orchestration
+Use the [root README](../../../README.md#development) for setup, version pins, and commands. Tests and the fixture import compiled output, so build the package before standalone checks that resolve generated imports.
 
-The [root manifest](../../../package.json) coordinates the public library and private fixture with one npm lockfile. Use the runtime pin in [`.node-version`](../../../.node-version) and package-manager pin in the manifest. The published package declares its own consumer engine requirement.
+## Local iteration
 
-`npm ci` installs dependencies. Install the browsers used by isolated integration once with `npx playwright install chromium firefox webkit`; CI uses `playwright install --with-deps chromium firefox webkit`. `npm run build` generates and compiles the library. Tests and the fixture import compiled package output, so a fresh checkout needs that build before standalone test or lint commands that resolve generated imports. Root `check`, `test`, and `typecheck` arrange their prerequisites.
+`npm run dev` builds the library once, then starts the workspace fixture. Library edits require another build. Next configuration runs the consumer build API during its production phase; Next type generation also loads that phase and can rewrite the ignored sprite.
 
-`npm run dev` builds once and then starts the fixture against the workspace package. Editing library source requires rebuilding it; this command has no library watch loop. `build:fixture` first builds the library. The fixture's Next configuration calls the Node build API in its production phase. Next type generation also loads that phase and can regenerate the ignored sprite.
+[scripts/build.ts](../../../packages/icon-sprite/scripts/build.ts) generates component source, recreates `dist`, compiles, then writes packaged data and copies the license. It restores the regenerated CLI's executable bit; omitting that step previously broke workspace bin execution.
 
-## Execution modes
+## Editing boundaries
 
-[`scripts/build.ts`](../../../packages/icon-sprite/scripts/build.ts) invokes generation, recreates `dist`, runs the compiler, copies the license, and restores the compatibility command's executable bit. `src/build.ts` is the separate consumer operation. Recreating a compiled executable without `chmod` previously caused workspace execution to fail; the direct-bin test protects that contract.
+`src/` uses `.js` import specifiers for compiled NodeNext output. `icon-library/` and scripts use `.ts` imports for direct Node execution and are checked by [tsconfig.tools.json](../../../tsconfig.tools.json). Preserve these separate execution modes when changing imports.
 
-Library TypeScript uses NodeNext and `.js` runtime import specifiers so emitted JavaScript runs in Node. Maintainer scripts execute directly under Node type stripping and use `.ts` runtime imports. [`tsconfig.tools.json`](../../../tsconfig.tools.json) strictly checks these scripts without emitting them. The fixture has a separate bundler-oriented configuration and generates route types before its typecheck.
+Canonical assets and handwritten entrypoints stay versioned. Generated `src/icons/`, `dist`, and fixture sprites are disposable. `.gitignore` explicitly retains handwritten `src/build/` despite the generic output exclusion.
 
-PostCSS configuration remains an `.mjs` tool entrypoint. Tests are JavaScript using Node's test runner; migrating syntax should preserve the behavior checked against compiled output.
-
-## Ownership during edits
-
-Generated wrappers, local icon components, `src/icons/index.ts`, `dist`, and fixture sprites are ignored output. The public `src/index.ts`, `assets/catalog.json`, both cumulative SVG archives, and handwritten generators stay versioned. `.gitignore` explicitly retains `src/build/` despite the generic build-output exclusion. [Catalog guidance](../build-system/icon-catalog.md) explains manual upstream synchronization.
-
-After intentionally upgrading Lucide or Tabler maintainer dependencies, run `npm run sync:icons --workspace @react-zero-ui/icon-sprite`, review catalog/asset changes, then run repository validation. Ordinary builds never synchronize upstream packages.
-
-[`biome.json`](../../../biome.json) owns formatting and strict handwritten-code rules. The [code quality policy](code-quality.md) explains nursery adoption, import boundaries, generated-file exclusions, fix commands, and documented tool exceptions.
-
-Choose checks through [validation](validation.md). Refer to the [root README](../../../README.md) for command syntax and [publishing](publishing.md) for artifact preparation.
+Use [icon-library guidance](../icon-library.md) for upstream updates and [validation](validation.md) to select checks.

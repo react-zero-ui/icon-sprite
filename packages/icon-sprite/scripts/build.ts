@@ -3,16 +3,15 @@ import fs from "node:fs"
 import { createRequire } from "node:module"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { writeAssetBundle } from "../src/catalog.ts"
+import { writePackagedIconData } from "../icon-library/catalog.ts"
+import { generateIconComponents } from "../icon-library/component-generation.ts"
 
 const require = createRequire(import.meta.url)
 const packageDir = fileURLToPath(new URL("../", import.meta.url))
 
 // Generation owns derived React source; compilation owns dist.
-execFileSync(process.execPath, [fileURLToPath(new URL("generate-icons.ts", import.meta.url))], {
-  cwd: packageDir,
-  stdio: "inherit",
-})
+const { icons, sourceSvgs } = generateIconComponents()
+console.log(`Generated ${icons} icons from ${sourceSvgs} package-owned SVGs.`)
 fs.rmSync(new URL("../dist/", import.meta.url), { recursive: true, force: true })
 const compilerPackage = require.resolve("typescript/package.json")
 const compiler: { bin: { tsc: string } } = JSON.parse(fs.readFileSync(compilerPackage, "utf8"))
@@ -21,7 +20,7 @@ execFileSync(process.execPath, [compilerBin, "-p", packageDir], {
   cwd: packageDir,
   stdio: "inherit",
 })
-writeAssetBundle(packageDir)
+writePackagedIconData(packageDir)
 fs.copyFileSync(
   new URL("../../../LICENSE", import.meta.url),
   new URL("../dist/LICENSE", import.meta.url)

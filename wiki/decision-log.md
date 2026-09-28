@@ -1,33 +1,35 @@
 # Decision Log
 
+This log preserves reasons for decisions. Linked topic pages own current behavior.
+
 ## 2026-09-27: Separate local iteration from consumer validation
 
-The repository refactor established one public library and a private Next.js integration fixture. Workspace linking supports local iteration; a second installation context tests the actual tarball outside the workspace. Keeping both prevents hoisted dependencies, archived assets, and unpublished source files from becoming hidden consumer requirements.
+Workspace linking can hide hoisted dependencies and files missing from a published artifact. The private fixture supports local iteration, while an isolated tarball installation verifies the consumer boundary. Preserve both checks when simplifying the test setup. Current evidence belongs to [validation](pages/development/validation.md).
 
-This reasoning matters when simplifying tests or changing repository layout: local fixture success covers a different boundary from isolated installation. The implementation is in [the integration harness](../scripts/test-integration.ts); current test contracts live in [validation](pages/development/validation.md). The refactor was committed as `4c7219d9`.
-## 2026-09-27 — Treat strict static-analysis failures as design feedback
+## 2026-09-27: Treat strict static-analysis failures as design feedback
 
-Biome policy was expanded beyond recommended defaults to enforce structural rules, selected nursery checks, source organization, cognitive-complexity limits, import boundaries, promise discipline, and deterministic project-file ordering. Existing violations were refactored instead of weakening rules because the repository uses lint failures to expose complexity and ambiguous ownership. Exceptions remain narrow and require a concrete semantic or tooling reason.
+Broad lint failures exposed complexity and ambiguous ownership. We chose to refactor violations and keep exceptions specific to concrete semantics or verified tooling limitations. [Code quality](pages/development/code-quality.md) owns enforcement policy.
 
-## 2026-09-27: Make operation ownership visible
+## 2026-09-27: Give operations ownership of their state
 
-The broad refactor replaced shared scanner state passed through helper chains and caller-managed SVG assembly with operation-oriented modules. The handwritten React facade and callable `/build` entrypoint now identify the supported application interfaces. Project resolution owns paths; scanning owns Babel and traversal; the catalog owns manifest reading and writing; asset collection owns selection; the writer owns XML and atomic output. Shared sprite constants keep generation and rendering aligned.
-
-The Next fixture calls the build operation directly. The historical command remains a compatibility adapter because existing documented package scripts use it. New integration work starts at the callable API. Narrow lint exceptions permit the React facade and cohesive scanner logic while preserving runtime/build dependency checks.
+Shared scanner state passed through helper chains and caller-managed SVG assembly required callers to understand internals. Moving state, diagnostics, and cleanup into complete operations reduced that coupling. Later domain organization retained this principle; [architecture](pages/architecture.md) maps the current boundaries.
 
 ## 2026-09-27: Preserve published icons across upstream upgrades
 
-Upstream icon packages can remove or rename icons between versions. Earlier upgrades caused existing applications to lose icons or fail builds after the local package moved forward. The library therefore keeps a cumulative compatibility archive: new upstream icons are added, previously published icons remain available after upstream removal, and updated SVG bytes replace older geometry for the same identity.
-
-Public component names and sprite IDs are compatibility commitments owned by this package. `assets/catalog.json`, `assets/lucide/`, and `assets/tabler/` now implement that ownership directly. Lucide and Tabler packages are dev-only synchronization sources; consumer installs never resolve icon data from them. `sync:icons` refreshes current bytes and adds new identities without deleting old ones. Renames keep historical IDs, and ambiguous identity changes require review.
+Upstream removals and renames previously made existing application icons disappear or fail builds after dependency upgrades. The package therefore owns a cumulative archive and stable public identities. Updates refresh geometry while retaining removed icons. The catalog itself carries compatibility history, avoiding a second historical registry. [Icon library](pages/icon-library.md) owns the update rules.
 
 ## 2026-09-28: Keep the `size` prop for upstream compatibility
 
-Both Lucide React and Tabler React expose `size?: string | number`. Keeping the same prop lets applications switch icon imports to this package without rewriting existing `<Icon size={...} />` usage. Native `width`/`height` and CSS could replace it internally, but removing `size` would break a useful drop-in compatibility guarantee for little architectural benefit.
+Lucide and Tabler callers already use `<Icon size={...} />`. Keeping this small convenience lets them switch imports without rewriting sizing. Removing it would break existing usage for little architectural benefit. [React rendering](pages/react/rendering.md) owns dimension precedence.
 
 ## 2026-09-28: Put built-in root presentation on each icon instance
 
-The earlier sprite contract rewrote authored `stroke-width` values to a CSS variable so per-instance React props could cross the external `<use>` boundary. Auditing the package-owned Lucide and Tabler archives showed all built-ins share the same root defaults: `fill="none"`, `stroke="currentColor"`, `stroke-width="2"`, `stroke-linecap="round"`, and `stroke-linejoin="round"`.
+Explicit styling on a shared sprite symbol blocked ordinary per-instance overrides. The archives shared root defaults, allowing us to move those defaults to the outer SVG and make symbols inherit. This replaced the stroke-width CSS-variable transport, preserved text-color styling, and kept defaults out of individual production wrappers. [React rendering](pages/react/rendering.md) owns the contract; [icon library](pages/icon-library.md) owns ingestion validation.
 
-The built-in renderer therefore owns those shared defaults once on the outer SVG, user props overwrite them normally, and each built-in sprite symbol sets the corresponding presentation attributes to `inherit`. This preserves direct props such as `stroke="red"` while retaining `currentColor` behavior for CSS text-color utilities. `sync:icons` validates the upstream root defaults before copying assets, and custom SVGs remain authored as provided. The writer applies inheritance through svgstore's per-symbol attributes rather than rewriting source markup.
+## 2026-09-28: Name modules by their owned domain
 
+Repeated renderer renames failed to clarify code that mixed canonical generation, consumer builds, and React elements. We separated `icon-library/`, `src/build/`, and `src/react/` inside one package so components and sprite identities stay versioned together. Names now follow those responsibilities. [Architecture](pages/architecture.md) is the current navigation map.
+
+## 2026-09-28: Give each wiki topic one detailed owner
+
+Successive implementation passes copied the same contracts into overview, architecture, roadmap, and subsystem pages. That amplified review work and allowed descriptions to diverge. Overview now provides startup context, architecture routes to owners, and detailed behavior lives once. Source owns exact implementation values; the roadmap retains deferred work and this log retains reasoning.

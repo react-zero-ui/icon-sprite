@@ -1,24 +1,23 @@
 ---
-summary: "Resolve configuration once into absolute build inputs; understand precedence, warning fallbacks, URL limits, and module caching."
+summary: "Debug source roots, config precedence and caching, and the separation between output paths and served URLs."
 paths:
   - packages/icon-sprite/src/config.ts
   - packages/icon-sprite/src/sprite-contract.ts
-  - packages/icon-sprite/src/build/project.ts
-  - packages/icon-sprite/tests/test-config.test.js
+  - packages/icon-sprite/src/build/resolve-build-config.ts
 ---
 
 # Consumer Configuration
 
-[`resolveProject(projectDirectory)`](../../../packages/icon-sprite/src/build/project.ts) owns config discovery, source-root detection, and path interpretation. It returns `SpriteProject`: scanner inputs, custom directory, output file, and warnings. Downstream modules receive resolved paths and never interpret uppercase config settings.
+[resolveSpriteBuildConfig](../../../packages/icon-sprite/src/build/resolve-build-config.ts) interprets configuration once and returns absolute paths plus scanner options. [config.ts](../../../packages/icon-sprite/src/config.ts) owns public fields and value validation.
 
-The public `ZeroUIConfig` type, defaults, and pure `parseConfig` validator live in [`config.ts`](../../../packages/icon-sprite/src/config.ts). Keeping the representation together localizes additions to config fields. Runtime URLs originate in [`sprite-contract.ts`](../../../packages/icon-sprite/src/sprite-contract.ts). Changing a consumer's output path leaves runtime URLs unchanged; the application must serve assets at `/icons.svg` and `/zero-ui-icons/`.
+## Resolution behavior
 
-## Resolution contract
+TypeScript config takes precedence over JavaScript. Each candidate runs only when the previous candidate is absent or invalid. Invalid candidates add warnings and fall back; unknown fields are ignored and array overrides replace defaults. Config modules are trusted Node code, including their relative imports and normal module cache. Source is rescanned on each build, while config edits in an existing process retain Node's caching behavior.
 
-TypeScript config takes precedence over JavaScript. Each candidate executes only if the previous candidate is absent or invalid. Config modules are trusted Node code; default exports, named exports, CommonJS JavaScript, and relative imports remain supported. Node's module cache applies across repeated calls.
+Explicit `ROOT_DIR` wins; otherwise detection tries `src`, `app`, then `pages`. The final `src` fallback can still fail if absent. Config paths and followed symlinks require trusted inputs.
 
-Invalid candidates append warnings and fall back. Unknown keys are ignored. Array overrides replace defaults and are copied per operation. Resolved results share no mutable arrays with other consumers.
+## Output paths and URLs
 
-Source detection selects the first directory among `src`, `app`, and `pages`; explicit `ROOT_DIR` overrides detection. The final `src` fallback can still fail during scanning if absent. Trusted paths can point outside the application; this API provides no filesystem sandbox.
+Build settings change disk locations. React URLs remain those in the [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts): `/icons.svg` and `/zero-ui-icons/`. Alternate output locations require corresponding hosting. Any future configurable-URL design must preserve per-consumer isolation and development/production agreement.
 
-Warnings return through the build result so each integration owns reporting policy. [Source scanning](source-scanning.md) explains discovery after resolution; [output](sprite-output.md) owns failure preservation. [`test-config`](../../../packages/icon-sprite/tests/test-config.test.js) covers normalization, precedence, fallback, relative imports, and isolation.
+[Sprite output](sprite-output.md) owns warning aggregation and failure preservation.

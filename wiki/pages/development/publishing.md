@@ -1,34 +1,26 @@
 ---
-summary: "Preserve React/build entrypoints, tarball completeness, the compatibility command, root-lock release checks, and publication verification."
+summary: "Protect the npm artifact and compatibility entrypoints, and verify the complete release gate."
 paths:
   - packages/icon-sprite/package.json
-  - packages/icon-sprite/scripts/build.ts
-  - scripts/test-integration.ts
+  - packages/icon-sprite/src/index.ts
+  - packages/icon-sprite/src/build.ts
+  - packages/icon-sprite/src/command.ts
   - .oss-release.yaml
   - .github/workflows/oss-release-trusted.yml
-  - .github/workflows/check.yml
 ---
 
 # Packaging and Publishing
 
-## Artifact boundary
+## Installed interface
 
-The public package ships compiled runtime/build modules, the compatibility command, declarations, `assets/catalog.json`, the derived `dist/icon-assets.json` SVG bundle, upstream license texts, and its README. `dist/LICENSE` is copied during build. Raw cumulative SVG archives, maintainer scripts, tests, and fixture files stay outside the tarball.
+The [package manifest](../../../packages/icon-sprite/package.json) exposes React at the root and the Node API at `/build`. `generateSprite` aliases `buildSpriteSheet`; `zero-icons` uses `dist/command.js`. The wildcard export permits shipped deep paths, while root and `/build` are the supported application interfaces.
 
-Lucide and Tabler are maintainer-only dev dependencies. Consumer installs resolve both development components and production sprites from data derived during package build from committed archives. The catalog reader locates packaged catalog/bundle files relative to its module; changing asset layout requires coordinated packaging validation.
+The artifact contains compiled React/build code and declarations, `assets/catalog.json`, `dist/icon-assets.json`, licenses, and the README. Canonical SVG directories, `icon-library/`, scripts, tests, and fixture files remain repository-only. Consumers install no upstream icon packages.
 
-The export map identifies the React root and `/build` Node API with their declarations. A file wildcard keeps deep-file access compatible where files remain shipped; application integrations should use the supported entrypoints. `zero-icons` targets `dist/command.js` and delegates to the build API.
+`prepack` builds and runs package tests. Follow [workflow](workflow.md) for artifact preparation and [isolated validation](validation.md#installed-package-validation) after layout, dependency, or CLI changes.
 
-[`package.json`](../../../packages/icon-sprite/package.json) defines the public entrypoints, package file allowlist, and `zero-icons` bin. Its `prepack` builds and runs package tests. Root `npm pack --workspace @react-zero-ui/icon-sprite` exercises that lifecycle. The integration harness deliberately skips lifecycle scripts because its caller has already built; direct harness execution requires current output.
+## Release gate
 
-Use [isolated package validation](validation.md) after changing dependencies, asset layout, output locations, or bin handling. Workspace development can resolve files and dependencies unavailable in a consumer tarball.
+[.oss-release.yaml](../../../.oss-release.yaml) selects the public package directory. The [publication workflow](../../../.github/workflows/oss-release-trusted.yml) verifies the requested version, installs from the root lockfile, runs `check`, and publishes using OIDC permissions.
 
-## Release configuration
-
-[`.oss-release.yaml`](../../../.oss-release.yaml) selects GitHub and npm and points npm at `packages/icon-sprite`. The private fixture has no publication role. Other target branches in the reusable publishing workflow do not establish additional products in this repository.
-
-[`oss-release-trusted.yml`](../../../.github/workflows/oss-release-trusted.yml) accepts manual release inputs, checks the requested version against the package, installs from the repository root lockfile, runs `npm run check`, and publishes from the selected package directory. Node/npm selection follows repository pins. The workflow declares OIDC permissions.
-
-The publication job's `check` step omits the isolated integration harness; the normal [check workflow](../../../.github/workflows/check.yml) runs it separately. Verify the intended commit's complete validation before an authorized release.
-
-Registry trusted-publisher configuration, live release state, and deployed hosting are external facts. The files here establish configured intent. Confirm external status at release time; wiki creation never authorizes publishing.
+That job omits isolated/browser integration. Verify the intended commit's complete [validation](validation.md) before an authorized release. Registry trust configuration and publication success require external confirmation; workflow source alone establishes configured intent.

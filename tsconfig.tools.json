@@ -9,5 +9,9 @@
     "target": "ES2022",
     "types": ["node"]
   },
-  "include": ["scripts/**/*.ts", "packages/icon-sprite/scripts/**/*.ts"]
+  "include": [
+    "scripts/**/*.ts",
+    "packages/icon-sprite/scripts/**/*.ts",
+    "packages/icon-sprite/icon-library/**/*.ts"
+  ]
 }

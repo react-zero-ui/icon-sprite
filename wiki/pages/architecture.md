@@ -1,38 +1,26 @@
 ---
-summary: "Start with the React and Node interfaces; locate the owners of project settings, scanning, packaged catalogs, assets, and SVG output."
+summary: "Locate the React, consumer-build, and icon-library modules and their shared contracts."
 paths:
   - packages/icon-sprite/src/index.ts
   - packages/icon-sprite/src/build.ts
-  - packages/icon-sprite/src/build/
-  - packages/icon-sprite/src/catalog.ts
-  - packages/icon-sprite/src/runtime/
+  - packages/icon-sprite/src/build/icon-data-format.ts
   - packages/icon-sprite/src/sprite-contract.ts
-  - packages/icon-sprite/scripts/sync-icons.ts
-  - packages/icon-sprite/scripts/generate-icons.ts
-  - packages/icon-sprite/package.json
 ---
 
 # Architecture
 
-## Two application interfaces
+## Domain ownership
 
-[`src/index.ts`](../../packages/icon-sprite/src/index.ts) is the handwritten React facade. It exports custom rendering and public types, then exposes the generated icon barrel. Generation replaces `src/icons/index.ts` while preserving this interface.
+| Domain | Entry and responsibility | Detailed contract |
+| --- | --- | --- |
+| `src/react/` | Named components exported by `src/index.ts` render icon instances. | [React rendering](react/rendering.md) |
+| `src/build/` | `buildSpriteSheet()` through `src/build.ts` writes a consuming application's sprite. | [Sprite output](build-system/sprite-output.md) |
+| `icon-library/` | Synchronization and generation maintain the canonical library and produce package inputs. | [Icon library](icon-library.md) |
 
-[`src/build.ts`](../../packages/icon-sprite/src/build.ts) exposes `generateSprite(projectDirectory?)` through the package's `/build` export. It owns sequencing and combines diagnostics. Consumers supply an application root and receive an output file, symbol count, and warnings. The [fixture config](../../fixtures/next-app/next.config.ts) calls it directly. `command.ts` preserves historical prebuild scripts as a reporting adapter.
+`src/icons/` is generated React source. Command scripts invoke domain operations and sequence compilation. [Workflow](development/workflow.md) owns execution order; [publishing](development/publishing.md) owns the installed interface and artifact boundary.
 
-```text
-Manual sync: upstream packages → committed catalog + cumulative SVG archives
-Maintainer: committed catalog/assets → generated React components → npm artifact
-Consumer:   resolveProject → scanIcons → collectSymbols → writeSprite
-Runtime:    React facade → inline development components / shared production renderer
-```
+## Shared contracts
 
-## Knowledge ownership
+[icon-data-format.ts](../../packages/icon-sprite/src/build/icon-data-format.ts) is the pure format contract between the icon-library producer and installed-data reader. Canonical writes stay in `icon-library/`; consumer builds only read packaged data.
 
-[Project resolution](build-system/configuration.md) interprets settings once and returns absolute paths plus narrow scanner options. [Source scanning](build-system/source-scanning.md) hides Babel, traversal, and per-operation state. [Asset collection and writing](build-system/sprite-output.md) consume semantic icon usage and SVG symbols; orchestration never reads a manifest or manipulates XML.
-
-[`catalog.ts`](../../packages/icon-sprite/src/catalog.ts) owns the committed catalog format and package-owned asset lookup. [Icon synchronization](build-system/icon-catalog.md) imports reviewed upstream changes while preserving existing catalog identities and archived files.
-
-[`sprite-contract.ts`](../../packages/icon-sprite/src/sprite-contract.ts) defines shared URLs, default dimensions, validated built-in presentation defaults, SVG attribute mappings, and remaining presentation-risk metadata. [Rendering](runtime/rendering.md) owns outer SVG behavior and generated built-in defaults. [Custom rendering](runtime/custom-icons.md) owns browser loading and payload state.
-
-Runtime imports stay independent of Node build modules. The application owns asset hosting, caching, and dead-code elimination. [Validation](development/validation.md) checks both the local workspace and the actual consumer artifact.
+[sprite-contract.ts](../../packages/icon-sprite/src/sprite-contract.ts) connects React defaults, upstream validation, and symbol serialization. Keep it browser-safe. React rendering has no dependency on Node build machinery; consumer builds have no dependency on React or icon-library execution. [Code quality](development/code-quality.md) owns enforcement.

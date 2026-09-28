@@ -1,29 +1,26 @@
 ---
-summary: "Debug discovery through the scanner's narrow options and result; preserve binding identity, static-name semantics, and coverage limits."
+summary: "Diagnose missing icons through import bindings, static-name evaluation, directory exclusions, and scanner limitations."
 paths:
-  - packages/icon-sprite/src/build/source-scanner.ts
+  - packages/icon-sprite/src/build/scan-icon-usage.ts
   - packages/icon-sprite/src/sprite-contract.ts
-  - packages/icon-sprite/tests/test-scanner-exclusion.test.js
 ---
 
 # Source Scanning
 
-[`scanIcons(options)`](../../../packages/icon-sprite/src/build/source-scanner.ts) accepts resolved `SourceScanOptions` and returns `IconUsage`. Its private scanner owns Babel, recursion, visited directories, discovered names, and warnings. Babel paths and mutable scan state stay inside this module.
+[scanIconUsage](../../../packages/icon-sprite/src/build/scan-icon-usage.ts) parses application source without executing it or loading consumer Babel configuration. It owns traversal and binding analysis; callers receive sorted names and diagnostics.
 
-## Coverage model
+## Discovery limits
 
-The scanner parses JS, JSX, TS, and TSX without loading consumer Babel configuration or executing application source. Directory exclusions match basenames recursively. Realpath tracking prevents linked-directory cycles; trusted symlinks can reach sources outside the selected tree.
+Imports must match the configured package name. Binding identity preserves aliases and shadowing; unused imports and type-only references are excluded. Static namespace members work. Dynamic namespace access warns because discovery cannot determine all names.
 
-Imports must exactly match the configured package name. Binding references preserve aliases, shadowing, and usage before declarations. Unused imports and references confined to TypeScript types are excluded. Static namespace access works; dynamic computed access warns. Discovery reflects source references, including code a bundler might later remove.
+Discovery reflects source references, including code later removed by bundling. It does not traverse a re-export graph or handle CommonJS requires and dynamic imports. Local barrels work when a scanned file itself imports and references icons.
 
-There is no cross-module graph traversal. Direct re-export declarations, wildcard exports, CommonJS requires, and dynamic imports have no discovery handler. Local barrels work when a scanned file itself imports and references the icons.
+Directory exclusions match basenames. Realpath tracking prevents cycles while allowing trusted symlinks outside the selected tree.
 
-## Names and diagnostics
+## Static names and warnings
 
-Legacy generic `Icon` syntax requires a statically evaluable name. A later spread can invalidate an earlier name; a later explicit name can establish it again. This scanner capability creates no public generic component.
+Legacy generic `Icon` syntax requires a statically evaluable name. A later spread invalidates an earlier name; a later explicit name can restore it. This syntax support creates no generic public React export.
 
-Static `CustomIcon` names are diagnostic hints. [Asset collection](sprite-output.md) includes every custom SVG to support dynamic names. Ordinary icons' `name` props do not select further icons.
+`CustomIcon` names guide diagnostics; [symbol selection](sprite-output.md#symbol-selection) controls inclusion. Ordinary icon `name` props do not discover other icons.
 
-Presentation warnings inspect explicit JSX attributes and use the shared [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts). Spreads and wrapper-generated props need separate review. Parse errors and unresolved generic names throw with source locations; unsupported dynamic namespace access stays warning-only.
-
-One documented complexity exception keeps related import-binding logic together. Review that complete operation before splitting it. [`test-scanner-exclusion`](../../../packages/icon-sprite/tests/test-scanner-exclusion.test.js) exercises the discovery contract through resolved project inputs.
+Presentation warnings inspect direct JSX attributes against the [risk list](../../../packages/icon-sprite/src/sprite-contract.ts). They do not inspect values inside `style`, spreads, or wrapper-generated props. Parse failures and unresolved generic names throw with source locations.

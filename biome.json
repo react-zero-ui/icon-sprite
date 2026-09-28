@@ -214,7 +214,7 @@
   },
   "overrides": [
     {
-      "includes": ["packages/icon-sprite/src/index.ts"],
+      "includes": ["packages/icon-sprite/src/index.ts", "packages/icon-sprite/src/build.ts"],
       "linter": {
         "rules": {
           "performance": { "noBarrelFile": "off", "noReExportAll": "off" }
@@ -242,7 +242,7 @@
     },
     {
       "includes": [
-        "packages/icon-sprite/src/runtime/**",
+        "packages/icon-sprite/src/react/**",
         "packages/icon-sprite/src/index.ts",
         "packages/icon-sprite/src/config.ts",
         "packages/icon-sprite/src/sprite-contract.ts"
@@ -256,8 +256,39 @@
               "options": {
                 "patterns": [
                   {
-                    "group": ["**/build.*", "**/build/**", "**/catalog.*", "**/command.*"],
+                    "group": [
+                      "**/build.*",
+                      "**/build/**",
+                      "**/catalog.*",
+                      "**/command.*",
+                      "**/icon-library/**",
+                      "**/scripts/**"
+                    ],
                     "message": "Keep React rendering independent of Node build machinery."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "packages/icon-sprite/src/build/**",
+        "packages/icon-sprite/src/build.ts",
+        "packages/icon-sprite/src/command.ts"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["**/icon-library/**", "**/scripts/**", "**/react/**"],
+                    "message": "Published code consumes packaged icon data. Canonical generation belongs to icon-library."
                   }
                 ]
               }

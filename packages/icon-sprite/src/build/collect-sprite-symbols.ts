@@ -1,8 +1,8 @@
 import fs from "node:fs"
 import path from "node:path"
-import { openCatalog } from "../catalog.js"
-import type { IconUsage } from "./source-scanner.js"
-import type { SpriteSymbol } from "./sprite-writer.js"
+import { openPackagedIcons } from "./packaged-icons.js"
+import type { IconUsage } from "./scan-icon-usage.js"
+import type { SpriteSymbol } from "./write-sprite-sheet.js"
 
 function readCustomSymbols(directory: string): SpriteSymbol[] {
   if (!fs.existsSync(directory)) {
@@ -36,14 +36,14 @@ function readCustomSymbols(directory: string): SpriteSymbol[] {
  * supports dynamic names. Missing definitions produce warnings; unreadable assets
  * throw before the writer touches the previous sprite. This operation owns its sets.
  */
-export function collectSymbols(
+export function collectSpriteSymbols(
   usage: IconUsage,
   customDirectory: string
 ): {
   symbols: SpriteSymbol[]
   warnings: string[]
 } {
-  const resolveIcon = openCatalog()
+  const resolveIcon = openPackagedIcons()
   const requested = usage.icons.map((name) => ({ name, ...resolveIcon(name) }))
   const symbols: SpriteSymbol[] = []
   const added = new Set<string>()

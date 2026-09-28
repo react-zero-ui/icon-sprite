@@ -5,7 +5,7 @@ import { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "n
 import os from "node:os"
 import path from "node:path"
 import test from "node:test"
-import { generateIcons } from "../scripts/generate-icons.ts"
+import { generateIconComponents } from "../icon-library/component-generation.ts"
 
 const mapping = JSON.parse(readFileSync(new URL("../assets/catalog.json", import.meta.url), "utf8"))
 const compareText = (left, right) => left.localeCompare(right)
@@ -37,7 +37,7 @@ test("every mapped icon has exactly one wrapper and public export", async () => 
 test("generation is repeatable from another cwd and replaces only generated paths", (t) => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "zero-icons-generation-"))
   t.after(() => rmSync(directory, { recursive: true, force: true }))
-  const summary = generateIcons(directory)
+  const summary = generateIconComponents(directory)
   assert.equal(summary.icons, Object.keys(mapping).length)
   writeFileSync(path.join(directory, "src/index.ts"), "manually maintained public API")
   function digest() {
@@ -53,13 +53,13 @@ test("generation is repeatable from another cwd and replaces only generated path
   }
   const before = digest()
   writeFileSync(path.join(directory, "src/icons/Stale.tsx"), "stale")
-  const generator = new URL("../scripts/generate-icons.ts", import.meta.url).href
+  const generator = new URL("../icon-library/component-generation.ts", import.meta.url).href
   execFileSync(
     process.execPath,
     [
       "--input-type=module",
       "-e",
-      `import { generateIcons } from ${JSON.stringify(generator)}; generateIcons(${JSON.stringify(directory)});`,
+      `import { generateIconComponents } from ${JSON.stringify(generator)}; generateIconComponents(${JSON.stringify(directory)});`,
     ],
     { cwd: directory }
   )

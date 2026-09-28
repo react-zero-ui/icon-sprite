@@ -18,7 +18,7 @@ export interface IconUsage {
 }
 
 /** Resolved inputs supplied by project resolution; the scanner never loads user configuration. */
-export interface SourceScanOptions {
+export interface IconScanOptions {
   excludeDirectories: readonly string[]
   ignoreIcons: readonly string[]
   importName: string
@@ -75,16 +75,16 @@ function staticIconName(opening: NodePath<JSXOpeningElement>): string | undefine
   return value
 }
 
-class SourceScanner {
+class IconUsageScanner {
   private readonly customIcons = new Set<string>()
   private readonly excluded: ReadonlySet<string>
   private readonly icons = new Set<string>()
   private readonly ignored: ReadonlySet<string>
-  private readonly options: SourceScanOptions
+  private readonly options: IconScanOptions
   private readonly visited = new Set<string>()
   private readonly warnings: string[] = []
 
-  constructor(options: SourceScanOptions) {
+  constructor(options: IconScanOptions) {
     this.options = options
     this.excluded = new Set(options.excludeDirectories)
     this.ignored = new Set(options.ignoreIcons)
@@ -267,6 +267,6 @@ class SourceScanner {
  * or loading its Babel configuration. Exclusions match directory basenames,
  * linked directories are visited once by real path, and results are sorted.
  */
-export function scanIcons(options: SourceScanOptions): IconUsage {
-  return new SourceScanner(options).scan()
+export function scanIconUsage(options: IconScanOptions): IconUsage {
+  return new IconUsageScanner(options).scan()
 }

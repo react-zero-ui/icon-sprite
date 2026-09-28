@@ -23,7 +23,7 @@ test("every public icon renders the catalog's production symbol", async (t) => {
   }
 })
 
-test("compiled Lucide and Tabler wrappers preserve production props and development dimensions", async (t) => {
+test("compiled React icon wrappers preserve production props and development dimensions", async (t) => {
   const previousEnvironment = process.env.NODE_ENV
   t.after(() => {
     if (previousEnvironment === undefined) {

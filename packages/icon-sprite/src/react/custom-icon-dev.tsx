@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { CUSTOM_SVG_DIR } from "../sprite-contract.js"
-import { type CustomIconProps, iconDimensions, renderIcon } from "./icon.js"
+import { type CustomIconProps, renderSvgUseElement, resolveIconDimensions } from "./icon.js"
 
 type Payload = { attrs: Record<string, string | undefined>; innerHTML: string }
 // A cache supplies first paint on remount. Every mount still refreshes from disk.
@@ -10,7 +10,7 @@ const dimensionAttribute = /^(width|height)$/i
 const eventHandlerAttribute = /^on[a-z]+/i
 const surroundingSlashes = /^\/+|\/+$/g
 
-/** Extract trusted local SVG. Untrusted uploads need a separate sanitization boundary. */
+/** Parse a trusted local SVG payload. Untrusted uploads need a separate sanitization boundary. */
 function extractSVGContent(svg: string): Payload {
   const div = document.createElement("div")
   div.innerHTML = svg.trim()
@@ -38,11 +38,11 @@ function extractSVGContent(svg: string): Payload {
 }
 
 /** Asset root attributes retain their historical precedence over matching React props. */
-function applyPayload(el: SVGSVGElement, payload: Payload, incomingClass: string): void {
+function applyPayload(element: SVGSVGElement, payload: Payload, incomingClass: string): void {
   const payloadClass = payload.attrs.class ?? payload.attrs.className ?? ""
   const mergedClass = [incomingClass, payloadClass].filter(Boolean).join(" ").trim()
   if (mergedClass) {
-    el.setAttribute("class", mergedClass)
+    element.setAttribute("class", mergedClass)
   }
   for (const [key, value] of Object.entries(payload.attrs)) {
     if (
@@ -55,11 +55,16 @@ function applyPayload(el: SVGSVGElement, payload: Payload, incomingClass: string
     ) {
       continue
     }
-    el.setAttribute(key, value)
+    element.setAttribute(key, value)
   }
 }
 
-function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) {
+/**
+ * Development-only browser loader for CustomIcon. It caches the last payload for
+ * first paint, refreshes every mount from the stable custom-asset URL, and falls
+ * back to the same sprite element used outside development. It never writes files.
+ */
+function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) {
   const [payload, setPayload] = useState<Payload | null>(() =>
     typeof globalThis.document !== "undefined" ? (payloadCache.get(name) ?? null) : null
   )
@@ -67,41 +72,43 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
   const incomingClass = rest.className ?? ""
 
   useLayoutEffect(() => {
-    const el = svgRef.current
-    if (!el || !payload) {
+    const element = svgRef.current
+    if (!element || !payload) {
       return
     }
-    applyPayload(el, payload, incomingClass)
+    applyPayload(element, payload, incomingClass)
   }, [payload, incomingClass])
 
   useEffect(() => {
     if (typeof globalThis.document === "undefined") {
       return
     }
-    const ctrl = new AbortController()
+    const controller = new AbortController()
     const base = `/${CUSTOM_SVG_DIR.replace(surroundingSlashes, "")}`
     const url = `${base}/${encodeURIComponent(name)}.svg?v=${Date.now()}`
-    fetch(url, { cache: "no-store", signal: ctrl.signal })
-      .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then((txt) => {
-        if (ctrl.signal.aborted) {
+    fetch(url, { cache: "no-store", signal: controller.signal })
+      .then((response) =>
+        response.ok ? response.text() : Promise.reject(new Error(`HTTP ${response.status}`))
+      )
+      .then((svgText) => {
+        if (controller.signal.aborted) {
           return
         }
-        const p = extractSVGContent(txt)
-        payloadCache.set(name, p)
-        setPayload(p)
+        const nextPayload = extractSVGContent(svgText)
+        payloadCache.set(name, nextPayload)
+        setPayload(nextPayload)
       })
-      .catch((err) => {
-        if (err.name !== "AbortError") {
+      .catch((error) => {
+        if (error.name !== "AbortError") {
           console.warn(
             `[CustomIcon] "${name}" not found. Add ${name}.svg to /public/${CUSTOM_SVG_DIR}/\nThen run: npx zero-icons\nDocs: https://github.com/react-zero-ui/icon-sprite#custom-icons`
           )
         }
-        if (!ctrl.signal.aborted) {
+        if (!controller.signal.aborted) {
           setPayload(null)
         }
       })
-    return () => ctrl.abort()
+    return () => controller.abort()
   }, [name])
 
   if (payload) {
@@ -109,7 +116,7 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
       <svg
         aria-hidden="true"
         ref={svgRef}
-        {...iconDimensions({ size, width, height })}
+        {...resolveIconDimensions({ size, width, height })}
         {...rest}
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted local SVG assets require raw markup; extractSVGContent removes scripts and event handlers.
         dangerouslySetInnerHTML={{ __html: payload.innerHTML }}
@@ -118,7 +125,7 @@ function DevCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) 
   }
 
   // fallback if fetch fails in dev
-  return renderIcon(name, { size, width, height, ...rest })
+  return renderSvgUseElement(name, { size, width, height, ...rest })
 }
 
-export default DevCustomIcon
+export default DevelopmentCustomIcon

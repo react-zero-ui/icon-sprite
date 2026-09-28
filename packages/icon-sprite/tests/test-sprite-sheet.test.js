@@ -4,7 +4,7 @@ import fs from "node:fs"
 import path from "node:path"
 import test from "node:test"
 import { fileURLToPath } from "node:url"
-import { generateSprite } from "@react-zero-ui/icon-sprite/build"
+import { buildSpriteSheet, generateSprite } from "@react-zero-ui/icon-sprite/build"
 import { createProject, svg, writeProject } from "./cli-fixtures.js"
 
 const cli = fileURLToPath(new URL("../dist/command.js", import.meta.url))
@@ -20,6 +20,10 @@ function symbolIds(file) {
     .sort(compareText)
 }
 
+test("the existing generateSprite name aliases the consumer sprite-sheet build operation", () => {
+  assert.equal(generateSprite, buildSpriteSheet)
+})
+
 test("the public build API returns config diagnostics without console side effects", async (t) => {
   const root = createProject(t, {
     "zero-ui.config.ts": "export default { invalid",
@@ -27,7 +31,7 @@ test("the public build API returns config diagnostics without console side effec
   })
   const log = t.mock.method(console, "log", () => undefined)
   const warn = t.mock.method(console, "warn", () => undefined)
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.equal(result.iconCount, 0)
   assert.equal(result.outputFile, path.join(root, "public/icons.svg"))
   assert.equal(result.warnings.length, 1)
@@ -45,7 +49,7 @@ test("built-in symbols inherit root presentation while custom SVGs stay authored
     "public/zero-ui-icons/unused.svg": svg,
     "public/zero-ui-icons/notes.txt": "not an SVG",
   })
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.deepEqual(symbolIds(result.outputFile), [
     "CaseSensitive",
     "check",
@@ -82,7 +86,7 @@ test("nested sprite paths stay under the configured consumer output directory", 
     "src/index.js": "export const value = 1;",
     "static/logos/only-custom.svg": svg,
   })
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.equal(result.outputFile, path.join(root, "static/assets/icons/site.svg"))
   assert.deepEqual(symbolIds(result.outputFile), ["only-custom"])
 })
@@ -101,7 +105,7 @@ test("repeated and concurrent consumers stay isolated and rescan changed sources
     "src/icon.js":
       'import { Heart } from "@react-zero-ui/icon-sprite"; export const icons = [Heart];',
   })
-  const [a, b] = await Promise.all([generateSprite(first), generateSprite(second)])
+  const [a, b] = await Promise.all([buildSpriteSheet(first), buildSpriteSheet(second)])
   assert.deepEqual(symbolIds(a.outputFile), ["check"])
   assert.deepEqual(symbolIds(b.outputFile), ["heart"])
   assert.equal(fs.readFileSync(path.join(first, "config-loads"), "utf8"), "loaded\n")
@@ -109,7 +113,7 @@ test("repeated and concurrent consumers stay isolated and rescan changed sources
     "app/icon.js":
       'import { Star } from "@react-zero-ui/icon-sprite"; export const icons = [Star];',
   })
-  const repeat = await generateSprite(first)
+  const repeat = await buildSpriteSheet(first)
   assert.deepEqual(symbolIds(repeat.outputFile), ["star"])
   assert.deepEqual(symbolIds(b.outputFile), ["heart"])
   assert.equal(process.cwd(), cwd)
@@ -120,7 +124,7 @@ test("missing icons remain warning-only, including static custom names", async (
     "src/view.jsx": `import { UnknownIcon, CustomIcon, Check } from "@react-zero-ui/icon-sprite";
 			export const icons = <><UnknownIcon/><CustomIcon name="missing-logo"/><Check/></>;`,
   })
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.deepEqual(symbolIds(result.outputFile), ["check"])
   assert.equal(result.warnings.length, 2)
   assert.ok(result.warnings[0].includes("Missing icon: UnknownIcon"))
@@ -138,14 +142,14 @@ test("custom SVG symlinks are bundled even without source references", async (t)
     path.join(root, "assets/logo.svg"),
     path.join(root, "public/zero-ui-icons/linked.svg")
   )
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.deepEqual(symbolIds(result.outputFile), ["linked"])
   assert.deepEqual(result.warnings, [])
 })
 
 test("an empty source tree produces an empty sprite, not stale icons", async (t) => {
   const root = createProject(t, { "src/index.js": "", "public/icons.svg": "old output" })
-  const result = await generateSprite(root)
+  const result = await buildSpriteSheet(root)
   assert.equal(result.iconCount, 0)
   assert.deepEqual(symbolIds(result.outputFile), [])
   assert.deepEqual(result.warnings, [])
@@ -163,7 +167,7 @@ test("parse and SVG failures do not replace an existing output", async (t) => {
   await Promise.all(
     cases.map(async (files) => {
       const root = createProject(t, { ...files, "public/icons.svg": "previous sprite" })
-      await assert.rejects(generateSprite(root))
+      await assert.rejects(buildSpriteSheet(root))
       assert.equal(fs.readFileSync(path.join(root, "public/icons.svg"), "utf8"), "previous sprite")
       assert.deepEqual(
         fs.readdirSync(path.join(root, "public")).filter((name) => name.endsWith(".tmp")),
@@ -178,7 +182,7 @@ test("write failures clean up the temporary output and preserve the existing tar
     "src/index.js": "",
     "public/icons.svg/keep": "existing directory",
   })
-  await assert.rejects(generateSprite(root))
+  await assert.rejects(buildSpriteSheet(root))
   assert.equal(
     fs.readFileSync(path.join(root, "public/icons.svg/keep"), "utf8"),
     "existing directory"
@@ -191,9 +195,11 @@ test("imports do not load consumer configuration or generate output", (t) => {
     "zero-ui.config.js":
       'import fs from "node:fs"; fs.writeFileSync(new URL("./loaded", import.meta.url), "unexpected"); export default {};',
   })
-  const modules = ["../dist/command.js", "../dist/build.js", "../dist/build/project.js"].map(
-    (relative) => new URL(relative, import.meta.url).href
-  )
+  const modules = [
+    "../dist/command.js",
+    "../dist/build.js",
+    "../dist/build/resolve-build-config.js",
+  ].map((relative) => new URL(relative, import.meta.url).href)
   const script = modules.map((url) => `await import(${JSON.stringify(url)});`).join("\n")
   assert.equal(
     execFileSync(process.execPath, ["--input-type=module", "--eval", script], {

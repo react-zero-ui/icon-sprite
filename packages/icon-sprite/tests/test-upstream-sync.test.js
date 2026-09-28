@@ -11,7 +11,8 @@ import {
 import os from "node:os"
 import path from "node:path"
 import test from "node:test"
-import { syncIcons, validateBuiltInPresentation } from "../scripts/sync-icons.ts"
+import { syncUpstreamIcons } from "../icon-library/upstream-sync.ts"
+import { validateUpstreamIcon } from "../icon-library/upstream-validation.ts"
 
 const packageDirectory = path.resolve(import.meta.dirname, "..")
 const catalogFile = path.join(packageDirectory, "assets/catalog.json")
@@ -24,7 +25,7 @@ test("every public icon resolves to a committed package-owned SVG", () => {
     assert.equal(existsSync(file), true, `${name}: ${info.pack}/${info.svgFile}`)
     const markup = readFileSync(file, "utf8")
     assert.ok(markup.includes("<svg"), name)
-    validateBuiltInPresentation(markup, `${info.pack}/${info.svgFile}`)
+    validateUpstreamIcon(markup, `${info.pack}/${info.svgFile}`)
   }
 })
 
@@ -32,7 +33,7 @@ test("built-in presentation validation rejects inheritance-breaking upstream SVG
   const root =
     'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
   assert.doesNotThrow(() =>
-    validateBuiltInPresentation(`<svg ${root}><path d="M0 0h1"/></svg>`, "valid.svg")
+    validateUpstreamIcon(`<svg ${root}><path d="M0 0h1"/></svg>`, "valid.svg")
   )
   for (const [source, markup] of [
     ["missing.svg", `<svg ${root.replace('fill="none" ', "")}><path d="M0 0h1"/></svg>`],
@@ -45,7 +46,7 @@ test("built-in presentation validation rejects inheritance-breaking upstream SVG
     ["descendant-style.svg", `<svg ${root}><path style="stroke-width: 1" d="M0 0h1"/></svg>`],
   ]) {
     assert.throws(
-      () => validateBuiltInPresentation(markup, source),
+      () => validateUpstreamIcon(markup, source),
       (error) => error instanceof Error && error.message.includes(source)
     )
   }
@@ -60,7 +61,7 @@ test("manual sync refreshes current assets without deleting historical files or 
   writeFileSync(path.join(directory, "assets/lucide/retired-test-icon.svg"), "historical lucide")
   writeFileSync(path.join(directory, "assets/tabler/retired-test-icon.svg"), "historical tabler")
 
-  const summary = syncIcons(directory)
+  const summary = syncUpstreamIcons(directory)
 
   assert.equal(summary.added, 0)
   assert.deepEqual(
@@ -101,7 +102,7 @@ test("sync preserves a published icon after upstream removes it", (t) => {
     '<svg viewBox="0 0 24 24"><path d="M1 1h1"/></svg>'
   )
 
-  syncIcons(directory)
+  syncUpstreamIcons(directory)
 
   const syncedCatalog = JSON.parse(
     readFileSync(path.join(directory, "assets/catalog.json"), "utf8")

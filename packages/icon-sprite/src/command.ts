@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, realpathSync } from "node:fs"
 import { pathToFileURL } from "node:url"
-import { generateSprite } from "./build.js"
+import { buildSpriteSheet } from "./build.js"
 
 // Compatibility adapter for published `zero-icons` prebuild scripts. The library
 // build API owns all behavior; importing this file performs no generation.
@@ -11,7 +11,7 @@ if (
   import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href
 ) {
   try {
-    const result = await generateSprite()
+    const result = await buildSpriteSheet()
     for (const warning of result.warnings) {
       console.warn(warning)
     }
