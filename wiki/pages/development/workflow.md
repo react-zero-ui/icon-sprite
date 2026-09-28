@@ -21,7 +21,7 @@ paths:
 
 The [root manifest](../../../package.json) coordinates the public library and private fixture with one npm lockfile. Use the runtime pin in [`.node-version`](../../../.node-version) and package-manager pin in the manifest. The published package declares its own consumer engine requirement.
 
-`npm ci` installs dependencies. Install the browser used by isolated integration once with `npx playwright install chromium`; CI uses `playwright install --with-deps chromium`. `npm run build` generates and compiles the library. Tests and the fixture import compiled package output, so a fresh checkout needs that build before standalone test or lint commands that resolve generated imports. Root `check`, `test`, and `typecheck` arrange their prerequisites.
+`npm ci` installs dependencies. Install the browsers used by isolated integration once with `npx playwright install chromium firefox webkit`; CI uses `playwright install --with-deps chromium firefox webkit`. `npm run build` generates and compiles the library. Tests and the fixture import compiled package output, so a fresh checkout needs that build before standalone test or lint commands that resolve generated imports. Root `check`, `test`, and `typecheck` arrange their prerequisites.
 
 `npm run dev` builds once and then starts the fixture against the workspace package. Editing library source requires rebuilding it; this command has no library watch loop. `build:fixture` first builds the library. The fixture's Next configuration calls the Node build API in its production phase. Next type generation also loads that phase and can regenerate the ignored sprite.
 

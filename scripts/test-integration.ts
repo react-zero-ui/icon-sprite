@@ -24,6 +24,13 @@ const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
 const inlinePathPattern = /<path\b/
 const arrowRightSpritePattern = /<use\b[^>]*href="\/icons\.svg#arrow-right"/
+const browserNames = ["chromium", "firefox", "webkit"] as const
+type BrowserName = (typeof browserNames)[number]
+const browserLaunchers: Record<BrowserName, () => Promise<Browser>> = {
+  chromium: () => playwright.chromium.launch({ headless: true }),
+  firefox: () => playwright.firefox.launch({ headless: true }),
+  webkit: () => playwright.webkit.launch({ headless: true }),
+}
 const presentationCases = [
   "default",
   "text-color",
@@ -191,6 +198,7 @@ function assertExpectedPresentation(capture: PresentationCapture): void {
 }
 
 async function assertPresentationParity(
+  browserName: BrowserName,
   production: PresentationCapture,
   development: PresentationCapture
 ): Promise<void> {
@@ -199,9 +207,9 @@ async function assertPresentationParity(
   assert.deepEqual(
     production.styles,
     development.styles,
-    "Computed presentation styles differ between production and development"
+    `${browserName}: computed presentation styles differ between production and development`
   )
-  const failureDirectory = path.join(root, "test-results/presentation-parity")
+  const failureDirectory = path.join(root, "test-results/presentation-parity", browserName)
   await fs.rm(failureDirectory, { force: true, recursive: true })
   const mismatch = presentationCases.find((testId) => {
     const productionScreenshot = production.screenshots.get(testId)
@@ -221,7 +229,7 @@ async function assertPresentationParity(
     fs.writeFile(path.join(failureDirectory, `${mismatch}-development.png`), developmentScreenshot),
   ])
   assert.fail(
-    `${mismatch}: browser rendering differs between production and development; screenshots written to test-results/presentation-parity`
+    `${browserName} ${mismatch}: rendering differs between production and development; screenshots written to test-results/presentation-parity/${browserName}`
   )
 }
 
@@ -305,7 +313,7 @@ async function verifyServer(
 }
 
 const directory = await fs.mkdtemp(path.join(os.tmpdir(), "zero-icon-integration-"))
-let browser: Browser | undefined
+const browsers = new Map<BrowserName, Browser>()
 try {
   const fixture: FixtureManifest = JSON.parse(
     await fs.readFile(path.join(fixturePath, "package.json"), "utf8")
@@ -412,9 +420,11 @@ try {
     )
   }
 
-  browser = await playwright.chromium.launch({ headless: true })
-  const activeBrowser = browser
-  let productionPresentation: PresentationCapture | undefined
+  for (const browserName of browserNames) {
+    // biome-ignore lint/performance/noAwaitInLoops: Browser engines are launched serially to keep integration memory use predictable.
+    browsers.set(browserName, await browserLaunchers[browserName]())
+  }
+  const productionPresentations = new Map<BrowserName, PresentationCapture>()
   await verifyServer(directory, "start", async (base) => {
     const spriteResponse = await fetch(`${base}/icons.svg`, { signal: AbortSignal.timeout(10_000) })
     assert.equal(spriteResponse.status, 200)
@@ -449,7 +459,13 @@ try {
     const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) })
     assert.equal(comparison.status, 200)
     assert.match(await comparison.text(), inlinePathPattern)
-    productionPresentation = await capturePresentation(activeBrowser, base, "production")
+    for (const browserName of browserNames) {
+      const browser = browsers.get(browserName)
+      assert(browser, `Missing ${browserName} browser`)
+      // biome-ignore lint/performance/noAwaitInLoops: Captures are serialized across engines to avoid concurrent screenshot variance and excess memory.
+      const presentation = await capturePresentation(browser, base, "production")
+      productionPresentations.set(browserName, presentation)
+    }
   })
   await verifyServer(directory, "dev", async (base) => {
     const response = await fetch(base, { signal: AbortSignal.timeout(30_000) })
@@ -461,14 +477,20 @@ try {
       arrowRightSpritePattern,
       "Development ArrowRight unexpectedly uses the production sprite"
     )
-    const developmentPresentation = await capturePresentation(activeBrowser, base, "development")
-    assert(productionPresentation, "Production presentation capture did not run")
-    await assertPresentationParity(productionPresentation, developmentPresentation)
+    for (const browserName of browserNames) {
+      const browser = browsers.get(browserName)
+      const productionPresentation = productionPresentations.get(browserName)
+      assert(browser, `Missing ${browserName} browser`)
+      assert(productionPresentation, `${browserName}: production presentation capture did not run`)
+      // biome-ignore lint/performance/noAwaitInLoops: Captures are serialized across engines to avoid concurrent screenshot variance and excess memory.
+      const developmentPresentation = await capturePresentation(browser, base, "development")
+      await assertPresentationParity(browserName, productionPresentation, developmentPresentation)
+    }
   })
   console.log(
-    "Passed: package contents, isolated install, production build, served sprite symbols, development rendering, and browser presentation parity."
+    "Passed: package contents, isolated install, production build, served sprite symbols, development rendering, and Chromium/Firefox/WebKit presentation parity."
   )
 } finally {
-  await browser?.close()
+  await Promise.all([...browsers.values()].map((browser) => browser.close()))
   await fs.rm(directory, { force: true, recursive: true })
 }
