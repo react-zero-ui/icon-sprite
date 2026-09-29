@@ -11,7 +11,7 @@ paths:
 
 ## Discovery limits
 
-Imports must match the configured package name. Binding identity preserves aliases and shadowing; unused imports and type-only references are excluded. Static namespace members work. Dynamic namespace access warns because discovery cannot determine all names.
+Imports must match the configured package name. Binding identity preserves named aliases and shadowing; unused named imports and type-only references are excluded. Value namespace imports fail at the declaration with a named-import diagnostic, including unused declarations and destructuring. Type-only namespaces are erased and remain outside runtime discovery.
 
 Discovery reflects source references, including code later removed by bundling. It does not traverse a re-export graph or handle CommonJS requires and dynamic imports. Local barrels work when a scanned file itself imports and references icons.
 

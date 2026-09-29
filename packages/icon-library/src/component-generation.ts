@@ -39,6 +39,7 @@ function DevIcon({ size, width, height, ...rest }: IconProps) {
   return (
     <svg
       ${attributes}
+      aria-hidden="true"
       {...rest}
       {...resolveIconDimensions({ size, width, height })}
     >

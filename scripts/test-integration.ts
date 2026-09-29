@@ -39,6 +39,13 @@ const presentationCases = [
   "stroke-width",
   "line-cap",
   "line-join",
+  "tabler-default",
+  "accessible",
+  "custom-fixed",
+  "custom-fixed-again",
+  "custom-inherit",
+  "custom-current-color",
+  "custom-nested",
 ] as const
 
 interface FixtureManifest {
@@ -128,20 +135,32 @@ async function capturePresentation(
     await page.goto(`${base}/presentation-parity`, { waitUntil: "load" })
     await page.getByTestId("default").waitFor()
     await page.waitForFunction(
-      (testIds) =>
+      ({ testIds, mode: renderingMode }) =>
         testIds.every((testId) => {
           const element = document.querySelector(`[data-testid="${testId}"]`)
           if (!(element instanceof SVGGraphicsElement)) {
             return false
           }
+          // Wait for the actual custom payload, even when a usable sprite fallback exists.
+          if (
+            renderingMode === "development" &&
+            testId.startsWith("custom-") &&
+            !element.querySelector("svg")
+          ) {
+            return false
+          }
           const box = element.getBBox()
           return box.width > 0 && box.height > 0
         }),
-      presentationCases
+      { testIds: presentationCases, mode }
     )
 
     const captureCase = async (testId: (typeof presentationCases)[number]) => {
       const icon = page.getByTestId(testId)
+      assert.equal(
+        await icon.getAttribute("aria-hidden"),
+        testId === "accessible" ? "false" : "true"
+      )
       const useCount = await icon.locator("use").count()
       assert.equal(
         useCount > 0,
@@ -195,6 +214,14 @@ function assertExpectedPresentation(capture: PresentationCapture): void {
   assert.equal(capture.styles["stroke-width"].strokeWidth, "4px")
   assert.equal(capture.styles["line-cap"].strokeLinecap, "square")
   assert.equal(capture.styles["line-join"].strokeLinejoin, "bevel")
+  assert.equal(capture.styles["tabler-default"].strokeWidth, "2px")
+  assert.equal(capture.styles["custom-inherit"].fill, "rgb(255, 0, 0)")
+  assert.equal(capture.styles["custom-current-color"].color, "rgb(0, 0, 255)")
+  assert.deepEqual(
+    capture.screenshots.get("custom-fixed"),
+    capture.screenshots.get("custom-fixed-again"),
+    "Authored fixed paint must remain unchanged by caller color/fill/stroke props"
+  )
 }
 
 async function assertPresentationParity(

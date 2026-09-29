@@ -1,4 +1,4 @@
-import { ArrowDown, Check, Circle } from "@react-zero-ui/icon-sprite"
+import { ArrowDown, Check, Circle, CustomIcon, IconCheck } from "@react-zero-ui/icon-sprite"
 
 const iconProps = { size: 64 } as const
 
@@ -28,6 +28,46 @@ export default function PresentationParity() {
       <Check data-testid="stroke-width" strokeWidth={4} {...iconProps} />
       <ArrowDown data-testid="line-cap" strokeLinecap="square" {...iconProps} />
       <Check data-testid="line-join" strokeLinejoin="bevel" {...iconProps} />
+      <IconCheck data-testid="tabler-default" {...iconProps} />
+      <Check
+        aria-hidden={false}
+        aria-label="Check"
+        data-testid="accessible"
+        role="img"
+        {...iconProps}
+      />
+      <CustomIcon
+        color="orange"
+        data-testid="custom-fixed"
+        fill="lime"
+        name="parity-fixed"
+        stroke="purple"
+        {...iconProps}
+      />
+      <CustomIcon
+        color="black"
+        data-testid="custom-fixed-again"
+        fill="yellow"
+        name="parity-fixed"
+        stroke="cyan"
+        {...iconProps}
+      />
+      <CustomIcon
+        data-testid="custom-inherit"
+        fill="red"
+        name="parity-inherit"
+        stroke="blue"
+        strokeWidth={2}
+        {...iconProps}
+      />
+      <CustomIcon
+        color="blue"
+        data-testid="custom-current-color"
+        fill="red"
+        name="parity-current-color"
+        {...iconProps}
+      />
+      <CustomIcon data-testid="custom-nested" name="parity-nested" {...iconProps} />
     </main>
   )
 }

@@ -10,7 +10,22 @@ declare module "svgstore" {
 
   interface Store {
     add(id: string, svg: string, options?: Options): Store
+    element: XmlDocument
     toString(options?: Options): string
+  }
+
+  /** Minimal XML API exposed by svgstore's existing parser. */
+  interface XmlDocument {
+    load(markup: string, options: { xmlMode: boolean }): XmlDocument
+    (selector: string): XmlSelection
+  }
+
+  interface XmlSelection {
+    append(content: XmlSelection): XmlSelection
+    attr(): Record<string, string> | undefined
+    attr(attributes: Record<string, string>): XmlSelection
+    contents(): XmlSelection
+    first(): XmlSelection
   }
 
   export default function svgstore(options?: Options): Store

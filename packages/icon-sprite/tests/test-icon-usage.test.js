@@ -58,15 +58,30 @@ test("generic and CustomIcon aliases support static names without treating wrapp
   assert.deepEqual(result.customIcons, ["my-logo"])
 })
 
-test("static namespace members work in JSX and value references", async (t) => {
-  const root = createProject(t, {
-    "src/view.tsx": `import * as Icons from "@react-zero-ui/icon-sprite";
-			export const list = [Icons.Heart, Icons["Home"]];
-			export const view = <><Icons.Check/><Icons.CustomIcon name="logo"/><Icons.Icon name="Star"/></>;`,
-  })
-  const result = scanIconUsage((await resolveSpriteBuildConfig(root)).scan)
-  assert.deepEqual(result.icons, ["Check", "Heart", "Home", "Star"])
-  assert.deepEqual(result.customIcons, ["logo"])
+test("namespace icon imports fail for members, destructuring, dynamic access, and unused imports", async (t) => {
+  const cases = [
+    "export const icon = <Icons.Check/>;",
+    'export const icon = Icons["Check"];',
+    "const { Check } = Icons; export const icon = <Check/>;",
+    "export const icon = Icons[name];",
+    "",
+  ]
+  await Promise.all(
+    cases.map(async (usage) => {
+      const root = createProject(t, {
+        "src/view.tsx": `import * as Icons from "@react-zero-ui/icon-sprite";\n${usage}`,
+      })
+      const project = await resolveSpriteBuildConfig(root)
+      assert.throws(
+        () => scanIconUsage(project.scan),
+        (error) =>
+          error instanceof Error &&
+          error.message.includes("view.tsx:1") &&
+          error.message.includes("Namespace icon imports") &&
+          error.message.includes("named imports")
+      )
+    })
+  )
 })
 
 test("exclusion skips matching directory basenames recursively before parsing", async (t) => {
@@ -154,16 +169,16 @@ test("unknown generic names and overriding spreads fail with actionable location
   }
 })
 
-test("dynamic namespace access warns instead of silently claiming complete coverage", async (t) => {
+test("type-only namespaces and namespaces from unrelated packages remain outside runtime discovery", async (t) => {
   const root = createProject(t, {
-    "src/list.ts":
-      'import * as Icons from "@react-zero-ui/icon-sprite"; export const icon = Icons[name];',
+    "src/types.ts": `import type * as Icons from "@react-zero-ui/icon-sprite";
+      import * as Other from "another-package";
+      export type Props = Icons.IconProps;
+      export const value = Other.value;`,
   })
-  assert.ok(
-    scanIconUsage((await resolveSpriteBuildConfig(root)).scan).warnings[0].includes(
-      "Dynamic icon namespace access"
-    )
-  )
+  const result = scanIconUsage((await resolveSpriteBuildConfig(root)).scan)
+  assert.deepEqual(result.icons, [])
+  assert.deepEqual(result.warnings, [])
 })
 
 test("parse errors and missing scan roots are failures with source paths", async (t) => {

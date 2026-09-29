@@ -1,36 +1,35 @@
-#!/usr/bin/env node
-/**
- * Test: sprite-rendered icons match Lucide React's default accessibility behavior.
- *
- * Decorative icons should be hidden from assistive technology by default, while
- * consumers can still override aria-hidden when an icon has semantic meaning.
- */
+import assert from "node:assert/strict"
+import test from "node:test"
+import { Activity } from "../dist/icons/Activity.js"
+import { IconAccessible } from "../dist/icons/IconAccessible.js"
 
-process.env.NODE_ENV = "production"
+test("icons share a decorative ARIA default and explicit overrides in every rendering mode", (t) => {
+  const previous = process.env.NODE_ENV
+  t.after(() => {
+    if (previous === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = previous
+    }
+  })
 
-try {
-  const { Activity } = await import("../dist/icons/Activity.js")
-
-  const defaultIcon = Activity({})
-  if (defaultIcon.props["aria-hidden"] !== "true") {
-    throw new Error(
-      `Expected default aria-hidden to be "true", received ${defaultIcon.props["aria-hidden"]}`
-    )
+  for (const environment of ["development", "test", "production"]) {
+    process.env.NODE_ENV = environment
+    for (const Icon of [Activity, IconAccessible]) {
+      for (const props of [
+        {},
+        { "aria-label": "Activity", role: "img" },
+        { "aria-hidden": false, "aria-label": "Activity", role: "img" },
+        { "aria-hidden": "false" },
+        { "aria-hidden": undefined },
+      ]) {
+        const wrapper = Icon(props)
+        const svg = wrapper.type === "svg" ? wrapper : wrapper.type(wrapper.props)
+        const expected = Object.hasOwn(props, "aria-hidden") ? props["aria-hidden"] : "true"
+        assert.equal(svg.props["aria-hidden"], expected, `${Icon.name} ${environment}`)
+        assert.equal(svg.props["aria-label"], props["aria-label"])
+        assert.equal(svg.props.role, props.role)
+      }
+    }
   }
-
-  const exposedIcon = Activity({ "aria-hidden": "false", role: "img" })
-  if (exposedIcon.props["aria-hidden"] !== "false") {
-    throw new Error(
-      `Expected aria-hidden override to be preserved, received ${exposedIcon.props["aria-hidden"]}`
-    )
-  }
-
-  if (exposedIcon.props.role !== "img") {
-    throw new Error(`Expected role prop to be preserved, received ${exposedIcon.props.role}`)
-  }
-
-  console.log("✅ Default aria-hidden behavior matches lucide-react and remains overrideable.")
-} catch (e) {
-  console.error(`❌ Test failed: ${e.message}`)
-  process.exit(1)
-}
+})

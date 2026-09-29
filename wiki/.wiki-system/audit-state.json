@@ -2,16 +2,16 @@
   "version": 1,
   "pages": {
     "pages/architecture.md": {
-      "fingerprint": "sha256:5c32b256ac8351716c122aeb3c9346acfffe9a8162f5eeb7279d0580bf77d672"
+      "fingerprint": "sha256:42bc7366d4d1f033e1027d1b00059f4f1540800c764b2bd86808afdb43b04c4f"
     },
     "pages/build-system/configuration.md": {
       "fingerprint": "sha256:89f4a969044fc1fec584c99ee7d5487977d0c89b853e621d7b66f25eac0e8f82"
     },
     "pages/build-system/source-scanning.md": {
-      "fingerprint": "sha256:7d1a9a573613b78964e5a37fd1fe59445cf97677cfd868f8a269b7ca53263cbd"
+      "fingerprint": "sha256:29ed34ce6979b48086e9ec2231356f5d4d11d54c21c8b32cf76e70b7d261e860"
     },
     "pages/build-system/sprite-output.md": {
-      "fingerprint": "sha256:98a4c81d4e8b0c7ec4e2738fcd66aee0ec8e7762664be822331df93716dbb760"
+      "fingerprint": "sha256:e21cbf04d32e20c9974e71623e993ea4948af19c2af449d266b60982f2ca7252"
     },
     "pages/development/code-quality.md": {
       "fingerprint": "sha256:ce0975fe46ff4c2c1aaf11551e2c57a43443a98ab001817b2415eff29243d0e4"
@@ -20,19 +20,19 @@
       "fingerprint": "sha256:0f75abea74592ce259cea22dfaa490420581026a9b5237e486bbdebf2d619596"
     },
     "pages/development/validation.md": {
-      "fingerprint": "sha256:8c683f3362dd85354b0c952db436a4399058fb39186297b8b3f667375e0c48f3"
+      "fingerprint": "sha256:3bef52c79b6dccb1e49eb99344f3cd1b35332e39e60703988554101580fb04b6"
     },
     "pages/development/workflow.md": {
-      "fingerprint": "sha256:3fcf6705ffbff9ced19bef97b5d6ff962c3800c5e83db45faa7f779a15ed109a"
+      "fingerprint": "sha256:1dceccd1a1bae99f7417d848907c59c2a25e3e628c0d9a305a1581036d4edfe2"
     },
     "pages/icon-library.md": {
-      "fingerprint": "sha256:acaf226e8fbcbdc2bc28bede36f3d3003632d3bab37090a21ad49f4d00e7b8ba"
+      "fingerprint": "sha256:4d9a87403d1bf98e6a25b4435e0f053b7248e0bc24cbfbe2db34c5b95387ba6a"
     },
     "pages/react/custom-icons.md": {
-      "fingerprint": "sha256:494ae895eff49d4aaa8dac2604fc155e15e715d1d972bd3ac24e0b2e7c7a3335"
+      "fingerprint": "sha256:b08f2c9add4adeedf4c22d0545e02cd6d6765fc376fc30b071dfcf388b5ea5fc"
     },
     "pages/react/rendering.md": {
-      "fingerprint": "sha256:764176163aa5fae2e406d973b290bcb65e2f4308a28ed9b70b2e392327421572"
+      "fingerprint": "sha256:c6134fb5c20f67c7c81e920bbcf08bafff4abbf2f09146995520f3934d52ba65"
     }
   }
 }

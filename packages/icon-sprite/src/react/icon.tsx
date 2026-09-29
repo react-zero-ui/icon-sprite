@@ -1,4 +1,4 @@
-import type { ReactElement, SVGProps } from "react"
+import type { AriaAttributes, DOMAttributes, ReactElement, SVGProps } from "react"
 import {
   BUILT_IN_PRESENTATION_DEFAULTS,
   DEFAULT_ICON_SIZE,
@@ -6,11 +6,35 @@ import {
 } from "../sprite-contract.js"
 
 /**
- * SVG instance props. Explicit width/height override size independently; zero is valid.
- * Props target the outer SVG. Attributes fixed inside a sprite symbol can override
- * presentation values; library symbols inherit the supported root defaults.
+ * Supported icon instance props. Width/height override size independently; zero is valid.
+ * Styling and events target the outer SVG. Built-in symbols inherit paint defaults;
+ * custom artwork keeps authored values. Geometry, children, and upstream-specific
+ * conveniences are owned by the icon, so they are excluded from this interface.
  */
-export type IconProps = SVGProps<SVGSVGElement> & { size?: number | string }
+export interface IconProps
+  extends AriaAttributes,
+    Omit<DOMAttributes<SVGSVGElement>, "children" | "dangerouslySetInnerHTML">,
+    Pick<
+      SVGProps<SVGSVGElement>,
+      | "className"
+      | "color"
+      | "fill"
+      | "focusable"
+      | "height"
+      | "id"
+      | "ref"
+      | "role"
+      | "stroke"
+      | "strokeLinecap"
+      | "strokeLinejoin"
+      | "strokeWidth"
+      | "style"
+      | "tabIndex"
+      | "width"
+    > {
+  size?: number | string
+  [attribute: `data-${string}`]: string | number | boolean | undefined
+}
 
 /** Exact custom filename stem, including case, without the .svg extension. */
 export interface CustomIconProps extends IconProps {

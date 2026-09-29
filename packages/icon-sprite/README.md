@@ -72,9 +72,11 @@ Production retains a small React wrapper. Bundlers that replace `process.env.NOD
 
 ## Props
 
-Icon props extend React's SVG props. Each dimension resolves as explicit width/height, then `size`, then `24`. Zero remains valid. `className`, `style`, `id`, `role`, `aria-*`, and `data-*` reach the outer SVG. Built-in Lucide/Tabler icons preserve their shared root defaults for `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin` on the outer SVG; explicit props or CSS can override them. `color` also works with the default `stroke="currentColor"` behavior.
+`IconProps` defines this library's instance API: `size`, `width`, `height`, `className`, `style`, `id`, `role`, `tabIndex`, `focusable`, `ref`, React events, `aria-*`, `data-*`, and the supported presentation props `color`, `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin`. Each dimension resolves as explicit width/height, then `size`, then `24`. Zero remains valid. Built-ins keep shared presentation defaults on the outer SVG, followed by caller overrides. `color` supplies the default `stroke="currentColor"` behavior.
 
-Sprite-rendered icons default to `aria-hidden="true"`. A meaningful icon needs an accessible label and an explicit override:
+The component owns its geometry and children. Upstream conveniences such as `title`, `absoluteStrokeWidth`, and `nonScalingStroke` are excluded from this API. Use `aria-label` for accessible names.
+
+Development and production icons default to `aria-hidden="true"`, including when a label or role is supplied. A meaningful icon needs an accessible label and an explicit override:
 
 ```tsx
 <ArrowRight aria-hidden={false} role="img" aria-label="Continue" />
@@ -88,9 +90,13 @@ Custom names match filenames without `.svg`, including case. All SVG files direc
 
 Development fetches the individual SVG with caching disabled and renders its markup. Pending or failed loads use a sprite fallback. Changing a name remounts the loader so the previous asset's state stays isolated. Production uses the shared sprite.
 
+Custom artwork retains its root attributes and descendant styling. Instance props live on the outer SVG; fixed colors and strokes inside the artwork remain fixed. Author `inherit` or `currentColor` where instance styling should apply. The instance controls dimensions and the custom filename supplies the sprite ID. A custom filename that collides with a used built-in ID fails the build and leaves the previous sprite intact. Application stylesheet selectors cannot target an external sprite's internal classes.
+
+Custom gradient URLs remain authored. Our WebKit test found that fragment-only paint references such as `url(#gradient)` can render blank through an external sprite. Verify gradient-dependent custom artwork in your target browsers.
+
 ## Scanning and configuration
 
-The build operation scans `.js`, `.jsx`, `.ts`, and `.tsx` files. Used named imports, aliases, and static namespace members are supported. Unused and type-only imports are excluded. Import icons directly from this package within the scanned source tree. Dynamic namespace lookups and module re-export graphs have limited discovery coverage.
+The build operation scans `.js`, `.jsx`, `.ts`, and `.tsx` files. Use named imports or named aliases directly from this package within the scanned source tree. Value namespace imports (`import * as Icons`) fail the build even when unused. Type-only imports are excluded from runtime discovery. The scanner does not follow module re-export graphs.
 
 Source detection chooses `src`, then `app`, then `pages`. Override settings with `zero-ui.config.js` or `zero-ui.config.ts` in the application directory:
 

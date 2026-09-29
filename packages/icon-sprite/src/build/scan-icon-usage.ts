@@ -157,32 +157,6 @@ class IconUsageScanner {
     }
   }
 
-  private recordNamespaceReference(file: string, reference: NodePath): void {
-    const member = reference.parentPath
-    let name: string | undefined
-    if (member?.isMemberExpression() && member.node.object === reference.node) {
-      const property = member.node.property
-      if (member.node.computed && property.type === "StringLiteral") {
-        name = property.value
-      } else if (!member.node.computed && property.type === "Identifier") {
-        name = property.name
-      }
-    } else if (member?.isJSXMemberExpression() && member.node.object === reference.node) {
-      name = member.node.property.name
-    } else {
-      return
-    }
-
-    if (name !== undefined) {
-      this.recordUsage(file, name, member)
-      return
-    }
-    this.warnings.push(
-      `${this.location(file, member.node.loc?.start.line)}: Dynamic icon namespace access cannot be scanned; use named imports or static member names.`
-    )
-  }
-
-  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Named and namespace imports share one binding lookup and reference policy; splitting this creates shallow dispatch helpers around the same Babel mechanism.
   private recordImport(file: string, importPath: NodePath<ImportDeclaration>): void {
     if (
       importPath.node.source.value !== this.options.importName ||
@@ -192,10 +166,14 @@ class IconUsageScanner {
     }
 
     for (const specifier of importPath.get("specifiers")) {
-      if (specifier.isImportSpecifier() && specifier.node.importKind === "type") {
-        continue
+      // Reject the declaration even when unused; later namespace/destructuring
+      // usage would otherwise disappear silently from the production sprite.
+      if (specifier.isImportNamespaceSpecifier()) {
+        throw new Error(
+          `${this.location(file, importPath.node.loc?.start.line)}: Namespace icon imports are unsupported. Use named imports from "${this.options.importName}".`
+        )
       }
-      if (!(specifier.isImportSpecifier() || specifier.isImportNamespaceSpecifier())) {
+      if (!specifier.isImportSpecifier() || specifier.node.importKind === "type") {
         continue
       }
 
@@ -206,16 +184,10 @@ class IconUsageScanner {
         continue
       }
       const references = binding.referencePaths.filter(isRuntimeReference)
-      if (specifier.isImportSpecifier()) {
-        const imported = specifier.node.imported
-        const name = imported.type === "Identifier" ? imported.name : imported.value
-        for (const reference of references) {
-          this.recordUsage(file, name, reference)
-        }
-      } else {
-        for (const reference of references) {
-          this.recordNamespaceReference(file, reference)
-        }
+      const imported = specifier.node.imported
+      const name = imported.type === "Identifier" ? imported.name : imported.value
+      for (const reference of references) {
+        this.recordUsage(file, name, reference)
       }
     }
   }
@@ -266,6 +238,7 @@ class IconUsageScanner {
  * Scan one source tree for runtime icon usage without executing application code
  * or loading its Babel configuration. Exclusions match directory basenames,
  * linked directories are visited once by real path, and results are sorted.
+ * Namespace imports fail before sprite output; type-only imports are ignored.
  */
 export function scanIconUsage(options: IconScanOptions): IconUsage {
   return new IconUsageScanner(options).scan()

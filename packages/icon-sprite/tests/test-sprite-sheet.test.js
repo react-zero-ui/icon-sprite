@@ -13,6 +13,10 @@ const builtInCheckSymbolPattern = /<symbol\b[^>]*id="check"[^>]*>/
 const customCaseSensitiveSymbolPattern = /<symbol\b[^>]*id="CaseSensitive"[^>]*>/
 const symbolIdPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const tablerCheckSymbolPattern = /<symbol\b[^>]*id="tabler-check"[^>]*>/
+const namespaceImportError = /Namespace icon imports/
+const nestedCustomSvgPattern =
+  /<svg x="4" y="4" width="8" height="8" viewBox="0 0 10 10"><path fill="url\(#paint\)" d="M0 0h10v10z"\/><\/svg>/
+const localCustomDefsPattern = /<symbol[^>]*id="nested"[^>]*><defs>/
 
 function symbolIds(file) {
   return [...fs.readFileSync(file, "utf8").matchAll(symbolIdPattern)]
@@ -89,6 +93,84 @@ test("nested sprite paths stay under the configured consumer output directory", 
   const result = await buildSpriteSheet(root)
   assert.equal(result.outputFile, path.join(root, "static/assets/icons/site.svg"))
   assert.deepEqual(symbolIds(result.outputFile), ["only-custom"])
+})
+
+test("custom collisions fail the API and CLI before replacing the previous sprite", async (t) => {
+  const root = createProject(t, {
+    "src/icon.tsx":
+      'import { Check } from "@react-zero-ui/icon-sprite"; export const icon = <Check/>;',
+    "public/zero-ui-icons/check.svg": svg,
+    "public/icons.svg": "previous sprite",
+  })
+  await assert.rejects(
+    buildSpriteSheet(root),
+    (error) =>
+      error instanceof Error &&
+      error.message.includes('Duplicate sprite ID "check"') &&
+      error.message.includes("lucide") &&
+      error.message.includes("zero-ui-icons")
+  )
+  const cliResult = spawnSync(process.execPath, [cli], { cwd: root, encoding: "utf8" })
+  assert.equal(cliResult.status, 1)
+  assert.ok(cliResult.stderr.includes("Rename the custom SVG"))
+  assert.equal(fs.readFileSync(path.join(root, "public/icons.svg"), "utf8"), "previous sprite")
+})
+
+test("custom roots retain authored presentation, metadata, and namespaces", async (t) => {
+  const custom =
+    '<svg id="original" width="500" height="500" viewBox="0 0 24 24" class="artwork" opacity="0.4" fill-rule="evenodd" color="blue" fill="red" stroke="inherit" data-kind="logo" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="green" d="M0 0h10v10z"/></svg>'
+  const root = createProject(t, {
+    "src/index.js": "",
+    "public/zero-ui-icons/artwork.svg": custom,
+  })
+  const result = await buildSpriteSheet(root)
+  const output = fs.readFileSync(result.outputFile, "utf8")
+  for (const attribute of [
+    'id="artwork"',
+    'class="artwork"',
+    'opacity="0.4"',
+    'fill-rule="evenodd"',
+    'color="blue"',
+    'fill="red"',
+    'stroke="inherit"',
+    'data-kind="logo"',
+    'xmlns:xlink="http://www.w3.org/1999/xlink"',
+    'fill="green"',
+  ]) {
+    assert.ok(output.includes(attribute), attribute)
+  }
+  assert.ok(!output.includes('id="original"'))
+  assert.ok(!output.includes('width="500"'))
+  assert.ok(!output.includes('height="500"'))
+  assert.equal(fs.readFileSync(path.join(root, "public/zero-ui-icons/artwork.svg"), "utf8"), custom)
+})
+
+test("namespace imports fail a complete build and preserve the existing sprite", async (t) => {
+  const root = createProject(t, {
+    "src/view.tsx":
+      'import * as Icons from "@react-zero-ui/icon-sprite"; const { Check } = Icons; export const icon = <Check/>;',
+    "public/icons.svg": "previous sprite",
+  })
+  await assert.rejects(buildSpriteSheet(root), namespaceImportError)
+  const cliResult = spawnSync(process.execPath, [cli], { cwd: root, encoding: "utf8" })
+  assert.equal(cliResult.status, 1)
+  assert.ok(cliResult.stderr.includes("named imports"))
+  assert.equal(fs.readFileSync(path.join(root, "public/icons.svg"), "utf8"), "previous sprite")
+})
+
+test("custom serialization preserves nested SVG viewports and local definitions", async (t) => {
+  const nested =
+    '<svg viewBox="0 0 24 24"><defs><linearGradient id="paint"><stop stop-color="red"/></linearGradient></defs><svg x="4" y="4" width="8" height="8" viewBox="0 0 10 10"><path fill="url(#paint)" d="M0 0h10v10z"/></svg></svg>'
+  const root = createProject(t, {
+    "src/index.js": "",
+    "public/zero-ui-icons/nested.svg": nested,
+    "public/zero-ui-icons/second.svg": svg,
+  })
+  const result = await buildSpriteSheet(root)
+  const output = fs.readFileSync(result.outputFile, "utf8")
+  assert.match(output, nestedCustomSvgPattern)
+  assert.match(output, localCustomDefsPattern)
+  assert.deepEqual(symbolIds(result.outputFile), ["nested", "second"])
 })
 
 test("repeated and concurrent consumers stay isolated and rescan changed sources", async (t) => {

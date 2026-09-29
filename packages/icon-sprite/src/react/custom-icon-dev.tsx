@@ -1,17 +1,15 @@
 "use client"
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { CUSTOM_SVG_DIR } from "../sprite-contract.js"
 import { type CustomIconProps, renderSvgUseElement, resolveIconDimensions } from "./icon.js"
 
-type Payload = { attrs: Record<string, string | undefined>; innerHTML: string }
 // A cache supplies first paint on remount. Every mount still refreshes from disk.
-const payloadCache = new Map<string, Payload>()
-const dimensionAttribute = /^(width|height)$/i
+const payloadCache = new Map<string, string>()
 const eventHandlerAttribute = /^on[a-z]+/i
 const surroundingSlashes = /^\/+|\/+$/g
 
-/** Parse a trusted local SVG payload. Untrusted uploads need a separate sanitization boundary. */
-function extractSVGContent(svg: string): Payload {
+/** Preserve trusted artwork inside its own SVG so fixed paint stays local and inherit reaches instance props. */
+function prepareCustomSvgMarkup(svg: string): string {
   const div = document.createElement("div")
   div.innerHTML = svg.trim()
   const svgEl = div.querySelector("svg")
@@ -28,35 +26,11 @@ function extractSVGContent(svg: string): Payload {
       }
     }
   })
-  const attrs: Record<string, string | undefined> = {}
-  for (const a of Array.from(svgEl.attributes)) {
-    if (!dimensionAttribute.test(a.name)) {
-      attrs[a.name] = a.value
-    }
-  }
-  return { attrs, innerHTML: svgEl.innerHTML.trim() }
-}
-
-/** Asset root attributes retain their historical precedence over matching React props. */
-function applyPayload(element: SVGSVGElement, payload: Payload, incomingClass: string): void {
-  const payloadClass = payload.attrs.class ?? payload.attrs.className ?? ""
-  const mergedClass = [incomingClass, payloadClass].filter(Boolean).join(" ").trim()
-  if (mergedClass) {
-    element.setAttribute("class", mergedClass)
-  }
-  for (const [key, value] of Object.entries(payload.attrs)) {
-    if (
-      value === undefined ||
-      key === "class" ||
-      key === "className" ||
-      dimensionAttribute.test(key) ||
-      key === "xmlns" ||
-      key.startsWith("xmlns:")
-    ) {
-      continue
-    }
-    element.setAttribute(key, value)
-  }
+  // The outer SVG owns size in both modes; the authored viewBox scales artwork
+  // within that viewport just as it does on the production symbol.
+  svgEl.removeAttribute("width")
+  svgEl.removeAttribute("height")
+  return svgEl.outerHTML
 }
 
 /**
@@ -65,19 +39,9 @@ function applyPayload(element: SVGSVGElement, payload: Payload, incomingClass: s
  * back to the same sprite element used outside development. It never writes files.
  */
 function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) {
-  const [payload, setPayload] = useState<Payload | null>(() =>
+  const [payload, setPayload] = useState<string | null>(() =>
     typeof globalThis.document !== "undefined" ? (payloadCache.get(name) ?? null) : null
   )
-  const svgRef = useRef<SVGSVGElement>(null)
-  const incomingClass = rest.className ?? ""
-
-  useLayoutEffect(() => {
-    const element = svgRef.current
-    if (!element || !payload) {
-      return
-    }
-    applyPayload(element, payload, incomingClass)
-  }, [payload, incomingClass])
 
   useEffect(() => {
     if (typeof globalThis.document === "undefined") {
@@ -94,7 +58,7 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
         if (controller.signal.aborted) {
           return
         }
-        const nextPayload = extractSVGContent(svgText)
+        const nextPayload = prepareCustomSvgMarkup(svgText)
         payloadCache.set(name, nextPayload)
         setPayload(nextPayload)
       })
@@ -115,11 +79,10 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
     return (
       <svg
         aria-hidden="true"
-        ref={svgRef}
         {...resolveIconDimensions({ size, width, height })}
         {...rest}
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted local SVG assets require raw markup; extractSVGContent removes scripts and event handlers.
-        dangerouslySetInnerHTML={{ __html: payload.innerHTML }}
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted local artwork is preserved; prepareCustomSvgMarkup removes scripts and event handlers.
+        dangerouslySetInnerHTML={{ __html: payload }}
       />
     )
   }

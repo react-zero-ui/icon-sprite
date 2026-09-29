@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, readdirSync, readFileSync } from "node:fs"
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -58,26 +58,15 @@ function svgFiles(directory: string): string[] {
     .sort((left, right) => left.localeCompare(right))
 }
 
-function validateUpstreamPack(pack: UpstreamPack, files: readonly string[]): void {
-  for (const file of files) {
-    const source = path.join(pack.iconDirectory, file)
-    validateUpstreamIcon(readFileSync(source, "utf8"), `${pack.pack}/${file}`)
+/** Snapshot validated bytes so the apply phase writes exactly what was reviewed. */
+function readUpstreamSvgs(pack: UpstreamPack): Map<string, string> {
+  const svgs = new Map<string, string>()
+  for (const file of svgFiles(pack.iconDirectory)) {
+    const svg = readFileSync(path.join(pack.iconDirectory, file), "utf8")
+    validateUpstreamIcon(svg, `${pack.pack}/${file}`)
+    svgs.set(file, svg)
   }
-}
-
-/**
- * Copy current upstream bytes into a cumulative archive. Files absent upstream
- * remain untouched, which is the core compatibility guarantee.
- */
-function copyUpstreamSvgs(
-  sourceDirectory: string,
-  archiveDirectory: string,
-  files: readonly string[]
-): void {
-  mkdirSync(archiveDirectory, { recursive: true })
-  for (const file of files) {
-    copyFileSync(path.join(sourceDirectory, file), path.join(archiveDirectory, file))
-  }
+  return svgs
 }
 
 function readCanonicalNames(packageName: string, pack: IconPack): Map<string, string> {
@@ -125,12 +114,14 @@ function derivedComponentName(pack: IconPack, svgFile: string): string {
   return pack === "tabler" ? `Icon${name}` : name
 }
 
-function addCurrentIcons(
+/** Merge identities in memory and plan archived filenames, including historical aliases. */
+function planCurrentIcons(
   catalog: IconCatalog,
   pack: UpstreamPack,
-  files: string[]
-): { added: number; skippedCollisions: number } {
+  svgs: ReadonlyMap<string, string>
+): { added: number; skippedCollisions: number; updates: Map<string, string> } {
   const names = readCanonicalNames(pack.reactPackage, pack.pack)
+  const updates = new Map(svgs)
   const namesByCase = new Map(Object.keys(catalog).map((name) => [name.toLowerCase(), name]))
   const referencedFiles = new Set(
     Object.values(catalog)
@@ -139,7 +130,7 @@ function addCurrentIcons(
   )
   let added = 0
   let skippedCollisions = 0
-  for (const svgFile of files) {
+  for (const [svgFile, svg] of svgs) {
     const key = svgFile.slice(0, -4).replaceAll("-", "")
     const componentName =
       names.get(key) ??
@@ -162,11 +153,8 @@ function addCurrentIcons(
       }
       if (existing.svgFile !== info.svgFile) {
         // Upstream occasionally renames an SVG while keeping the React component.
-        // Refresh bytes under our historical filename so public name and sprite ID stay stable.
-        copyFileSync(
-          path.join(pack.iconDirectory, svgFile),
-          path.join(pack.archiveDirectory, existing.svgFile)
-        )
+        // Plan the historical filename too so public name and sprite ID stay stable.
+        updates.set(existing.svgFile, svg)
       }
       continue
     }
@@ -180,36 +168,42 @@ function addCurrentIcons(
     referencedFiles.add(svgFile)
     added += 1
   }
-  return { added, skippedCollisions }
+  return { added, skippedCollisions, updates }
 }
 
 /**
  * Synchronize current Lucide and Tabler releases into package-owned state.
  * Existing catalog entries and archived files are never deleted automatically.
+ * Both packs' SVGs, declarations, identities, and licenses are read and validated
+ * before the first write. Planning errors leave canonical state untouched.
+ * Filesystem failures during application can leave partial writes; Git owns recovery.
  */
 export function syncUpstreamIcons(directory = packageDirectory): UpstreamSyncResult {
   const catalog = readCanonicalCatalog(directory)
-  const packs = upstreamPacks(directory).map((pack) => ({
-    pack,
-    files: svgFiles(pack.iconDirectory),
-  }))
-  for (const { pack, files } of packs) {
-    validateUpstreamPack(pack, files)
-  }
   const retained = Object.keys(catalog).length
   let added = 0
   let skippedCollisions = 0
   const copied: Record<IconPack, number> = { lucide: 0, tabler: 0 }
   const licenses = path.join(directory, "assets/licenses")
-  mkdirSync(licenses, { recursive: true })
+  const writes = new Map<string, string>()
 
-  for (const { pack, files } of packs) {
-    copyUpstreamSvgs(pack.iconDirectory, pack.archiveDirectory, files)
-    copied[pack.pack] = files.length
-    const merged = addCurrentIcons(catalog, pack, files)
+  // Phase one resolves every possible input/identity error without touching the archive.
+  for (const pack of upstreamPacks(directory)) {
+    const svgs = readUpstreamSvgs(pack)
+    copied[pack.pack] = svgs.size
+    const merged = planCurrentIcons(catalog, pack, svgs)
     added += merged.added
     skippedCollisions += merged.skippedCollisions
-    copyFileSync(pack.licenseFile, path.join(licenses, `${pack.pack}.txt`))
+    for (const [file, svg] of merged.updates) {
+      writes.set(path.join(pack.archiveDirectory, file), svg)
+    }
+    writes.set(path.join(licenses, `${pack.pack}.txt`), readFileSync(pack.licenseFile, "utf8"))
+  }
+
+  // Phase two applies the snapshot. Absence upstream never schedules a deletion.
+  for (const [file, content] of writes) {
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, content)
   }
 
   writeCanonicalCatalog(directory, catalog)

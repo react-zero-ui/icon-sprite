@@ -18,10 +18,12 @@ Generation drops upstream root `class` plus authored width/height from built-in 
 
 ## Instance props
 
-Each dimension resolves as explicit width/height, then `size`, then the package default. Nullish fallback preserves zero. `size` is consumed by sizing logic; other SVG props reach the outer element. Sprite rendering supplies an overrideable `aria-hidden` default.
+`IconProps` owns the explicit instance API in the renderer: dimensions, supported paint, events, accessibility, data attributes, and ordinary instance styling. Geometry, children, and upstream-specific conveniences stay outside that type. Compile-time assertions in `tests/icon-props.types.ts` protect this boundary.
+
+Each dimension resolves as explicit width/height, then `size`, then the package default. Nullish fallback preserves zero. Every rendering mode supplies `aria-hidden="true"`; caller props override it. Adding a role or label alone preserves the decorative default.
 
 The [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts) owns the exact defaults and attribute mappings for `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin`. Development places them on the inline SVG. Production places them on the outer SVG and makes the symbol inherit. User props follow defaults in both paths, including explicit `undefined` or `null`.
 
-`color` supplies `currentColor`, so text-color CSS classes work with the default stroke. An explicit stroke controls that property independently. Authored descendant paint overrides remain effective in both modes. Additional SVG props accepted by TypeScript carry only the guarantees documented here.
+`color` supplies `currentColor`, so text-color CSS classes work with the default stroke. An explicit stroke controls that property independently. Authored descendant paint overrides remain effective in both modes. Ref behavior and the React peer range remain unchanged; the package does not emulate upstream-specific React APIs.
 
 [Validation](../development/validation.md#browser-parity-and-limits) owns browser evidence and coverage limits.

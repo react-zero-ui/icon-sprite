@@ -61,7 +61,7 @@ export function collectSpriteSymbols(
   const custom = readCustomSymbols(customDirectory)
   const customIds = new Set(custom.map((symbol) => symbol.id))
   for (const symbol of custom) {
-    // Preserve existing custom/built-in collision behavior; XML assembly owns symbols.
+    // The writer validates uniqueness across built-ins and authored custom symbols.
     symbols.push(symbol)
     added.add(symbol.id)
   }

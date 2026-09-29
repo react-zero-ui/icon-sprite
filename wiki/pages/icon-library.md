@@ -22,6 +22,8 @@ Canonical inputs live only under `packages/icon-library/assets/`. Generated copi
 
 [validateUpstreamIcon](../../packages/icon-library/src/upstream-validation.ts) checks both packs before copying begins. Roots must match the product [presentation contract](react/rendering.md); root style overrides and descendant stroke widths are rejected. Intentional descendant paint values remain authored. Run `npm run sync:icons` from repository root.
 
+Synchronization has two phases. Planning reads and validates both packs, resolves declarations and identities, and snapshots SVG/license bytes in memory. Application writes that snapshot and then the catalog. Input or identity failures leave canonical files unchanged; filesystem failures during application can require Git recovery. Retained historical files are never scheduled for deletion.
+
 ## Generated components
 
 [generateIconPackage](../../packages/icon-library/src/component-generation.ts) writes generated React components, package-ready catalog/licenses, and the deduplicated SVG bundle into `packages/icon-sprite`. Generation never synchronizes upstream. `packages/icon-sprite/scripts/build.ts` removes old compiled output, invokes this generator, then compiles the published package.

@@ -12,6 +12,7 @@
   "include": [
     "scripts/**/*.ts",
     "packages/icon-sprite/scripts/**/*.ts",
+    "packages/icon-sprite/tests/*.types.ts",
     "packages/icon-library/src/**/*.ts"
   ]
 }

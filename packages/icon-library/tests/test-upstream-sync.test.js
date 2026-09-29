@@ -4,6 +4,7 @@ import {
   existsSync,
   mkdirSync,
   mkdtempSync,
+  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
@@ -17,6 +18,7 @@ import { validateUpstreamIcon } from "../src/upstream-validation.ts"
 const packageDirectory = path.resolve(import.meta.dirname, "..")
 const catalogFile = path.join(packageDirectory, "assets/catalog.json")
 const catalog = JSON.parse(readFileSync(catalogFile, "utf8"))
+const crossPackError = /between packs/
 
 test("every public icon resolves to a committed package-owned SVG", () => {
   assert.ok(Object.keys(catalog).length > 0)
@@ -126,5 +128,41 @@ test("upstream icon packages belong only to the private icon-library workspace",
   for (const name of ["lucide-react", "lucide-static", "@tabler/icons", "@tabler/icons-react"]) {
     assert.equal(productManifest.dependencies?.[name], undefined, name)
     assert.equal(productManifest.devDependencies?.[name], undefined, name)
+  }
+})
+
+test("identity failures in either pack leave every canonical file unchanged", () => {
+  for (const name of ["Check", "IconCheck"]) {
+    const directory = mkdtempSync(path.join(os.tmpdir(), "zero-icons-sync-failure-"))
+    try {
+      const invalid = {
+        ...catalog,
+        [name]: { ...catalog[name], pack: name === "Check" ? "tabler" : "lucide" },
+      }
+      mkdirSync(path.join(directory, "assets/lucide"), { recursive: true })
+      mkdirSync(path.join(directory, "assets/tabler"), { recursive: true })
+      mkdirSync(path.join(directory, "assets/licenses"), { recursive: true })
+      writeFileSync(path.join(directory, "assets/catalog.json"), JSON.stringify(invalid))
+      writeFileSync(path.join(directory, "assets/lucide/check.svg"), "previous lucide")
+      writeFileSync(path.join(directory, "assets/tabler/check.svg"), "previous tabler")
+      writeFileSync(path.join(directory, "assets/licenses/lucide.txt"), "previous license")
+      const snapshot = () =>
+        readdirSync(directory, { recursive: true, withFileTypes: true })
+          .filter((entry) => entry.isFile())
+          .map((entry) => {
+            const file = path.join(entry.parentPath, entry.name)
+            return [path.relative(directory, file), readFileSync(file, "utf8")]
+          })
+          .sort(([left], [right]) => left.localeCompare(right))
+      const before = snapshot()
+      assert.throws(() => syncUpstreamIcons(directory), crossPackError)
+      assert.deepEqual(
+        snapshot(),
+        before,
+        `${name}: planning must finish before any canonical write`
+      )
+    } finally {
+      rmSync(directory, { recursive: true, force: true })
+    }
   }
 })

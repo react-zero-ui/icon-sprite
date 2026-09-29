@@ -2,6 +2,12 @@
 
 This log preserves reasons for decisions. Linked topic pages own current behavior.
 
+## 2026-09-28: Define the product's supported icon contract
+
+The review exposed ambiguity from accepting an upstream-sized SVG interface while guaranteeing a smaller set of behavior. The product now types its supported instance props plus size, defaults every mode to decorative ARIA, and requires named value imports. Duplicate symbol identities fail before output replacement. Custom artwork retains authored styling; automatic paint normalization remains specific to validated built-ins. Root export organization and ref behavior remain unchanged by this decision.
+
+Upstream synchronization now finishes validation and identity planning before any canonical mutation. This preserves the cumulative archive when an incoming pack fails review without adding a transactional filesystem layer.
+
 ## 2026-09-27: Separate local iteration from consumer validation
 
 Workspace linking can hide hoisted dependencies and files missing from a published artifact. The private fixture supports local iteration, while an isolated tarball installation verifies the consumer boundary. Preserve both checks when simplifying the test setup. Current evidence belongs to [validation](pages/development/validation.md).
