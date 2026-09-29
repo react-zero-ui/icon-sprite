@@ -8,4 +8,4 @@
 - [Development](./pages/development/index.md) — Build and edit the repository, choose meaningful validation, and inspect package/release boundaries without relying on workspace-only success.
 - [Icon Library](./pages/icon-library.md) — Change canonical icons safely: additive upgrades, validation before copying, and reproducible component generation.
 - [React](./pages/react/index.md) — React icon instances: inline development rendering, production SVG references, shared props, and custom SVG loading.
-- [Roadmap](./pages/roadmap.md) — Track deferred upstream-update automation; completed icon ownership is documented with its module.
+- [Roadmap](./pages/roadmap.md) — Track deferred upstream-update automation and a possible simpler development sprite architecture.
