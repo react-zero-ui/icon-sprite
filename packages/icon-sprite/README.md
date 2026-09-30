@@ -1,129 +1,223 @@
-# @react-zero-ui/icon-sprite
+[![MIT License](https://img.shields.io/badge/License-MIT-4b00b8?style=for-the-badge&logo=github&logoColor=white)](https://github.com/react-zero-ui/icon-sprite/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/@react-zero-ui/icon-sprite?style=for-the-badge&logo=npm&logoColor=white&label=npm&color=0044cc)](https://www.npmjs.com/package/@react-zero-ui/icon-sprite)
+[![View Demo](https://img.shields.io/badge/View%20Demo-%E2%86%97-4b00b8?style=for-the-badge&logo=react&logoColor=white)](https://zero-ui.dev/icon-sprite)
 
-Use Lucide, Tabler, and custom SVG icons through React components. Development renders inline SVGs; production renders references to a shared sprite containing discovered built-in icons and custom SVG assets.
+<div align="center">
+  
+<h1>React Zero Icon Sprite</h1>
+<h2>7,200+ React icons. One production SVG sprite.</h2>
 
-## Install and render
+<legend>Use Lucide and Tabler through one React API.<br/>At build time, ship <b>one SVG sprite</b> containing only the icon geometry your app uses.</legend>
 
-```sh
+<br/>
+
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <b>7,200+ Icons</b><br/>Lucide + Tabler through one package
+    </td>
+    <td align="center" width="33%">
+      <b>Build-Time Sprite</b><br/>Ship only the icon geometry your app uses
+    </td>
+    <td align="center" width="33%">
+      <b>Zero Runtime Icon Overhead</b><br/>Production renders native <code>&lt;use&gt;</code> references
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <b>One React API</b><br/>Use the same component model across icon sets
+    </td>
+    <td align="center" width="33%">
+      <b>~70% Smaller Compressed HTML</b><br/>Current 135-icon demo
+    </td>
+    <td align="center" width="33%">
+      <b>Custom Icons</b><br/>Add your own SVGs to the same sprite
+    </td>
+  </tr>
+</table>
+
+</div>
+
+---
+
+## Contents
+
+- [Why This Library?](#why-this-library)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [How It Works](#how-it-works-under-the-hood)
+
+---
+
+## Why This Library?
+
+Most React icon packages make you choose an icon set up front, then ship each icon as component-level SVG geometry.
+
+React Zero Icon Sprite takes a different approach:
+
+1. **One package:** Lucide and Tabler share one React API, with more icon sets able to join the same catalog over time.
+2. **Build-time discovery:** `zero-icons` scans your source and finds the icons your app actually uses.
+3. **One production sprite:** Used built-in icons and your custom SVGs are compiled into a single cacheable sprite.
+4. **Small production markup:** Icon components render native `<svg><use /></svg>` references instead of repeating SVG geometry.
+
+You can choose from thousands of icons during development while production ships only the geometry your application needs.
+
+> [!NOTE]
+> [View the live demo](https://zero-ui.dev/icon-sprite)
+
+---
+
+## Quick Start
+
+### 1. Install
+
+```bash
 npm install @react-zero-ui/icon-sprite
 ```
 
-React 17 or newer is a peer dependency. Build integration requires Node.js 22.18+ on the 22.x line, or Node.js 24.11+.
-Consumers do not install Lucide or Tabler packages. Published icon data is derived from this repository's reviewed catalog and cumulative SVG archives.
+React 17+ is supported. The `zero-icons` build step requires Node.js 22.18+ on Node 22, or Node.js 24.11+.
+
+### 2. Use Icons
 
 ```tsx
-import { ArrowRight, IconBrandGithub, CustomIcon } from "@react-zero-ui/icon-sprite"
+import { ArrowRight, Mail } from "@react-zero-ui/icon-sprite";
 
 <ArrowRight size={24} className="text-gray-600" />
-<IconBrandGithub width={32} height={32} />
-<CustomIcon name="company-logo" size={40} />
+<Mail width={24} height={24} />
 ```
 
-Place `company-logo.svg` in `public/zero-ui-icons/` for the custom example. The root entrypoint also exports the `IconProps`, `CustomIconProps`, and `ZeroUIConfig` types.
+### 3. Build for Production
 
-## Production build integration
+> [!CAUTION]
+> Run this **before** your app build so the sprite exists.
 
-Import the Node build API from your build tool or application configuration:
-
-```ts
-import { buildSpriteSheet } from "@react-zero-ui/icon-sprite/build"
-
-const result = await buildSpriteSheet() // Defaults to the application's working directory.
-for (const warning of result.warnings) {
-  console.warn(warning)
-}
+```bash
+npx zero-icons
 ```
 
-`buildSpriteSheet(projectDirectory?)` returns `{ outputFile, iconCount, warnings }`. It handles config discovery, source analysis, package-owned asset resolution, and atomic writing. Callers decide how to report warnings. Parse, catalog, asset, and write failures reject the operation and preserve an existing sprite. Missing definitions produce warnings and require review before deployment.
-
-Existing integrations may continue importing `generateSprite`; it is an alias of `buildSpriteSheet`.
-
-For Next.js, integrate directly in `next.config.ts`:
-
-```ts
-import { buildSpriteSheet } from "@react-zero-ui/icon-sprite/build"
-import type { NextConfig } from "next"
-import { PHASE_PRODUCTION_BUILD } from "next/constants.js"
-
-export default async function configureNext(phase: string): Promise<NextConfig> {
-  if (phase === PHASE_PRODUCTION_BUILD) {
-    const { warnings } = await buildSpriteSheet()
-    for (const warning of warnings) {
-      console.warn(warning)
-    }
+Or add it to your `package.json`:
+```json
+{
+  "scripts": {
+    "prebuild": "zero-icons",
+    "build": "your build command"
   }
-  return {}
 }
 ```
 
-The repository fixture uses this integration. Next's type-generation command also loads production configuration and can regenerate the sprite. Other build tools can invoke the same Node operation before bundling.
+That's it. `zero-icons` scans your source and writes `public/icons.svg` before your application build.
 
-Existing package scripts using `"prebuild": "zero-icons"` remain supported. The command is a compatibility adapter over the build API. Keep build imports in Node configuration; React components belong to the root entrypoint.
+---
 
-The application serves the generated `public/icons.svg` at `/icons.svg` and owns production caching and invalidation. An icon renders approximately:
+## Usage
 
-```html
-<svg aria-hidden="true" width="24" height="24">
-  <use href="/icons.svg#arrow-right"></use>
-</svg>
-```
-
-Production retains a small React wrapper. Bundlers that replace `process.env.NODE_ENV` and remove dead code can discard development icon implementations.
-
-## Props
-
-`IconProps` defines this library's instance API: `size`, `width`, `height`, `className`, `style`, `id`, `role`, `tabIndex`, `focusable`, `ref`, React events, `aria-*`, `data-*`, and the supported presentation props `color`, `fill`, `stroke`, `strokeWidth`, `strokeLinecap`, and `strokeLinejoin`. Each dimension resolves as explicit width/height, then `size`, then `24`. Zero remains valid. Built-ins keep shared presentation defaults on the outer SVG, followed by caller overrides. `color` supplies the default `stroke="currentColor"` behavior.
-
-The component owns its geometry and children. Upstream conveniences such as `title`, `absoluteStrokeWidth`, and `nonScalingStroke` are excluded from this API. Use `aria-label` for accessible names.
-
-Development and production icons default to `aria-hidden="true"`, including when a label or role is supplied. A meaningful icon needs an accessible label and an explicit override:
+### Lucide Icons
 
 ```tsx
-<ArrowRight aria-hidden={false} role="img" aria-label="Continue" />
+import { ArrowRight, Mail } from "@react-zero-ui/icon-sprite";
+
+<ArrowRight size={24} className="text-gray-600" />
+<Mail width={24} height={24} />
 ```
 
-Use CSS `color` or a text-color class for assets drawn with `currentColor`. Built-in sprite symbols inherit the supported root presentation values from each icon instance, while authored descendant overrides remain intact. Source scanning warns only for presentation props outside that parity contract.
+### Tabler Icons
 
-## Custom SVGs
+tabler icons are imported with the `Icon` prefix, e.g. `IconBrandGithub`
 
-Custom names match filenames without `.svg`, including case. All SVG files directly inside `public/zero-ui-icons/` are bundled, including unused assets and assets selected through dynamic names. Use this directory for trusted project files.
+```tsx
+import { IconBrandGithub, IconHeart } from "@react-zero-ui/icon-sprite";
 
-Development fetches the individual SVG with caching disabled and renders its markup. Pending or failed loads use a sprite fallback. Changing a name remounts the loader so the previous asset's state stays isolated. Production uses the shared sprite.
+<IconBrandGithub size={24} className="text-gray-600" />
+<IconHeart width={24} height={24} />
+```
 
-Custom artwork retains its root attributes and descendant styling. Instance props live on the outer SVG; fixed colors and strokes inside the artwork remain fixed. Author `inherit` or `currentColor` where instance styling should apply. The instance controls dimensions and the custom filename supplies the sprite ID. A custom filename that collides with a used built-in ID fails the build and leaves the previous sprite intact. Application stylesheet selectors cannot target an external sprite's internal classes.
+### Custom Icons
 
-Custom gradient URLs remain authored. Our WebKit test found that fragment-only paint references such as `url(#gradient)` can render blank through an external sprite. Verify gradient-dependent custom artwork in your target browsers.
+Drop your own SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />`:
 
-## Scanning and configuration
+> [!TIP]
+>```txt
+>📁/public
+>   └──📁/zero-ui-icons/
+>       └──dog.svg
+>```
+>```tsx
+>import { CustomIcon } from "@react-zero-ui/icon-sprite";
+>
+><CustomIcon name="dog" size={24} />
+>```
 
-The build operation scans `.js`, `.jsx`, `.ts`, and `.tsx` files. Use named imports or named aliases directly from this package within the scanned source tree. Value namespace imports (`import * as Icons`) fail the build even when unused. Type-only imports are excluded from runtime discovery. The scanner does not follow module re-export graphs.
+The `name` prop **must match** the file name (without `.svg`).
 
-Source detection chooses `src`, then `app`, then `pages`. Override settings with `zero-ui.config.js` or `zero-ui.config.ts` in the application directory:
+> [!NOTE]
+> In dev you may see a brief FOUC using custom icons; this is removed in production.
+
+---
+
+## Configuration
+
+Most apps need no configuration. If your source lives somewhere other than `src`, `app`, or `pages`, add `zero-ui.config.ts`:
 
 ```ts
 import type { ZeroUIConfig } from "@react-zero-ui/icon-sprite"
 
 export default {
-  ROOT_DIR: "app",
-  IMPORT_NAME: "@react-zero-ui/icon-sprite",
-  OUTPUT_DIR: "public",
-  SPRITE_PATH: "/icons.svg",
-  CUSTOM_SVG_DIR: "zero-ui-icons",
-  IGNORE_ICONS: ["CustomIcon"],
-  EXCLUDE_DIRS: ["node_modules", ".git", "dist", "build", ".next", "out"],
+  ROOT_DIR: "frontend",
 } satisfies ZeroUIConfig
 ```
 
-TypeScript config takes precedence. Invalid configuration produces returned warnings and falls back to another supported file or defaults. Config files execute as trusted Node modules with normal import caching. Each operation rescans application source and owns its state.
+The config also supports custom scan exclusions, import names, output locations, and custom SVG directories.
 
-Configuration controls build input and output locations. Runtime URLs stay `/icons.svg` and `/zero-ui-icons/`. Applications choosing other output paths must serve those assets at the runtime URLs. Builds leave shared package files and process cwd unchanged.
+---
 
-## Contributing
+## How It Works (Under the Hood)
 
-This published library lives in `packages/icon-sprite`; canonical icon source lives in private `packages/icon-library`; the integration fixture lives in `fixtures/next-app`. Run `npm ci`, `npm run check`, and `npm run test:integration` from repository root.
+<details>
+<summary><b>See how development and production rendering differ</b></summary>
 
-Start with `src/index.ts` for React components and `src/build.ts` for application build integration. `src/react/` owns instance rendering. `src/build/` owns source scanning, packaged icon lookup, and sprite-sheet output. Private `../icon-library/` owns upstream synchronization, canonical assets, validation, and generation into this package.
+### Development: DX First
 
-The handwritten entrypoints remain versioned. This package's `assets/catalog.json` and licenses are generated package inputs; canonical catalog/SVGs/licenses live only in `packages/icon-library/assets/`. Upstream packages are private-workspace dependencies used only by root `npm run sync:icons`. Internal module paths may change; root and `/build` are the supported application interfaces.
+Generated icon components follow this shape:
 
-Licensed under MIT. The package license is included in `dist/LICENSE`; upstream icon licenses ship under `assets/licenses/`.
+```tsx
+export function ArrowRight(props) {
+  if (process.env.NODE_ENV !== "production") {
+    return <svg {...props}>{/* packaged SVG geometry */}</svg>
+  }
+
+  return <svg {...props}><use href="/icons.svg#arrow-right" /></svg>
+}
+```
+
+This ensures:
+
+* Development uses inline SVG geometry
+* Familiar props such as `size`, `strokeWidth`, and `className`
+* Built-in icons do not depend on fetching the production sprite during development
+* Production reuses shared geometry through the sprite
+
+### Production Mode: Zero Runtime Icon Overhead
+
+Production icons compile to native SVG `<use>` references with no icon geometry or icon-library runtime shipped to the client.
+
+At build time:
+
+1. `zero-icons` scans `.js`, `.jsx`, `.ts`, and `.tsx` source with Babel AST traversal
+2. Named imports are resolved across the package-owned icon catalog
+3. Only used built-in icon geometry is selected from Lucide and Tabler
+4. Project custom SVGs are added to the same sprite
+5. The final sprite is written to `public/icons.svg`
+6. Production icon wrappers render `<use href="/icons.svg#icon-id" />`
+
+### The Build Pipeline (`npx zero-icons`)
+
+The CLI is backed by the package's Node build API. It discovers project configuration, scans icon usage, resolves packaged SVG data, and atomically writes the sprite without modifying the installed package.
+
+</details>
+
+---
+
+Part of the [React Zero-UI](https://github.com/react-zero-ui) ecosystem.
+
+Created by and maintained by [Serbyte Development](https://www.serbyte.net/)

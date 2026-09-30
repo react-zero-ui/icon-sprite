@@ -36,6 +36,10 @@ Explicit styling on a shared sprite symbol blocked ordinary per-instance overrid
 
 Repeated renderer renames exposed two different ownership levels: canonical icon maintenance and consumer product behavior. Canonical assets, upstream dependencies, validation, and generation now live in private `packages/icon-library`; published `packages/icon-sprite` contains React rendering, consumer sprite building, and generated package inputs. The private workspace generates the product one-way. No runtime or consumer-build dependency points back to it. [Architecture](pages/architecture.md) maps the current boundary.
 
+## 2026-09-29: Keep one consumer README
+
+GitHub and npm had diverged because the root and package READMEs were maintained independently. Root `README.md` now owns product-facing copy; the package build copies it into `packages/icon-sprite/README.md` for npm publication. Treat the package copy as generated output. [Workflow](pages/development/workflow.md) owns generation; [publishing](pages/development/publishing.md) owns artifact expectations.
+
 ## 2026-09-28: Give each wiki topic one detailed owner
 
 Successive implementation passes copied the same contracts into overview, architecture, roadmap, and subsystem pages. That amplified review work and allowed descriptions to diverge. Overview now provides startup context, architecture routes to owners, and detailed behavior lives once. Source owns exact implementation values; the roadmap retains deferred work and this log retains reasoning.

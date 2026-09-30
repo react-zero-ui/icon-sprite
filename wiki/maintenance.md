@@ -6,7 +6,7 @@ Use the `wiki-system` skill and its update workflow. The wiki routes agents from
 
 Keep mandatory startup context in `pages/project-overview.md` short. `architecture.md` maps domains and shared boundaries. Detailed behavior belongs to the relevant topic page. A short orientation sentence and a link are sufficient elsewhere.
 
-The root README owns setup and command usage; the package README owns consumer instructions. Source files own exact types, defaults, rule lists, and scripts. Wiki pages preserve relationships, subtle invariants, failure semantics, and evidence limits that require synthesis.
+The root README owns GitHub and npm consumer-facing copy plus setup and command usage. Package builds copy it to `packages/icon-sprite/README.md`; do not maintain a second README by hand. Source files own exact types, defaults, rule lists, and scripts. Wiki pages preserve relationships, subtle invariants, failure semantics, and evidence limits that require synthesis.
 
 Keep historical reasons in `decision-log.md` and deferred work in `pages/roadmap.md`. Link completed roadmap work to its current owner. Keep transient status and test-run results out of durable pages.
 

@@ -27,5 +27,10 @@ fs.copyFileSync(
   new URL("../../../LICENSE", import.meta.url),
   new URL("../dist/LICENSE", import.meta.url)
 )
+// Root README is the canonical GitHub/npm package README.
+fs.copyFileSync(
+  new URL("../../../README.md", import.meta.url),
+  new URL("../README.md", import.meta.url)
+)
 // Workspace bin links target this regenerated file directly.
 fs.chmodSync(new URL("../dist/command.js", import.meta.url), 0o755)
