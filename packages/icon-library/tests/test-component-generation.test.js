@@ -11,6 +11,23 @@ const mapping = JSON.parse(readFileSync(new URL("../assets/catalog.json", import
 const compareText = (left, right) => left.localeCompare(right)
 const exportPattern = /export \{ (\w+) \} from "([^"]+)";/g
 
+test("generated filled wrappers carry source paint while outline defaults stay shared", () => {
+  const filled = readFileSync(
+    new URL("../../icon-sprite/src/icons/IconHeartFilled.tsx", import.meta.url),
+    "utf8"
+  )
+  assert.ok(
+    filled.includes('renderProdIcon("tabler-filled-heart", props, {"fill":"currentColor"})')
+  )
+  assert.ok(filled.includes('fill="currentColor"'))
+  assert.ok(filled.includes('stroke="none"')) // Authored transparent canvas path stays intact.
+  const outline = readFileSync(
+    new URL("../../icon-sprite/src/icons/IconHeart.tsx", import.meta.url),
+    "utf8"
+  )
+  assert.ok(outline.includes('renderProdIcon("tabler-heart", props);'))
+})
+
 test("every mapped icon has exactly one wrapper and public export", async () => {
   const names = Object.keys(mapping)
   assert.ok(names.length > 0)

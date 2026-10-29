@@ -25,7 +25,7 @@ Focused tests follow ownership: canonical generation/sync tests live in [package
 | Installed lookup, sprite output, and CLI | `test-packaged-icons`, `test-sprite-sheet` |
 | React props, identities, and import boundaries | `test-react`, `test-sprite-id-match`, `test-react-boundary`, `test-accessibility-props` |
 
-`icon-props.types.ts` is checked by the Node TypeScript configuration against emitted declarations. It accepts the explicit instance API and rejects upstream conveniences and geometry/children props. Sync regressions check that failures in either pack preserve every canonical file. Sprite tests exercise duplicate IDs and namespace imports through both the API and CLI.
+`icon-props.types.ts` is checked by the Node TypeScript configuration against emitted declarations. It accepts the explicit instance API and rejects upstream conveniences and geometry/children props. Sync regressions cover every Tabler filled asset, additive identities, repeatability, and failures before canonical writes. Production root paint is checked against every packaged source SVG. Sprite tests cover filled aliases, unused filled exclusion, duplicate IDs, and namespace imports.
 
 ## Installed-package validation
 
@@ -37,7 +37,7 @@ HTTP checks validate production references against served symbol IDs and reject 
 
 ## Browser parity and limits
 
-Install the matching Playwright engines with `npx playwright install chromium firefox webkit`. Each engine renders [presentation-parity](../../../fixtures/next-app/app/presentation-parity/page.tsx) against production and development servers. Checks compare structure, ARIA defaults/overrides, computed outer-SVG styles, and exact screenshots. Cases include both packs and custom fixed paint, explicit inheritance, currentColor, and nested viewports. Custom captures wait for the fetched SVG to replace its sprite fallback. Comparisons stay within each engine.
+Install the matching Playwright engines with `npx playwright install chromium firefox webkit`. Each engine renders [presentation-parity](../../../fixtures/next-app/app/presentation-parity/page.tsx) against production and development servers. Checks compare structure, ARIA defaults/overrides, computed outer-SVG styles, and exact screenshots. Filled cases exercise default paint, text color, fill/stroke overrides, omitted-attribute inheritance, explicit undefined fill, and accessibility alongside existing outline/custom cases. Custom captures wait for the fetched SVG to replace its sprite fallback. Comparisons stay within each engine.
 
 Failures write paired PNGs under `test-results/presentation-parity/<browser>/`. Keep screenshots serialized on their shared page for deterministic capture.
 

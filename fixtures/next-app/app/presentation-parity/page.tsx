@@ -1,4 +1,12 @@
-import { ArrowDown, Check, Circle, CustomIcon, IconCheck } from "@react-zero-ui/icon-sprite"
+import {
+  ArrowDown,
+  Check,
+  Circle,
+  CustomIcon,
+  IconCheck,
+  IconHeartFilled,
+  IconStarFilled,
+} from "@react-zero-ui/icon-sprite"
 
 const iconProps = { size: 64 } as const
 
@@ -33,6 +41,44 @@ export default function PresentationParity() {
         aria-hidden={false}
         aria-label="Check"
         data-testid="accessible"
+        role="img"
+        {...iconProps}
+      />
+      <IconHeartFilled data-testid="filled-default" {...iconProps} />
+      <span style={{ color: "rgb(255, 128, 0)" }}>
+        <IconStarFilled className="text-black" data-testid="filled-text-color" {...iconProps} />
+      </span>
+      <IconHeartFilled
+        color="rgb(0, 0, 255)"
+        data-testid="filled-fill-over-color"
+        fill="rgb(255, 0, 0)"
+        {...iconProps}
+      />
+      <IconStarFilled
+        data-testid="filled-stroke"
+        stroke="rgb(0, 0, 255)"
+        strokeLinecap="square"
+        strokeLinejoin="bevel"
+        strokeWidth={4}
+        {...iconProps}
+      />
+      <span
+        style={{
+          stroke: "rgb(0, 128, 0)",
+          strokeLinecap: "square",
+          strokeLinejoin: "bevel",
+          strokeWidth: 3,
+        }}
+      >
+        <IconStarFilled data-testid="filled-inherited-stroke" {...iconProps} />
+      </span>
+      <span style={{ color: "rgb(0, 0, 255)", fill: "rgb(255, 0, 0)" }}>
+        <IconHeartFilled data-testid="filled-undefined-fill" fill={undefined} {...iconProps} />
+      </span>
+      <IconHeartFilled
+        aria-hidden={false}
+        aria-label="Favorite"
+        data-testid="filled-accessible"
         role="img"
         {...iconProps}
       />

@@ -12,7 +12,7 @@ import { validateUpstreamIcon } from "./upstream-validation.ts"
 
 interface UpstreamPack {
   archiveDirectory: string
-  iconDirectory: string
+  iconDirectories: Record<string, string>
   licenseFile: string
   pack: IconPack
 
@@ -37,14 +37,17 @@ function upstreamPacks(directory: string): UpstreamPack[] {
   return [
     {
       archiveDirectory: path.join(directory, "assets/lucide"),
-      iconDirectory: lucideDirectory,
+      iconDirectories: { "": lucideDirectory },
       licenseFile: path.resolve(lucideDirectory, "../LICENSE"),
       pack: "lucide",
       reactPackage: "lucide-react",
     },
     {
       archiveDirectory: path.join(directory, "assets/tabler"),
-      iconDirectory: tablerDirectory,
+      iconDirectories: {
+        "": tablerDirectory,
+        "filled/": path.resolve(tablerDirectory, "../filled"),
+      },
       licenseFile: path.resolve(tablerDirectory, "../../LICENSE"),
       pack: "tabler",
       reactPackage: "@tabler/icons-react",
@@ -61,10 +64,13 @@ function svgFiles(directory: string): string[] {
 /** Snapshot validated bytes so the apply phase writes exactly what was reviewed. */
 function readUpstreamSvgs(pack: UpstreamPack): Map<string, string> {
   const svgs = new Map<string, string>()
-  for (const file of svgFiles(pack.iconDirectory)) {
-    const svg = readFileSync(path.join(pack.iconDirectory, file), "utf8")
-    validateUpstreamIcon(svg, `${pack.pack}/${file}`)
-    svgs.set(file, svg)
+  for (const [prefix, directory] of Object.entries(pack.iconDirectories)) {
+    for (const file of svgFiles(directory)) {
+      const svgFile = `${prefix}${file}`
+      const svg = readFileSync(path.join(directory, file), "utf8")
+      validateUpstreamIcon(svg, `${pack.pack}/${svgFile}`)
+      svgs.set(svgFile, svg)
+    }
   }
   return svgs
 }
@@ -97,7 +103,7 @@ function readCanonicalNames(packageName: string, pack: IconPack): Map<string, st
 }
 
 function currentIconInfo(pack: IconPack, svgFile: string): IconInfo {
-  const svgId = svgFile.slice(0, -4)
+  const svgId = svgFile.slice(0, -4).replaceAll("/", "-")
   return {
     pack,
     spriteId: pack === "tabler" ? `tabler-${svgId}` : svgId,
@@ -131,7 +137,10 @@ function planCurrentIcons(
   let added = 0
   let skippedCollisions = 0
   for (const [svgFile, svg] of svgs) {
-    const key = svgFile.slice(0, -4).replaceAll("-", "")
+    // filled/heart.svg maps to IconHeartFilled while keeping its own asset and symbol ID.
+    const key =
+      path.posix.basename(svgFile, ".svg").replaceAll("-", "") +
+      (svgFile.startsWith("filled/") ? "filled" : "")
     const componentName =
       names.get(key) ??
       (pack.pack === "lucide" ? derivedComponentName(pack.pack, svgFile) : undefined)

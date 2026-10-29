@@ -5,7 +5,7 @@
 <div align="center">
   
 <h1>React Zero Icon Sprite</h1>
-<h2>7,200+ React icons. One production SVG sprite.</h2>
+<h2>8,300+ React icons. One production SVG sprite.</h2>
 
 <legend>Use Lucide and Tabler through one React API.<br/>At build time, ship <b>one SVG sprite</b> containing only the icon geometry your app uses.</legend>
 
@@ -14,7 +14,7 @@
 <table align="center">
   <tr>
     <td align="center" width="33%">
-      <b>7,200+ Icons</b><br/>Lucide + Tabler through one package
+      <b>8,300+ Icons</b><br/>Lucide + Tabler through one package
     </td>
     <td align="center" width="33%">
       <b>Build-Time Sprite</b><br/>Ship only the icon geometry your app uses
@@ -112,6 +112,9 @@ That's it. `zero-icons` scans your source and writes `public/icons.svg` before y
 
 ## Usage
 
+> [!NOTE]
+> Style the outer `<svg>` through props or `className`. Descendant selectors such as `.icon path` apply only to development's inline SVGs; production sprites use an isolated shadow tree.
+
 ### Lucide Icons
 
 ```tsx
@@ -131,6 +134,19 @@ import { IconBrandGithub, IconHeart } from "@react-zero-ui/icon-sprite";
 <IconBrandGithub size={24} className="text-gray-600" />
 <IconHeart width={24} height={24} />
 ```
+
+### Tabler Filled Icons
+
+Use the `Filled` suffix for Tabler's filled designs. Color follows `currentColor`, so text-color classes and the `color` prop work in development and production.
+
+```tsx
+import { IconHeartFilled, IconStarFilled } from "@react-zero-ui/icon-sprite";
+
+<IconHeartFilled size={24} className="text-red-500" />
+<IconStarFilled size={24} color="gold" />
+```
+
+Used outline and filled icons share the same production sprite. Filled components are available for Tabler's filled catalog.
 
 ### Custom Icons
 

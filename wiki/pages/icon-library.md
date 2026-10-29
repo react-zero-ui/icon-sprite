@@ -16,11 +16,13 @@ paths:
 
 Canonical inputs live only under `packages/icon-library/assets/`. Generated copies under `packages/icon-sprite/assets/` are disposable package inputs. The producer imports the product's [data-format contract](../../packages/icon-sprite/src/build/icon-data-format.ts); published code has no import back to this workspace.
 
+Tabler filled assets live under `assets/tabler/filled/`. Sync maps `filled/heart.svg` to `IconHeartFilled` and `tabler-filled-heart`. The existing catalog fields identify the nested asset; its SVG owns presentation. Preserve existing outline filenames, exports, and IDs.
+
 ## Upstream updates
 
 [syncUpstreamIcons](../../packages/icon-library/src/upstream-sync.ts) reads upstream dependencies owned by this private workspace. It adds new identities and refreshes SVG bytes while retaining entries and files absent from upstream. When a component keeps its name but its SVG filename changes, the historical filename receives the new bytes and its sprite ID stays stable. Case-insensitive name collisions are skipped and counted; cross-pack identity changes fail.
 
-[validateUpstreamIcon](../../packages/icon-library/src/upstream-validation.ts) checks both packs before copying begins. Roots must match the product [presentation contract](react/rendering.md); root style overrides and descendant stroke widths are rejected. Intentional descendant paint values remain authored. Run `npm run sync:icons` from repository root.
+[validateUpstreamIcon](../../packages/icon-library/src/upstream-validation.ts) checks both packs before copying begins and returns their authored root presentation for generation. Root presentation styles and descendant stroke widths are rejected because they bypass the product [presentation contract](react/rendering.md). Intentional descendant paint values remain authored. Run `npm run sync:icons` from repository root.
 
 Synchronization has two phases. Planning reads and validates both packs, resolves declarations and identities, and snapshots SVG/license bytes in memory. Application writes that snapshot and then the catalog. Input or identity failures leave canonical files unchanged; filesystem failures during application can require Git recovery. Retained historical files are never scheduled for deletion.
 

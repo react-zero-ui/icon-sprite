@@ -66,7 +66,11 @@ export function renderSvgUseElement(
   )
 }
 
-/** Render a production built-in icon with the package-owned root presentation defaults. */
-export function renderProdIcon(id: string, props: IconProps): ReactElement {
-  return renderSvgUseElement(id, { ...BUILT_IN_PRESENTATION_DEFAULTS, ...props })
+/** Generated source defaults replace the shared outline defaults; caller props keep precedence. */
+export function renderProdIcon(
+  id: string,
+  props: IconProps,
+  defaults: IconProps = BUILT_IN_PRESENTATION_DEFAULTS
+): ReactElement {
+  return renderSvgUseElement(id, { ...defaults, ...props })
 }

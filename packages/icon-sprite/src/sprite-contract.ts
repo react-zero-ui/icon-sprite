@@ -8,7 +8,7 @@ export const SPRITE_PATH = "/icons.svg"
 export const CUSTOM_SVG_DIR = "zero-ui-icons"
 export const DEFAULT_ICON_SIZE = 24
 
-/** Shared root defaults validated for every package-owned Lucide/Tabler SVG. */
+/** Common outline defaults shared by generated icons whose source attributes match exactly. */
 export const BUILT_IN_PRESENTATION_DEFAULTS = {
   fill: "none",
   stroke: "currentColor",

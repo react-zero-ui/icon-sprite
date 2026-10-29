@@ -3,6 +3,18 @@ import { readFileSync } from "node:fs"
 import test from "node:test"
 
 const mapping = JSON.parse(readFileSync(new URL("../assets/catalog.json", import.meta.url), "utf8"))
+const assets = JSON.parse(
+  readFileSync(new URL("../dist/icon-assets.json", import.meta.url), "utf8")
+)
+const rootPattern = /<svg\b([^>]*)>/
+const rootAttributePattern = /([\w:-]+)="([^"]*)"/g
+const presentationAttributes = {
+  fill: "fill",
+  stroke: "stroke",
+  strokeWidth: "stroke-width",
+  strokeLinecap: "stroke-linecap",
+  strokeLinejoin: "stroke-linejoin",
+}
 test("every public icon renders the catalog's production symbol", async (t) => {
   const previousEnvironment = process.env.NODE_ENV
   t.after(() => {
@@ -15,11 +27,22 @@ test("every public icon renders the catalog's production symbol", async (t) => {
   process.env.NODE_ENV = "production"
   const api = await import("../dist/index.js")
   assert.ok(Object.keys(mapping).length > 0)
-  for (const [name, { spriteId }] of Object.entries(mapping)) {
+  for (const [name, { spriteId, pack, svgFile }] of Object.entries(mapping)) {
     const element = api[name]({ size: 0 })
     assert.equal(element.type, "svg", name)
     assert.equal(element.props.children.props.href, `/icons.svg#${spriteId}`, name)
     assert.equal(element.props.width, 0, name)
+    const sourceRoot = assets[`${pack}/${svgFile}`].match(rootPattern)[1]
+    const attributes = Object.fromEntries(
+      [...sourceRoot.matchAll(rootAttributePattern)].map(([, key, value]) => [key, value])
+    )
+    for (const [prop, attribute] of Object.entries(presentationAttributes)) {
+      assert.equal(
+        element.props[prop],
+        attributes[attribute],
+        `${name}: ${prop} follows its source SVG`
+      )
+    }
   }
 })
 
@@ -32,7 +55,7 @@ test("compiled React icon wrappers preserve production props and development dim
       process.env.NODE_ENV = previousEnvironment
     }
   })
-  const names = ["ArrowDownAZ", "IconAB2"]
+  const names = ["ArrowDownAZ", "IconAB2", "IconHeartFilled", "IconStarFilled"]
   const modules = await Promise.all(names.map((name) => import(`../dist/icons/${name}.js`)))
   for (const [index, name] of names.entries()) {
     const Icon = modules[index][name]
@@ -45,7 +68,7 @@ test("compiled React icon wrappers preserve production props and development dim
     assert.equal(production.props.height, 0)
     assert.equal(production.props["aria-label"], "example")
     assert.equal(production.props.onClick, onClick)
-    assert.equal(production.props.strokeWidth, "2")
+    assert.equal(production.props.strokeWidth, name.endsWith("Filled") ? undefined : "2")
     assert.equal(production.props.children.props.href, `/icons.svg#${mapping[name].spriteId}`)
     assert.equal(Icon({ strokeWidth: 4 }).props.strokeWidth, 4)
     for (const environment of ["development", "test"]) {
@@ -105,7 +128,7 @@ test("built-in presentation props match between development and production", asy
       process.env.NODE_ENV = previousEnvironment
     }
   })
-  const names = ["ArrowDownAZ", "IconAB2"]
+  const names = ["ArrowDownAZ", "IconAB2", "IconHeartFilled", "IconStarFilled"]
   const modules = await Promise.all(names.map((name) => import(`../dist/icons/${name}.js`)))
   const cases = [
     {},
@@ -125,6 +148,7 @@ test("built-in presentation props match between development and production", asy
       strokeLinejoin: undefined,
     },
     { color: "blue", stroke: "red" },
+    { fill: undefined, stroke: null },
   ]
   const props = ["color", "fill", "stroke", "strokeWidth", "strokeLinecap", "strokeLinejoin"]
   for (const [index, name] of names.entries()) {
@@ -140,6 +164,39 @@ test("built-in presentation props match between development and production", asy
       }
     }
   }
+})
+
+test("filled development geometry preserves transparent child paint and caller accessibility", async (t) => {
+  const previous = process.env.NODE_ENV
+  t.after(() => {
+    if (previous === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = previous
+    }
+  })
+  const { IconHeartFilled } = await import("../dist/icons/IconHeartFilled.js")
+  const props = {
+    "aria-hidden": false,
+    "aria-label": "Favorite",
+    role: "img",
+    className: "text-red-500",
+  }
+  process.env.NODE_ENV = "development"
+  const wrapper = IconHeartFilled(props)
+  const development = wrapper.type(wrapper.props)
+  assert.equal(development.props.fill, "currentColor")
+  assert.equal(development.props.children[0].props.fill, "none")
+  assert.equal(development.props.children[0].props.stroke, "none")
+  process.env.NODE_ENV = "production"
+  const production = IconHeartFilled(props)
+  assert.equal(production.props.fill, "currentColor")
+  assert.equal(production.props.children.props.href, "/icons.svg#tabler-filled-heart")
+  for (const [prop, value] of Object.entries(props)) {
+    assert.equal(development.props[prop], value)
+    assert.equal(production.props[prop], value)
+  }
+  assert.equal(IconHeartFilled({}).props["aria-hidden"], "true")
 })
 
 test("renamed Tabler icons retain published export names and sprite IDs", async () => {

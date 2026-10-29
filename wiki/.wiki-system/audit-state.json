@@ -2,13 +2,13 @@
   "version": 1,
   "pages": {
     "pages/architecture.md": {
-      "fingerprint": "sha256:42bc7366d4d1f033e1027d1b00059f4f1540800c764b2bd86808afdb43b04c4f"
+      "fingerprint": "sha256:09bd3de0abd830946182e279f5c0ed17415b1e8465d483fc9133aab7bd765d3d"
     },
     "pages/build-system/configuration.md": {
-      "fingerprint": "sha256:89f4a969044fc1fec584c99ee7d5487977d0c89b853e621d7b66f25eac0e8f82"
+      "fingerprint": "sha256:f160d5f683bab5abc2558610fb8774e31cbe873004d1737f2a74a921b17cfa6a"
     },
     "pages/build-system/source-scanning.md": {
-      "fingerprint": "sha256:29ed34ce6979b48086e9ec2231356f5d4d11d54c21c8b32cf76e70b7d261e860"
+      "fingerprint": "sha256:8a93138dc51ae87466a082c7377398ab5b6521e5490d394e631c0c694fb3c6f7"
     },
     "pages/build-system/sprite-output.md": {
       "fingerprint": "sha256:e21cbf04d32e20c9974e71623e993ea4948af19c2af449d266b60982f2ca7252"
@@ -17,22 +17,22 @@
       "fingerprint": "sha256:ce0975fe46ff4c2c1aaf11551e2c57a43443a98ab001817b2415eff29243d0e4"
     },
     "pages/development/publishing.md": {
-      "fingerprint": "sha256:bb71342549c51fa28b36aec83667cafadf541a358f398422c9eda613fefdac6e"
+      "fingerprint": "sha256:69e2b69ee24330d5a8dd6f517b60db9fcd007b8771fe951970cf71d045f95c3a"
     },
     "pages/development/validation.md": {
-      "fingerprint": "sha256:3bef52c79b6dccb1e49eb99344f3cd1b35332e39e60703988554101580fb04b6"
+      "fingerprint": "sha256:cb8278977279c084bdf971360c9168846c2880df29ebbf7deaac1f7f6c7574dd"
     },
     "pages/development/workflow.md": {
-      "fingerprint": "sha256:f21c3111db92a6efbf54baafe1585db66856cf4c67b63bcc88ea86a3af08215a"
+      "fingerprint": "sha256:546d2ef4eb1408b58805b54d0058b091c0a9879cf1f2bf17936a12aeda8066b1"
     },
     "pages/icon-library.md": {
-      "fingerprint": "sha256:4d9a87403d1bf98e6a25b4435e0f053b7248e0bc24cbfbe2db34c5b95387ba6a"
+      "fingerprint": "sha256:494d4ec9ec7d34b8049a9bef8cd3d57b4bab9a8ee04e0a005e926d54af50e5c7"
     },
     "pages/react/custom-icons.md": {
-      "fingerprint": "sha256:b08f2c9add4adeedf4c22d0545e02cd6d6765fc376fc30b071dfcf388b5ea5fc"
+      "fingerprint": "sha256:8d8af039a8ab47b63c30dc88715f69a8c800da23c8c026db1cd9968a54f406fe"
     },
     "pages/react/rendering.md": {
-      "fingerprint": "sha256:c6134fb5c20f67c7c81e920bbcf08bafff4abbf2f09146995520f3934d52ba65"
+      "fingerprint": "sha256:d1b028e8f647940c177bbe1b9b1f441f983d61d29c7b358efe9da87badb87847"
     }
   }
 }

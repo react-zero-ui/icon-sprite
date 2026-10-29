@@ -43,3 +43,7 @@ GitHub and npm had diverged because the root and package READMEs were maintained
 ## 2026-09-28: Give each wiki topic one detailed owner
 
 Successive implementation passes copied the same contracts into overview, architecture, roadmap, and subsystem pages. That amplified review work and allowed descriptions to diverge. Overview now provides startup context, architecture routes to owners, and detailed behavior lives once. Source owns exact implementation values; the roadmap retains deferred work and this log retains reasoning.
+
+## 2026-10-29: Derive filled rendering from source SVGs
+
+Tabler's `filled/` directory supplies `IconNameFilled` naming and separate sprite IDs. The existing catalog format already identifies these assets. Generation now carries authored root presentation into production; a separate variant field would duplicate source information. Omitted attributes remain absent to preserve native SVG defaults and CSS inheritance. Shared outline defaults remain an optimization for exact matches. [Icon library](pages/icon-library.md) owns ingestion; [React rendering](pages/react/rendering.md) owns presentation parity.

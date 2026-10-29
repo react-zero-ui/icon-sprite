@@ -2,7 +2,9 @@ import { copyFileSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { ICON_CATALOG_FILE, type IconInfo } from "../../icon-sprite/src/build/icon-data-format.ts"
+import { BUILT_IN_PRESENTATION_DEFAULTS } from "../../icon-sprite/src/sprite-contract.ts"
 import { readCanonicalCatalog, readCanonicalSvg, writePackagedIconData } from "./catalog.ts"
+import { validateUpstreamIcon } from "./upstream-validation.ts"
 
 const libraryDirectory = fileURLToPath(new URL("../", import.meta.url))
 const defaultOutputDirectory = fileURLToPath(new URL("../../icon-sprite/", import.meta.url))
@@ -32,6 +34,13 @@ function createIconComponentSource(componentName: string, info: IconInfo, svg: s
   }
   const attributes = jsxAttributes(match[1].replace(omittedRootAttributePattern, "")).trim()
   const children = jsxAttributes(match[2]).trim()
+  const presentation = validateUpstreamIcon(svg, `${info.pack}/${info.svgFile}`)
+  // Common outline defaults stay shared; other icons carry their own authored values.
+  const productionDefaults = Object.entries(BUILT_IN_PRESENTATION_DEFAULTS).every(
+    ([prop, value]) => presentation[prop] === value
+  )
+    ? ""
+    : `, ${JSON.stringify(presentation)}`
   return `// Generated from assets/${info.pack}/${info.svgFile} by icon-library/component-generation.ts. Do not edit.
 import { resolveIconDimensions, renderProdIcon, type IconProps } from "../react/icon.js";
 
@@ -52,7 +61,7 @@ export function ${componentName}(props: IconProps) {
   if (process.env.NODE_ENV !== "production") {
     return <DevIcon {...props} />;
   }
-  return renderProdIcon("${info.spriteId}", props);
+  return renderProdIcon("${info.spriteId}", props${productionDefaults});
 }
 `
 }

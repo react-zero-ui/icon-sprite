@@ -17,6 +17,8 @@ const namespaceImportError = /Namespace icon imports/
 const nestedCustomSvgPattern =
   /<svg x="4" y="4" width="8" height="8" viewBox="0 0 10 10"><path fill="url\(#paint\)" d="M0 0h10v10z"\/><\/svg>/
 const localCustomDefsPattern = /<symbol[^>]*id="nested"[^>]*><defs>/
+const filledHeartSymbolPattern = /<symbol\b[^>]*id="tabler-filled-heart"[^>]*>[\s\S]*?<\/symbol>/
+const transparentCanvasPattern = /<path[^>]*stroke="none"[^>]*fill="none"[^>]*\/>/
 
 function symbolIds(file) {
   return [...fs.readFileSync(file, "utf8").matchAll(symbolIdPattern)]
@@ -93,6 +95,23 @@ test("nested sprite paths stay under the configured consumer output directory", 
   const result = await buildSpriteSheet(root)
   assert.equal(result.outputFile, path.join(root, "static/assets/icons/site.svg"))
   assert.deepEqual(symbolIds(result.outputFile), ["only-custom"])
+})
+
+test("filled and outline named imports share one sprite and unused filled icons stay excluded", async (t) => {
+  const root = createProject(t, {
+    "src/view.tsx": `import { IconHeart, IconHeartFilled as Heart, IconStarFilled } from "@react-zero-ui/icon-sprite";
+      export const icons = <><IconHeart/><Heart/><Heart/></>;`,
+  })
+  const result = await buildSpriteSheet(root)
+  assert.equal(result.iconCount, 2)
+  assert.deepEqual(result.warnings, [])
+  assert.deepEqual(symbolIds(result.outputFile), ["tabler-filled-heart", "tabler-heart"])
+  const symbol = fs.readFileSync(result.outputFile, "utf8").match(filledHeartSymbolPattern)?.[0]
+  assert.ok(symbol)
+  assert.ok(symbol.includes('fill="inherit"'))
+  assert.ok(symbol.includes('stroke="inherit"'))
+  assert.match(symbol, transparentCanvasPattern)
+  assert.ok(symbol.includes('viewBox="0 0 24 24"'))
 })
 
 test("custom collisions fail the API and CLI before replacing the previous sprite", async (t) => {

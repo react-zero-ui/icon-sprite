@@ -79,3 +79,21 @@ test("custom names isolate development component state and keep the sprite fallb
   process.env.NODE_ENV = "production"
   assert.equal(CustomIcon({ name: "second" }).props.children.props.href, "/icons.svg#second")
 })
+
+test("source presentation replaces outline defaults and keeps caller overrides immutable", () => {
+  const source = Object.freeze({ fill: "currentColor" })
+  const defaults = renderProdIcon("tabler-filled-heart", {}, source)
+  assert.equal(defaults.props.fill, "currentColor")
+  for (const prop of ["stroke", "strokeWidth", "strokeLinecap", "strokeLinejoin"]) {
+    assert.equal(Object.hasOwn(defaults.props, prop), false, prop)
+  }
+  for (const fill of ["red", undefined, null]) {
+    const props = Object.freeze({ fill, color: "blue", stroke: "green", size: 0 })
+    const icon = renderProdIcon("tabler-filled-heart", props, source)
+    assert.equal(icon.props.fill, fill)
+    assert.equal(icon.props.color, "blue")
+    assert.equal(icon.props.stroke, "green")
+    assert.equal(icon.props.width, 0)
+  }
+  assert.deepEqual(source, { fill: "currentColor" })
+})

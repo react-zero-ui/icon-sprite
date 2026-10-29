@@ -9,6 +9,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs"
+import { createRequire } from "node:module"
 import os from "node:os"
 import path from "node:path"
 import test from "node:test"
@@ -19,6 +20,9 @@ const packageDirectory = path.resolve(import.meta.dirname, "..")
 const catalogFile = path.join(packageDirectory, "assets/catalog.json")
 const catalog = JSON.parse(readFileSync(catalogFile, "utf8"))
 const crossPackError = /between packs/
+const require = createRequire(import.meta.url)
+const filledDirectory = path.dirname(require.resolve("@tabler/icons/filled/heart.svg"))
+const filledFiles = readdirSync(filledDirectory).filter((file) => file.endsWith(".svg"))
 
 test("every public icon resolves to a committed package-owned SVG", () => {
   assert.ok(Object.keys(catalog).length > 0)
@@ -31,19 +35,35 @@ test("every public icon resolves to a committed package-owned SVG", () => {
   }
 })
 
+test("built-in presentation comes from authored attributes and preserves omitted values", () => {
+  assert.deepEqual(
+    validateUpstreamIcon(
+      '<svg fill="currentColor"><path fill="none" stroke="none"/></svg>',
+      "filled.svg"
+    ),
+    { fill: "currentColor" }
+  )
+  assert.deepEqual(
+    validateUpstreamIcon('<svg fill="red" stroke="blue" stroke-width="3"></svg>', "source.svg"),
+    { fill: "red", stroke: "blue", strokeWidth: "3" }
+  )
+  assert.deepEqual(validateUpstreamIcon("<svg><path/></svg>", "inherited.svg"), {})
+})
+
 test("built-in presentation validation rejects inheritance-breaking upstream SVGs", () => {
   const root =
     'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
-  assert.doesNotThrow(() =>
-    validateUpstreamIcon(`<svg ${root}><path d="M0 0h1"/></svg>`, "valid.svg")
-  )
+  assert.deepEqual(validateUpstreamIcon(`<svg ${root}><path d="M0 0h1"/></svg>`, "valid.svg"), {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  })
   for (const [source, markup] of [
-    ["missing.svg", `<svg ${root.replace('fill="none" ', "")}><path d="M0 0h1"/></svg>`],
-    [
-      "different.svg",
-      `<svg ${root.replace('stroke="currentColor"', 'stroke="red"')}><path d="M0 0h1"/></svg>`,
-    ],
+    ["missing.svg", '<path d="M0 0h1"/>'],
     ["root-style.svg", `<svg ${root} style="stroke: red"><path d="M0 0h1"/></svg>`],
+    ["filled-style.svg", '<svg fill="currentColor" style="fill: red"><path/></svg>'],
     ["descendant.svg", `<svg ${root}><path stroke-width="1" d="M0 0h1"/></svg>`],
     ["descendant-style.svg", `<svg ${root}><path style="stroke-width: 1" d="M0 0h1"/></svg>`],
   ]) {
@@ -52,6 +72,46 @@ test("built-in presentation validation rejects inheritance-breaking upstream SVG
       (error) => error instanceof Error && error.message.includes(source)
     )
   }
+})
+
+test("sync adds every Tabler filled icon without changing existing outline identities", (t) => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), "zero-icons-filled-sync-"))
+  t.after(() => rmSync(directory, { recursive: true, force: true }))
+  mkdirSync(path.join(directory, "assets"), { recursive: true })
+  const outlineCatalog = Object.fromEntries(
+    Object.entries(catalog).filter(([, info]) => !info.svgFile.startsWith("filled/"))
+  )
+  writeFileSync(path.join(directory, "assets/catalog.json"), JSON.stringify(outlineCatalog))
+  const result = syncUpstreamIcons(directory)
+  const synced = JSON.parse(readFileSync(path.join(directory, "assets/catalog.json"), "utf8"))
+  assert.ok(filledFiles.length > 0)
+  assert.equal(result.added, filledFiles.length)
+  assert.equal(Object.keys(synced).length, Object.keys(outlineCatalog).length + filledFiles.length)
+  for (const [name, info] of Object.entries(outlineCatalog)) {
+    assert.deepEqual(synced[name], info, name)
+  }
+  for (const file of filledFiles) {
+    const stem = file.slice(0, -4)
+    const component = `Icon${stem
+      .split("-")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join("")}Filled`
+    assert.deepEqual(
+      synced[component],
+      {
+        pack: "tabler",
+        spriteId: `tabler-filled-${stem}`,
+        svgFile: `filled/${file}`,
+      },
+      component
+    )
+    assert.equal(
+      readFileSync(path.join(directory, "assets/tabler/filled", file), "utf8"),
+      readFileSync(path.join(filledDirectory, file), "utf8"),
+      file
+    )
+  }
+  assert.equal(syncUpstreamIcons(directory).added, 0)
 })
 
 test("manual sync refreshes current assets without deleting historical files or identities", (t) => {
@@ -131,8 +191,8 @@ test("upstream icon packages belong only to the private icon-library workspace",
   }
 })
 
-test("identity failures in either pack leave every canonical file unchanged", () => {
-  for (const name of ["Check", "IconCheck"]) {
+test("identity failures in outline or filled icons leave every canonical file unchanged", () => {
+  for (const name of ["Check", "IconCheck", "IconHeartFilled"]) {
     const directory = mkdtempSync(path.join(os.tmpdir(), "zero-icons-sync-failure-"))
     try {
       const invalid = {

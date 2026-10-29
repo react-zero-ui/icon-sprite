@@ -41,6 +41,13 @@ const presentationCases = [
   "line-join",
   "tabler-default",
   "accessible",
+  "filled-default",
+  "filled-text-color",
+  "filled-fill-over-color",
+  "filled-stroke",
+  "filled-inherited-stroke",
+  "filled-undefined-fill",
+  "filled-accessible",
   "custom-fixed",
   "custom-fixed-again",
   "custom-inherit",
@@ -159,8 +166,27 @@ async function capturePresentation(
       const icon = page.getByTestId(testId)
       assert.equal(
         await icon.getAttribute("aria-hidden"),
-        testId === "accessible" ? "false" : "true"
+        testId === "accessible" || testId === "filled-accessible" ? "false" : "true"
       )
+      if (testId === "filled-accessible") {
+        assert.equal(await icon.getAttribute("role"), "img")
+        assert.equal(await icon.getAttribute("aria-label"), "Favorite")
+      }
+      if (testId.startsWith("filled-") && testId !== "filled-stroke") {
+        const strokeAttributes = await icon.evaluate((element) =>
+          ["stroke", "stroke-width", "stroke-linecap", "stroke-linejoin"].map((attribute) =>
+            element.getAttribute(attribute)
+          )
+        )
+        assert.deepEqual(
+          strokeAttributes,
+          [null, null, null, null],
+          `${testId}: omitted source stroke attributes must remain absent on the outer SVG`
+        )
+      }
+      if (testId === "filled-undefined-fill") {
+        assert.equal(await icon.getAttribute("fill"), null)
+      }
       const useCount = await icon.locator("use").count()
       assert.equal(
         useCount > 0,
@@ -215,6 +241,31 @@ function assertExpectedPresentation(capture: PresentationCapture): void {
   assert.equal(capture.styles["line-cap"].strokeLinecap, "square")
   assert.equal(capture.styles["line-join"].strokeLinejoin, "bevel")
   assert.equal(capture.styles["tabler-default"].strokeWidth, "2px")
+  assert.equal(capture.styles["filled-default"].fill, capture.styles["filled-default"].color)
+  assert.equal(capture.styles["filled-default"].stroke, "none")
+  assert.equal(capture.styles["filled-default"].strokeWidth, "1px")
+  assert.equal(capture.styles["filled-default"].strokeLinecap, "butt")
+  assert.equal(capture.styles["filled-default"].strokeLinejoin, "miter")
+  assert.equal(capture.styles["filled-text-color"].fill, capture.styles["filled-text-color"].color)
+  assert.equal(capture.styles["filled-text-color"].color, capture.styles["text-color"].color)
+  assert.notEqual(capture.styles["filled-text-color"].color, "rgb(255, 128, 0)")
+  assert.equal(capture.styles["filled-fill-over-color"].color, "rgb(0, 0, 255)")
+  assert.equal(capture.styles["filled-fill-over-color"].fill, "rgb(255, 0, 0)")
+  assert.equal(capture.styles["filled-stroke"].fill, capture.styles["filled-stroke"].color)
+  assert.equal(capture.styles["filled-stroke"].stroke, "rgb(0, 0, 255)")
+  assert.equal(capture.styles["filled-stroke"].strokeWidth, "4px")
+  assert.equal(capture.styles["filled-stroke"].strokeLinecap, "square")
+  assert.equal(capture.styles["filled-stroke"].strokeLinejoin, "bevel")
+  assert.equal(
+    capture.styles["filled-inherited-stroke"].fill,
+    capture.styles["filled-inherited-stroke"].color
+  )
+  assert.equal(capture.styles["filled-inherited-stroke"].stroke, "rgb(0, 128, 0)")
+  assert.equal(capture.styles["filled-inherited-stroke"].strokeWidth, "3px")
+  assert.equal(capture.styles["filled-inherited-stroke"].strokeLinecap, "square")
+  assert.equal(capture.styles["filled-inherited-stroke"].strokeLinejoin, "bevel")
+  assert.equal(capture.styles["filled-undefined-fill"].color, "rgb(0, 0, 255)")
+  assert.equal(capture.styles["filled-undefined-fill"].fill, "rgb(255, 0, 0)")
   assert.equal(capture.styles["custom-inherit"].fill, "rgb(255, 0, 0)")
   assert.equal(capture.styles["custom-current-color"].color, "rgb(0, 0, 255)")
   assert.deepEqual(
@@ -466,7 +517,7 @@ try {
     const sprite = await spriteResponse.text()
     const symbols = new Set([...sprite.matchAll(spriteSymbolPattern)].map((match) => match[1]))
     await finishAll(
-      ["/", "/zero-icon-sprite"].map(async (route) => {
+      ["/", "/zero-icon-sprite", "/presentation-parity"].map(async (route) => {
         const response = await fetch(`${base}${route}`, { signal: AbortSignal.timeout(30_000) })
         assert.equal(response.status, 200)
         const html = await response.text()
@@ -485,12 +536,15 @@ try {
     for (const id of [
       "arrow-right",
       "tabler-accessible",
+      "tabler-filled-heart",
+      "tabler-filled-star",
       "google-ads",
       "ai",
       "react-svgrepo-com",
     ]) {
       assert(symbols.has(id), `Missing required fixture symbol: ${id}`)
     }
+    assert(!symbols.has("tabler-filled-moon"), "Sprite includes the unused filled moon icon")
     const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) })
     assert.equal(comparison.status, 200)
     assert.match(await comparison.text(), inlinePathPattern)
