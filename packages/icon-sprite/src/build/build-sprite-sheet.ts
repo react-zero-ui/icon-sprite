@@ -18,15 +18,15 @@ export interface SpriteBuildResult {
  * @throws Parse, catalog, asset, or write errors; a previous sprite remains intact.
  *
  * The operation performs no console reporting and leaves cwd and package files
- * unchanged. Separate project calls share no operation state. Custom SVGs are
- * trusted inputs and are all included so runtime-selected names remain usable.
+ * unchanged. Separate project calls share no operation state. Referenced public
+ * SVGs are trusted inputs and are selected from inline src string literals.
  */
 export async function buildSpriteSheet(
   projectDirectory = process.cwd()
 ): Promise<SpriteBuildResult> {
   const project = await resolveSpriteBuildConfig(projectDirectory)
   const usage = scanIconUsage(project.scan)
-  const assets = collectSpriteSymbols(usage, project.customDirectory)
+  const assets = collectSpriteSymbols(usage, project.publicDirectory, project.outputFile)
   const iconCount = writeSpriteSheet(project.outputFile, assets.symbols)
   return {
     outputFile: project.outputFile,

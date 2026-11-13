@@ -86,34 +86,34 @@ export default function PresentationParity() {
         color="orange"
         data-testid="custom-fixed"
         fill="lime"
-        name="parity-fixed"
         stroke="purple"
         {...iconProps}
+        src="/brand-icons/parity-fixed.svg"
       />
       <CustomIcon
         color="black"
         data-testid="custom-fixed-again"
         fill="yellow"
-        name="parity-fixed"
         stroke="cyan"
         {...iconProps}
+        src="/brand-icons/parity-fixed.svg"
       />
       <CustomIcon
         data-testid="custom-inherit"
         fill="red"
-        name="parity-inherit"
         stroke="blue"
         strokeWidth={2}
         {...iconProps}
+        src="/brand-icons/parity-inherit.svg"
       />
       <CustomIcon
         color="blue"
         data-testid="custom-current-color"
         fill="red"
-        name="parity-current-color"
         {...iconProps}
+        src="/brand-icons/parity-current-color.svg"
       />
-      <CustomIcon data-testid="custom-nested" name="parity-nested" {...iconProps} />
+      <CustomIcon data-testid="custom-nested" {...iconProps} src="/brand-icons/parity-nested.svg" />
     </main>
   )
 }

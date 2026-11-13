@@ -1,5 +1,5 @@
 ---
-summary: "Diagnose missing icons through import bindings, static-name evaluation, directory exclusions, and scanner limitations."
+summary: "Diagnose missing icons through import bindings, inline custom src literals, directory exclusions, and scanner limitations."
 paths:
   - packages/icon-sprite/src/build/scan-icon-usage.ts
   - packages/icon-sprite/src/sprite-contract.ts
@@ -17,10 +17,10 @@ Discovery reflects source references, including code later removed by bundling. 
 
 Directory exclusions match basenames. Realpath tracking prevents cycles while allowing trusted symlinks outside the selected tree.
 
-## Static names and warnings
+## Static custom sources and warnings
 
 Legacy generic `Icon` syntax requires a statically evaluable name. A later spread invalidates an earlier name; a later explicit name can restore it. This syntax support creates no generic public React export.
 
-`CustomIcon` names guide diagnostics; [symbol selection](sprite-output.md#symbol-selection) controls inclusion. Ordinary icon `name` props do not discover other icons.
+`CustomIcon` requires an inline string literal `src`, either `src="/brand/logo.svg"` or `src={"/brand/logo.svg"}`. Custom sources never use Babel evaluation or TypeScript expression normalization: variables, imports, assertions, and computed expressions fail with a source location. Paths must be root-relative SVG URLs beneath the public directory. A later JSX spread invalidates a preceding `src`; a subsequent explicit literal restores it. Closing-tag references are skipped, so explicit and self-closing JSX discover the same source once. [Symbol selection](sprite-output.md#symbol-selection) excludes unused files. `CustomIcon` has no `name` prop or directory-based fallback. Ordinary icon `name` props do not discover other icons.
 
-Presentation warnings inspect direct JSX attributes against the [risk list](../../../packages/icon-sprite/src/sprite-contract.ts). They do not inspect values inside `style`, spreads, or wrapper-generated props. Parse failures and unresolved generic names throw with source locations.
+Presentation warnings inspect direct JSX attributes against the [risk list](../../../packages/icon-sprite/src/sprite-contract.ts). They do not inspect values inside `style`, spreads, or wrapper-generated props. Parse failures and unresolved generic names or custom sources throw with source locations.

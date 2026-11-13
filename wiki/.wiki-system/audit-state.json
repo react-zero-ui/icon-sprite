@@ -2,37 +2,37 @@
   "version": 1,
   "pages": {
     "pages/architecture.md": {
-      "fingerprint": "sha256:09bd3de0abd830946182e279f5c0ed17415b1e8465d483fc9133aab7bd765d3d"
+      "fingerprint": "sha256:75f26853e9cd9e30f63a11a2f3eff54c1b324e84f077d608b1460dbc523fbc38"
     },
     "pages/build-system/configuration.md": {
-      "fingerprint": "sha256:f160d5f683bab5abc2558610fb8774e31cbe873004d1737f2a74a921b17cfa6a"
+      "fingerprint": "sha256:c7e327bfca534b587407f42c79a44a2659e34d0fa22cfead51e45d5e937ba6a1"
     },
     "pages/build-system/source-scanning.md": {
-      "fingerprint": "sha256:8a93138dc51ae87466a082c7377398ab5b6521e5490d394e631c0c694fb3c6f7"
+      "fingerprint": "sha256:553fc0305e8d9dd26c647561ba2f611edee2a0fde88be1e5143a941deb2a635f"
     },
     "pages/build-system/sprite-output.md": {
-      "fingerprint": "sha256:e21cbf04d32e20c9974e71623e993ea4948af19c2af449d266b60982f2ca7252"
+      "fingerprint": "sha256:a1597e06bbfc0149ed1cef3f15c0cefd87ede151e95815816fc3569aafd0ff28"
     },
     "pages/development/code-quality.md": {
       "fingerprint": "sha256:ce0975fe46ff4c2c1aaf11551e2c57a43443a98ab001817b2415eff29243d0e4"
     },
     "pages/development/publishing.md": {
-      "fingerprint": "sha256:69e2b69ee24330d5a8dd6f517b60db9fcd007b8771fe951970cf71d045f95c3a"
+      "fingerprint": "sha256:bc9e1822dbafa22c8cf6901d863a7706d7cdea85629b9bafeb6d16f79258c069"
     },
     "pages/development/validation.md": {
-      "fingerprint": "sha256:cb8278977279c084bdf971360c9168846c2880df29ebbf7deaac1f7f6c7574dd"
+      "fingerprint": "sha256:92b14f8aa0626133ee549831a6d8a297c29b717f219a2896e8fa042cd23b95f5"
     },
     "pages/development/workflow.md": {
       "fingerprint": "sha256:546d2ef4eb1408b58805b54d0058b091c0a9879cf1f2bf17936a12aeda8066b1"
     },
     "pages/icon-library.md": {
-      "fingerprint": "sha256:494d4ec9ec7d34b8049a9bef8cd3d57b4bab9a8ee04e0a005e926d54af50e5c7"
+      "fingerprint": "sha256:d241de2b1357ad2b8824fd455d7952e154af4955005a6221a62354ab2cae8273"
     },
     "pages/react/custom-icons.md": {
-      "fingerprint": "sha256:8d8af039a8ab47b63c30dc88715f69a8c800da23c8c026db1cd9968a54f406fe"
+      "fingerprint": "sha256:09ac1f1a9ac6f8d934a45c407c679b1137c19a12bc245b51a6ee739cc5fd9f9d"
     },
     "pages/react/rendering.md": {
-      "fingerprint": "sha256:d1b028e8f647940c177bbe1b9b1f441f983d61d29c7b358efe9da87badb87847"
+      "fingerprint": "sha256:17b8f8d9384ae82f255f34870a50325c731645ac71eb7361f5a8933526ed1d5d"
     }
   }
 }

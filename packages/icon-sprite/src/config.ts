@@ -1,12 +1,10 @@
-import { CUSTOM_SVG_DIR, SPRITE_PATH } from "./sprite-contract.js"
+import { SPRITE_PATH } from "./sprite-contract.js"
 
 // These exports retain the historical config-module import contract.
-export { CUSTOM_SVG_DIR, SPRITE_PATH }
+export { SPRITE_PATH }
 
 /** Configuration options for zero-ui.config.js or zero-ui.config.ts */
 export interface ZeroUIConfig {
-  /** Directory for custom SVG icons inside OUTPUT_DIR (default: "zero-ui-icons") */
-  CUSTOM_SVG_DIR?: string
   /** Directories to exclude from scanning (default: ["node_modules", ".git", "dist", "build", ".next", "out"]) */
   EXCLUDE_DIRS?: string[]
   /** Icon names to ignore during scanning (default: ["CustomIcon"]) */
@@ -32,7 +30,6 @@ export const DEFAULT_CONFIG: Readonly<Required<ZeroUIConfig>> = {
   IMPORT_NAME,
   SPRITE_PATH,
   ROOT_DIR,
-  CUSTOM_SVG_DIR,
   OUTPUT_DIR,
   IGNORE_ICONS,
   EXCLUDE_DIRS,
@@ -49,13 +46,7 @@ export function parseConfig(value: unknown): ZeroUIConfig {
   }
   const entries: Record<string, unknown> = { ...value }
   const config: ZeroUIConfig = {}
-  for (const key of [
-    "IMPORT_NAME",
-    "SPRITE_PATH",
-    "ROOT_DIR",
-    "CUSTOM_SVG_DIR",
-    "OUTPUT_DIR",
-  ] as const) {
+  for (const key of ["IMPORT_NAME", "SPRITE_PATH", "ROOT_DIR", "OUTPUT_DIR"] as const) {
     const entry = entries[key]
     if (entry === undefined) {
       continue

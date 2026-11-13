@@ -59,7 +59,7 @@ test("sprite rendering preserves explicit accessibility and normal SVG presentat
   assert.equal(renderProdIcon("check", { stroke: undefined }).props.stroke, undefined)
 })
 
-test("custom names isolate development component state and keep the sprite fallback", async (t) => {
+test("custom sources isolate development state and keep the matching sprite fallback", async (t) => {
   const previous = process.env.NODE_ENV
   t.after(() => {
     if (previous === undefined) {
@@ -71,13 +71,19 @@ test("custom names isolate development component state and keep the sprite fallb
   process.env.NODE_ENV = "development"
   const moduleUrl = new URL("../dist/react/custom-icon.js?react-test", import.meta.url)
   const { CustomIcon } = await import(moduleUrl.href)
-  const first = CustomIcon({ name: "first", size: 48 })
-  const second = CustomIcon({ name: "second" })
-  assert.equal(first.props.children.key, "first")
-  assert.equal(second.props.children.key, "second")
-  assert.equal(first.props.fallback.props.children.props.href, "/icons.svg#first")
+  const first = CustomIcon({ src: "/brand/first.svg", size: 48 })
+  const second = CustomIcon({ src: "/icons/second.svg" })
+  assert.equal(first.props.children.key, "/brand/first.svg")
+  assert.equal(second.props.children.key, "/icons/second.svg")
+  assert.equal(
+    first.props.fallback.props.children.props.href,
+    "/icons.svg#custom-_2f_brand_2f_first.svg"
+  )
   process.env.NODE_ENV = "production"
-  assert.equal(CustomIcon({ name: "second" }).props.children.props.href, "/icons.svg#second")
+  assert.equal(
+    CustomIcon({ src: "/icons/second.svg" }).props.children.props.href,
+    "/icons.svg#custom-_2f_icons_2f_second.svg"
+  )
 })
 
 test("source presentation replaces outline defaults and keeps caller overrides immutable", () => {

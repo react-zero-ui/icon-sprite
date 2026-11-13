@@ -18,6 +18,6 @@ Explicit `ROOT_DIR` wins; otherwise detection tries `src`, `app`, then `pages`. 
 
 ## Output paths and URLs
 
-Build settings change disk locations. React URLs remain those in the [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts): `/icons.svg` and `/zero-ui-icons/`. Alternate output locations require corresponding hosting. Any future configurable-URL design must preserve per-consumer isolation and development/production agreement.
+Build settings change disk locations. React's default production sprite URL remains `/icons.svg` in the [sprite contract](../../../packages/icon-sprite/src/sprite-contract.ts). `CustomIcon` supplies its own root-relative `src`: `/brand/logo.svg` resolves to `public/brand/logo.svg` under the default output directory. There is no custom SVG directory configuration. Alternate output locations require corresponding hosting for the sprite and source URLs. Any future configurable sprite-URL design must preserve per-consumer isolation and development/production agreement.
 
 [Sprite output](sprite-output.md) owns warning aggregation and failure preservation.

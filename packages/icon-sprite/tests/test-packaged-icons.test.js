@@ -23,8 +23,8 @@ test("packaged data resolves both icon packs without canonical SVG archives", (t
   assert.equal(resolve("Check").svg, svg)
   assert.equal(resolve("IconCheck").id, "tabler-check")
   assert.equal(resolve("IconCheck").svg, svg)
-  assert.equal(resolve("MyLogo").id, "my-logo")
-  assert.equal(resolve("constructor").description, "custom: constructor.svg")
+  assert.equal(resolve("MyLogo").svg, undefined)
+  assert.equal(resolve("constructor").description, "unknown icon: constructor")
 })
 
 test("corrupt catalog entries fail at the storage boundary with useful paths", (t) => {

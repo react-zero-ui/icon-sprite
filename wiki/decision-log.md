@@ -2,6 +2,12 @@
 
 This log preserves reasons for decisions. Linked topic pages own current behavior.
 
+## 2026-11-09: Select custom SVGs by static public URLs
+
+`CustomIcon` now uses a root-relative `src` under the application's `public/` tree. Source scanning selects only referenced SVGs, allowing nested asset paths without a custom-directory setting and keeping unused assets out of production. The browser and generator derive symbol IDs through one `customIconId(src)` contract. Dynamic and imported URLs remain outside build-time discovery. [Custom icons](pages/react/custom-icons.md) and [source scanning](pages/build-system/source-scanning.md) own the current contract.
+
+Review narrowed `src` to inline string literals. Resolving constants and TypeScript wrappers would expand the scanner into expression evaluation; direct literals keep discovery explicit. Source/output overlap uses normalized path equality, and custom symlink aliases remain unsupported.
+
 ## 2026-09-28: Define the product's supported icon contract
 
 The review exposed ambiguity from accepting an upstream-sized SVG interface while guaranteeing a smaller set of behavior. The product now types its supported instance props plus size, defaults every mode to decorative ARIA, and requires named value imports. Duplicate symbol identities fail before output replacement. Custom artwork retains authored styling; automatic paint normalization remains specific to validated built-ins. Root export organization and ref behavior remain unchanged by this decision.

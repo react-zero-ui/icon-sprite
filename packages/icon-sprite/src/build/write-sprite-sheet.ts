@@ -44,7 +44,7 @@ export function writeSpriteSheet(outputFile: string, symbols: readonly SpriteSym
     const previousSource = sources.get(symbol.id)
     if (previousSource !== undefined) {
       throw new Error(
-        `Duplicate sprite ID "${symbol.id}" in ${previousSource} and ${symbol.source}. Rename the custom SVG so each icon has a unique ID.`
+        `Duplicate sprite ID "${symbol.id}" in ${previousSource} and ${symbol.source}. Each icon must have a unique symbol ID.`
       )
     }
     sources.set(symbol.id, symbol.source)

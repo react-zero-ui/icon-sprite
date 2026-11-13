@@ -150,24 +150,24 @@ Used outline and filled icons share the same production sprite. Filled component
 
 ### Custom Icons
 
-Drop your own SVGs into **`/public/zero-ui-icons/`**, then use `<CustomIcon />`:
+Place SVGs anywhere under your app's `public/` directory and pass their root-relative URLs to `<CustomIcon />`:
 
 > [!TIP]
 >```txt
->📁/public
->   └──📁/zero-ui-icons/
->       └──dog.svg
+>public/
+>  brand/
+>    logo.svg
 >```
 >```tsx
 >import { CustomIcon } from "@react-zero-ui/icon-sprite";
 >
-><CustomIcon name="dog" size={24} />
+><CustomIcon src="/brand/logo.svg" size={24} />
 >```
 
-The `name` prop **must match** the file name (without `.svg`).
+The required `src` prop replaces `name`. The build includes **only referenced SVGs**. Write `src` as an inline string, such as `src="/brand/logo.svg"` or `src={"/brand/logo.svg"}`, after any JSX spreads. Variables, computed expressions, remote URLs, and symlinks are unsupported. Missing files and paths targeting the generated sprite fail the build.
 
 > [!NOTE]
-> In dev you may see a brief FOUC using custom icons; this is removed in production.
+> Development fetches the source SVG and displays it inline, so a brief flash may occur before loading. Production uses the sprite. Style the outer SVG; descendant CSS selectors cannot reach artwork inside an external sprite.
 
 ---
 
@@ -183,7 +183,7 @@ export default {
 } satisfies ZeroUIConfig
 ```
 
-The config also supports custom scan exclusions, import names, output locations, and custom SVG directories.
+The config also supports scan exclusions, package import names, and sprite output locations. Custom SVGs use their `src` paths under `public/`; no custom icon directory setting is needed.
 
 ---
 
@@ -222,7 +222,7 @@ At build time:
 1. `zero-icons` scans `.js`, `.jsx`, `.ts`, and `.tsx` source with Babel AST traversal
 2. Named imports are resolved across the package-owned icon catalog
 3. Only used built-in icon geometry is selected from Lucide and Tabler
-4. Project custom SVGs are added to the same sprite
+4. Only custom SVGs referenced through static `<CustomIcon src="..." />` paths are added to that sprite
 5. The final sprite is written to `public/icons.svg`
 6. Production icon wrappers render `<use href="/icons.svg#icon-id" />`
 

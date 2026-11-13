@@ -25,7 +25,7 @@ Focused tests follow ownership: canonical generation/sync tests live in [package
 | Installed lookup, sprite output, and CLI | `test-packaged-icons`, `test-sprite-sheet` |
 | React props, identities, and import boundaries | `test-react`, `test-sprite-id-match`, `test-react-boundary`, `test-accessibility-props` |
 
-`icon-props.types.ts` is checked by the Node TypeScript configuration against emitted declarations. It accepts the explicit instance API and rejects upstream conveniences and geometry/children props. Sync regressions cover every Tabler filled asset, additive identities, repeatability, and failures before canonical writes. Production root paint is checked against every packaged source SVG. Sprite tests cover filled aliases, unused filled exclusion, duplicate IDs, and namespace imports.
+`icon-props.types.ts` is checked by the Node TypeScript configuration against emitted declarations. It accepts the explicit instance API and rejects upstream conveniences and geometry/children props. Sync regressions cover every Tabler filled asset, additive identities, repeatability, and failures before canonical writes. Production root paint is checked against every packaged source SVG. Sprite tests cover filled aliases, unused filled exclusion, duplicate IDs, and namespace imports. Custom-source tests cover inline literals, closing tags and aliases, variable/expression rejection, path-based IDs, regular-file requirements, source/output overlap through the API and CLI, failure preservation, and unused public SVG exclusion.
 
 ## Installed-package validation
 
@@ -33,7 +33,7 @@ Focused tests follow ownership: canonical generation/sync tests live in [package
 
 Direct fixture dependencies follow root-lock versions; transitive versions resolve during installation and can vary from `npm ci`. The harness needs registry access and loopback listeners. Preserve its ownership of temporary servers, process groups, and cleanup when extending it.
 
-HTTP checks validate production references against served symbol IDs and reject inline paths on sprite routes. Development checks require inline geometry. Client chunks are scanned for leaked icon implementations on the Server Component fixture.
+HTTP checks validate production references against served symbol IDs and reject inline paths on sprite routes. Custom references must resolve to `customIconId(src)` symbols for used public SVGs, with unused files absent. Development checks require inline geometry fetched from the source URL. Client chunks are scanned for leaked icon implementations on the Server Component fixture.
 
 ## Browser parity and limits
 

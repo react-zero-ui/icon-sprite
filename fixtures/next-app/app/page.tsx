@@ -74,11 +74,15 @@ const Home = () => {
         <div className="flex-center border border-red-800">
           <CustomIcon
             className="h-20 w-20 fill-red-500! text-red-500"
-            name="google-ads"
             size={80}
+            src="/brand-icons/google-ads.svg"
           />
-          <CustomIcon className="h-20 w-20 fill-red-500!" name="ai" size={80} />
-          <CustomIcon className="h-20 w-20 fill-red-500!" name="react-svgrepo-com" size={80} />
+          <CustomIcon className="h-20 w-20 fill-red-500!" size={80} src="/brand-icons/ai.svg" />
+          <CustomIcon
+            className="h-20 w-20 fill-red-500!"
+            size={80}
+            src="/brand-icons/react-svgrepo-com.svg"
+          />
         </div>
         <AlarmClockCheck color="#000" size={80} strokeWidth={3} />
         <AlarmClockMinus className="h-20 w-20 fill-red-500" size={80} />

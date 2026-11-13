@@ -36,9 +36,9 @@ export interface IconProps
   [attribute: `data-${string}`]: string | number | boolean | undefined
 }
 
-/** Exact custom filename stem, including case, without the .svg extension. */
+/** Inline root-relative SVG URL under the application's public directory. */
 export interface CustomIconProps extends IconProps {
-  name: string
+  src: `/${string}.svg`
 }
 
 /** Resolve explicit dimensions, then size, then the package default; zero remains valid. */

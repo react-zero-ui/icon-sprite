@@ -9,6 +9,7 @@ import { setTimeout as delay } from "node:timers/promises"
 import { fileURLToPath } from "node:url"
 // biome-ignore lint/performance/noNamespaceImport: Playwright re-exports browser types through playwright-core; this Node-only harness is never bundled.
 import * as playwright from "playwright"
+import { customIconId } from "../packages/icon-sprite/src/sprite-contract.ts"
 
 type Browser = Awaited<ReturnType<typeof playwright.chromium.launch>>
 
@@ -24,6 +25,16 @@ const spriteSymbolPattern = /<symbol\b[^>]*\bid="([^"]+)"/g
 const spriteReferencePattern = /<use\b[^>]*href="\/icons\.svg#([^"]+)"/g
 const inlinePathPattern = /<path\b/
 const arrowRightSpritePattern = /<use\b[^>]*href="\/icons\.svg#arrow-right"/
+const customSources = [
+  "/brand-icons/ai.svg",
+  "/brand-icons/google-ads.svg",
+  "/brand-icons/react-svgrepo-com.svg",
+  "/brand-icons/parity-current-color.svg",
+  "/brand-icons/parity-fixed.svg",
+  "/brand-icons/parity-inherit.svg",
+  "/brand-icons/parity-nested.svg",
+] as const
+const unusedCustomSource = "/brand-icons/unused-custom.svg"
 const browserNames = ["chromium", "firefox", "webkit"] as const
 type BrowserName = (typeof browserNames)[number]
 const browserLaunchers: Record<BrowserName, () => Promise<Browser>> = {
@@ -538,12 +549,18 @@ try {
       "tabler-accessible",
       "tabler-filled-heart",
       "tabler-filled-star",
-      "google-ads",
-      "ai",
-      "react-svgrepo-com",
+      ...customSources.map(customIconId),
     ]) {
       assert(symbols.has(id), `Missing required fixture symbol: ${id}`)
     }
+    const unusedCustomResponse = await fetch(`${base}${unusedCustomSource}`, {
+      signal: AbortSignal.timeout(10_000),
+    })
+    assert.equal(unusedCustomResponse.status, 200, "Unused custom SVG must exist in public/")
+    assert(
+      !symbols.has(customIconId(unusedCustomSource)),
+      "Sprite includes an unreferenced custom SVG"
+    )
     assert(!symbols.has("tabler-filled-moon"), "Sprite includes the unused filled moon icon")
     const comparison = await fetch(`${base}/lucid-react`, { signal: AbortSignal.timeout(30_000) })
     assert.equal(comparison.status, 200)

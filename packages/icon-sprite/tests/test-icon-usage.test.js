@@ -6,6 +6,8 @@ import { resolveSpriteBuildConfig } from "../dist/build/resolve-build-config.js"
 import { scanIconUsage } from "../dist/build/scan-icon-usage.js"
 import { createProject } from "./cli-fixtures.js"
 
+const customSourceError = /CustomIcon.*src/
+const inlineSourceError = /CustomIcon src.*inline string literal/
 test("scanner finds used aliases in all four source extensions, not unused imports", async (t) => {
   const root = createProject(t, {
     "src/a.ts":
@@ -47,15 +49,95 @@ test("binding identity handles shadowed components and usage before imports", as
   assert.deepEqual(result.warnings, [])
 })
 
-test("generic and CustomIcon aliases support static names without treating wrapper props as names", async (t) => {
+test("generic names resolve constants while CustomIcon aliases use inline sources", async (t) => {
   const root = createProject(t, {
     "src/view.tsx": `import { Icon as Glyph, CustomIcon as Custom, Heart } from "@react-zero-ui/icon-sprite";
-			const name = "Check";
-			export const view = <><Glyph name={name}/><Custom name={"my-logo"}/><Custom name={props.name}/><Heart name="not-an-icon"/></>;`,
+      const name = "Check";
+      export const view = <><Glyph name={name}/><Custom src="/brand/logo.svg"/><Custom src={"/icons/second.svg"}/><Heart name="not-an-icon"/></>;`,
   })
   const result = scanIconUsage((await resolveSpriteBuildConfig(root)).scan)
   assert.deepEqual(result.icons, ["Check", "Heart"])
-  assert.deepEqual(result.customIcons, ["my-logo"])
+  assert.deepEqual(result.customSources, ["/brand/logo.svg", "/icons/second.svg"])
+})
+
+test("CustomIcon requires an inline public SVG source after JSX spread precedence", async (t) => {
+  const valid = createProject(t, {
+    "src/view.tsx": `import { CustomIcon as Logo } from "@react-zero-ui/icon-sprite";
+      export const view = <><Logo {...props} src="/brand/logo.svg"/><Logo src="/icons/second.svg"/></>;`,
+  })
+  assert.deepEqual(scanIconUsage((await resolveSpriteBuildConfig(valid)).scan).customSources, [
+    "/brand/logo.svg",
+    "/icons/second.svg",
+  ])
+  const invalid = [
+    "<CustomIcon src={props.src}/>",
+    '<CustomIcon src="/icons/icon.svg" {...props}/>',
+    '<CustomIcon name="logo"/>',
+    "<CustomIcon/>",
+    '<CustomIcon src="relative/logo.svg"/>',
+    '<CustomIcon src="https://example.com/logo.svg"/>',
+    '<CustomIcon src="//example.com/logo.svg"/>',
+    '<CustomIcon src="/brand/../logo.svg"/>',
+    '<CustomIcon src="/brand/logo.svg?version=1"/>',
+    '<CustomIcon src="/brand/logo.png"/>',
+    '<CustomIcon src="/brand/%6cogo.svg"/>',
+  ]
+  await Promise.all(
+    invalid.map(async (jsx) => {
+      const root = createProject(t, {
+        "src/view.tsx": `import { CustomIcon } from "@react-zero-ui/icon-sprite";
+        export const view = ${jsx};`,
+      })
+      const scan = (await resolveSpriteBuildConfig(root)).scan
+      assert.throws(() => scanIconUsage(scan), customSourceError)
+    })
+  )
+})
+
+test("custom sources accept explicit closing tags and aliases without duplicate discovery", async (t) => {
+  const root = createProject(t, {
+    "src/view.tsx": `import { CustomIcon, CustomIcon as Logo } from "@react-zero-ui/icon-sprite";
+      export const view = <>
+        <CustomIcon src="/brand/logo.svg"></CustomIcon>
+        <CustomIcon src="/brand/logo.svg"/>
+        <Logo src={"/brand/second.svg"}></Logo>
+      </>;`,
+  })
+  const result = scanIconUsage((await resolveSpriteBuildConfig(root)).scan)
+  assert.deepEqual(result.customSources, ["/brand/logo.svg", "/brand/second.svg"])
+  assert.deepEqual(result.warnings, [])
+})
+
+test("custom sources reject variables and expressions even when their values are constant", async (t) => {
+  const expressions = [
+    "source",
+    "assertedSource",
+    "satisfiedSource",
+    "importedSource",
+    '"/brand/" + "logo.svg"',
+    "`/brand/logo.svg`",
+    '"/brand/logo.svg" as const',
+    '"/brand/logo.svg" satisfies string',
+    "source!",
+    "getSource()",
+    'true ? "/brand/logo.svg" : "/brand/second.svg"',
+    "({ src: '/brand/logo.svg' }).src",
+  ]
+  await Promise.all(
+    expressions.map(async (expression) => {
+      const root = createProject(t, {
+        "src/view.tsx": `import { CustomIcon } from "@react-zero-ui/icon-sprite";
+          import importedSource from "./logo.svg";
+          const source = "/brand/logo.svg";
+          const assertedSource = "/brand/logo.svg" as const;
+          const satisfiedSource = "/brand/logo.svg" satisfies string;
+          const getSource = () => "/brand/logo.svg";
+          export const view = <CustomIcon src={${expression}}/>;`,
+      })
+      const scan = (await resolveSpriteBuildConfig(root)).scan
+      assert.throws(() => scanIconUsage(scan), inlineSourceError, expression)
+    })
+  )
 })
 
 test("namespace icon imports fail for members, destructuring, dynamic access, and unused imports", async (t) => {

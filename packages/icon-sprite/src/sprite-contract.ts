@@ -5,8 +5,12 @@
  * these stable URLs. No consumer build may mutate a shared installation.
  */
 export const SPRITE_PATH = "/icons.svg"
-export const CUSTOM_SVG_DIR = "zero-ui-icons"
 export const DEFAULT_ICON_SIZE = 24
+
+/** Stable, collision-free XML symbol ID derived from a public SVG URL. */
+export function customIconId(src: string): string {
+  return `custom-${src.replace(/[^a-zA-Z0-9.-]/g, (character) => `_${character.charCodeAt(0).toString(16)}_`)}`
+}
 
 /** Common outline defaults shared by generated icons whose source attributes match exactly. */
 export const BUILT_IN_PRESENTATION_DEFAULTS = {

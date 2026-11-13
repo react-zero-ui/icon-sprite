@@ -11,8 +11,8 @@ test("project resolution owns defaults, absolute paths, and source detection wit
   const root = createProject(t, { "app/index.js": "", "pages/index.js": "" })
   const project = await resolveSpriteBuildConfig(root)
   assert.deepEqual(project, {
-    customDirectory: path.join(root, "public/zero-ui-icons"),
     outputFile: path.join(root, "public/icons.svg"),
+    publicDirectory: path.join(root, "public"),
     scan: {
       sourceDirectory: path.join(root, "app"),
       projectDirectory: root,
@@ -37,13 +37,12 @@ test("source detection skips files and falls back to src", async (t) => {
   assert.equal((await resolveSpriteBuildConfig(root)).scan.sourceDirectory, path.join(root, "src"))
 })
 
-test("relative config imports and all existing overrides resolve at one boundary", async (t) => {
+test("relative config imports and supported overrides resolve at one boundary", async (t) => {
   const overrides = {
     IMPORT_NAME: "@example/icons",
     ROOT_DIR: "lib",
     SPRITE_PATH: "/nested/icons.svg",
     OUTPUT_DIR: "static",
-    CUSTOM_SVG_DIR: "logos",
     IGNORE_ICONS: ["Ignored"],
     EXCLUDE_DIRS: ["vendor"],
   }
@@ -52,8 +51,8 @@ test("relative config imports and all existing overrides resolve at one boundary
     "zero-ui.config.js": 'import config from "./settings.js"; export default config;',
   })
   assert.deepEqual(await resolveSpriteBuildConfig(root), {
-    customDirectory: path.join(root, "static/logos"),
     outputFile: path.join(root, "static/nested/icons.svg"),
+    publicDirectory: path.join(root, "static"),
     scan: {
       sourceDirectory: path.join(root, "lib"),
       projectDirectory: root,

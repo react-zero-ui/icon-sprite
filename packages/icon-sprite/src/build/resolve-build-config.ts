@@ -6,8 +6,8 @@ import type { IconScanOptions } from "./scan-icon-usage.js"
 
 /** Fully resolved consumer inputs. Downstream modules never interpret config paths. */
 export interface SpriteBuildConfig {
-  customDirectory: string
   outputFile: string
+  publicDirectory: string
   scan: IconScanOptions
   warnings: string[]
 }
@@ -60,7 +60,7 @@ export async function resolveSpriteBuildConfig(
   const overrides = await loadProjectConfig(root, warnings)
   const config = { ...DEFAULT_CONFIG, ...overrides }
   return {
-    customDirectory: path.resolve(root, config.OUTPUT_DIR, config.CUSTOM_SVG_DIR),
+    publicDirectory: path.resolve(root, config.OUTPUT_DIR),
     // join preserves the historical public-URL convention: /icons.svg stays under OUTPUT_DIR.
     outputFile: path.join(root, config.OUTPUT_DIR, config.SPRITE_PATH),
     scan: {

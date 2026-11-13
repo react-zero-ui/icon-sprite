@@ -1,44 +1,19 @@
 import fs from "node:fs"
 import path from "node:path"
+import { customIconId } from "../sprite-contract.js"
 import { openPackagedIcons } from "./packaged-icons.js"
 import type { IconUsage } from "./scan-icon-usage.js"
 import type { SpriteSymbol } from "./write-sprite-sheet.js"
 
-function readCustomSymbols(directory: string): SpriteSymbol[] {
-  if (!fs.existsSync(directory)) {
-    return []
-  }
-  const symbols: SpriteSymbol[] = []
-  const entries = fs
-    .readdirSync(directory, { withFileTypes: true })
-    .sort((left, right) => left.name.localeCompare(right.name))
-  for (const entry of entries) {
-    if (!entry.name.endsWith(".svg")) {
-      continue
-    }
-    const file = path.join(directory, entry.name)
-    const info = entry.isSymbolicLink() ? fs.statSync(file) : entry
-    if (info.isFile()) {
-      symbols.push({
-        id: entry.name.slice(0, -4),
-        markup: fs.readFileSync(file, "utf8"),
-        presentation: "authored",
-        source: file,
-      })
-    }
-  }
-  return symbols
-}
-
 /**
- * Resolve discovered built-ins and all directly contained custom SVG files.
- * Custom filenames are exact, case-sensitive IDs. Including unused custom files
- * supports dynamic names. Missing definitions produce warnings; unreadable assets
- * throw before the writer touches the previous sprite. This operation owns its sets.
+ * Resolve discovered built-ins and referenced public SVG paths.
+ * Source paths determine stable custom IDs; missing or unreadable assets fail
+ * before the writer changes the previous sprite.
  */
 export function collectSpriteSymbols(
   usage: IconUsage,
-  customDirectory: string
+  publicDirectory: string,
+  outputFile: string
 ): {
   symbols: SpriteSymbol[]
   warnings: string[]
@@ -58,22 +33,25 @@ export function collectSpriteSymbols(
       added.add(icon.id)
     }
   }
-  const custom = readCustomSymbols(customDirectory)
-  const customIds = new Set(custom.map((symbol) => symbol.id))
-  for (const symbol of custom) {
-    // The writer validates uniqueness across built-ins and authored custom symbols.
-    symbols.push(symbol)
-    added.add(symbol.id)
+  for (const src of usage.customSources) {
+    const file = path.resolve(publicDirectory, src.slice(1))
+    if (file === path.resolve(outputFile)) {
+      throw new Error(`CustomIcon source "${src}" resolves to the sprite output file: ${file}`)
+    }
+    if (!fs.existsSync(file) || !fs.lstatSync(file).isFile()) {
+      throw new Error(`CustomIcon source "${src}" must be an existing regular SVG file: ${file}`)
+    }
+    symbols.push({
+      id: customIconId(src),
+      markup: fs.readFileSync(file, "utf8"),
+      presentation: "authored",
+      source: file,
+    })
   }
   const warnings: string[] = []
   for (const icon of requested) {
     if (!added.has(icon.id)) {
       warnings.push(`Missing icon: ${icon.name} (${icon.description}).`)
-    }
-  }
-  for (const name of usage.customIcons) {
-    if (!customIds.has(name)) {
-      warnings.push(`Missing custom icon: ${name}. Add ${name}.svg to ${customDirectory}.`)
     }
   }
   return { symbols, warnings }

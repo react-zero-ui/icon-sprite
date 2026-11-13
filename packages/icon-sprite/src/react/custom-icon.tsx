@@ -1,5 +1,6 @@
 // biome-ignore lint/performance/noNamespaceImport: Biome cannot resolve React's named Suspense export in this package shape; namespace access is verified by TypeScript and integration tests.
 import * as React from "react"
+import { customIconId } from "../sprite-contract.js"
 import { type CustomIconProps, renderSvgUseElement } from "./icon.js"
 
 // The lazy browser loader exists only in development so production bundlers can erase it.
@@ -7,21 +8,20 @@ const DevelopmentCustomIcon =
   process.env.NODE_ENV === "development" ? React.lazy(() => import("./custom-icon-dev.js")) : null
 
 /**
- * Render a trusted custom asset by filename stem. Development lazily loads the
- * browser SVG asset while other environments render the shared sprite <use>.
- * The sprite URL/defaults belong to icon.tsx, and rendering never generates files.
- * Keying the loader by name prevents payload and DOM attributes leaking across assets.
+ * Render an SVG from `public/` using an inline `src` (e.g. `src="/brand/logo.svg"`).
+ * Development loads the source; `zero-icons` bundles it into the production sprite.
  */
-export function CustomIcon({ name, ...rest }: CustomIconProps) {
+export function CustomIcon({ src, ...rest }: CustomIconProps) {
+  const id = customIconId(src)
   if (process.env.NODE_ENV === "development" && DevelopmentCustomIcon) {
-    const fallback = renderSvgUseElement(name, rest)
+    const fallback = renderSvgUseElement(id, rest)
     return (
       <React.Suspense fallback={fallback}>
-        <DevelopmentCustomIcon key={name} name={name} {...rest} />
+        <DevelopmentCustomIcon key={src} src={src} {...rest} />
       </React.Suspense>
     )
   }
-  return renderSvgUseElement(name, rest)
+  return renderSvgUseElement(id, rest)
 }
 
 export default CustomIcon

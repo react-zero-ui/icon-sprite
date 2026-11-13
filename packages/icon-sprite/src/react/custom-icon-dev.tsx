@@ -1,12 +1,11 @@
 "use client"
 import { useEffect, useState } from "react"
-import { CUSTOM_SVG_DIR } from "../sprite-contract.js"
+import { customIconId } from "../sprite-contract.js"
 import { type CustomIconProps, renderSvgUseElement, resolveIconDimensions } from "./icon.js"
 
 // A cache supplies first paint on remount. Every mount still refreshes from disk.
 const payloadCache = new Map<string, string>()
 const eventHandlerAttribute = /^on[a-z]+/i
-const surroundingSlashes = /^\/+|\/+$/g
 
 /** Preserve trusted artwork inside its own SVG so fixed paint stays local and inherit reaches instance props. */
 function prepareCustomSvgMarkup(svg: string): string {
@@ -35,12 +34,12 @@ function prepareCustomSvgMarkup(svg: string): string {
 
 /**
  * Development-only browser loader for CustomIcon. It caches the last payload for
- * first paint, refreshes every mount from the stable custom-asset URL, and falls
+ * first paint, refreshes every mount from the supplied source URL, and falls
  * back to the same sprite element used outside development. It never writes files.
  */
-function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIconProps) {
+function DevelopmentCustomIcon({ src, size, height, width, ...rest }: CustomIconProps) {
   const [payload, setPayload] = useState<string | null>(() =>
-    typeof globalThis.document !== "undefined" ? (payloadCache.get(name) ?? null) : null
+    typeof globalThis.document !== "undefined" ? (payloadCache.get(src) ?? null) : null
   )
 
   useEffect(() => {
@@ -48,8 +47,7 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
       return
     }
     const controller = new AbortController()
-    const base = `/${CUSTOM_SVG_DIR.replace(surroundingSlashes, "")}`
-    const url = `${base}/${encodeURIComponent(name)}.svg?v=${Date.now()}`
+    const url = `${src}?v=${Date.now()}`
     fetch(url, { cache: "no-store", signal: controller.signal })
       .then((response) =>
         response.ok ? response.text() : Promise.reject(new Error(`HTTP ${response.status}`))
@@ -59,13 +57,13 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
           return
         }
         const nextPayload = prepareCustomSvgMarkup(svgText)
-        payloadCache.set(name, nextPayload)
+        payloadCache.set(src, nextPayload)
         setPayload(nextPayload)
       })
       .catch((error) => {
         if (error.name !== "AbortError") {
           console.warn(
-            `[CustomIcon] "${name}" not found. Add ${name}.svg to /public/${CUSTOM_SVG_DIR}/\nThen run: npx zero-icons\nDocs: https://github.com/react-zero-ui/icon-sprite#custom-icons`
+            `[CustomIcon] Could not load "${src}". Check that the SVG exists in public/.\nDocs: https://github.com/react-zero-ui/icon-sprite#custom-icons`
           )
         }
         if (!controller.signal.aborted) {
@@ -73,7 +71,7 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
         }
       })
     return () => controller.abort()
-  }, [name])
+  }, [src])
 
   if (payload) {
     return (
@@ -88,7 +86,7 @@ function DevelopmentCustomIcon({ name, size, height, width, ...rest }: CustomIco
   }
 
   // fallback if fetch fails in dev
-  return renderSvgUseElement(name, { size, width, height, ...rest })
+  return renderSvgUseElement(customIconId(src), { size, width, height, ...rest })
 }
 
 export default DevelopmentCustomIcon

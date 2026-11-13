@@ -11,8 +11,8 @@ const riskyProps: ReadonlySet<string> = new Set(RISKY_SPRITE_PRESENTATION_PROPS)
 
 /** Discovery results use imported public names, independent of local JSX aliases. */
 export interface IconUsage {
-  /** Static custom names support diagnostics; asset collection still includes every custom SVG. */
-  customIcons: string[]
+  /** Root-relative public SVG paths read from inline string literals. */
+  customSources: string[]
   icons: string[]
   warnings: string[]
 }
@@ -47,26 +47,32 @@ function isRuntimeReference(reference: NodePath): boolean {
   )
 }
 
-function staticIconName(opening: NodePath<JSXOpeningElement>): string | undefined {
+function staticStringAttribute(
+  opening: NodePath<JSXOpeningElement>,
+  property: "name" | "src"
+): string | undefined {
   let value: string | undefined
   for (const attribute of opening.get("attributes")) {
-    // Spreads can override earlier names. A later explicit name establishes a new
-    // static value, and Babel evaluation accepts constants only when it is confident.
+    // Spreads can override earlier attributes; later explicit values take precedence.
     if (attribute.isJSXSpreadAttribute()) {
       value = undefined
     }
     if (
       !attribute.isJSXAttribute() ||
       attribute.node.name.type !== "JSXIdentifier" ||
-      attribute.node.name.name !== "name"
+      attribute.node.name.name !== property
     ) {
       continue
     }
-    const expression = attribute.get("value")
+    const attributeValue = attribute.get("value")
+    const expression = attributeValue.isJSXExpressionContainer()
+      ? attributeValue.get("expression")
+      : attributeValue
     if (expression.isStringLiteral()) {
       value = expression.node.value
-    } else if (expression.isJSXExpressionContainer()) {
-      const result = expression.get("expression").evaluate()
+    } else if (property === "name" && attributeValue.isJSXExpressionContainer()) {
+      // Preserve legacy generic Icon names; CustomIcon src is always an inline literal.
+      const result = attributeValue.get("expression").evaluate()
       value = result.confident && typeof result.value === "string" ? result.value : undefined
     } else {
       value = undefined
@@ -75,8 +81,27 @@ function staticIconName(opening: NodePath<JSXOpeningElement>): string | undefine
   return value
 }
 
+function validateCustomSrc(src: string, location: string): void {
+  const segments = src.slice(1).split("/")
+  if (
+    !src.startsWith("/") ||
+    src.startsWith("//") ||
+    !src.endsWith(".svg") ||
+    src.includes("\\") ||
+    src.includes("?") ||
+    src.includes("#") ||
+    src.includes("%") ||
+    [...src].some((character) => character.charCodeAt(0) < 32) ||
+    segments.some((segment) => !segment || segment === "." || segment === "..")
+  ) {
+    throw new Error(
+      `${location}: <CustomIcon src> must be a root-relative .svg URL under public/ (for example, "/brand/logo.svg").`
+    )
+  }
+}
+
 class IconUsageScanner {
-  private readonly customIcons = new Set<string>()
+  private readonly customSources = new Set<string>()
   private readonly excluded: ReadonlySet<string>
   private readonly icons = new Set<string>()
   private readonly ignored: ReadonlySet<string>
@@ -93,7 +118,7 @@ class IconUsageScanner {
   scan(): IconUsage {
     this.scanDirectory(this.options.sourceDirectory)
     return {
-      customIcons: [...this.customIcons].sort(),
+      customSources: [...this.customSources].sort(),
       icons: [...this.icons].sort(),
       warnings: this.warnings,
     }
@@ -108,17 +133,25 @@ class IconUsageScanner {
     opening: NodePath<JSXOpeningElement>,
     location: string
   ): void {
-    const value = staticIconName(opening)
+    const property = name === "CustomIcon" ? "src" : "name"
+    const value = staticStringAttribute(opening, property)
     if (value !== undefined) {
-      const target = name === "CustomIcon" ? this.customIcons : this.icons
-      target.add(value)
+      if (name === "CustomIcon") {
+        validateCustomSrc(value, location)
+        this.customSources.add(value)
+      } else {
+        this.icons.add(value)
+      }
       return
     }
-    if (name === "Icon") {
+    if (name === "CustomIcon") {
       throw new Error(
-        `${location}: Unable to statically evaluate <Icon name={...}>. Use a string literal or a statically evaluable constant.`
+        `${location}: <CustomIcon src> requires an inline string literal, such as src="/brand/logo.svg". Place src after JSX spreads.`
       )
     }
+    throw new Error(
+      `${location}: Unable to statically evaluate <${name} ${property}={...}>. Use a string literal or a statically evaluable constant.`
+    )
   }
 
   private recordPresentationWarnings(
@@ -147,7 +180,15 @@ class IconUsageScanner {
       this.icons.add(name)
     }
     const opening = reference.parentPath
+    if (opening?.isJSXClosingElement()) {
+      return
+    }
     if (!opening?.isJSXOpeningElement() || opening.node.name !== reference.node) {
+      if (name === "CustomIcon") {
+        throw new Error(
+          `${this.location(file, reference.node.loc?.start.line)}: CustomIcon must be used in JSX with an inline string literal src so zero-icons can include its SVG.`
+        )
+      }
       return
     }
     const location = this.location(file, opening.node.loc?.start.line)

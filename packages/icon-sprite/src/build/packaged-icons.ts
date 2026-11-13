@@ -9,7 +9,7 @@ import {
   parsePackagedSvgs,
 } from "./icon-data-format.js"
 
-/** Resolved metadata remains useful for a missing SVG or the legacy custom fallback. */
+/** Resolved metadata includes diagnostics when a catalog name is unknown. */
 export interface PackagedIcon {
   description: string
   id: string
@@ -18,24 +18,10 @@ export interface PackagedIcon {
 
 // src/build and dist/build have the same depth relative to the package data.
 const packageDirectory = fileURLToPath(new URL("../../", import.meta.url))
-const wordBoundary = /([a-z])([A-Z])/g
-const acronymBoundary = /([A-Z])([A-Z][a-z])/g
-const letterDigitBoundary = /([a-zA-Z])(\d)/g
-const digitLetterBoundary = /(\d)([a-zA-Z])/g
-
-function customSpriteId(name: string): string {
-  return name
-    .replace(wordBoundary, "$1-$2")
-    .replace(acronymBoundary, "$1-$2")
-    .replace(letterDigitBoundary, "$1-$2")
-    .replace(digitLetterBoundary, "$1-$2")
-    .toLowerCase()
-}
-
 /**
  * Open installed icon data once for a consumer sprite build.
  * Reads the packaged catalog and SVG bundle, with no upstream or archive access.
- * Unknown names retain the historical custom-file fallback; corrupt data throws.
+ * Unknown names produce diagnostics; corrupt data throws.
  */
 export function openPackagedIcons(directory = packageDirectory): (name: string) => PackagedIcon {
   const catalogSource = path.join(directory, ICON_CATALOG_FILE)
@@ -45,8 +31,7 @@ export function openPackagedIcons(directory = packageDirectory): (name: string) 
   return (name) => {
     const icon = catalog[name]
     if (!icon) {
-      const id = customSpriteId(name)
-      return { id, svg: undefined, description: `custom: ${id}.svg` }
+      return { id: name, svg: undefined, description: `unknown icon: ${name}` }
     }
     return {
       id: icon.spriteId,
